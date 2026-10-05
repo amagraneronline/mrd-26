@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema Operativo - 1.º ESO</title>
+  <style>
+    :root{
+      --bg:#f6f8fc;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --primary:#3b82f6;
+      --primary-2:#2563eb;
+      --accent:#14b8a6;
+      --accent-2:#8b5cf6;
+      --warn:#f59e0b;
+      --soft:#eaf2ff;
+      --soft-2:#eefcf9;
+      --border:#dbe4f0;
+      --shadow:0 8px 24px rgba(35, 58, 118, .10);
+      --radius:18px;
+      --radius-sm:12px;
+      --max:1200px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(59,130,246,.10), transparent 26%),
+        radial-gradient(circle at top left, rgba(20,184,166,.12), transparent 18%),
+        var(--bg);
+      line-height:1.6;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:rgba(255,255,255,.85);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid rgba(219,228,240,.8);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      font-size:1.05rem;
+    }
+
+    .logo{
+      width:40px;
+      height:40px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      color:#fff;
+      background:linear-gradient(135deg, var(--primary), var(--accent-2));
+      box-shadow:var(--shadow);
+      font-size:1.1rem;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .search{
+      min-width:min(360px, 90vw);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:10px 14px;
+      box-shadow:0 2px 10px rgba(15, 23, 42, .04);
+    }
+    .search input{
+      border:none;
+      outline:none;
+      background:transparent;
+      width:100%;
+      font-size:0.98rem;
+      color:var(--text);
+    }
+
+    .btn{
+      border:none;
+      background:linear-gradient(135deg, var(--primary), var(--primary-2));
+      color:#fff;
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:var(--shadow);
+    }
+    .btn.secondary{
+      background:#fff;
+      color:var(--primary-2);
+      border:1px solid var(--border);
+      box-shadow:none;
+    }
+
+    .hero{
+      max-width:var(--max);
+      margin:30px auto 18px;
+      padding:0 18px;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:20px;
+    }
+
+    .hero-card,
+    .panel,
+    .card,
+    .mini-card,
+    .glossary-item,
+    details{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-card{
+      padding:28px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      right:-70px;
+      top:-70px;
+      background:radial-gradient(circle, rgba(59,130,246,.18), transparent 70%);
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:var(--soft);
+      color:var(--primary-2);
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:.92rem;
+    }
+    h1{
+      margin:14px 0 8px;
+      font-size:clamp(2rem, 3vw, 3.2rem);
+      line-height:1.1;
+    }
+    .lead{
+      color:var(--muted);
+      font-size:1.05rem;
+      max-width:62ch;
+    }
+
+    .hero-grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:12px;
+    }
+
+    .mini-card{
+      padding:16px;
+    }
+    .mini-card .icon{font-size:1.5rem}
+    .mini-card h3{margin:10px 0 6px;font-size:1rem}
+    .mini-card p{margin:0;color:var(--muted);font-size:.94rem}
+
+    .quick-panel{
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+    .quick-panel h2{margin:0;font-size:1.25rem}
+    .checklist{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+    .checklist li{
+      display:flex;gap:10px;align-items:flex-start;
+      padding:10px 12px;
+      background:linear-gradient(180deg, #fbfdff, #f7faff);
+      border:1px solid #e8eef8;
+      border-radius:14px;
+    }
+    .checklist .tick{font-weight:800;color:var(--accent)}
+
+    .container{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:10px 18px 40px;
+      display:grid;
+      grid-template-columns:280px 1fr;
+      gap:24px;
+    }
+
+    .toc{
+      position:sticky;
+      top:92px;
+      align-self:start;
+      padding:18px;
+    }
+    .toc h3{margin:0 0 10px;font-size:1.05rem}
+    .toc p{margin:0 0 14px;color:var(--muted);font-size:.94rem}
+    .toc nav{display:grid;gap:8px}
+    .toc a{
+      text-decoration:none;
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      transition:.2s ease;
+      font-weight:600;
+    }
+    .toc a:hover{background:var(--soft); color:var(--primary-2)}
+
+    main{display:grid;gap:20px}
+
+    .section{
+      padding:24px;
+      scroll-margin-top:92px;
+    }
+    .section h2{
+      margin:0 0 10px;
+      font-size:1.6rem;
+      line-height:1.2;
+    }
+    .section .intro{
+      margin:0 0 16px;
+      color:var(--muted);
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .card{
+      padding:18px;
+    }
+    .card h3{margin:0 0 8px;font-size:1.08rem}
+    .card p{margin:0;color:var(--muted)}
+    .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .pill{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:.94rem;
+      font-weight:600;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .example-box{
+      background:linear-gradient(180deg, #fbfdff, #f7fbff);
+      border:1px dashed #bfd4f8;
+      border-radius:16px;
+      padding:16px;
+      margin-top:12px;
+    }
+
+    .folder-tree{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background:#0f172a;
+      color:#e5f0ff;
+      border-radius:16px;
+      padding:16px;
+      margin-top:14px;
+      overflow:auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      overflow:hidden;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:#fff;
+    }
+    th, td{
+      padding:14px;
+      text-align:left;
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+    }
+    th{
+      background:#f5f8ff;
+      font-size:1rem;
+    }
+
+    details{padding:16px}
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      display:flex;align-items:center;gap:10px;
+    }
+    summary::-webkit-details-marker{display:none}
+    details .content{padding-top:12px;color:var(--muted)}
+
+    .glossary{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+    .glossary-item{padding:16px}
+    .glossary-item h4{margin:0 0 6px}
+    .glossary-item p{margin:0;color:var(--muted)}
+
+    .rules{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+    }
+    .rule{
+      background:linear-gradient(180deg, #fffef8, #fffaf0);
+      border:1px solid #f9e5b0;
+      border-radius:16px;
+      padding:16px;
+    }
+    .rule strong{display:block;margin-bottom:6px}
+
+    .footer{
+      max-width:var(--max);
+      margin:0 auto 30px;
+      padding:0 18px;
+    }
+    .footer-box{
+      padding:20px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .hidden-by-search{display:none !important}
+    mark{background:#fff1a8;padding:0 .2em;border-radius:4px}
+
+    @media (max-width: 980px){
+      .hero, .container{grid-template-columns:1fr}
+      .toc{position:relative; top:0}
+    }
+    @media (max-width: 720px){
+      .cards, .two-col, .glossary, .rules, .hero-grid{grid-template-columns:1fr}
+      .search{min-width:100%}
+      .topbar-inner{align-items:stretch}
+      .actions{width:100%}
+      .btn{width:100%}
+    }
+
+
+    .license-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    .license-box{
+      border-radius:18px;
+      padding:18px;
+      border:1px solid var(--border);
+      background:#fff;
+    }
+    .license-box.free{background:linear-gradient(180deg,#f5fffb,#effcf7); border-color:#bde8d8}
+    .license-box.proprietary{background:linear-gradient(180deg,#fff8f6,#fff3ef); border-color:#f2c7bc}
+    .license-box h3{margin:0 0 8px}
+    .license-box p{margin:0;color:var(--muted)}
+    .os-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:18px;
+    }
+    .os-card{
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:#fff;
+      padding:18px;
+      text-align:center;
+      box-shadow:0 4px 14px rgba(15,23,42,.05);
+    }
+    .os-logo-wrap{
+      height:88px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:12px;
+    }
+    .os-logo{
+      max-width:130px;
+      max-height:76px;
+      object-fit:contain;
+    }
+    .os-card h3{margin:4px 0 6px}
+    .os-card p{margin:0;color:var(--muted);font-size:.94rem}
+    .status{
+      display:inline-block;
+      margin:8px 0 10px;
+      padding:5px 10px;
+      border-radius:999px;
+      font-size:.82rem;
+      font-weight:800;
+    }
+    .status.free{background:#dcfce7;color:#166534}
+    .status.prop{background:#fee2e2;color:#991b1b}
+    .status.mixed{background:#fef3c7;color:#92400e}
+    .important-note{
+      margin-top:16px;
+      padding:16px;
+      border-left:5px solid var(--warn);
+      background:#fffaf0;
+      border-radius:12px;
+    }
+    @media (max-width: 850px){
+      .license-grid,.os-grid{grid-template-columns:1fr}
+    }
+
+    @media print{
+      .topbar, .toc, .actions, .btn{display:none !important}
+      body{background:#fff}
+      .hero, .container{display:block; max-width:none}
+      .hero-card, .quick-panel, .section, .footer-box{box-shadow:none; border:1px solid #ccc}
+      .section{break-inside:avoid; margin-bottom:18px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo">💻</div>
+        <div>Sistema Operativo · 1.º ESO</div>
+      </div>
+      <div class="actions">
+        <label class="search" aria-label="Buscar información">
+          <span>🔎</span>
+          <input id="searchInput" type="text" placeholder="Busca: archivo, carpeta, copiar, mover, ruta..." />
+        </label>
+        <button class="btn secondary" onclick="resetSearch()">Limpiar búsqueda</button>
+        <button class="btn" onclick="window.print()">Imprimir / Guardar PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <article class="hero-card">
+      <div class="kicker">📘 Guía de consulta para clase</div>
+      <h1>El sistema operativo y la organización de archivos</h1>
+      <p class="lead">
+        Esta web te servirá como referencia para entender qué es un sistema operativo,
+        cómo funciona de forma básica y cómo trabajar correctamente con archivos y carpetas.
+      </p>
+
+      <div class="hero-grid">
+        <div class="mini-card">
+          <div class="icon">🧠</div>
+          <h3>Aprender</h3>
+          <p>Comprender los conceptos básicos antes de hacer la práctica.</p>
+        </div>
+        <div class="mini-card">
+          <div class="icon">🗂️</div>
+          <h3>Organizar</h3>
+          <p>Crear carpetas, guardar archivos y mantener el ordenador ordenado.</p>
+        </div>
+        <div class="mini-card">
+          <div class="icon">🔁</div>
+          <h3>Distinguir</h3>
+          <p>Saber la diferencia entre copiar, mover, eliminar y recuperar.</p>
+        </div>
+        <div class="mini-card">
+          <div class="icon">🚀</div>
+          <h3>Aplicar</h3>
+          <p>Usar lo aprendido en las tareas diarias de clase.</p>
+        </div>
+      </div>
+    </article>
+
+    <aside class="quick-panel panel">
+      <h2>Al terminar deberías saber...</h2>
+      <ul class="checklist">
+        <li><span class="tick">✔</span><span>Qué es un <strong>sistema operativo</strong>.</span></li>
+        <li><span class="tick">✔</span><span>Diferenciar <strong>archivo</strong> y <strong>carpeta</strong>.</span></li>
+        <li><span class="tick">✔</span><span>Reconocer algunas <strong>extensiones</strong>.</span></li>
+        <li><span class="tick">✔</span><span>Crear, renombrar, copiar, mover y eliminar archivos.</span></li>
+        <li><span class="tick">✔</span><span>Entender qué es una <strong>ruta</strong>.</span></li>
+        <li><span class="tick">✔</span><span>Organizar mejor tu espacio digital.</span></li>
+      </ul>
+    </aside>
+  </section>
+
+  <div class="container">
+    <aside class="toc panel">
+      <h3>Índice</h3>
+      <p>Pulsa en un apartado para ir directamente.</p>
+      <nav>
+        <a href="#que-es">1. ¿Qué es un sistema operativo?</a>
+        <a href="#licencias">2. ¿Libre o propietario?</a>
+        <a href="#que-hace">3. ¿Qué hace?</a>
+        <a href="#escritorio">4. El escritorio</a>
+        <a href="#archivos">5. Archivo y extensión</a>
+        <a href="#carpetas">6. Carpetas</a>
+        <a href="#guardar">7. ¿Dónde se guardan?</a>
+        <a href="#ruta">8. La ruta</a>
+        <a href="#operaciones">9. Operaciones básicas</a>
+        <a href="#copiar-mover">10. Copiar y mover</a>
+        <a href="#papelera">11. Papelera de reciclaje</a>
+        <a href="#habitos">12. Buenos hábitos</a>
+        <a href="#glosario">13. Glosario rápido</a>
+        <a href="#reglas">14. Reglas antes de empezar</a>
+      </nav>
+    </aside>
+
+    <main id="contentArea">
+      <section class="section panel searchable" id="que-es" data-title="que es sistema operativo">
+        <h2>1. ¿Qué es un sistema operativo?</h2>
+        <p class="intro">
+          El sistema operativo es el <strong>programa principal del ordenador</strong>.
+          Hace posible que podamos usar el equipo, abrir programas, guardar archivos
+          y comunicarnos con los componentes físicos.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <h3>📌 Definición sencilla</h3>
+            <p>
+              Es el sistema que organiza el funcionamiento del ordenador para que el usuario pueda trabajar con facilidad.
+            </p>
+          </article>
+          <article class="card">
+            <h3>🌍 Ejemplos</h3>
+            <p>Windows · macOS · Linux · Android · iOS</p>
+          </article>
+        </div>
+        <div class="example-box">
+          <strong>Una comparación útil:</strong><br />
+          Si el ordenador fuera una oficina, el <strong>hardware</strong> serían los objetos físicos,
+          el <strong>sistema operativo</strong> sería quien organiza todo, las <strong>aplicaciones</strong> serían las herramientas
+          y los <strong>archivos</strong> serían los trabajos y documentos.
+        </div>
+      </section>
+
+
+      <section class="section panel searchable" id="licencias" data-title="software libre propietario privado licencias linux windows macos android ios">
+        <h2>2. ¿Los sistemas operativos son libres o propietarios?</h2>
+        <p class="intro">
+          No todos los sistemas operativos se distribuyen de la misma forma. Una diferencia importante es si son
+          <strong>software libre</strong> o <strong>software propietario</strong>. A veces se dice “privado”, pero el término
+          más correcto en informática es <strong>propietario</strong>.
+        </p>
+
+        <div class="license-grid">
+          <article class="license-box free">
+            <h3>🔓 Software libre</h3>
+            <p>
+              Permite a los usuarios <strong>usar, estudiar, modificar y compartir</strong> el programa. Para poder estudiarlo
+              y modificarlo, su código fuente debe estar disponible.
+            </p>
+          </article>
+          <article class="license-box proprietary">
+            <h3>🔒 Software propietario</h3>
+            <p>
+              Su propietario establece las condiciones de uso mediante una licencia. Normalmente el código fuente no está
+              disponible para que cualquier usuario pueda modificarlo o redistribuirlo libremente.
+            </p>
+          </article>
+        </div>
+
+        <div class="important-note">
+          <strong>⚠️ Importante:</strong> “software libre” no significa necesariamente “software gratis”.
+          La palabra <em>libre</em> se refiere a las libertades que tiene el usuario sobre el programa.
+        </div>
+
+        <h3 style="margin-top:24px">¿Y los sistemas operativos que hemos visto?</h3>
+        <div class="os-grid">
+          <article class="os-card">
+            <div class="os-logo-wrap">
+              <img class="os-logo" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Windows_11_logo.svg" alt="Logotipo de Windows">
+            </div>
+            <h3>Windows</h3>
+            <span class="status prop">Propietario</span>
+            <p>
+              Microsoft permite usar Windows según los términos de su licencia, pero no ofrece su código completo para que
+              cualquier persona lo modifique y redistribuya libremente.
+            </p>
+          </article>
+
+          <article class="os-card">
+            <div class="os-logo-wrap">
+              <img class="os-logo" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Apple_logo_black.svg" alt="Logotipo de Apple, utilizado para representar macOS">
+            </div>
+            <h3>macOS</h3>
+            <span class="status prop">Propietario</span>
+            <p>
+              Apple distribuye macOS bajo sus propios acuerdos de licencia. Incluye algunos componentes de código abierto,
+              pero el sistema completo no es software libre.
+            </p>
+          </article>
+
+          <article class="os-card">
+            <div class="os-logo-wrap">
+              <img class="os-logo" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Tux.svg" alt="Tux, mascota de Linux">
+            </div>
+            <h3>GNU/Linux</h3>
+            <span class="status free">Libre</span>
+            <p>
+              Muchas distribuciones GNU/Linux son software libre: su código puede estudiarse, modificarse y compartirse
+              según las licencias de sus componentes.
+            </p>
+          </article>
+
+          <article class="os-card">
+            <div class="os-logo-wrap">
+              <img class="os-logo" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Android_logo_2023_%28stacked%29.svg" alt="Logotipo de Android">
+            </div>
+            <h3>Android</h3>
+            <span class="status mixed">Caso mixto</span>
+            <p>
+              La base de Android, llamada <strong>AOSP</strong>, es de código abierto. Sin embargo, muchos móviles añaden
+              servicios y aplicaciones propietarias, por lo que el Android que usamos habitualmente no es completamente libre.
+            </p>
+          </article>
+
+          <article class="os-card">
+            <div class="os-logo-wrap">
+              <img class="os-logo" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Apple_iOS_logo.svg" alt="Logotipo de iOS">
+            </div>
+            <h3>iOS</h3>
+            <span class="status prop">Propietario</span>
+            <p>
+              Apple controla su distribución y establece las condiciones de uso mediante su licencia. El sistema completo
+              no puede modificarse y redistribuirse libremente por cualquier usuario.
+            </p>
+          </article>
+        </div>
+
+        <details style="margin-top:16px">
+          <summary>💡 Qué debes recordar</summary>
+          <div class="content">
+            <strong>GNU/Linux → libre.</strong><br>
+            <strong>Windows, macOS e iOS → propietarios.</strong><br>
+            <strong>Android → su base AOSP es abierta, pero los móviles Android suelen combinar partes abiertas y propietarias.</strong>
+          </div>
+        </details>
+      </section>
+
+      <section class="section panel searchable" id="que-hace" data-title="que hace sistema operativo">
+        <h2>3. ¿Qué hace el sistema operativo?</h2>
+        <p class="intro">Tiene muchas funciones, pero en clase vamos a centrarnos en estas cuatro:</p>
+        <div class="cards">
+          <article class="card">
+            <h3>⌨️ A. Permite usar los dispositivos</h3>
+            <p>Gestiona el teclado, el ratón, la pantalla, la memoria, el disco o la impresora.</p>
+          </article>
+          <article class="card">
+            <h3>🧩 B. Permite abrir programas</h3>
+            <p>Navegador web, procesador de textos, calculadora, aplicaciones educativas, etc.</p>
+          </article>
+          <article class="card">
+            <h3>🗃️ C. Organiza la información</h3>
+            <p>Usa archivos, carpetas y unidades de almacenamiento para guardar el trabajo.</p>
+          </article>
+          <article class="card">
+            <h3>🖱️ D. Permite interactuar con el ordenador</h3>
+            <p>Lo hacemos mediante escritorio, ventanas, iconos, menús y barra de tareas.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section panel searchable" id="escritorio" data-title="escritorio ventanas barra de tareas">
+        <h2>4. El escritorio</h2>
+        <p class="intro">
+          Cuando iniciamos sesión, normalmente aparece el <strong>escritorio</strong>. Es el espacio principal de trabajo.
+        </p>
+        <div class="two-col">
+          <article class="card">
+            <h3>En el escritorio puedes encontrar:</h3>
+            <div class="pill-row">
+              <span class="pill">Iconos</span>
+              <span class="pill">Accesos directos</span>
+              <span class="pill">Carpetas</span>
+              <span class="pill">Archivos</span>
+              <span class="pill">Papelera</span>
+              <span class="pill">Barra de tareas</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>Consejo importante</h3>
+            <p>
+              El escritorio no debería llenarse de archivos sin orden. Es mejor usar carpetas para organizar el trabajo.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section panel searchable" id="archivos" data-title="archivo extension tipos de archivo">
+        <h2>5. ¿Qué es un archivo? ¿Y qué es una extensión?</h2>
+        <div class="two-col">
+          <article class="card">
+            <h3>📄 Archivo</h3>
+            <p>
+              Un archivo es una unidad de información guardada en el ordenador: un documento, una imagen, una presentación, una canción o un vídeo.
+            </p>
+            <div class="example-box">
+              <strong>Ejemplo:</strong><br />
+              <code>trabajo_historia.docx</code><br />
+              <strong>trabajo_historia</strong> es el nombre.<br />
+              <strong>.docx</strong> es la extensión.
+            </div>
+          </article>
+          <article class="card">
+            <h3>🏷️ Extensión</h3>
+            <p>
+              La extensión indica qué tipo de archivo es.
+            </p>
+            <div class="pill-row">
+              <span class="pill">.docx → documento</span>
+              <span class="pill">.pdf → PDF</span>
+              <span class="pill">.jpg / .png → imagen</span>
+              <span class="pill">.mp3 → audio</span>
+              <span class="pill">.mp4 → vídeo</span>
+              <span class="pill">.pptx → presentación</span>
+              <span class="pill">.txt → texto sencillo</span>
+            </div>
+          </article>
+        </div>
+        <details>
+          <summary>❓ Pregunta para pensar</summary>
+          <div class="content">
+            ¿Puede una fotografía tener la misma extensión que una canción? <br />
+            <strong>No</strong>, porque son tipos de archivo diferentes.
+          </div>
+        </details>
+      </section>
+
+      <section class="section panel searchable" id="carpetas" data-title="carpeta subcarpeta organizar archivos">
+        <h2>6. ¿Qué es una carpeta?</h2>
+        <p class="intro">
+          Una carpeta sirve para <strong>organizar archivos</strong>. También puede contener otras carpetas.
+        </p>
+        <div class="folder-tree">Medios Digitales/
+├── Documentos/
+├── Imágenes/
+└── Prácticas/</div>
+        <div class="example-box">
+          Gracias a las carpetas, es más fácil encontrar el trabajo y mantener el ordenador ordenado.
+        </div>
+      </section>
+
+      <section class="section panel searchable" id="guardar" data-title="guardar archivos unidad almacenamiento nube usb disco">
+        <h2>7. ¿Dónde se guardan los archivos?</h2>
+        <p class="intro">Los archivos siempre se guardan en algún lugar.</p>
+        <div class="cards">
+          <article class="card"><h3>💾 Disco interno</h3><p>Es el almacenamiento del propio ordenador.</p></article>
+          <article class="card"><h3>🔌 Memoria USB</h3><p>Sirve para transportar archivos de un equipo a otro.</p></article>
+          <article class="card"><h3>🧱 Disco externo</h3><p>Ofrece más espacio para guardar datos.</p></article>
+          <article class="card"><h3>☁️ Nube</h3><p>Permite guardar archivos en internet para acceder desde distintos dispositivos.</p></article>
+        </div>
+      </section>
+
+      <section class="section panel searchable" id="ruta" data-title="ruta ubicacion archivo direccion">
+        <h2>8. ¿Qué es una ruta?</h2>
+        <p class="intro">
+          Una <strong>ruta</strong> indica dónde se encuentra un archivo. Es parecida a una dirección.
+        </p>
+        <div class="example-box">
+          <strong>Ejemplo de ruta:</strong><br />
+          <code>Documentos &gt; Medios Digitales &gt; Prácticas &gt; actividad1.docx</code>
+        </div>
+        <p>La ruta nos dice exactamente en qué carpeta está guardado un archivo.</p>
+      </section>
+
+      <section class="section panel searchable" id="operaciones" data-title="crear renombrar copiar mover eliminar recuperar operaciones basicas">
+        <h2>9. Operaciones básicas con archivos y carpetas</h2>
+        <div class="cards">
+          <article class="card"><h3>➕ Crear</h3><p>Hacer una carpeta nueva o generar un archivo nuevo.</p></article>
+          <article class="card"><h3>✏️ Renombrar</h3><p>Cambiar el nombre de un archivo o una carpeta.</p></article>
+          <article class="card"><h3>📋 Copiar</h3><p>Crear otra copia del archivo manteniendo el original.</p></article>
+          <article class="card"><h3>📦 Mover</h3><p>Cambiar el archivo de lugar. Ya no queda en la ubicación anterior.</p></article>
+          <article class="card"><h3>🗑️ Eliminar</h3><p>Enviar el archivo a la papelera.</p></article>
+          <article class="card"><h3>♻️ Recuperar</h3><p>Restaurar un archivo si sigue en la papelera.</p></article>
+        </div>
+      </section>
+
+      <section class="section panel searchable" id="copiar-mover" data-title="diferencia copiar mover">
+        <h2>10. Diferencia entre copiar y mover</h2>
+        <p class="intro">Esta diferencia es muy importante.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Acción</th>
+              <th>Qué ocurre</th>
+              <th>Resultado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Copiar</strong></td>
+              <td>Se crea otra copia del archivo.</td>
+              <td>El original sigue en su sitio y aparece otra copia en la nueva ubicación.</td>
+            </tr>
+            <tr>
+              <td><strong>Mover</strong></td>
+              <td>El archivo cambia de ubicación.</td>
+              <td>Solo queda en el nuevo lugar; desaparece del sitio anterior.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section panel searchable" id="papelera" data-title="papelera de reciclaje restaurar eliminar definitivamente">
+        <h2>11. La papelera de reciclaje</h2>
+        <p class="intro">
+          Cuando eliminamos un archivo en Windows, normalmente no desaparece inmediatamente.
+          Se envía primero a la <strong>papelera de reciclaje</strong>.
+        </p>
+        <div class="two-col">
+          <article class="card">
+            <h3>Desde la papelera podemos...</h3>
+            <div class="pill-row">
+              <span class="pill">Restaurar</span>
+              <span class="pill">Eliminar definitivamente</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>¿Por qué es útil?</h3>
+            <p>Porque nos permite recuperar archivos borrados por error.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section panel searchable" id="habitos" data-title="habitos organizar trabajo nombres claros escritorio ordenado">
+        <h2>12. Buenos hábitos para organizar tu trabajo</h2>
+        <p class="intro">Un ordenador puede contener miles de archivos. Por eso es importante mantener el orden.</p>
+        <div class="cards">
+          <article class="card">
+            <h3>✅ Usa nombres claros</h3>
+            <p>
+              Mejor <code>tema1_sistema_operativo.docx</code> que <code>documento1.docx</code> o <code>finaldefinitivo.docx</code>.
+            </p>
+          </article>
+          <article class="card">
+            <h3>✅ Crea carpetas con sentido</h3>
+            <p>Agrupa los archivos por asignatura, proyecto o tipo de contenido.</p>
+          </article>
+          <article class="card">
+            <h3>✅ No guardes todo en el escritorio</h3>
+            <p>El escritorio debe estar ordenado y no lleno de archivos sueltos.</p>
+          </article>
+          <article class="card">
+            <h3>✅ Revisa antes de borrar</h3>
+            <p>Comprueba qué archivo estás eliminando para evitar errores.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section panel searchable" id="glosario" data-title="glosario vocabulario digital archivo carpeta ruta extension escritorio">
+        <h2>13. Glosario rápido</h2>
+        <div class="glossary">
+          <article class="glossary-item"><h4>Sistema operativo</h4><p>Programa principal que permite usar el ordenador.</p></article>
+          <article class="glossary-item"><h4>Escritorio</h4><p>Espacio principal de trabajo al iniciar sesión.</p></article>
+          <article class="glossary-item"><h4>Archivo</h4><p>Unidad de información guardada en el ordenador.</p></article>
+          <article class="glossary-item"><h4>Carpeta</h4><p>Elemento que sirve para organizar archivos y otras carpetas.</p></article>
+          <article class="glossary-item"><h4>Extensión</h4><p>Parte final del nombre que indica el tipo de archivo.</p></article>
+          <article class="glossary-item"><h4>Ruta</h4><p>Dirección que indica dónde está guardado un archivo.</p></article>
+          <article class="glossary-item"><h4>Copiar</h4><p>Crear una copia manteniendo el original.</p></article>
+          <article class="glossary-item"><h4>Mover</h4><p>Cambiar un archivo de ubicación.</p></article>
+          <article class="glossary-item"><h4>Software libre</h4><p>Software que permite usar, estudiar, modificar y compartir el programa.</p></article>
+          <article class="glossary-item"><h4>Software propietario</h4><p>Software cuyo uso está limitado por la licencia establecida por su propietario.</p></article>
+        </div>
+      </section>
+
+      <section class="section panel searchable" id="reglas" data-title="reglas antes de empezar">
+        <h2>14. Antes de empezar la práctica</h2>
+        <p class="intro">Recuerda estas tres reglas:</p>
+        <div class="rules">
+          <div class="rule"><strong>1. No guardes todo en el escritorio.</strong> Usa carpetas para mantener el orden.</div>
+          <div class="rule"><strong>2. Utiliza nombres claros.</strong> Así podrás encontrar tus trabajos con facilidad.</div>
+          <div class="rule"><strong>3. Comprueba antes de borrar.</strong> Evitarás eliminar archivos importantes por error.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-box panel">
+      <strong>Consejo:</strong> utiliza esta web como guía de consulta mientras haces las actividades.
+      Si no recuerdas un concepto, usa el buscador superior o el índice lateral para localizarlo rápidamente.
+    </div>
+  </footer>
+
+  <script>
+    const input = document.getElementById('searchInput');
+    const blocks = [...document.querySelectorAll('.searchable')];
+
+    function clearMarks(el){
+      el.querySelectorAll('mark').forEach(mark => {
+        const parent = mark.parentNode;
+        parent.replaceChild(document.createTextNode(mark.textContent), mark);
+        parent.normalize();
+      });
+    }
+
+    function highlightTerm(node, term) {
+      const walk = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, {
+        acceptNode(textNode) {
+          const parent = textNode.parentElement;
+          if (!parent) return NodeFilter.FILTER_REJECT;
+          if (["SCRIPT", "STYLE", "MARK"].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
+          if (!textNode.nodeValue.toLowerCase().includes(term)) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+
+      const toProcess = [];
+      while (walk.nextNode()) toProcess.push(walk.currentNode);
+
+      toProcess.forEach(textNode => {
+        const text = textNode.nodeValue;
+        const lower = text.toLowerCase();
+        const frag = document.createDocumentFragment();
+        let lastIndex = 0;
+        let idx = lower.indexOf(term);
+
+        while (idx !== -1) {
+          frag.appendChild(document.createTextNode(text.slice(lastIndex, idx)));
+          const mark = document.createElement('mark');
+          mark.textContent = text.slice(idx, idx + term.length);
+          frag.appendChild(mark);
+          lastIndex = idx + term.length;
+          idx = lower.indexOf(term, lastIndex);
+        }
+
+        frag.appendChild(document.createTextNode(text.slice(lastIndex)));
+        textNode.parentNode.replaceChild(frag, textNode);
+      });
+    }
+
+    function runSearch(){
+      const term = input.value.trim().toLowerCase();
+      blocks.forEach(block => {
+        clearMarks(block);
+        const haystack = (block.innerText + ' ' + (block.dataset.title || '')).toLowerCase();
+        const match = !term || haystack.includes(term);
+        block.classList.toggle('hidden-by-search', !match);
+        if (match && term.length > 1) highlightTerm(block, term);
+      });
+    }
+
+    function resetSearch(){
+      input.value = '';
+      runSearch();
+    }
+
+    input.addEventListener('input', runSearch);
+    window.resetSearch = resetSearch;
+  </script>
+</body>
+</html>

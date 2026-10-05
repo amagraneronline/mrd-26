@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Principales conectores externos de un ordenador</title>
+  <desc id="desc">Infografía con HDMI, VGA, USB-A, Ethernet, USB-C, Thunderbolt, audio y puerto serie.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5db5e8"/>
+      <stop offset="1" stop-color="#2e83c6"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7f7f7"/>
+      <stop offset="0.5" stop-color="#cfd3d6"/>
+      <stop offset="1" stop-color="#8e969c"/>
+    </linearGradient>
+    <linearGradient id="darkmetal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a4f55"/>
+      <stop offset="1" stop-color="#15191d"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0b3657" flood-opacity=".35"/>
+    </filter>
+    <style>
+      .label { font: 700 27px system-ui, -apple-system, "Segoe UI", Arial, sans-serif; fill:#fff; }
+      .small { font: 700 25px system-ui, -apple-system, "Segoe UI", Arial, sans-serif; fill:#fff; }
+      .tag { fill:#263b4e; stroke:#4d6579; stroke-width:2; }
+      .gold { fill:#d9a83f; }
+      .pin { fill:#d9a83f; stroke:#6f5119; stroke-width:2; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <!-- subtle grid -->
+  <g opacity=".18" stroke="#d7efff" stroke-width="2">
+    <path d="M0 337.5H1200"/>
+    <path d="M300 0V675M600 0V675M900 0V675"/>
+    <path d="M0 168.75H1200M0 506.25H1200"/>
+  </g>
+
+  <!-- HDMI -->
+  <g transform="translate(70 55)" filter="url(#shadow)">
+    <rect x="0" y="0" width="220" height="120" rx="18" fill="url(#darkmetal)" stroke="#2b2f33" stroke-width="4"/>
+    <path d="M38 38 H182 L170 86 H50 Z" fill="#090b0c" stroke="#d2a044" stroke-width="8"/>
+    <rect x="65" y="54" width="90" height="16" rx="4" fill="#1d2327"/>
+    <g class="gold">
+      <rect x="74" y="57" width="6" height="10" rx="1"/>
+      <rect x="88" y="57" width="6" height="10" rx="1"/>
+      <rect x="102" y="57" width="6" height="10" rx="1"/>
+      <rect x="116" y="57" width="6" height="10" rx="1"/>
+      <rect x="130" y="57" width="6" height="10" rx="1"/>
+      <rect x="144" y="57" width="6" height="10" rx="1"/>
+    </g>
+    <rect class="tag" x="55" y="145" width="110" height="44" rx="8"/>
+    <text class="label" x="110" y="176" text-anchor="middle">HDMI</text>
+  </g>
+
+  <!-- VGA -->
+  <g transform="translate(365 55)" filter="url(#shadow)">
+    <rect x="0" y="5" width="220" height="110" rx="18" fill="url(#metal)" stroke="#606970" stroke-width="4"/>
+    <path d="M54 30 H166 L180 90 H40 Z" fill="#5ca0e6" stroke="#45515c" stroke-width="4"/>
+    <g fill="#0e3154">
+      <circle cx="72" cy="47" r="5"/><circle cx="94" cy="47" r="5"/><circle cx="116" cy="47" r="5"/><circle cx="138" cy="47" r="5"/><circle cx="160" cy="47" r="5"/>
+      <circle cx="72" cy="64" r="5"/><circle cx="94" cy="64" r="5"/><circle cx="116" cy="64" r="5"/><circle cx="138" cy="64" r="5"/><circle cx="160" cy="64" r="5"/>
+      <circle cx="72" cy="81" r="5"/><circle cx="94" cy="81" r="5"/><circle cx="116" cy="81" r="5"/><circle cx="138" cy="81" r="5"/><circle cx="160" cy="81" r="5"/>
+    </g>
+    <circle class="pin" cx="26" cy="60" r="8"/><circle class="pin" cx="194" cy="60" r="8"/>
+    <rect class="tag" x="61" y="145" width="98" height="44" rx="8"/>
+    <text class="label" x="110" y="176" text-anchor="middle">VGA</text>
+  </g>
+
+  <!-- USB-A -->
+  <g transform="translate(660 55)" filter="url(#shadow)">
+    <rect x="0" y="0" width="220" height="120" rx="18" fill="url(#darkmetal)" stroke="#2c3338" stroke-width="4"/>
+    <rect x="40" y="30" width="140" height="60" rx="7" fill="#b4bbc0" stroke="#565f65" stroke-width="4"/>
+    <rect x="58" y="44" width="104" height="32" rx="4" fill="#11171c"/>
+    <rect x="70" y="56" width="80" height="8" rx="2" fill="#777f85"/>
+    <rect class="tag" x="45" y="145" width="130" height="44" rx="8"/>
+    <text class="label" x="110" y="176" text-anchor="middle">USB-A</text>
+  </g>
+
+  <!-- Ethernet -->
+  <g transform="translate(955 40)" filter="url(#shadow)">
+    <rect x="0" y="0" width="180" height="145" rx="14" fill="url(#metal)" stroke="#626c73" stroke-width="4"/>
+    <path d="M35 30 H145 V105 H122 V120 H58 V105 H35 Z" fill="#15191c" stroke="#565f66" stroke-width="4"/>
+    <g stroke="#d8ab4e" stroke-width="5">
+      <line x1="60" y1="54" x2="60" y2="93"/><line x1="72" y1="54" x2="72" y2="93"/>
+      <line x1="84" y1="54" x2="84" y2="93"/><line x1="96" y1="54" x2="96" y2="93"/>
+      <line x1="108" y1="54" x2="108" y2="93"/><line x1="120" y1="54" x2="120" y2="93"/>
+    </g>
+    <rect class="tag" x="28" y="160" width="124" height="44" rx="8"/>
+    <text class="label" x="90" y="191" text-anchor="middle">Ethernet</text>
+  </g>
+
+  <!-- USB-C -->
+  <g transform="translate(80 380)" filter="url(#shadow)">
+    <rect x="0" y="0" width="205" height="80" rx="40" fill="url(#metal)" stroke="#66717a" stroke-width="4"/>
+    <rect x="25" y="19" width="155" height="42" rx="21" fill="#151b20"/>
+    <rect x="55" y="32" width="95" height="16" rx="8" fill="#4e5960"/>
+    <rect class="tag" x="42" y="105" width="122" height="44" rx="8"/>
+    <text class="label" x="103" y="136" text-anchor="middle">USB-C</text>
+  </g>
+
+  <!-- Thunderbolt -->
+  <g transform="translate(385 380)" filter="url(#shadow)">
+    <rect x="0" y="0" width="205" height="80" rx="40" fill="url(#metal)" stroke="#66717a" stroke-width="4"/>
+    <rect x="25" y="19" width="155" height="42" rx="21" fill="#151b20"/>
+    <rect x="55" y="32" width="95" height="16" rx="8" fill="#4e5960"/>
+    <path d="M218 5 l-16 30 h15 l-22 38 8-28 h-15 l14-40 z" fill="#ffd15c" stroke="#f0aa20" stroke-width="2"/>
+    <rect class="tag" x="10" y="105" width="185" height="44" rx="8"/>
+    <text class="small" x="102" y="136" text-anchor="middle">Thunderbolt</text>
+  </g>
+
+  <!-- Audio -->
+  <g transform="translate(680 345)" filter="url(#shadow)">
+    <rect x="0" y="0" width="150" height="150" rx="24" fill="#d9d3de" stroke="#7b7280" stroke-width="4"/>
+    <circle cx="75" cy="35" r="20" fill="#ec80ac" stroke="#87415e" stroke-width="3"/>
+    <circle cx="75" cy="75" r="20" fill="#5eb6e4" stroke="#2d6685" stroke-width="3"/>
+    <circle cx="75" cy="115" r="20" fill="#70c879" stroke="#3e8246" stroke-width="3"/>
+    <g fill="none" stroke="#292e32" stroke-width="4" stroke-linecap="round">
+      <path d="M75 23 v13"/><path d="M68 29 v4 a7 7 0 0 0 14 0 v-4"/><path d="M75 40 v5"/>
+      <path d="M65 115 q10-16 20 0"/><path d="M65 115 v8M85 115 v8"/>
+    </g>
+    <rect class="tag" x="23" y="165" width="104" height="44" rx="8"/>
+    <text class="label" x="75" y="196" text-anchor="middle">Audio</text>
+  </g>
+
+  <!-- Serial -->
+  <g transform="translate(930 365)" filter="url(#shadow)">
+    <rect x="0" y="0" width="225" height="105" rx="14" fill="url(#metal)" stroke="#6a7277" stroke-width="4"/>
+    <path d="M55 28 H170 L185 78 H40 Z" fill="#5e666b" stroke="#454c51" stroke-width="4"/>
+    <g fill="#dcb65a" stroke="#765d20" stroke-width="1.5">
+      <circle cx="77" cy="44" r="5"/><circle cx="99" cy="44" r="5"/><circle cx="121" cy="44" r="5"/><circle cx="143" cy="44" r="5"/><circle cx="165" cy="44" r="5"/>
+      <circle cx="88" cy="64" r="5"/><circle cx="110" cy="64" r="5"/><circle cx="132" cy="64" r="5"/><circle cx="154" cy="64" r="5"/>
+    </g>
+    <circle class="pin" cx="22" cy="52" r="8"/><circle class="pin" cx="203" cy="52" r="8"/>
+    <rect class="tag" x="57" y="130" width="112" height="44" rx="8"/>
+    <text class="label" x="113" y="161" text-anchor="middle">Serial</text>
+  </g>
+</svg>

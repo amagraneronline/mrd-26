@@ -1,0 +1,14 @@
+COMPONENTES HARDWARE — WEB INTERACTIVA
+======================================
+
+1. Descomprime la carpeta completa.
+2. Abre index.html con Chrome, Edge, Firefox o Safari.
+3. No es necesario instalar nada.
+
+IMÁGENES
+- Con Internet: la web carga fotografías reales de Wikimedia Commons.
+- Sin Internet: cada fotografía tiene una ilustración SVG local de respaldo en la carpeta img/.
+- Las fuentes y licencias se detallan en FUENTES_IMAGENES.txt.
+
+IMPORTANTE
+Mantén index.html y la carpeta img/ en la misma ubicación para que el modo sin conexión funcione correctamente.

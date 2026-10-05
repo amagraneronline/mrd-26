@@ -1,0 +1,58 @@
+FUENTES DE LAS IMÁGENES REALES
+===============================
+
+Las fotografías de la web se cargan desde Wikimedia Commons. La carpeta img/ contiene ilustraciones SVG locales de respaldo para que la web siga siendo usable sin conexión.
+
+1. Placa base / hardware
+   Archivo: Computer motherboard.jpg
+   Autor: Kurt Kaiser
+   Licencia: CC0 1.0 / dedicación al dominio público
+   Fuente: https://commons.wikimedia.org/wiki/File:Computer_motherboard.jpg
+
+2. Procesador
+   Archivo: Cpu.jpg
+   Autor: Poooow
+   Licencia: dominio público
+   Fuente: https://commons.wikimedia.org/wiki/File:Cpu.jpg
+
+3. Memoria RAM
+   Archivo: RAM module.jpg
+   Autor: Julo (según Wikimedia Commons)
+   Licencia: dominio público
+   Fuente: https://commons.wikimedia.org/wiki/File:RAM_module.jpg
+
+4. HDD abierto
+   Archivo: Open hard-drive.jpg
+   Autor: Zzubnik
+   Licencia: dominio público
+   Fuente: https://commons.wikimedia.org/wiki/File:Open_hard-drive.jpg
+
+5. SSD M.2 NVMe
+   Archivo: 20260522 스캔디스크 NVMe M.2형 SSD.jpg
+   Autor: Striker9498
+   Licencia: CC0 1.0
+   Fuente: https://commons.wikimedia.org/wiki/File:20260522_%EC%8A%A4%EC%BA%94%EB%94%94%EC%8A%A4%ED%81%AC_NVMe_M.2%ED%98%95_SSD.jpg
+
+6. Tarjeta gráfica
+   Archivo: Graphics board gv-n560oc-1gi IMGP0968 wp.jpg
+   Autor: Rainer Knäpper (smial)
+   Licencia: Free Art License / otras licencias libres indicadas en Wikimedia Commons
+   Fuente: https://commons.wikimedia.org/wiki/File:Graphics_board_gv-n560oc-1gi_IMGP0968_wp.jpg
+
+7. Fuente de alimentación
+   Archivo: HP-Compaq-PC-Power-Supply IMG 8112.JPG
+   Autor: Hans Haase
+   Licencia: CC BY-SA 3.0
+   Fuente: https://commons.wikimedia.org/wiki/File:HP-Compaq-PC-Power-Supply_IMG_8112.JPG
+
+8. Red / RJ45
+   Archivo: RJ-45 Ethernet socket on Lenovo T410 Laptop.jpg
+   Autores: Pittigrilli; trabajo derivado Zinnmann
+   Licencia: CC BY-SA 4.0
+   Fuente: https://commons.wikimedia.org/wiki/File:RJ-45_Ethernet_socket_on_Lenovo_T410_Laptop.jpg
+
+9. Conectores externos
+   Archivo: Motherboard external connections.jpg
+   Autor: Mixabest
+   Licencia: dominio público
+   Fuente: https://commons.wikimedia.org/wiki/File:Motherboard_external_connections.jpg

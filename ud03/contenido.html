@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Material de consulta para 1.º ESO sobre el tamaño de la información digital: bit, byte, KB, MB, GB y TB." />
+  <title>El tamaño de la información digital | 1.º ESO</title>
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --surface:#ffffff;
+      --surface-2:#eef5ff;
+      --text:#1f2937;
+      --muted:#667085;
+      --primary:#3157d5;
+      --primary-soft:#e9efff;
+      --accent:#f59e0b;
+      --accent-soft:#fff4d6;
+      --success:#16845b;
+      --success-soft:#e7f7f0;
+      --danger:#c2413a;
+      --border:#dce3ee;
+      --shadow:0 12px 30px rgba(36,54,90,.09);
+      --radius:20px;
+      --radius-sm:14px;
+      --max:980px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, #e8eeff 0, transparent 32%),
+        radial-gradient(circle at 92% 12%, #fff1c7 0, transparent 24%),
+        var(--bg);
+      line-height:1.65;
+      font-size:17px;
+    }
+
+    a{color:inherit}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:10;
+      backdrop-filter:blur(12px);
+      background:rgba(244,247,251,.86);
+      border-bottom:1px solid rgba(220,227,238,.85);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:auto;
+      padding:10px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:.95rem;
+      font-weight:800;
+    }
+
+    .brand-icon{
+      display:grid;
+      place-items:center;
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      background:var(--primary);
+      color:white;
+      box-shadow:0 7px 16px rgba(49,87,213,.22);
+    }
+
+    .nav{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .nav a{
+      text-decoration:none;
+      font-size:.86rem;
+      font-weight:700;
+      color:#4b5563;
+      padding:7px 10px;
+      border-radius:999px;
+    }
+
+    .nav a:hover{background:white;color:var(--primary)}
+
+    main{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 70px;
+    }
+
+    .hero{
+      background:linear-gradient(135deg, #3157d5 0%, #4f6ee5 60%, #6f83ea 100%);
+      color:white;
+      border-radius:30px;
+      padding:42px;
+      box-shadow:0 20px 50px rgba(49,87,213,.22);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero::after{
+      content:"010101";
+      position:absolute;
+      right:-20px;
+      bottom:-25px;
+      font-size:6rem;
+      font-weight:900;
+      opacity:.08;
+      letter-spacing:-.4rem;
+      transform:rotate(-8deg);
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.15);
+      font-size:.8rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+
+    h1{
+      margin:16px 0 10px;
+      max-width:700px;
+      font-size:clamp(2.25rem, 5vw, 4.3rem);
+      line-height:1.02;
+      letter-spacing:-.045em;
+    }
+
+    .hero p{
+      max-width:720px;
+      margin:0;
+      color:#eef2ff;
+      font-size:1.08rem;
+    }
+
+    .hero-scale{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:26px;
+    }
+
+    .hero-scale span{
+      background:white;
+      color:var(--primary);
+      font-weight:900;
+      border-radius:12px;
+      padding:9px 13px;
+      min-width:54px;
+      text-align:center;
+    }
+
+    .intro-grid,
+    .two-col,
+    .unit-grid{
+      display:grid;
+      gap:18px;
+    }
+
+    .intro-grid{grid-template-columns:repeat(3, 1fr);margin:22px 0 30px}
+    .two-col{grid-template-columns:1fr 1fr}
+    .unit-grid{grid-template-columns:repeat(2, 1fr)}
+
+    .mini-card,
+    .card,
+    .unit-card,
+    .example,
+    .callout,
+    .quiz{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .mini-card{padding:18px}
+    .mini-card strong{display:block;font-size:1.1rem;margin-bottom:4px}
+    .mini-card span{color:var(--muted);font-size:.93rem}
+
+    section{
+      scroll-margin-top:85px;
+      margin-top:30px;
+    }
+
+    .section-card{
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(220,227,238,.85);
+      border-radius:26px;
+      padding:30px;
+      box-shadow:0 12px 35px rgba(36,54,90,.06);
+    }
+
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+    .section-number{
+      display:grid;
+      place-items:center;
+      width:42px;
+      height:42px;
+      flex:0 0 42px;
+      background:var(--primary-soft);
+      color:var(--primary);
+      border-radius:13px;
+      font-weight:900;
+    }
+
+    h2{
+      margin:0;
+      font-size:clamp(1.55rem, 3vw, 2.2rem);
+      line-height:1.2;
+      letter-spacing:-.025em;
+    }
+
+    h3{margin:0 0 8px;font-size:1.15rem}
+    p{margin:10px 0}
+
+    .big-idea{
+      margin:22px 0;
+      text-align:center;
+      padding:24px;
+      background:var(--primary-soft);
+      border:2px dashed #b7c7ff;
+      border-radius:18px;
+      font-size:1.35rem;
+      font-weight:900;
+      color:#243b9c;
+    }
+
+    .binary{
+      font-family:"SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size:1.2rem;
+      letter-spacing:.12em;
+      background:#111827;
+      color:#a7f3d0;
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:11px;
+    }
+
+    .unit-card{padding:22px}
+    .unit-card .symbol{
+      display:inline-grid;
+      place-items:center;
+      min-width:52px;
+      height:52px;
+      padding:0 12px;
+      border-radius:15px;
+      background:var(--primary);
+      color:white;
+      font-size:1.25rem;
+      font-weight:900;
+      margin-bottom:12px;
+    }
+
+    .unit-card p{color:var(--muted)}
+
+    .scale{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      padding:20px 0 8px;
+    }
+
+    .scale .box{
+      background:white;
+      border:2px solid var(--border);
+      border-radius:14px;
+      padding:12px 15px;
+      font-weight:900;
+      min-width:66px;
+      text-align:center;
+    }
+
+    .scale .arrow{
+      color:var(--primary);
+      font-size:1.6rem;
+      font-weight:900;
+    }
+
+    .table-wrap{overflow-x:auto;margin-top:16px}
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      background:white;
+      border:1px solid var(--border);
+      border-radius:16px;
+    }
+
+    th,td{
+      padding:13px 15px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
+      vertical-align:top;
+    }
+
+    th{background:#f8fafc;font-size:.92rem}
+    tr:last-child td{border-bottom:0}
+
+    .example{
+      padding:20px;
+      margin:18px 0;
+      border-left:5px solid var(--accent);
+      background:#fffdf7;
+    }
+
+    .example-title{
+      font-weight:900;
+      margin-bottom:6px;
+      color:#92400e;
+    }
+
+    .callout{
+      padding:20px;
+      margin:18px 0;
+      background:var(--success-soft);
+      border-color:#bfe7d8;
+    }
+
+    .callout strong{color:var(--success)}
+
+    .warning{
+      background:var(--accent-soft);
+      border:1px solid #f4d588;
+      border-radius:16px;
+      padding:18px;
+      margin:18px 0;
+    }
+
+    .formula{
+      display:block;
+      text-align:center;
+      font-size:1.24rem;
+      font-weight:900;
+      color:#243b9c;
+      background:#f5f7ff;
+      border-radius:14px;
+      padding:12px;
+      margin:12px 0;
+    }
+
+    code{
+      font-family:"SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background:#f0f2f6;
+      padding:.13em .38em;
+      border-radius:6px;
+      font-size:.93em;
+    }
+
+    .file-list{
+      display:grid;
+      gap:10px;
+      margin:14px 0;
+    }
+
+    .file{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:center;
+      padding:12px 14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      border-radius:12px;
+    }
+
+    .file strong{font-family:"SFMono-Regular", Consolas, monospace;font-size:.93rem}
+    .file span{font-weight:900;color:var(--primary)}
+
+    .checks{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px 16px;
+      padding:0;
+      list-style:none;
+    }
+
+    .checks li{
+      background:#f8fafc;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px 14px 12px 42px;
+      position:relative;
+    }
+
+    .checks li::before{
+      content:"✓";
+      position:absolute;
+      left:14px;
+      top:11px;
+      width:20px;
+      height:20px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      color:white;
+      background:var(--success);
+      font-size:.75rem;
+      font-weight:900;
+    }
+
+    .summary{
+      background:#111827;
+      color:#f9fafb;
+      border-radius:25px;
+      padding:30px;
+      margin-top:30px;
+      box-shadow:var(--shadow);
+    }
+
+    .summary h2{color:white}
+    .summary .scale .box{background:#1f2937;border-color:#374151;color:white}
+    .summary .scale .arrow{color:#93a8ff}
+    .summary-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-top:20px;
+    }
+
+    .summary-item{
+      background:#1f2937;
+      border:1px solid #374151;
+      border-radius:15px;
+      padding:15px;
+    }
+
+    .summary-item small{
+      display:block;
+      text-transform:uppercase;
+      font-weight:800;
+      letter-spacing:.05em;
+      color:#9ca3af;
+      margin-bottom:4px;
+    }
+
+    .quiz{
+      margin-top:24px;
+      padding:24px;
+      background:white;
+    }
+
+    .quiz button{
+      border:0;
+      background:var(--primary);
+      color:white;
+      border-radius:11px;
+      padding:10px 15px;
+      font:inherit;
+      font-weight:800;
+      cursor:pointer;
+      margin:4px 6px 4px 0;
+    }
+
+    .quiz button:hover{filter:brightness(.95)}
+    .feedback{margin-top:10px;font-weight:800;min-height:28px}
+
+    footer{
+      max-width:var(--max);
+      margin:auto;
+      padding:0 20px 35px;
+      color:var(--muted);
+      font-size:.86rem;
+      text-align:center;
+    }
+
+    @media (max-width:760px){
+      body{font-size:16px}
+      .nav{display:none}
+      .hero{padding:30px 24px}
+      .hero::after{font-size:4rem}
+      .intro-grid,.two-col,.unit-grid,.summary-grid,.checks{grid-template-columns:1fr}
+      .section-card{padding:22px}
+      .topbar-inner{padding:9px 16px}
+      main{padding-left:14px;padding-right:14px}
+      .scale{gap:7px}
+      .scale .box{min-width:54px;padding:10px 11px}
+      .scale .arrow{font-size:1.2rem}
+    }
+
+    @media print{
+      .topbar,.quiz{display:none}
+      body{background:white;font-size:12pt}
+      main{max-width:none;padding:0}
+      .hero,.section-card,.summary{box-shadow:none}
+      .section-card{break-inside:avoid}
+    }
+  
+    /* ─────────────── PONTE A PRUEBA ─────────────── */
+    .practice{
+      margin-top:30px;
+      background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%);
+      border:1px solid var(--border);
+      border-radius:28px;
+      padding:30px;
+      box-shadow:var(--shadow);
+    }
+
+    .practice-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:22px;
+    }
+
+    .practice-head p{
+      margin:7px 0 0;
+      color:var(--muted);
+      max-width:700px;
+    }
+
+    .score-pill{
+      flex:0 0 auto;
+      background:var(--primary-soft);
+      color:var(--primary);
+      border:1px solid #cbd6ff;
+      border-radius:999px;
+      padding:9px 14px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .activity{
+      background:white;
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:22px;
+      margin-top:18px;
+    }
+
+    .activity-top{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:15px;
+    }
+
+    .activity-icon{
+      width:42px;
+      height:42px;
+      flex:0 0 42px;
+      display:grid;
+      place-items:center;
+      border-radius:13px;
+      background:var(--primary-soft);
+      font-size:1.25rem;
+    }
+
+    .activity h3{
+      margin:0;
+      font-size:1.15rem;
+    }
+
+    .activity-instructions{
+      color:var(--muted);
+      margin:2px 0 0;
+      font-size:.95rem;
+    }
+
+    .match-grid,
+    .fill-grid,
+    .conversion-grid{
+      display:grid;
+      gap:12px;
+    }
+
+    .match-row,
+    .fill-row,
+    .conversion-row{
+      display:grid;
+      grid-template-columns:minmax(180px,1fr) minmax(180px,1fr);
+      gap:12px;
+      align-items:center;
+      padding:12px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      border-radius:14px;
+    }
+
+    select,
+    .answer-input{
+      width:100%;
+      min-height:44px;
+      border:1.5px solid #cfd7e6;
+      background:white;
+      color:var(--text);
+      border-radius:10px;
+      padding:9px 11px;
+      font:inherit;
+    }
+
+    select:focus,
+    .answer-input:focus{
+      outline:3px solid rgba(49,87,213,.15);
+      border-color:var(--primary);
+    }
+
+    .order-list{
+      display:grid;
+      gap:9px;
+      margin-top:12px;
+    }
+
+    .order-item{
+      display:grid;
+      grid-template-columns:42px 1fr auto;
+      align-items:center;
+      gap:10px;
+      border:1px solid var(--border);
+      background:#f8fafc;
+      border-radius:13px;
+      padding:9px 10px;
+    }
+
+    .order-num{
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:10px;
+      background:white;
+      border:1px solid var(--border);
+      font-weight:900;
+      color:var(--primary);
+    }
+
+    .order-actions{
+      display:flex;
+      gap:6px;
+    }
+
+    .small-btn{
+      width:36px;
+      height:36px;
+      border:1px solid #cfd7e6;
+      background:white;
+      color:var(--text);
+      border-radius:9px;
+      cursor:pointer;
+      font-weight:900;
+    }
+
+    .small-btn:hover{background:var(--primary-soft);color:var(--primary)}
+
+    .activity-actions,
+    .practice-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+
+    .check-btn,
+    .reset-btn{
+      border:0;
+      border-radius:11px;
+      padding:10px 15px;
+      font:inherit;
+      font-weight:850;
+      cursor:pointer;
+    }
+
+    .check-btn{
+      background:var(--primary);
+      color:white;
+    }
+
+    .reset-btn{
+      background:#eef1f6;
+      color:#374151;
+    }
+
+    .check-btn:hover,
+    .reset-btn:hover{filter:brightness(.97)}
+
+    .activity-feedback{
+      margin-top:12px;
+      min-height:28px;
+      font-weight:800;
+    }
+
+    .is-correct{
+      border-color:#6ac5a0 !important;
+      background:#f0fbf6 !important;
+    }
+
+    .is-wrong{
+      border-color:#efaaa6 !important;
+      background:#fff5f4 !important;
+    }
+
+    .tiny-hint{
+      display:block;
+      color:var(--muted);
+      font-size:.82rem;
+      margin-top:4px;
+    }
+
+    .final-result{
+      margin-top:18px;
+      padding:18px;
+      border-radius:16px;
+      background:#eef4ff;
+      border:1px solid #cbd6ff;
+      font-weight:800;
+      display:none;
+    }
+
+    @media (max-width:760px){
+      .practice{padding:20px}
+      .practice-head{display:block}
+      .score-pill{display:inline-block;margin-top:12px}
+      .match-row,.fill-row,.conversion-row{grid-template-columns:1fr}
+      .order-item{grid-template-columns:38px 1fr}
+      .order-actions{grid-column:1 / -1;justify-content:flex-end}
+    }
+
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-icon">💾</span>
+        <span>Medios y Recursos Digitales · 1.º ESO</span>
+      </div>
+      <nav class="nav" aria-label="Navegación">
+        <a href="#unidades">Unidades</a>
+        <a href="#comparar">Comparar</a>
+        <a href="#convertir">Convertir</a>
+        <a href="#almacenamiento">Almacenamiento</a>
+        <a href="#resumen">Resumen</a>
+        <a href="#ponte-a-prueba">Ponte a prueba</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="titulo">
+      <span class="eyebrow">📘 Material de consulta</span>
+      <h1 id="titulo">El tamaño de la información digital</h1>
+      <p>
+        Fotos, vídeos, documentos, música y juegos ocupan espacio. En esta página aprenderás
+        cómo medimos ese espacio y cómo interpretar tamaños como KB, MB, GB o TB.
+      </p>
+      <div class="hero-scale" aria-label="Escala de unidades">
+        <span>B</span><span>KB</span><span>MB</span><span>GB</span><span>TB</span>
+      </div>
+    </section>
+
+    <div class="intro-grid">
+      <div class="mini-card">
+        <strong>🎯 Objetivo</strong>
+        <span>Entender cuánto ocupa la información digital.</span>
+      </div>
+      <div class="mini-card">
+        <strong>🧠 Idea clave</strong>
+        <span>No basta con mirar el número: también hay que mirar la unidad.</span>
+      </div>
+      <div class="mini-card">
+        <strong>🛠️ Para qué sirve</strong>
+        <span>Para saber si un archivo cabe, comparar tamaños y gestionar espacio.</span>
+      </div>
+    </div>
+
+    <section class="section-card">
+      <div class="section-title">
+        <span class="section-number">1</span>
+        <h2>La información también ocupa espacio</h2>
+      </div>
+      <p>
+        Cuando usamos un ordenador, una tableta o un teléfono móvil trabajamos constantemente
+        con <strong>información digital</strong>: fotografías, documentos, canciones, vídeos,
+        presentaciones, videojuegos o páginas web.
+      </p>
+      <p>
+        Toda esa información tiene que almacenarse en algún lugar, como el disco del ordenador,
+        una memoria USB, una tarjeta de memoria o un servicio en la nube.
+      </p>
+
+      <div class="file-list">
+        <div class="file"><strong>trabajo.pdf</strong><span>2,4 MB</span></div>
+        <div class="file"><strong>foto.jpg</strong><span>6 MB</span></div>
+        <div class="file"><strong>video.mp4</strong><span>850 MB</span></div>
+      </div>
+
+      <div class="callout">
+        <strong>Idea importante:</strong> no todos los archivos ocupan lo mismo.
+        Por eso necesitamos unidades que nos permitan medir la cantidad de información.
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-title">
+        <span class="section-number">2</span>
+        <h2>El bit: la unidad más pequeña</h2>
+      </div>
+      <p>
+        La unidad más pequeña que utilizamos para representar información digital se llama
+        <strong>bit</strong>. Su nombre procede de <em>binary digit</em>, que significa
+        «dígito binario».
+      </p>
+      <p>Un bit solo puede tener dos valores:</p>
+
+      <div class="big-idea">0 &nbsp; o &nbsp; 1</div>
+
+      <p>
+        Podemos imaginarlo como un interruptor que está <strong>apagado</strong> o
+        <strong>encendido</strong>. Los dispositivos digitales combinan enormes cantidades
+        de bits para representar textos, imágenes, sonidos, vídeos y programas.
+      </p>
+      <p>Una secuencia de bits podría ser:</p>
+      <p><span class="binary">01001101</span></p>
+
+      <div class="warning">
+        <strong>Para esta unidad no necesitas convertir binario a decimal.</strong>
+        Lo importante es comprender que la información digital puede representarse mediante
+        combinaciones de bits.
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-title">
+        <span class="section-number">3</span>
+        <h2>El byte</h2>
+      </div>
+      <p>
+        Trabajar con bits sueltos sería poco práctico, así que se agrupan.
+        Un grupo de <strong>8 bits forma 1 byte</strong>.
+      </p>
+
+      <span class="formula">1 byte = 8 bits</span>
+
+      <div class="two-col">
+        <div class="unit-card">
+          <span class="symbol">b</span>
+          <h3>bit</h3>
+          <p>Se representa normalmente con una <strong>b minúscula</strong>.</p>
+        </div>
+        <div class="unit-card">
+          <span class="symbol">B</span>
+          <h3>byte</h3>
+          <p>Se representa con una <strong>B mayúscula</strong>.</p>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Ejemplo</div>
+        La secuencia <code>01000001</code> contiene 8 bits. Por tanto, ocupa <strong>1 byte</strong>.
+      </div>
+    </section>
+
+    <section class="section-card" id="unidades">
+      <div class="section-title">
+        <span class="section-number">4</span>
+        <h2>Las unidades que utilizamos</h2>
+      </div>
+      <p>
+        Los archivos actuales contienen miles, millones o miles de millones de bytes.
+        Por eso utilizamos unidades cada vez mayores.
+      </p>
+
+      <div class="scale" aria-label="Escala de B a TB">
+        <span class="box">B</span><span class="arrow">→</span>
+        <span class="box">KB</span><span class="arrow">→</span>
+        <span class="box">MB</span><span class="arrow">→</span>
+        <span class="box">GB</span><span class="arrow">→</span>
+        <span class="box">TB</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Unidad</th>
+              <th>Símbolo</th>
+              <th>Equivale aproximadamente a</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>byte</td><td><strong>B</strong></td><td>8 bits</td></tr>
+            <tr><td>kilobyte</td><td><strong>KB</strong></td><td>1 000 bytes</td></tr>
+            <tr><td>megabyte</td><td><strong>MB</strong></td><td>1 000 KB</td></tr>
+            <tr><td>gigabyte</td><td><strong>GB</strong></td><td>1 000 MB</td></tr>
+            <tr><td>terabyte</td><td><strong>TB</strong></td><td>1 000 GB</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="big-idea">B &lt; KB &lt; MB &lt; GB &lt; TB</div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-title">
+        <span class="section-number">5</span>
+        <h2>¿Qué tamaño suele tener cada cosa?</h2>
+      </div>
+
+      <div class="unit-grid">
+        <div class="unit-card">
+          <span class="symbol">KB</span>
+          <h3>Kilobytes</h3>
+          <p>Son habituales en archivos pequeños: textos sencillos o imágenes muy pequeñas.</p>
+        </div>
+        <div class="unit-card">
+          <span class="symbol">MB</span>
+          <h3>Megabytes</h3>
+          <p>Son muy comunes en fotografías, canciones, PDFs o presentaciones.</p>
+        </div>
+        <div class="unit-card">
+          <span class="symbol">GB</span>
+          <h3>Gigabytes</h3>
+          <p>Se usan en vídeos grandes, juegos y para indicar la capacidad de muchos dispositivos.</p>
+        </div>
+        <div class="unit-card">
+          <span class="symbol">TB</span>
+          <h3>Terabytes</h3>
+          <p>Se utilizan sobre todo para indicar grandes capacidades de almacenamiento.</p>
+        </div>
+      </div>
+
+      <div class="warning">
+        Los tamaños anteriores son solo orientativos. Dos fotos o dos vídeos pueden ocupar
+        cantidades muy distintas según su calidad, resolución, duración, formato o compresión.
+      </div>
+    </section>
+
+    <section class="section-card" id="comparar">
+      <div class="section-title">
+        <span class="section-number">6</span>
+        <h2>Comparar tamaños</h2>
+      </div>
+      <p>
+        Para comparar cantidades de información hay que mirar <strong>el número y la unidad</strong>.
+      </p>
+
+      <div class="big-idea">750 KB &lt; 5 MB &lt; 600 MB &lt; 2 GB</div>
+
+      <p>
+        Aunque 750 sea un número mayor que 5, <strong>750 KB no ocupa más que 5 MB</strong>,
+        porque las unidades son distintas.
+      </p>
+
+      <div class="example">
+        <div class="example-title">Ejemplo: ¿qué ocupa más?</div>
+        <p><strong>900 KB</strong> o <strong>2 MB</strong></p>
+        <p>Como 1 MB ≈ 1 000 KB:</p>
+        <span class="formula">2 MB ≈ 2 000 KB</span>
+        <p>Por tanto, <strong>2 MB ocupa más que 900 KB</strong>.</p>
+      </div>
+    </section>
+
+    <section class="section-card" id="convertir">
+      <div class="section-title">
+        <span class="section-number">7</span>
+        <h2>Convertir entre unidades</h2>
+      </div>
+
+      <p>Para nuestro nivel utilizaremos estas relaciones aproximadas:</p>
+
+      <span class="formula">1 KB ≈ 1 000 B</span>
+      <span class="formula">1 MB ≈ 1 000 KB</span>
+      <span class="formula">1 GB ≈ 1 000 MB</span>
+      <span class="formula">1 TB ≈ 1 000 GB</span>
+
+      <div class="two-col">
+        <div class="example">
+          <div class="example-title">➡️ A una unidad más pequeña</div>
+          <p>¿Cuántos MB son aproximadamente 3 GB?</p>
+          <p><strong>3 × 1 000 = 3 000 MB</strong></p>
+        </div>
+        <div class="example">
+          <div class="example-title">⬅️ A una unidad mayor</div>
+          <p>¿Cuántos GB son aproximadamente 4 000 MB?</p>
+          <p><strong>4 000 ÷ 1 000 = 4 GB</strong></p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Truco:</strong> si pasas a una unidad más pequeña, el número aumenta.
+        Si pasas a una unidad más grande, el número disminuye.
+      </div>
+    </section>
+
+    <section class="section-card" id="almacenamiento">
+      <div class="section-title">
+        <span class="section-number">8</span>
+        <h2>Tamaño de archivo y capacidad</h2>
+      </div>
+
+      <div class="two-col">
+        <div class="unit-card">
+          <span class="symbol">📄</span>
+          <h3>Tamaño de un archivo</h3>
+          <p>Indica cuánto espacio necesita un archivo para almacenarse.</p>
+          <p><code>foto.jpg → 6 MB</code></p>
+        </div>
+        <div class="unit-card">
+          <span class="symbol">💾</span>
+          <h3>Capacidad de almacenamiento</h3>
+          <p>Indica cuánta información puede guardar un dispositivo.</p>
+          <p><code>USB → 32 GB</code></p>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="example-title">¿Cabe el archivo?</div>
+        <p>Tenemos <strong>500 MB libres</strong> y queremos guardar un vídeo de <strong>1,2 GB</strong>.</p>
+        <p>Como 1,2 GB ≈ 1 200 MB y 1 200 MB &gt; 500 MB, <strong>el vídeo no cabe</strong>.</p>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-title">
+        <span class="section-number">9</span>
+        <h2>Sumar el tamaño de varios archivos</h2>
+      </div>
+      <p>Imagina que quieres guardar:</p>
+
+      <div class="file-list">
+        <div class="file"><strong>foto1.jpg</strong><span>5 MB</span></div>
+        <div class="file"><strong>foto2.jpg</strong><span>4 MB</span></div>
+        <div class="file"><strong>documento.pdf</strong><span>2 MB</span></div>
+        <div class="file"><strong>video.mp4</strong><span>800 MB</span></div>
+      </div>
+
+      <span class="formula">5 + 4 + 2 + 800 = 811 MB</span>
+      <p>Necesitamos aproximadamente <strong>811 MB de espacio libre</strong>.</p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-title">
+        <span class="section-number">10</span>
+        <h2>¿De qué depende el tamaño?</h2>
+      </div>
+      <p>Dos archivos del mismo tipo pueden ocupar cantidades muy diferentes.</p>
+
+      <div class="two-col">
+        <div class="file-list">
+          <div class="file"><strong>foto1.jpg</strong><span>800 KB</span></div>
+          <div class="file"><strong>foto2.jpg</strong><span>7 MB</span></div>
+        </div>
+        <div class="file-list">
+          <div class="file"><strong>video1.mp4</strong><span>50 MB</span></div>
+          <div class="file"><strong>video2.mp4</strong><span>3 GB</span></div>
+        </div>
+      </div>
+
+      <p>El tamaño puede depender de:</p>
+      <ul>
+        <li>la cantidad de información;</li>
+        <li>la duración de un audio o vídeo;</li>
+        <li>la calidad;</li>
+        <li>la resolución;</li>
+        <li>el formato;</li>
+        <li>el nivel de compresión.</li>
+      </ul>
+    </section>
+
+    <section class="section-card">
+      <div class="section-title">
+        <span class="section-number">11</span>
+        <h2>¿Por qué a veces aparece 1 024?</h2>
+      </div>
+      <p>
+        Es posible que en algunos libros, páginas web o sistemas aparezca
+        <strong>1 KB = 1 024 bytes</strong> en lugar de 1 000.
+      </p>
+      <p>
+        Esto ocurre porque históricamente los ordenadores han trabajado con agrupaciones
+        basadas en potencias de 2.
+      </p>
+
+      <div class="two-col">
+        <div class="unit-card">
+          <span class="symbol">kB</span>
+          <h3>1 kB = 1 000 bytes</h3>
+          <p>Usa la escala decimal.</p>
+        </div>
+        <div class="unit-card">
+          <span class="symbol">KiB</span>
+          <h3>1 KiB = 1 024 bytes</h3>
+          <p>Usa la escala binaria.</p>
+        </div>
+      </div>
+
+      <div class="warning">
+        En 1.º ESO no necesitamos profundizar en esta diferencia. Para nuestras estimaciones
+        y conversiones utilizaremos normalmente la escala de 1 000.
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-title">
+        <span class="section-number">12</span>
+        <h2>Cuidado con las mayúsculas</h2>
+      </div>
+
+      <div class="big-idea">b = bit &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp; B = byte</div>
+
+      <p>
+        No es lo mismo <strong>Mb</strong> que <strong>MB</strong>. Esta diferencia aparece
+        con frecuencia al hablar de almacenamiento y de velocidad de conexión.
+      </p>
+      <p>
+        En esta unidad trabajaremos principalmente con bytes y sus múltiplos:
+        <strong>B, KB, MB, GB y TB</strong>.
+      </p>
+    </section>
+
+    <section class="section-card">
+      <div class="section-title">
+        <span class="section-number">✓</span>
+        <h2>Lo que debes saber al terminar</h2>
+      </div>
+
+      <ul class="checks">
+        <li>Explicar qué es un bit.</li>
+        <li>Explicar qué es un byte.</li>
+        <li>Recordar que 1 byte = 8 bits.</li>
+        <li>Reconocer B, KB, MB, GB y TB.</li>
+        <li>Ordenar las unidades de menor a mayor.</li>
+        <li>Comparar tamaños diferentes.</li>
+        <li>Realizar conversiones sencillas.</li>
+        <li>Diferenciar tamaño y capacidad.</li>
+        <li>Decidir si un archivo cabe.</li>
+        <li>Interpretar tamaños de archivos reales.</li>
+      </ul>
+    </section>
+
+    <section class="summary" id="resumen">
+      <h2>🧩 Resumen rápido</h2>
+
+      <div class="scale">
+        <span class="box">B</span><span class="arrow">→</span>
+        <span class="box">KB</span><span class="arrow">→</span>
+        <span class="box">MB</span><span class="arrow">→</span>
+        <span class="box">GB</span><span class="arrow">→</span>
+        <span class="box">TB</span>
+      </div>
+
+      <div class="summary-grid">
+        <div class="summary-item">
+          <small>Relación básica</small>
+          <strong>1 byte = 8 bits</strong>
+        </div>
+        <div class="summary-item">
+          <small>Escala aproximada</small>
+          <strong>Cada salto ≈ × 1 000</strong>
+        </div>
+        <div class="summary-item">
+          <small>Bit</small>
+          <strong>b minúscula</strong>
+        </div>
+        <div class="summary-item">
+          <small>Byte</small>
+          <strong>B mayúscula</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="quiz" aria-labelledby="quiz-title">
+      <h2 id="quiz-title">⚡ Comprueba si lo has entendido</h2>
+      <p><strong>¿Qué ocupa más: 900 KB o 2 MB?</strong></p>
+      <button type="button" onclick="responder(false)">900 KB</button>
+      <button type="button" onclick="responder(true)">2 MB</button>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+    <section class="practice" id="ponte-a-prueba">
+      <div class="practice-head">
+        <div>
+          <div class="section-title" style="margin-bottom:0">
+            <span class="section-number">★</span>
+            <h2>Ponte a prueba</h2>
+          </div>
+          <p>
+            Realiza las actividades sin mirar el resumen. Puedes corregir cada ejercicio cuando quieras.
+            Al final verás tu puntuación total.
+          </p>
+        </div>
+        <div class="score-pill" id="practice-score">0 / 18 aciertos</div>
+      </div>
+
+      <!-- ACTIVIDAD 1 -->
+      <div class="activity" id="act-relaciona">
+        <div class="activity-top">
+          <div class="activity-icon">🔗</div>
+          <div>
+            <h3>1. Relaciona cada unidad con su significado</h3>
+            <p class="activity-instructions">Selecciona la opción correcta en cada caso.</p>
+          </div>
+        </div>
+
+        <div class="match-grid">
+          <div class="match-row question-row">
+            <strong>bit (b)</strong>
+            <select data-answer="unidad mínima que puede valer 0 o 1">
+              <option value="">Elige una opción…</option>
+              <option>aproximadamente 1 000 MB</option>
+              <option>unidad mínima que puede valer 0 o 1</option>
+              <option>grupo de 8 bits</option>
+              <option>aproximadamente 1 000 KB</option>
+            </select>
+          </div>
+          <div class="match-row question-row">
+            <strong>byte (B)</strong>
+            <select data-answer="grupo de 8 bits">
+              <option value="">Elige una opción…</option>
+              <option>aproximadamente 1 000 MB</option>
+              <option>unidad mínima que puede valer 0 o 1</option>
+              <option>grupo de 8 bits</option>
+              <option>aproximadamente 1 000 KB</option>
+            </select>
+          </div>
+          <div class="match-row question-row">
+            <strong>megabyte (MB)</strong>
+            <select data-answer="aproximadamente 1 000 KB">
+              <option value="">Elige una opción…</option>
+              <option>aproximadamente 1 000 MB</option>
+              <option>unidad mínima que puede valer 0 o 1</option>
+              <option>grupo de 8 bits</option>
+              <option>aproximadamente 1 000 KB</option>
+            </select>
+          </div>
+          <div class="match-row question-row">
+            <strong>gigabyte (GB)</strong>
+            <select data-answer="aproximadamente 1 000 MB">
+              <option value="">Elige una opción…</option>
+              <option>aproximadamente 1 000 MB</option>
+              <option>unidad mínima que puede valer 0 o 1</option>
+              <option>grupo de 8 bits</option>
+              <option>aproximadamente 1 000 KB</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="activity-actions">
+          <button class="check-btn" type="button" onclick="checkSelectActivity('act-relaciona')">Corregir actividad</button>
+        </div>
+        <div class="activity-feedback" aria-live="polite"></div>
+      </div>
+
+      <!-- ACTIVIDAD 2 -->
+      <div class="activity" id="act-ordena">
+        <div class="activity-top">
+          <div class="activity-icon">↕️</div>
+          <div>
+            <h3>2. Ordena de menor a mayor</h3>
+            <p class="activity-instructions">Usa las flechas para colocar los tamaños en el orden correcto.</p>
+          </div>
+        </div>
+
+        <div class="order-list" id="order-list">
+          <div class="order-item" data-value="3">
+            <span class="order-num">1</span><strong>2 GB</strong>
+            <div class="order-actions">
+              <button class="small-btn" type="button" aria-label="Subir" onclick="moveItem(this,-1)">↑</button>
+              <button class="small-btn" type="button" aria-label="Bajar" onclick="moveItem(this,1)">↓</button>
+            </div>
+          </div>
+          <div class="order-item" data-value="1">
+            <span class="order-num">2</span><strong>5 MB</strong>
+            <div class="order-actions">
+              <button class="small-btn" type="button" aria-label="Subir" onclick="moveItem(this,-1)">↑</button>
+              <button class="small-btn" type="button" aria-label="Bajar" onclick="moveItem(this,1)">↓</button>
+            </div>
+          </div>
+          <div class="order-item" data-value="0">
+            <span class="order-num">3</span><strong>750 KB</strong>
+            <div class="order-actions">
+              <button class="small-btn" type="button" aria-label="Subir" onclick="moveItem(this,-1)">↑</button>
+              <button class="small-btn" type="button" aria-label="Bajar" onclick="moveItem(this,1)">↓</button>
+            </div>
+          </div>
+          <div class="order-item" data-value="2">
+            <span class="order-num">4</span><strong>600 MB</strong>
+            <div class="order-actions">
+              <button class="small-btn" type="button" aria-label="Subir" onclick="moveItem(this,-1)">↑</button>
+              <button class="small-btn" type="button" aria-label="Bajar" onclick="moveItem(this,1)">↓</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity-actions">
+          <button class="check-btn" type="button" onclick="checkOrder()">Corregir actividad</button>
+        </div>
+        <div class="activity-feedback" aria-live="polite"></div>
+      </div>
+
+      <!-- ACTIVIDAD 3 -->
+      <div class="activity" id="act-conversiones">
+        <div class="activity-top">
+          <div class="activity-icon">🧮</div>
+          <div>
+            <h3>3. Calcula las conversiones</h3>
+            <p class="activity-instructions">Utiliza la escala aproximada de 1 000 que hemos trabajado.</p>
+          </div>
+        </div>
+
+        <div class="conversion-grid">
+          <div class="conversion-row question-row">
+            <label for="conv1"><strong>3 GB =</strong></label>
+            <div><input id="conv1" class="answer-input" type="number" inputmode="decimal" data-answer="3000" /> <span>MB</span></div>
+          </div>
+          <div class="conversion-row question-row">
+            <label for="conv2"><strong>7 000 MB =</strong></label>
+            <div><input id="conv2" class="answer-input" type="number" inputmode="decimal" data-answer="7" /> <span>GB</span></div>
+          </div>
+          <div class="conversion-row question-row">
+            <label for="conv3"><strong>5 MB =</strong></label>
+            <div><input id="conv3" class="answer-input" type="number" inputmode="decimal" data-answer="5000" /> <span>KB</span></div>
+          </div>
+          <div class="conversion-row question-row">
+            <label for="conv4"><strong>2 TB =</strong></label>
+            <div><input id="conv4" class="answer-input" type="number" inputmode="decimal" data-answer="2000" /> <span>GB</span></div>
+          </div>
+          <div class="conversion-row question-row">
+            <label for="conv5"><strong>8 000 KB =</strong></label>
+            <div><input id="conv5" class="answer-input" type="number" inputmode="decimal" data-answer="8" /> <span>MB</span></div>
+          </div>
+        </div>
+
+        <div class="activity-actions">
+          <button class="check-btn" type="button" onclick="checkInputActivity('act-conversiones')">Corregir actividad</button>
+        </div>
+        <div class="activity-feedback" aria-live="polite"></div>
+      </div>
+
+      <!-- ACTIVIDAD 4 -->
+      <div class="activity" id="act-rellena">
+        <div class="activity-top">
+          <div class="activity-icon">✍️</div>
+          <div>
+            <h3>4. Completa las frases</h3>
+            <p class="activity-instructions">Escribe la palabra o símbolo que falta.</p>
+          </div>
+        </div>
+
+        <div class="fill-grid">
+          <div class="fill-row question-row">
+            <label for="fill1">Un byte está formado por <strong>___</strong> bits.</label>
+            <input id="fill1" class="answer-input" type="text" data-answer="8" />
+          </div>
+          <div class="fill-row question-row">
+            <label for="fill2">La unidad mayor entre MB y GB es <strong>___</strong>.</label>
+            <input id="fill2" class="answer-input" type="text" data-answer="GB" />
+          </div>
+          <div class="fill-row question-row">
+            <label for="fill3">El símbolo del byte es una <strong>___</strong> mayúscula.</label>
+            <input id="fill3" class="answer-input" type="text" data-answer="B" />
+          </div>
+          <div class="fill-row question-row">
+            <label for="fill4">Un archivo de 1,5 GB necesita más espacio que uno de 900 <strong>___</strong>.</label>
+            <input id="fill4" class="answer-input" type="text" data-answer="MB" />
+          </div>
+          <div class="fill-row question-row">
+            <label for="fill5">La capacidad de un dispositivo indica cuánta información puede <strong>___</strong>.</label>
+            <input id="fill5" class="answer-input" type="text" data-answer="guardar|almacenar" />
+          </div>
+        </div>
+
+        <div class="activity-actions">
+          <button class="check-btn" type="button" onclick="checkInputActivity('act-rellena', true)">Corregir actividad</button>
+        </div>
+        <div class="activity-feedback" aria-live="polite"></div>
+      </div>
+
+      <div class="practice-actions">
+        <button class="check-btn" type="button" onclick="checkAllPractice()">✅ Corregir todo</button>
+        <button class="reset-btn" type="button" onclick="resetPractice()">↻ Reiniciar actividades</button>
+      </div>
+
+      <div class="final-result" id="final-result" aria-live="polite"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    Material de consulta · Medios y Recursos Digitales · 1.º ESO
+  </footer>
+
+  <script>
+    function responder(correcta){
+      const f = document.getElementById('feedback');
+      if(correcta){
+        f.textContent = '✅ ¡Correcto! 2 MB son aproximadamente 2 000 KB.';
+        f.style.color = '#16845b';
+      }else{
+        f.textContent = '❌ Revisa la unidad: 2 MB son aproximadamente 2 000 KB.';
+        f.style.color = '#c2413a';
+      }
+    }
+  
+    // ─────────────── Actividades autocorregibles ───────────────
+    const practiceState = {
+      relaciona: 0,
+      ordena: 0,
+      conversiones: 0,
+      rellena: 0
+    };
+
+    function normalizar(texto){
+      return String(texto)
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"");
+    }
+
+    function setRowState(row, ok){
+      row.classList.remove("is-correct","is-wrong");
+      row.classList.add(ok ? "is-correct" : "is-wrong");
+    }
+
+    function updateScore(){
+      const total = practiceState.relaciona + practiceState.ordena +
+                    practiceState.conversiones + practiceState.rellena;
+      document.getElementById("practice-score").textContent = total + " / 18 aciertos";
+      return total;
+    }
+
+    function feedbackText(container, correct, total){
+      const feedback = container.querySelector(".activity-feedback");
+      feedback.textContent = `Has acertado ${correct} de ${total}.`;
+      feedback.style.color = correct === total ? "#16845b" : "#92400e";
+    }
+
+    function checkSelectActivity(id){
+      const container = document.getElementById(id);
+      const rows = [...container.querySelectorAll(".question-row")];
+      let correct = 0;
+
+      rows.forEach(row => {
+        const select = row.querySelector("select");
+        const ok = normalizar(select.value) === normalizar(select.dataset.answer);
+        setRowState(row, ok);
+        if(ok) correct++;
+      });
+
+      practiceState.relaciona = correct;
+      feedbackText(container, correct, rows.length);
+      updateScore();
+      return correct;
+    }
+
+    function moveItem(button, direction){
+      const item = button.closest(".order-item");
+      const list = item.parentElement;
+      if(direction < 0 && item.previousElementSibling){
+        list.insertBefore(item, item.previousElementSibling);
+      }else if(direction > 0 && item.nextElementSibling){
+        list.insertBefore(item.nextElementSibling, item);
+      }
+      updateOrderNumbers();
+      [...list.children].forEach(el => el.classList.remove("is-correct","is-wrong"));
+    }
+
+    function updateOrderNumbers(){
+      document.querySelectorAll("#order-list .order-item").forEach((item, index) => {
+        item.querySelector(".order-num").textContent = index + 1;
+      });
+    }
+
+    function checkOrder(){
+      const container = document.getElementById("act-ordena");
+      const items = [...document.querySelectorAll("#order-list .order-item")];
+      let correct = 0;
+
+      items.forEach((item, index) => {
+        const ok = Number(item.dataset.value) === index;
+        setRowState(item, ok);
+        if(ok) correct++;
+      });
+
+      practiceState.ordena = correct;
+      feedbackText(container, correct, items.length);
+      updateScore();
+      return correct;
+    }
+
+    function checkInputActivity(id, textMode=false){
+      const container = document.getElementById(id);
+      const rows = [...container.querySelectorAll(".question-row")];
+      let correct = 0;
+
+      rows.forEach(row => {
+        const input = row.querySelector("input");
+        const answers = input.dataset.answer.split("|").map(normalizar);
+        let value = normalizar(input.value);
+
+        if(!textMode){
+          value = String(Number(input.value));
+        }
+
+        const ok = input.value.trim() !== "" && answers.includes(value);
+        setRowState(row, ok);
+        if(ok) correct++;
+      });
+
+      if(id === "act-conversiones"){
+        practiceState.conversiones = correct;
+      }else{
+        practiceState.rellena = correct;
+      }
+
+      feedbackText(container, correct, rows.length);
+      updateScore();
+      return correct;
+    }
+
+    function checkAllPractice(){
+      checkSelectActivity("act-relaciona");
+      checkOrder();
+      checkInputActivity("act-conversiones");
+      checkInputActivity("act-rellena", true);
+
+      const total = updateScore();
+      const result = document.getElementById("final-result");
+      result.style.display = "block";
+
+      let msg = "";
+      if(total === 18){
+        msg = "🏆 ¡Excelente! Has conseguido 18 de 18. Dominas muy bien estas ideas.";
+      }else if(total >= 14){
+        msg = `👏 Muy bien: ${total} de 18. Revisa solo los elementos marcados en rojo.`;
+      }else if(total >= 9){
+        msg = `🙂 Vas por buen camino: ${total} de 18. Revisa las unidades y vuelve a intentarlo.`;
+      }else{
+        msg = `📘 Has conseguido ${total} de 18. Repasa el resumen y prueba de nuevo.`;
+      }
+      result.textContent = msg;
+      result.scrollIntoView({behavior:"smooth", block:"nearest"});
+    }
+
+    function resetPractice(){
+      document.querySelectorAll("#ponte-a-prueba select").forEach(el => el.selectedIndex = 0);
+      document.querySelectorAll("#ponte-a-prueba input").forEach(el => el.value = "");
+      document.querySelectorAll("#ponte-a-prueba .is-correct, #ponte-a-prueba .is-wrong")
+        .forEach(el => el.classList.remove("is-correct","is-wrong"));
+
+      const list = document.getElementById("order-list");
+      const desired = ["3","1","0","2"];
+      desired.forEach(v => {
+        const item = [...list.children].find(el => el.dataset.value === v);
+        if(item) list.appendChild(item);
+      });
+      updateOrderNumbers();
+
+      document.querySelectorAll("#ponte-a-prueba .activity-feedback").forEach(el => {
+        el.textContent = "";
+      });
+
+      practiceState.relaciona = 0;
+      practiceState.ordena = 0;
+      practiceState.conversiones = 0;
+      practiceState.rellena = 0;
+      updateScore();
+
+      const result = document.getElementById("final-result");
+      result.style.display = "none";
+      result.textContent = "";
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Reto interactivo para aprender símbolos, teclas y atajos de teclado en 1.º ESO.">
+  <title>Misión Teclado — 1.º ESO</title>
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --panel:#eef3f8;
+      --text:#17324d;
+      --muted:#5f7285;
+      --border:#d7e0e8;
+      --accent:#2563eb;
+      --accent-hover:#1d4ed8;
+      --ok:#2f855a;
+      --bad:#c2413a;
+      --warning:#b7791f;
+      --shadow:0 8px 24px rgba(22,50,77,.08);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+
+    .page{
+      width:min(100% - 28px, 980px);
+      margin:24px auto 48px;
+    }
+
+    .hero{
+      display:grid;
+      gap:14px;
+      grid-template-columns:1fr auto;
+      align-items:center;
+      margin-bottom:18px;
+    }
+
+    .eyebrow{
+      margin:0 0 4px;
+      font-size:.82rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      color:var(--muted);
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(1.55rem, 4vw, 2.35rem);
+      line-height:1.15;
+    }
+
+    .subtitle{
+      margin:.55rem 0 0;
+      color:var(--muted);
+      max-width:70ch;
+    }
+
+    .stats{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .pill{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:8px 12px;
+      box-shadow:var(--shadow);
+      font-size:.95rem;
+      white-space:nowrap;
+    }
+
+    .progress-wrap{
+      margin:16px 0 18px;
+    }
+
+    .progress-meta{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      font-size:.92rem;
+      margin-bottom:8px;
+    }
+
+    .progress-track{
+      height:10px;
+      background:var(--panel);
+      border-radius:999px;
+      overflow:hidden;
+      border:1px solid var(--border);
+    }
+
+    .progress-bar{
+      height:100%;
+      width:0;
+      background:var(--accent);
+      border-radius:999px;
+      transition:width .25s ease;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:clamp(18px,3vw,28px);
+    }
+
+    .card-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .kicker{
+      margin:0;
+      font-size:.8rem;
+      font-weight:800;
+      color:var(--muted);
+      letter-spacing:.08em;
+    }
+
+    .question{
+      margin:.35rem 0 0;
+      font-size:clamp(1.2rem,3vw,1.55rem);
+      line-height:1.25;
+    }
+
+    .instruction{
+      margin:.45rem 0 0;
+      color:var(--muted);
+    }
+
+    .badge{
+      background:var(--panel);
+      border:1px solid var(--border);
+      padding:7px 11px;
+      border-radius:999px;
+      font-size:.9rem;
+      font-weight:700;
+    }
+
+    .practice-area{
+      margin-top:22px;
+    }
+
+    label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:700;
+      font-size:.95rem;
+    }
+
+    .answer-row{
+      display:flex;
+      gap:10px;
+      align-items:stretch;
+    }
+
+    input[type="text"]{
+      flex:1;
+      min-width:0;
+      min-height:52px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:0 14px;
+      font-size:1.6rem;
+      font-weight:800;
+      color:var(--text);
+      background:#fff;
+      outline:none;
+    }
+
+    input[type="text"]:focus,
+    button:focus-visible{
+      outline:3px solid rgba(37,99,235,.25);
+      outline-offset:2px;
+    }
+
+    button{
+      min-height:48px;
+      border:none;
+      border-radius:14px;
+      padding:0 18px;
+      font:inherit;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .05s ease, background .15s ease, border-color .15s ease;
+    }
+
+    button:active{transform:translateY(1px)}
+
+    .btn-primary{
+      background:var(--accent);
+      color:#fff;
+    }
+
+    .btn-primary:hover{background:var(--accent-hover)}
+
+    .btn-secondary{
+      background:#fff;
+      color:var(--text);
+      border:1px solid var(--border);
+    }
+
+    .capture{
+      width:100%;
+      background:var(--panel);
+      color:var(--text);
+      border:2px dashed var(--border);
+      padding:24px;
+      text-align:center;
+    }
+
+    .capture.ready{
+      border-color:var(--accent);
+      background:#edf4ff;
+    }
+
+    .capture .icon{
+      display:block;
+      font-size:2rem;
+      margin-bottom:6px;
+    }
+
+    .capture .small{
+      display:block;
+      margin-top:4px;
+      font-size:.88rem;
+      color:var(--muted);
+      font-weight:500;
+    }
+
+    .feedback{
+      min-height:62px;
+      margin-top:16px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      font-size:.95rem;
+    }
+
+    .feedback.ok{border-color:#87c7a5;background:#edf9f2}
+    .feedback.bad{border-color:#e3aaa5;background:#fff3f2}
+    .feedback.hint{border-color:#e5c989;background:#fff9e9}
+
+    .actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .hidden{display:none !important}
+
+    .guide{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .guide-item{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:13px 14px;
+      font-size:.92rem;
+    }
+
+    .guide-item strong{
+      display:block;
+      margin-bottom:3px;
+    }
+
+    .results{
+      margin-top:18px;
+    }
+
+    .result-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .result-box{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:16px;
+    }
+
+    .result-box .big{
+      font-size:1.6rem;
+      font-weight:900;
+    }
+
+    .result-box .label{
+      color:var(--muted);
+      font-size:.9rem;
+    }
+
+    .review-box{
+      margin-top:14px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+    }
+
+    .note{
+      margin:14px 2px 0;
+      color:var(--muted);
+      font-size:.82rem;
+    }
+
+    footer{
+      margin-top:22px;
+      text-align:center;
+      color:var(--muted);
+      font-size:.83rem;
+    }
+
+    @media (max-width:720px){
+      .hero{grid-template-columns:1fr}
+      .stats{justify-content:flex-start}
+      .answer-row{flex-direction:column}
+      .guide,.result-grid{grid-template-columns:1fr}
+      button{width:100%}
+      .actions button{width:auto;flex:1 1 180px}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto !important;transition:none !important}
+    }
+  </style>
+</head>
+<body>
+  <main class="page" id="keyboard-mission">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">ENTRENAMIENTO · 1.º ESO</p>
+        <h1>🎮 Misión Teclado</h1>
+        <p class="subtitle">Aprende a escribir símbolos, usar teclas especiales y ejecutar atajos reales. El juego valida automáticamente tus respuestas.</p>
+      </div>
+
+      <div class="stats" aria-label="Puntuación">
+        <span class="pill">⭐ <strong id="score">0</strong> puntos</span>
+        <span class="pill">🔥 Racha <strong id="streak">0</strong></span>
+      </div>
+    </header>
+
+    <section class="progress-wrap" aria-label="Progreso de la misión">
+      <div class="progress-meta">
+        <strong id="phase-label">Nivel 1 · Símbolos y puntuación</strong>
+        <span id="progress-text">1 / 35</span>
+      </div>
+      <div class="progress-track" aria-hidden="true">
+        <div class="progress-bar" id="progress"></div>
+      </div>
+    </section>
+
+    <section class="card" id="challenge-card">
+      <div class="card-top">
+        <div>
+          <p class="kicker" id="kicker">NIVEL 1 · ESCRITURA</p>
+          <h2 class="question" id="question"></h2>
+          <p class="instruction" id="instruction"></p>
+        </div>
+        <span class="badge" id="badge"></span>
+      </div>
+
+      <div class="practice-area hidden" id="symbol-area">
+        <form id="symbol-form">
+          <label for="symbol-input">Tu respuesta</label>
+          <div class="answer-row">
+            <input
+              id="symbol-input"
+              type="text"
+              inputmode="text"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+              aria-describedby="feedback"
+              placeholder="Escribe aquí…">
+            <button type="submit" class="btn-primary">Comprobar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="practice-area hidden" id="key-area">
+        <button type="button" class="capture" id="capture">
+          <span class="icon">⌨️</span>
+          Haz clic aquí y pulsa la combinación
+          <span class="small">La zona se iluminará cuando esté preparada.</span>
+        </button>
+      </div>
+
+      <div id="feedback" class="feedback" aria-live="polite">
+        Lee el reto y prueba sin mirar la solución.
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn-secondary" id="hint">💡 Pista</button>
+        <button type="button" class="btn-secondary" id="skip">Dejar para repasar</button>
+        <button type="button" class="btn-primary hidden" id="next">Siguiente →</button>
+      </div>
+    </section>
+
+    <section class="guide" id="guide" aria-label="Recordatorio">
+      <div class="guide-item">
+        <strong>Shift</strong>
+        Suele obtener el símbolo situado arriba de una tecla.
+      </div>
+      <div class="guide-item">
+        <strong>AltGr</strong>
+        Suele obtener el tercer símbolo de la tecla.
+      </div>
+      <div class="guide-item">
+        <strong>Ctrl</strong>
+        Se utiliza en muchos atajos: copiar, pegar, guardar…
+      </div>
+    </section>
+
+    <section class="card results hidden" id="results">
+      <p class="kicker">MISIÓN COMPLETADA</p>
+      <h2 class="question">🏆 Informe de entrenamiento</h2>
+
+      <div class="result-grid" id="result-summary"></div>
+      <div class="review-box" id="review-box"></div>
+
+      <div class="actions">
+        <button type="button" class="btn-primary" id="review">Repetir las falladas</button>
+        <button type="button" class="btn-secondary" id="restart">Empezar de nuevo</button>
+      </div>
+    </section>
+
+    <p class="note">
+      Nota: la posición de algunos símbolos puede variar ligeramente según el teclado o el sistema.
+      Las combinaciones propuestas corresponden al teclado español de España usado habitualmente en clase.
+    </p>
+
+    <footer>
+      Medios y Recursos Digitales · Reto de alfabetización digital básica
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      const root = document.getElementById('keyboard-mission');
+
+      const symbolTasks = [
+        {q:'Escribe una M mayúscula usando Shift', answer:'M', combo:'Shift + M', hint:'Mantén pulsada Shift y, sin soltarla, pulsa M.', requireShift:true},
+        {q:'Escribe el símbolo @', answer:'@', combo:'AltGr + 2', hint:'Busca @ en la tecla 2. En teclado español suele usarse AltGr + 2.'},
+        {q:'Escribe el símbolo #', answer:'#', combo:'AltGr + 3', hint:'Busca el tercer símbolo de la tecla 3.'},
+        {q:'Escribe una virgulilla ~', answer:'~', combo:'AltGr + 4', hint:'En muchos teclados españoles se obtiene con AltGr + 4. Si no aparece sola, prueba después Espacio.'},
+        {q:'Escribe el símbolo €', answer:'€', combo:'AltGr + E', hint:'Mantén AltGr y pulsa E.'},
+        {q:'Escribe el símbolo %', answer:'%', combo:'Shift + 5', hint:'El % está en la parte superior de la tecla 5.'},
+        {q:'Escribe el símbolo &', answer:'&', combo:'Shift + 6', hint:'El & está en la parte superior de la tecla 6.'},
+        {q:'Escribe una barra /', answer:'/', combo:'Shift + 7', hint:'Busca / sobre la tecla 7.'},
+        {q:'Escribe un paréntesis de apertura (', answer:'(', combo:'Shift + 8', hint:'Mantén Shift y pulsa 8.'},
+        {q:'Escribe un paréntesis de cierre )', answer:')', combo:'Shift + 9', hint:'Mantén Shift y pulsa 9.'},
+        {q:'Escribe el símbolo =', answer:'=', combo:'Shift + 0', hint:'Mantén Shift y pulsa 0.'},
+        {q:'Escribe una llave de apertura {', answer:'{', combo:'AltGr + 7', hint:'Busca { como tercer símbolo de la tecla 7.'},
+        {q:'Escribe un corchete de apertura [', answer:'[', combo:'AltGr + 8', hint:'Busca [ como tercer símbolo de la tecla 8.'},
+        {q:'Escribe un corchete de cierre ]', answer:']', combo:'AltGr + 9', hint:'Busca ] como tercer símbolo de la tecla 9.'},
+        {q:'Escribe una llave de cierre }', answer:'}', combo:'AltGr + 0', hint:'Busca } como tercer símbolo de la tecla 0.'},
+        {q:'Escribe una vocal con tilde: á', answer:'á', combo:'´ y después A', hint:'Pulsa primero la tecla de tilde ´ y después la vocal A.'},
+        {q:'Escribe una u con diéresis: ü', answer:'ü', combo:'¨ y después U', hint:'Obtén primero ¨ y después pulsa U.'},
+        {q:'Escribe el signo de interrogación de apertura ¿', answer:'¿', combo:'Tecla ¿', hint:'En el teclado español existe una tecla específica para ¿.'},
+        {q:'Escribe el signo de exclamación de apertura ¡', answer:'¡', combo:'Tecla ¡', hint:'En el teclado español existe una tecla específica para ¡.'},
+        {q:'Escribe un signo de interrogación ?', answer:'?', combo:'Shift + tecla ?', hint:'Localiza ? en la parte superior de su tecla y utiliza Shift.'},
+        {q:'Escribe un signo de exclamación !', answer:'!', combo:'Shift + 1', hint:'Mantén Shift y pulsa 1.'},
+        {q:'Escribe un guion bajo _', answer:'_', combo:'Shift + -', hint:'Mantén Shift y pulsa la tecla del guion -.'},
+        {q:'Escribe comillas dobles "', answer:'"', combo:'Shift + 2', hint:'Mantén Shift y pulsa 2.'}
+      ].map((t,i)=>({...t,type:'symbol',cat:'Símbolos',id:'s'+i}));
+
+      const keyTasks = [
+        {q:'Activa o desactiva Bloq Mayús', key:'capslock', combo:'Bloq Mayús', hint:'Pulsa una sola vez la tecla Bloq Mayús.'},
+        {q:'Seleccionar todo', key:'a', ctrl:true, combo:'Ctrl + A', hint:'Mantén Ctrl y pulsa A.'},
+        {q:'Copiar', key:'c', ctrl:true, combo:'Ctrl + C', hint:'Mantén Ctrl y pulsa C.'},
+        {q:'Cortar', key:'x', ctrl:true, combo:'Ctrl + X', hint:'Mantén Ctrl y pulsa X.'},
+        {q:'Pegar', key:'v', ctrl:true, combo:'Ctrl + V', hint:'Mantén Ctrl y pulsa V.'},
+        {q:'Deshacer', key:'z', ctrl:true, combo:'Ctrl + Z', hint:'Mantén Ctrl y pulsa Z.'},
+        {q:'Rehacer', key:'y', ctrl:true, combo:'Ctrl + Y', hint:'Mantén Ctrl y pulsa Y.'},
+        {q:'Guardar', key:'s', ctrl:true, combo:'Ctrl + S', hint:'Mantén Ctrl y pulsa S.'},
+        {q:'Nueva línea', key:'enter', combo:'Enter', hint:'Pulsa Enter.'},
+        {q:'Borrar hacia atrás', key:'backspace', combo:'Retroceso', hint:'Pulsa Retroceso o Backspace.'},
+        {q:'Borrar hacia delante', key:'delete', combo:'Supr', hint:'Pulsa Supr o Delete.'},
+        {q:'Saltar al siguiente campo', key:'tab', combo:'Tab', hint:'Pulsa Tab.'}
+      ].map((t,i)=>({...t,type:'key',cat:'Atajos',id:'k'+i}));
+
+      const originalTasks = [...symbolTasks, ...keyTasks];
+
+      let tasks = [...originalTasks];
+      let index = 0;
+      let score = 0;
+      let streak = 0;
+      let attempts = {};
+      let missed = new Set();
+      let completed = new Set();
+      let lastKeyMeta = null;
+      let answered = false;
+
+      const $ = sel => root.querySelector(sel);
+
+      const scoreEl = $('#score');
+      const streakEl = $('#streak');
+      const phaseEl = $('#phase-label');
+      const progressText = $('#progress-text');
+      const progress = $('#progress');
+      const kicker = $('#kicker');
+      const question = $('#question');
+      const instruction = $('#instruction');
+      const badge = $('#badge');
+      const symbolArea = $('#symbol-area');
+      const keyArea = $('#key-area');
+      const form = $('#symbol-form');
+      const input = $('#symbol-input');
+      const capture = $('#capture');
+      const feedback = $('#feedback');
+      const hintBtn = $('#hint');
+      const skipBtn = $('#skip');
+      const nextBtn = $('#next');
+      const card = $('#challenge-card');
+      const guide = $('#guide');
+      const results = $('#results');
+      const summary = $('#result-summary');
+      const reviewBox = $('#review-box');
+      const reviewBtn = $('#review');
+      const restartBtn = $('#restart');
+
+      function current(){
+        return tasks[index];
+      }
+
+      function escapeHTML(value){
+        return String(value).replace(/[&<>"']/g, c => ({
+          '&':'&amp;',
+          '<':'&lt;',
+          '>':'&gt;',
+          '"':'&quot;',
+          "'":'&#39;'
+        }[c]));
+      }
+
+      function setFeedback(message, kind='neutral'){
+        feedback.className = 'feedback';
+        if(kind !== 'neutral') feedback.classList.add(kind);
+
+        const prefix =
+          kind === 'ok' ? '✅ ' :
+          kind === 'bad' ? '❌ ' :
+          kind === 'hint' ? '💡 ' : '';
+
+        feedback.innerHTML = prefix + message;
+      }
+
+      function render(){
+        if(index >= tasks.length){
+          finish();
+          return;
+        }
+
+        answered = false;
+        lastKeyMeta = null;
+
+        const t = current();
+
+        card.classList.remove('hidden');
+        guide.classList.remove('hidden');
+        results.classList.add('hidden');
+
+        kicker.textContent = t.type === 'symbol'
+          ? 'NIVEL 1 · ESCRITURA'
+          : 'NIVEL 2 · ATAJOS';
+
+        question.textContent = t.q;
+
+        instruction.textContent = t.type === 'symbol'
+          ? 'Escribe exactamente lo que se pide y pulsa Comprobar.'
+          : 'Haz clic en la zona de teclado y ejecuta la tecla o combinación indicada.';
+
+        badge.textContent = t.type === 'symbol'
+          ? '✍️ Símbolo'
+          : '⚡ Atajo';
+
+        phaseEl.textContent = t.type === 'symbol'
+          ? 'Nivel 1 · Símbolos y puntuación'
+          : 'Nivel 2 · Teclas y atajos';
+
+        progressText.textContent = (index + 1) + ' / ' + tasks.length;
+        progress.style.width = Math.round((index / tasks.length) * 100) + '%';
+
+        symbolArea.classList.toggle('hidden', t.type !== 'symbol');
+        keyArea.classList.toggle('hidden', t.type !== 'key');
+
+        nextBtn.classList.add('hidden');
+        hintBtn.classList.remove('hidden');
+        skipBtn.classList.remove('hidden');
+
+        input.value = '';
+        capture.classList.remove('ready');
+
+        setFeedback('Inténtalo sin mirar la solución. Si te bloqueas, usa la pista.');
+
+        if(t.type === 'symbol'){
+          setTimeout(() => input.focus(), 0);
+        }
+      }
+
+      function registerSuccess(t){
+        if(answered) return;
+
+        answered = true;
+
+        const failedAttempts = attempts[t.id] || 0;
+        const gained =
+          failedAttempts === 0 ? 3 :
+          failedAttempts === 1 ? 2 : 1;
+
+        score += gained;
+        streak += 1;
+
+        completed.add(t.id);
+
+        scoreEl.textContent = score;
+        streakEl.textContent = streak;
+
+        const extra = failedAttempts === 0
+          ? '¡A la primera!'
+          : 'Bien recuperado después del intento.';
+
+        setFeedback(
+          '<strong>Correcto.</strong> ' +
+          extra +
+          ' La combinación es <strong>' +
+          escapeHTML(t.combo) +
+          '</strong>.',
+          'ok'
+        );
+
+        nextBtn.classList.remove('hidden');
+        hintBtn.classList.add('hidden');
+        skipBtn.classList.add('hidden');
+        nextBtn.focus();
+      }
+
+      function registerFail(t, detail=''){
+        attempts[t.id] = (attempts[t.id] || 0) + 1;
+        missed.add(t.id);
+
+        streak = 0;
+        streakEl.textContent = streak;
+
+        const n = attempts[t.id];
+        let message = '<strong>Aún no.</strong> ' + detail;
+
+        if(n >= 2){
+          message += ' Ya puedes usar la pista sin problema.';
+        }
+
+        setFeedback(message, 'bad');
+      }
+
+      input.addEventListener('keydown', e => {
+        lastKeyMeta = {
+          key:e.key,
+          shift:e.shiftKey,
+          ctrl:e.ctrlKey,
+          alt:e.altKey
+        };
+      });
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        const t = current();
+        if(!t || t.type !== 'symbol' || answered) return;
+
+        const value = input.value;
+
+        if(value === t.answer){
+          if(t.requireShift && !(lastKeyMeta && lastKeyMeta.shift)){
+            registerFail(
+              t,
+              'Has obtenido la letra, pero este reto pide usar <strong>Shift</strong>.'
+            );
+          }else{
+            registerSuccess(t);
+          }
+        }else if(!value){
+          registerFail(t, 'No has escrito ningún carácter.');
+        }else{
+          registerFail(
+            t,
+            'Has escrito <strong>' +
+            escapeHTML(value) +
+            '</strong>. Revisa qué símbolo se pide.'
+          );
+        }
+      });
+
+      capture.addEventListener('focus', () => {
+        capture.classList.add('ready');
+        setFeedback('Zona preparada. Pulsa ahora la combinación.');
+      });
+
+      capture.addEventListener('blur', () => {
+        capture.classList.remove('ready');
+      });
+
+      capture.addEventListener('keydown', e => {
+        const t = current();
+        if(!t || t.type !== 'key' || answered) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const key = e.key.toLowerCase();
+        const keyOK = key === t.key;
+
+        const ctrlOK = t.ctrl
+          ? (e.ctrlKey && !e.altKey)
+          : (!t.ctrl || e.ctrlKey === false);
+
+        if(keyOK && ctrlOK){
+          registerSuccess(t);
+        }else{
+          const pressed = [
+            e.ctrlKey ? 'Ctrl' : null,
+            e.altKey ? 'Alt' : null,
+            e.shiftKey ? 'Shift' : null,
+            e.key
+          ].filter(Boolean).join(' + ');
+
+          registerFail(
+            t,
+            'Has pulsado <strong>' + escapeHTML(pressed) + '</strong>.'
+          );
+
+          capture.focus();
+        }
+      });
+
+      hintBtn.addEventListener('click', () => {
+        const t = current();
+        if(!t) return;
+
+        setFeedback(
+          t.hint +
+          '<br><strong>Solución:</strong> ' +
+          escapeHTML(t.combo),
+          'hint'
+        );
+
+        if(t.type === 'symbol'){
+          input.focus();
+        }else{
+          capture.focus();
+        }
+      });
+
+      skipBtn.addEventListener('click', () => {
+        const t = current();
+        if(!t) return;
+
+        missed.add(t.id);
+        streak = 0;
+        streakEl.textContent = streak;
+
+        index += 1;
+        render();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        index += 1;
+        render();
+      });
+
+      function finish(){
+        card.classList.add('hidden');
+        guide.classList.add('hidden');
+        results.classList.remove('hidden');
+
+        progress.style.width = '100%';
+        progressText.textContent = tasks.length + ' / ' + tasks.length;
+        phaseEl.textContent = 'Misión completada';
+
+        const total = tasks.length;
+        const correct = completed.size;
+
+        const reviewIds = [...missed].filter(id =>
+          !completed.has(id) || (attempts[id] || 0) > 0
+        );
+
+        const pct = total
+          ? Math.round((correct / total) * 100)
+          : 0;
+
+        summary.innerHTML =
+          '<div class="result-box">' +
+            '<div class="big">' + correct + '/' + total + '</div>' +
+            '<div class="label">retos superados</div>' +
+          '</div>' +
+          '<div class="result-box">' +
+            '<div class="big">' + pct + '%</div>' +
+            '<div class="label">completado</div>' +
+          '</div>' +
+          '<div class="result-box">' +
+            '<div class="big">⭐ ' + score + '</div>' +
+            '<div class="label">puntos</div>' +
+          '</div>';
+
+        if(reviewIds.length === 0){
+          reviewBox.innerHTML =
+            '<strong>Excelente:</strong> no queda ningún reto pendiente de repaso. ' +
+            'Intenta repetir la misión otro día sin utilizar pistas.';
+
+          reviewBtn.classList.add('hidden');
+        }else{
+          const names = reviewIds
+            .map(id => originalTasks.find(t => t.id === id))
+            .filter(Boolean)
+            .map(t => t.combo);
+
+          reviewBox.innerHTML =
+            '<strong>Conviene repetir ' + reviewIds.length + ' reto(s):</strong><br>' +
+            names.map(escapeHTML).join(' · ');
+
+          reviewBtn.classList.remove('hidden');
+          reviewBtn.dataset.ids = reviewIds.join(',');
+        }
+
+        const reduceMotion = window.matchMedia &&
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        results.scrollIntoView({
+          behavior: reduceMotion ? 'auto' : 'smooth',
+          block:'nearest'
+        });
+      }
+
+      reviewBtn.addEventListener('click', () => {
+        const ids = (reviewBtn.dataset.ids || '')
+          .split(',')
+          .filter(Boolean);
+
+        tasks = ids
+          .map(id => originalTasks.find(t => t.id === id))
+          .filter(Boolean);
+
+        index = 0;
+        missed = new Set();
+        completed = new Set();
+        attempts = {};
+        score = 0;
+        streak = 0;
+
+        scoreEl.textContent = '0';
+        streakEl.textContent = '0';
+
+        render();
+      });
+
+      restartBtn.addEventListener('click', () => {
+        tasks = [...originalTasks];
+        index = 0;
+        score = 0;
+        streak = 0;
+        attempts = {};
+        missed = new Set();
+        completed = new Set();
+
+        scoreEl.textContent = '0';
+        streakEl.textContent = '0';
+
+        render();
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

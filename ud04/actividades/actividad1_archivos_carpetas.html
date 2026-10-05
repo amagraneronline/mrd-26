@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 1 · Organiza tus archivos · 1.º ESO</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#657084;--blue:#2563eb;--blue2:#60a5fa;--green:#16a34a;--red:#dc2626;--amber:#d97706;--purple:#7c3aed;--border:#dce5f0;--soft:#eef5ff;--shadow:0 12px 32px rgba(28,55,100,.10);--radius:18px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#f9fbff,var(--bg));color:var(--text);line-height:1.55}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 18px;display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:10px;font-weight:900}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--purple));display:grid;place-items:center;color:#fff;box-shadow:var(--shadow)}
+.progress-wrap{display:flex;align-items:center;gap:10px;flex:1;max-width:470px;min-width:280px}.progress{height:12px;background:#e9eef6;border-radius:999px;overflow:hidden;flex:1}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--blue2),var(--green));transition:.25s}.progress-text{font-weight:800;color:var(--muted);font-size:.9rem}
+.container{max-width:1120px;margin:28px auto;padding:0 18px 45px}.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin-bottom:20px}.panel,.step,.summary{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}.hero-main{padding:28px}.hero-side{padding:22px}.kicker{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--soft);color:var(--blue);font-weight:900;font-size:.92rem}h1{font-size:clamp(2rem,4vw,3.15rem);line-height:1.08;margin:14px 0 8px}.lead{color:var(--muted);font-size:1.04rem}.meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.meta>div{padding:12px;border-radius:14px;background:#f8fafc;border:1px solid #e7edf5}.meta strong{display:block;font-size:.88rem}.meta span{color:var(--muted);font-size:.92rem}.hero-side h2{margin-top:0}.hero-side ol{padding-left:20px;color:var(--muted)}
+.timeline{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:16px 0 4px}.time{background:#f8fafc;border:1px solid var(--border);border-radius:12px;padding:10px;text-align:center;font-size:.83rem}.time strong{display:block;color:var(--blue)}
+.step{padding:22px;margin:18px 0;scroll-margin-top:88px}.step-head{display:flex;align-items:flex-start;gap:14px}.num{width:44px;height:44px;flex:0 0 auto;border-radius:14px;background:linear-gradient(135deg,var(--blue2),var(--blue));color:white;display:grid;place-items:center;font-size:1.12rem;font-weight:900}.step h2{margin:0;font-size:1.35rem}.objective{margin:4px 0 0;color:var(--muted)}.minutes{display:inline-block;margin-top:7px;background:#f1f5f9;color:#475569;border-radius:999px;padding:4px 9px;font-size:.82rem;font-weight:800}
+.action{margin-top:16px;padding:17px;border:1px solid #dbe8fa;border-radius:16px;background:linear-gradient(180deg,#fbfdff,#f7faff)}.action h3{margin:0 0 8px}.action ol,.action ul{margin:8px 0 0;padding-left:22px}.tip{margin-top:12px;padding:12px 14px;border-radius:12px;background:#fff7e8;border-left:4px solid var(--amber);color:#744405}.important{margin-top:12px;padding:12px 14px;border-radius:12px;background:#f0fdf4;border-left:4px solid var(--green);color:#166534}.code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#0f172a;color:#e5f0ff;padding:2px 7px;border-radius:7px;white-space:nowrap}.folder-tree{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#0f172a;color:#e5f0ff;padding:14px;border-radius:14px;margin-top:12px;overflow:auto}
+.check-box{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;background:#f8fafc;border:1px solid #e6edf5;border-radius:14px;margin-top:12px}.check-box input{transform:scale(1.2);margin-top:4px}.question{margin-top:15px;padding:16px;border:1px solid var(--border);border-radius:16px}.question h4{margin:0 0 10px}.options{display:grid;gap:8px}.option{display:flex;gap:9px;align-items:flex-start;padding:10px 12px;border:1px solid var(--border);border-radius:12px;cursor:pointer}.option:hover{background:#f8fbff}.feedback{min-height:24px;margin-top:9px;font-weight:800}.good{color:var(--green)}.bad{color:var(--red)}.btn{border:none;background:var(--blue);color:white;padding:10px 14px;border-radius:12px;font-weight:900;cursor:pointer}.btn:disabled{opacity:.45;cursor:not-allowed}.short-answer{display:flex;gap:8px;flex-wrap:wrap}.short-answer input{flex:1;min-width:220px;padding:11px 12px;border:1px solid var(--border);border-radius:12px;font:inherit}
+.locked{opacity:.5;filter:grayscale(.12)}.locked::after{content:"Completa correctamente el paso anterior para continuar.";display:block;margin-top:12px;color:var(--muted);font-size:.9rem;font-weight:800}.summary{padding:24px;margin-top:22px}.summary h2{margin-top:0}.score{font-size:2.2rem;font-weight:950;color:var(--blue)}.badge{display:inline-block;padding:8px 12px;border-radius:999px;background:#edf9ef;color:var(--green);font-weight:900}.hidden{display:none}.footer{text-align:center;color:var(--muted);font-size:.9rem;padding:18px}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.meta{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(2,1fr)}.progress-wrap{min-width:100%}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner"><div class="brand"><div class="logo">🗂️</div><div>Práctica 1 · Archivos y carpetas</div></div><div class="progress-wrap"><div class="progress"><div id="bar" class="bar"></div></div><div id="progressText" class="progress-text">0 / 6</div></div></div></header>
+
+<div class="container">
+<section class="hero">
+  <div class="panel hero-main">
+    <div class="kicker">💻 Medios y Recursos Digitales · 1.º ESO</div>
+    <h1>Organiza tus archivos como un usuario experto</h1>
+    <p class="lead">Trabajarás directamente en Windows siguiendo los pasos de esta web. Después de cada acción tendrás que demostrar que entiendes lo que has hecho.</p>
+    <div class="meta">
+      <div><strong>⏱ Duración</strong><span>20–25 minutos</span></div>
+      <div><strong>🎯 Modalidad</strong><span>Individual y guiada</span></div>
+      <div><strong>⌨️ Si terminas</strong><span>Pasa a mecanografía</span></div>
+    </div>
+    <div class="timeline">
+      <div class="time"><strong>2–3 min</strong>Extensiones</div><div class="time"><strong>3 min</strong>Carpetas</div><div class="time"><strong>4 min</strong>Archivos</div><div class="time"><strong>4 min</strong>Propiedades</div><div class="time"><strong>4 min</strong>Ordenar</div><div class="time"><strong>3–4 min</strong>Mover y recuperar</div>
+    </div>
+  </div>
+  <aside class="panel hero-side">
+    <h2>Antes de empezar</h2>
+    <ol>
+      <li>Lee cada paso completo antes de tocar nada.</li>
+      <li>Haz la acción en Windows.</li>
+      <li>Marca la casilla de comprobación.</li>
+      <li>Responde correctamente para desbloquear el siguiente paso.</li>
+      <li><strong>No ocultes las extensiones:</strong> las utilizaremos durante toda la práctica.</li>
+    </ol>
+  </aside>
+</section>
+
+<section class="step" id="step1">
+  <div class="step-head"><div class="num">1</div><div><h2>Haz visibles las extensiones</h2><p class="objective">Objetivo: ver siempre el nombre completo de los archivos.</p><span class="minutes">⏱ 2–3 min</span></div></div>
+  <div class="action">
+    <h3>✅ Hazlo en tu ordenador</h3>
+    <ol>
+      <li>Abre el <strong>Explorador de archivos</strong>.</li>
+      <li>En <strong>Windows 11</strong>: entra en <strong>Ver → Mostrar → Extensiones de nombre de archivo</strong>.</li>
+      <li>En <strong>Windows 10</strong>: abre la pestaña <strong>Vista</strong> y activa <strong>Extensiones de nombre de archivo</strong>.</li>
+      <li>Comprueba que la opción queda marcada.</li>
+    </ol>
+    <div class="important"><strong>Durante toda esta práctica escribiremos y veremos el nombre completo:</strong> por ejemplo <span class="code">notas.txt</span>, no solo <span class="code">notas</span>.</div>
+    <label class="check-box"><input type="checkbox" id="check1"><span>He activado la visualización de las extensiones.</span></label>
+  </div>
+  <div class="question"><h4>🧠 Comprueba que lo entiendes</h4><div class="options">
+    <label class="option"><input type="radio" name="q1" value="a"> En <span class="code">foto.png</span>, <strong>.png</strong> forma parte de la extensión.</label>
+    <label class="option"><input type="radio" name="q1" value="b"> En <span class="code">foto.png</span>, <strong>.png</strong> es una carpeta.</label>
+    <label class="option"><input type="radio" name="q1" value="c"> La extensión no nos aporta información.</label>
+  </div><div id="fb1" class="feedback"></div><button class="btn" onclick="validateRadio(1,'a')">Comprobar y continuar</button></div>
+</section>
+
+<section class="step locked" id="step2">
+  <div class="step-head"><div class="num">2</div><div><h2>Crea una estructura de carpetas</h2><p class="objective">Objetivo: organizar el trabajo antes de empezar a crear archivos.</p><span class="minutes">⏱ 3 min</span></div></div>
+  <div class="action"><h3>✅ Hazlo en tu ordenador</h3>
+    <ol><li>En <strong>Documentos</strong>, crea una carpeta llamada <span class="code">Medios Digitales</span>.</li><li>Dentro crea tres subcarpetas: <span class="code">Documentos</span>, <span class="code">Imagenes</span> y <span class="code">Practicas</span>.</li></ol>
+    <div class="folder-tree">Medios Digitales/
+├── Documentos/
+├── Imagenes/
+└── Practicas/</div>
+    <label class="check-box"><input type="checkbox" id="check2"><span>Mi estructura coincide con la mostrada arriba.</span></label>
+  </div>
+  <div class="question"><h4>🧠 ¿Para qué sirven principalmente las carpetas?</h4><div class="options">
+    <label class="option"><input type="radio" name="q2" value="a"> Para cambiar la extensión de los archivos.</label><label class="option"><input type="radio" name="q2" value="b"> Para organizar archivos y otras carpetas.</label><label class="option"><input type="radio" name="q2" value="c"> Para aumentar la memoria RAM.</label>
+  </div><div id="fb2" class="feedback"></div><button class="btn" onclick="validateRadio(2,'b')">Comprobar y continuar</button></div>
+</section>
+
+<section class="step locked" id="step3">
+  <div class="step-head"><div class="num">3</div><div><h2>Crea archivos con su extensión visible</h2><p class="objective">Objetivo: distinguir el nombre del archivo de su extensión.</p><span class="minutes">⏱ 4 min</span></div></div>
+  <div class="action"><h3>✅ Hazlo en tu ordenador</h3>
+    <ol>
+      <li>Entra en <span class="code">Medios Digitales → Documentos</span>.</li>
+      <li>Crea <strong>tres documentos de texto</strong> (clic derecho → Nuevo → Documento de texto).</li>
+      <li>Déjalos exactamente con estos nombres completos:</li>
+    </ol>
+    <div class="folder-tree">hardware.txt
+sistema_operativo.txt
+archivos_y_carpetas.txt</div>
+    <div class="tip">⚠️ Al cambiar el nombre, no borres accidentalmente <strong>.txt</strong>. Windows puede avisarte si intentas cambiar la extensión.</div>
+    <label class="check-box"><input type="checkbox" id="check3"><span>Veo los tres archivos y todos terminan en <strong>.txt</strong>.</span></label>
+  </div>
+  <div class="question"><h4>🧠 Escribe únicamente la extensión de <span class="code">sistema_operativo.txt</span></h4><div class="short-answer"><input id="ans3" placeholder="Ejemplo: .xxx"><button class="btn" onclick="validateText(3,['.txt','txt'])">Comprobar y continuar</button></div><div id="fb3" class="feedback"></div></div>
+</section>
+
+<section class="step locked" id="step4">
+  <div class="step-head"><div class="num">4</div><div><h2>Consulta las propiedades de un archivo</h2><p class="objective">Objetivo: aprender qué información guarda Windows sobre cada fichero.</p><span class="minutes">⏱ 4 min</span></div></div>
+  <div class="action"><h3>✅ Hazlo en tu ordenador</h3>
+    <ol>
+      <li>Haz clic derecho sobre <span class="code">sistema_operativo.txt</span>.</li>
+      <li>Selecciona <strong>Propiedades</strong>. En Windows 11 puede que primero debas pulsar <strong>Mostrar más opciones</strong>.</li>
+      <li>Localiza, sin necesidad de memorizar, estos datos: <strong>tipo de archivo</strong>, <strong>ubicación</strong>, <strong>tamaño</strong> y fechas disponibles como <strong>creado</strong> o <strong>modificado</strong>.</li>
+      <li>Cierra la ventana de propiedades.</li>
+    </ol>
+    <div class="important">Las propiedades permiten obtener información del archivo <strong>sin abrir su contenido</strong>.</div>
+    <label class="check-box"><input type="checkbox" id="check4"><span>He abierto las propiedades y he localizado al menos el tipo, la ubicación y el tamaño.</span></label>
+  </div>
+  <div class="question"><h4>🧠 ¿Qué dato de las propiedades te indica dónde está guardado el archivo?</h4><div class="options">
+    <label class="option"><input type="radio" name="q4" value="a"> Ubicación</label><label class="option"><input type="radio" name="q4" value="b"> Tamaño</label><label class="option"><input type="radio" name="q4" value="c"> Tipo de archivo</label>
+  </div><div id="fb4" class="feedback"></div><button class="btn" onclick="validateRadio(4,'a')">Comprobar y continuar</button></div>
+</section>
+
+<section class="step locked" id="step5">
+  <div class="step-head"><div class="num">5</div><div><h2>Ordena los documentos de una carpeta</h2><p class="objective">Objetivo: utilizar diferentes criterios de ordenación para encontrar información rápidamente.</p><span class="minutes">⏱ 4 min</span></div></div>
+  <div class="action"><h3>✅ Hazlo en tu ordenador</h3>
+    <ol>
+      <li>Quédate dentro de la carpeta <span class="code">Documentos</span>.</li>
+      <li>Ordena los archivos primero por <strong>Nombre</strong>.</li>
+      <li>Después prueba a ordenarlos por <strong>Fecha de modificación</strong>.</li>
+      <li>Vuelve a dejarlos ordenados por <strong>Nombre, de A a Z</strong>.</li>
+    </ol>
+    <div class="tip"><strong>¿Cómo?</strong> Puedes usar <strong>Ordenar</strong> en la barra del Explorador o hacer clic derecho en un espacio vacío → <strong>Ordenar por</strong>. Según la vista también puedes pulsar sobre los encabezados de las columnas.</div>
+    <label class="check-box"><input type="checkbox" id="check5"><span>He probado dos criterios y al final están ordenados por nombre de A a Z.</span></label>
+  </div>
+  <div class="question"><h4>🧠 Si quieres localizar rápidamente el archivo cuyo nombre empieza por A, ¿qué ordenación es la más útil?</h4><div class="options">
+    <label class="option"><input type="radio" name="q5" value="a"> Por nombre</label><label class="option"><input type="radio" name="q5" value="b"> Por tamaño</label><label class="option"><input type="radio" name="q5" value="c"> Por fecha de modificación</label>
+  </div><div id="fb5" class="feedback"></div><button class="btn" onclick="validateRadio(5,'a')">Comprobar y continuar</button></div>
+</section>
+
+<section class="step locked" id="step6">
+  <div class="step-head"><div class="num">6</div><div><h2>Mueve, elimina y recupera</h2><p class="objective">Objetivo: comprobar que sabes cambiar la ubicación de un archivo y recuperar un borrado.</p><span class="minutes">⏱ 3–4 min</span></div></div>
+  <div class="action"><h3>✅ Hazlo en tu ordenador</h3>
+    <ol>
+      <li>Mueve <span class="code">archivos_y_carpetas.txt</span> desde <span class="code">Documentos</span> hasta <span class="code">Practicas</span>.</li>
+      <li>Comprueba que ya <strong>no está</strong> en Documentos y que <strong>sí está</strong> en Practicas.</li>
+      <li>Elimina <span class="code">archivos_y_carpetas.txt</span>.</li>
+      <li>Abre la <strong>Papelera de reciclaje</strong>, localiza <span class="code">archivos_y_carpetas.txt</span> y selecciona <strong>Restaurar</strong>.</li>
+      <li>Vuelve a <span class="code">Medios Digitales → Practicas</span> y comprueba que ha regresado.</li>
+    </ol>
+    <label class="check-box"><input type="checkbox" id="check6"><span>El archivo <strong>archivos_y_carpetas.txt</strong> ha vuelto a aparecer en la carpeta Practicas.</span></label>
+  </div>
+  <div class="question"><h4>🧠 Al restaurar un archivo desde la papelera, ¿a dónde vuelve normalmente?</h4><div class="options">
+    <label class="option"><input type="radio" name="q6" value="a"> A la ubicación en la que estaba antes de eliminarlo.</label><label class="option"><input type="radio" name="q6" value="b"> Siempre al Escritorio.</label><label class="option"><input type="radio" name="q6" value="c"> Se crea una carpeta nueva automáticamente.</label>
+  </div><div id="fb6" class="feedback"></div><button class="btn" onclick="validateRadio(6,'a')">Finalizar práctica</button></div>
+</section>
+
+<section id="summary" class="summary hidden"><h2>🎉 Práctica completada</h2><p class="score" id="scoreText">6 / 6 pasos</p><span class="badge">✓ Primera misión digital completada</span><p>Has practicado cómo mostrar extensiones, crear una estructura de carpetas, crear archivos, consultar sus propiedades, ordenar documentos, moverlos y recuperarlos de la papelera.</p><p><strong>Si aún queda tiempo de clase:</strong> pasa a la actividad de mecanografía indicada por el profesor.</p><p id="attemptsText"></p></section>
+<div class="footer">No avances de paso hasta haber realizado realmente la acción en Windows.</div>
+</div>
+<script>
+let completed=0, attempts=0; const total=6;
+function canValidate(n){const cb=document.getElementById('check'+n); if(!cb.checked){setFeedback(n,false,'Primero realiza la acción y marca la casilla de comprobación.');return false}return true}
+function setFeedback(n,ok,msg){const el=document.getElementById('fb'+n);el.className='feedback '+(ok?'good':'bad');el.textContent=(ok?'✓ ':'✗ ')+msg}
+function unlock(n){if(n<total){const next=document.getElementById('step'+(n+1));next.classList.remove('locked');next.scrollIntoView({behavior:'smooth',block:'start'})}else{document.getElementById('summary').classList.remove('hidden');document.getElementById('summary').scrollIntoView({behavior:'smooth'});document.getElementById('attemptsText').textContent='Intentos de comprobación realizados: '+attempts}updateProgress()}
+function markDone(n){const step=document.getElementById('step'+n);if(step.dataset.done==='1')return;step.dataset.done='1';completed++;unlock(n)}
+function updateProgress(){document.getElementById('bar').style.width=(completed/total*100)+'%';document.getElementById('progressText').textContent=completed+' / '+total}
+function validateRadio(n,correct){attempts++;if(document.getElementById('step'+n).classList.contains('locked'))return;if(!canValidate(n))return;const chosen=document.querySelector('input[name="q'+n+'"]:checked');if(!chosen){setFeedback(n,false,'Selecciona una respuesta.');return}if(chosen.value===correct){setFeedback(n,true,'Correcto. Puedes continuar.');markDone(n)}else{setFeedback(n,false,'No es correcto. Revisa lo que acabas de hacer y vuelve a intentarlo.') }}
+function normalize(t){return t.trim().toLowerCase()}
+function validateText(n,answers){attempts++;if(document.getElementById('step'+n).classList.contains('locked'))return;if(!canValidate(n))return;const value=normalize(document.getElementById('ans'+n).value);if(answers.map(normalize).includes(value)){setFeedback(n,true,'Correcto. La extensión identifica el tipo de archivo.');markDone(n)}else{setFeedback(n,false,'Revisa el nombre completo del archivo. La extensión aparece al final.') }}
+</script>
+</body>
+</html>
