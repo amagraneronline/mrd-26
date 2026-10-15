@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10233b">
+<meta name="description" content="Ocho actividades interactivas y autoevaluables para repasar los componentes hardware esenciales del ordenador. Medios y Recursos Digitales, 1.º ESO.">
+<title>Reto hardware · 1.º ESO · Medios y Recursos Digitales</title>
+<style>
+  :root{--ink:#192b40;--soft:#5a6c81;--line:#dfe8f0;--paper:#fff;--base:#f3f7fb;--navy:#10233b;--teal:#0d938b;--teal-dark:#06756f;--cyan:#dff8f4;--amber:#d68121;--amber-soft:#fff0d7;--red:#ae3d40;--red-soft:#fff0f1;--good:#16734d;--good-soft:#e5f6ec;--round:19px;--shadow:0 14px 45px rgba(17,43,75,.065)}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font:16px/1.52 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--base);color:var(--ink)}
+  button,select,input{font:inherit}
+  button{cursor:pointer}
+  button:disabled{opacity:.43;cursor:not-allowed}
+  button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #f3a13a;outline-offset:3px}
+  a{color:var(--teal-dark)}
+  .top{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+  .top::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 95% 15%,rgba(30,185,174,.20),transparent 40%),radial-gradient(circle at 0% 96%,rgba(252,177,76,.1),transparent 37%);pointer-events:none}
+  .container{max-width:1180px;margin:0 auto;padding:0 24px}
+  .utility{position:relative;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 0;border-bottom:1px solid #ffffff23}
+  .brand{display:flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.085em;font-weight:800;text-transform:uppercase}
+  .logo{width:37px;height:37px;border:1px solid #55c6ba;display:grid;place-items:center;border-radius:11px;color:#75ebdb;flex-shrink:0}
+  .chipline{color:#b9d4e2;font-size:12px;letter-spacing:.09em;font-weight:750}
+  .hero{position:relative;display:flex;align-items:center;justify-content:space-between;gap:40px;padding:45px 0 51px}
+  .hero-body{max-width:720px}
+  .eyebrow{color:#76e6d3;text-transform:uppercase;font-size:12px;letter-spacing:.16em;font-weight:850;margin-bottom:10px}
+  h1{font-size:clamp(2rem,4vw,3.35rem);letter-spacing:-.05em;line-height:1.09;margin:0 0 18px;font-weight:830}
+  .hero p{font-size:16px;color:#d1e0eb;max-width:670px;margin:0 0 21px}
+  .hero-tags{display:flex;gap:9px;flex-wrap:wrap}
+  .hero-tag{font-size:12px;font-weight:750;color:#c8e8ec;border:1px solid #ffffff37;background:#ffffff0b;border-radius:30px;padding:7px 12px}
+  .hero-art{width:193px;min-width:193px;opacity:.94;filter:drop-shadow(0 14px 32px #030f27aa)}
+  .hero-art svg{display:block;width:100%}
+  .statbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin:25px 0 22px;background:white;border:1px solid var(--line);padding:16px 22px;border-radius:16px;box-shadow:var(--shadow)}
+  .stat-left{display:flex;gap:22px;align-items:center;flex:1;min-width:200px}
+  .stat-col{display:flex;flex-direction:column}
+  .stat-col strong{font-size:23px;line-height:1.1;letter-spacing:-.04em}
+  .stat-col span{font-size:12px;color:var(--soft);font-weight:700}
+  .stat-progress{width:min(100%,340px);flex:1;min-width:180px}
+  .progress-label{display:flex;justify-content:space-between;margin:0 0 7px;font-size:12px;font-weight:800;color:#50647a}
+  .progress{height:10px;background:#e3ebf2;border-radius:20px;overflow:hidden}
+  .fill{width:0%;height:100%;background:linear-gradient(90deg,#0c8e83,#38b99b);border-radius:20px;transition:width .3s}
+  .layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:25px;align-items:start;padding-bottom:55px}
+  .sidebar{position:sticky;top:18px}
+  .navbox{background:var(--paper);border:1px solid var(--line);padding:14px;border-radius:17px;box-shadow:var(--shadow)}
+  .side-title{padding:7px 10px 12px;color:#6b7f91;font-size:11px;text-transform:uppercase;font-weight:850;letter-spacing:.1em}
+  .nav-list{display:grid;gap:5px}
+  .nav-item{display:flex;width:100%;text-align:left;align-items:center;gap:10px;padding:11px 10px;background:transparent;color:#38516b;border:1px solid transparent;border-radius:10px;font-size:13px;font-weight:750}
+  .nav-item:hover{background:#f0f7f8}
+  .nav-item.active{background:var(--cyan);border-color:#b8e8df;color:#046b69}
+  .nav-item .n{background:#edf2f7;color:#52667a;width:25px;height:25px;border-radius:8px;display:grid;place-items:center;flex-shrink:0;font-size:12px}
+  .nav-item.active .n{background:#0b8a83;color:#fff}
+  .nav-item .n.done{background:#e0f6eb;color:#107149}
+  .nav-item .check{margin-left:auto;color:#168c5f}
+  .nav-item:last-child{margin-top:8px;border-top:1px solid #e8eef3;border-radius:0;padding-top:14px}
+  .side-note{color:#758495;font-size:12px;line-height:1.55;margin:12px 5px}
+  .panel{display:none;background:#fff;border:1px solid var(--line);border-radius:21px;overflow:hidden;box-shadow:var(--shadow);min-width:0}
+  .panel.active{display:block;animation:appear .2s ease-out}
+  @keyframes appear{from{opacity:.65;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+  .panel-heading{padding:27px 30px 23px;background:linear-gradient(160deg,#fff,#f6fafc);border-bottom:1px solid var(--line)}
+  .panel-number{font-size:11px;color:#0a867f;font-weight:850;letter-spacing:.12em;text-transform:uppercase}
+  .panel-heading h2{font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.04em;line-height:1.2;margin:8px 0 9px}
+  .panel-heading p{color:#51667a;margin:0;max-width:690px;font-size:14px}
+  .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .meta span{background:#e8f5f3;color:#0c716e;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:800}
+  .meta span:last-child{background:#eef2f7;color:#51637a}
+  .panel-body{padding:23px 30px}
+  .question-stack{display:grid;gap:12px}
+  .question{border:1px solid #e0e9ef;background:#fff;border-radius:13px;padding:15px 17px;transition:background .2s,border .2s;min-width:0}
+  .question.correct{border-color:#b9e1ca;background:#f6fcf8}
+  .question.incorrect{border-color:#edc1c1;background:#fff9f9}
+  .q-line{display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .q-label{font-weight:700;font-size:14px;line-height:1.42;flex:1}
+  .q-count{color:#9aabb8;font-size:12px;margin-right:6px;font-weight:800}
+  .segmented{display:flex;background:#f1f5f9;padding:4px;gap:4px;border-radius:10px;flex-shrink:0}
+  .choice{border:1px solid transparent;border-radius:8px;color:#526579;background:transparent;padding:8px 12px;font-size:12px;font-weight:750;transition:background .12s}
+  .choice:hover{background:#e0ebef}
+  .choice.selected{background:#0d8d87;color:#fff;box-shadow:0 2px 6px #0b767338}
+  select.answer-select{border:1px solid #cfdce6;padding:9px 31px 9px 11px;border-radius:9px;max-width:100%;min-width:240px;width:44%;background:#fff;color:#2b4058;font-size:13px;line-height:1.4}
+  .explain{margin-top:10px;border-top:1px dashed #d6e1e7;padding-top:9px;color:#425b6e;font-size:12.8px;line-height:1.5}
+  .explain strong{color:#1d644e}
+  .incorrect .explain strong{color:#97434a}
+  .feedback-flag{display:inline-flex;gap:4px;font-weight:850;align-items:center;margin-right:5px}
+  .choices-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .radio-button{border:1px solid #cddde5;background:#f8fafb;color:#33495f;border-radius:10px;padding:9px 13px;font-size:13px;font-weight:750;line-height:1.3;text-align:left}
+  .radio-button:hover{border-color:#8ebbb7;background:#eff8f6}
+  .radio-button.selected{background:#d9f2eb;border-color:#0d938b;color:#056b68;box-shadow:inset 0 0 0 1px #0d938b}
+  .visual-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+  .visual-question .q-label{display:block;padding-bottom:4px}
+  .visual-box{display:flex;justify-content:center;align-items:center;min-height:155px;background:radial-gradient(circle at 50% 30%,#edf9fc,#e8f0f6);border-radius:10px;margin:8px 0 11px;overflow:hidden}
+  .visual-box svg{width:min(100%,220px);height:135px;filter:drop-shadow(0 8px 8px #14384923)}
+  .visual-question .choices-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .visual-question .radio-button{text-align:center;padding:8px 6px}
+  .scenario{display:block;font-size:14px;font-weight:750;margin:0}
+  .scenario::before{content:"CASO ";color:#0b857e;letter-spacing:.1em;font-weight:900;font-size:11px}
+  .scenario-context{font-size:13px;color:#5c6c7b;margin:6px 0 2px}
+  .sortlist{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  .sortrow{display:flex;align-items:center;gap:11px;border:1px solid #dce6ed;border-radius:13px;padding:10px 13px;background:#fff;min-height:62px}
+  .sortindex{width:30px;height:30px;border-radius:9px;background:#eaf3f7;color:#4e6a79;display:grid;place-items:center;font-weight:850;flex-shrink:0}
+  .sortlabel{flex:1;font-size:13px;font-weight:750}
+  .sortbtns{display:flex;gap:4px}
+  .move-btn{min-width:34px;min-height:34px;border:1px solid #cddde5;border-radius:9px;background:#f5f9fb;font-size:18px;color:#24516b}
+  .move-btn:hover:not(:disabled){background:#e2f3f3}
+  .sequence-tip{font-size:13px;background:#f1f8fa;border:1px solid #d4ebed;color:#476574;border-radius:11px;padding:11px 14px;margin-bottom:14px}
+  .panel-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;border-top:1px solid #e4ecf1;padding:19px 30px;background:#f9fbfc}
+  .btn{border:1px solid transparent;border-radius:11px;padding:11px 16px;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:13px;font-weight:850;min-height:43px}
+  .btn-primary{background:#0b8982;color:#fff;box-shadow:0 5px 12px #067a7230}
+  .btn-primary:hover{background:#06736c}
+  .btn-secondary{background:#fff;border-color:#d1dfe8;color:#40576b}
+  .btn-secondary:hover{background:#eef6f7}
+  .btn-danger{background:#fff;border-color:#edcccc;color:#ad4746}
+  .next-btn{margin-left:auto}
+  .check-feedback{display:none;padding:19px 30px;background:#eff9f7;border-top:1px solid #d5eae2}
+  .check-feedback.visible{display:block}
+  .check-feedback.warning{background:#fff8ec;border-color:#f0d9b1}
+  .result-head{font-weight:900;color:#136954;font-size:18px;margin:0 0 5px}
+  .result-desc{font-size:13px;color:#426276;margin:0}
+  .warning .result-head{color:#925f20}
+  .panel-footer{padding:15px 30px;border-top:1px solid #e7eef3;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:#718294;font-size:12px}
+  .panel-footer a{text-decoration:none;font-weight:750}
+  .overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:0 0 23px}
+  .metric{padding:16px;background:#eff7f8;border-radius:13px;border:1px solid #dbebec}
+  .metric strong{display:block;font-size:27px;line-height:1.16;letter-spacing:-.04em}
+  .metric span{color:#53707b;font-size:12px;font-weight:750}
+  .report-table{width:100%;border-collapse:collapse;font-size:13px;overflow:hidden}
+  .report-table th,.report-table td{padding:11px;border-bottom:1px solid #e8edf1;text-align:left}
+  .report-table th{background:#f4f8fa;color:#4d6477;font-size:12px}
+  .report-table td:last-child,.report-table td:nth-last-child(2),.report-table th:last-child,.report-table th:nth-last-child(2){text-align:right;white-space:nowrap}
+  .report-note{font-size:13px;color:#526a79;line-height:1.6;background:#f4f9fb;padding:15px;border-radius:12px;margin:20px 0}
+  .report-actions{display:flex;gap:10px;flex-wrap:wrap}
+  .privacy{font-size:12px;color:#698090;margin:15px 0 0}
+  .summary-heading{margin:0 0 16px;font-size:17px}
+  .first-pill{border-radius:12px;padding:5px 8px;background:#eff3f6;font-size:11px;font-weight:850;color:#637487;white-space:nowrap}
+  .note-area{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;border-top:1px solid var(--line);padding:20px 0 40px;color:#607486;font-size:12px}
+  .note-area a{text-decoration:none}
+  .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  @media(max-width:980px){.layout{grid-template-columns:1fr}.sidebar{position:static}.nav-list{display:flex;flex-wrap:wrap;gap:6px}.nav-item{width:auto;flex:1 0 180px}.nav-item:last-child{margin-top:0;border-top:none;padding-top:11px}.side-title{padding-bottom:8px}.side-note{display:none}}
+  @media(max-width:660px){.container{padding:0 15px}.utility{padding:13px 0}.brand{font-size:10px;letter-spacing:.04em}.logo{width:32px;height:32px}.chipline{font-size:10px}.hero{padding:30px 0}.hero-art{display:none}.statbar{padding:15px}.stat-left{gap:16px}.stat-progress{min-width:100%}.nav-item{flex:1 0 145px;padding:9px 8px;font-size:11px}.nav-item .n{width:22px;height:22px}.panel-heading,.panel-body{padding:20px 16px}.panel-controls{padding:15px 16px}.panel-footer,.check-feedback{padding:15px 16px}.q-line{flex-direction:column;align-items:stretch;gap:10px}.segmented{width:100%;justify-content:stretch}.segmented .choice{flex:1}.question{padding:13px}.visual-grid{grid-template-columns:1fr}.visual-box{min-height:130px}.visual-box svg{height:115px}.next-btn{margin-left:0}.btn{flex:1}.panel-footer{font-size:11px}.overview{grid-template-columns:1fr 1fr}.metric{padding:12px}.metric strong{font-size:21px}.report-table th,.report-table td{padding:9px 5px;font-size:11px}select.answer-select{width:100%;min-width:0}.sortlabel{font-size:12px}.sortrow{padding:9px 7px}.sortbtns{flex-direction:column}.move-btn{min-width:31px;min-height:26px;font-size:14px}}
+  @media print{body{background:white}.top{background:white;color:black}.top *{color:black!important}.hero-art,.sidebar,.panel-controls,.navbox,.statbar,.note-area{display:none!important}.layout{display:block}.panel{display:none!important;border:0;box-shadow:none}.panel#summary-panel{display:block!important}.panel-heading{padding:5px 0 15px}.panel-body{padding:18px 0}}
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="container">
+    <div class="utility">
+      <div class="brand"><div class="logo" aria-hidden="true">▦</div><span>Medios y Recursos Digitales</span></div>
+      <span class="chipline">UNIDAD 02 &nbsp;·&nbsp; 1.º ESO</span>
+    </div>
+    <div class="hero">
+      <div class="hero-body">
+        <div class="eyebrow">Laboratorio de autoevaluación</div>
+        <h1>¿Conoces tu ordenador<br>por dentro?</h1>
+        <p>Demuestra lo que sabes sobre los componentes de un ordenador. Ocho retos diferentes, situaciones reales y explicaciones para aprender de los errores.</p>
+        <div class="hero-tags"><span class="hero-tag">8 retos interactivos</span><span class="hero-tag">Corrección automática</span><span class="hero-tag">Sin registro</span><span class="hero-tag">Ritmo libre</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="heroG" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#35d0bb"/><stop offset="1" stop-color="#4d90c1"/></linearGradient></defs><rect x="22" y="20" width="196" height="196" rx="25" fill="#123e53" stroke="#379eaa" stroke-width="2"/><path d="M46 55h148v130H46z" fill="#142b48" stroke="#5ca8b1" stroke-width="2"/><rect x="73" y="65" width="96" height="92" rx="8" fill="url(#heroG)" opacity=".18" stroke="#4db5af" stroke-width="2"/><rect x="89" y="81" width="64" height="62" rx="6" fill="#143b53" stroke="#61dccd" stroke-width="3"/><path d="M97 103h48M97 115h48M97 127h48" stroke="#53b2b4" stroke-width="3"/><g stroke="#66c6bd" stroke-width="4" stroke-linecap="round"><path d="M101 74v-11m16 11v-11m16 11v-11m16 11v-11M101 160v-11m16 11v-11m16 11v-11m16 11v-11M82 93H65m17 17H65m17 17H65m105-34h-17m17 17h-17m17 17h-17"/></g><path d="M57 196h126" stroke="#70d6c8" stroke-width="3" stroke-linecap="round"/><circle cx="186" cy="48" r="8" fill="#f8c477"/><circle cx="57" cy="176" r="6" fill="#67c9b9"/></svg>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="statbar" aria-label="Progreso de las actividades">
+    <div class="stat-left"><div class="stat-col"><strong id="done-stat">0/8</strong><span>Retos corregidos</span></div><div class="stat-col"><strong id="score-stat">—</strong><span>Aciertos actuales</span></div></div>
+    <div class="stat-progress"><div class="progress-label"><span>Mi recorrido</span><span id="progress-percent">0 %</span></div><div class="progress"><div id="progress-fill" class="fill"></div></div></div>
+  </div>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Navegación entre actividades">
+      <div class="navbox"><div class="side-title">Elige un reto</div><nav id="nav-list" class="nav-list"></nav></div>
+      <div class="side-note">Responde cada actividad y pulsa <strong>Corregir</strong>. Puedes revisar tus errores y volver a intentarlo. Se conserva la nota del primer intento.</div>
+    </aside>
+    <main id="workspace">
+      <noscript><div style="padding:20px;background:white">Activa JavaScript en tu navegador para realizar las actividades.</div></noscript>
+    </main>
+  </div>
+  <footer class="note-area">
+    <div>Actividad de repaso · Componentes hardware esenciales · 1.º ESO<br>Ilustraciones esquemáticas originales. Sin bibliotecas externas y funcional sin conexión.</div>
+    <div><a href="https://amagraneronline.github.io/mrd-26/ud02/contenido.html" target="_blank" rel="noopener noreferrer">Consultar los contenidos de la unidad ↗</a></div>
+  </footer>
+</div>
+<script>
+(() => {
+  'use strict';
+  const SOURCE = 'https://amagraneronline.github.io/mrd-26/ud02/contenido.html';
+  const STORAGE = 'mrd26-ud02-hardware-autoevaluacion-v1';
+  const activities = [
+    {id:'clasifica',title:'¿Hardware o software?',subtitle:'Distingue lo que se puede tocar de los programas.',type:'classify',tag:'Conceptos básicos',
+      items:[
+        {label:'La placa base',answer:'Hardware',why:'Es una placa electrónica física del ordenador.'},
+        {label:'El sistema operativo (Windows, Linux…)',answer:'Software',why:'Es un conjunto de programas que permiten utilizar el ordenador.'},
+        {label:'Un módulo de memoria RAM',answer:'Hardware',why:'Es una pieza física que se instala en el equipo.'},
+        {label:'Un navegador web',answer:'Software',why:'Es un programa, no un componente físico.'},
+        {label:'El procesador (CPU)',answer:'Hardware',why:'Es un componente electrónico que ejecuta instrucciones.'},
+        {label:'Un programa de edición de vídeo',answer:'Software',why:'Es una aplicación informática.'},
+        {label:'Una unidad SSD',answer:'Hardware',why:'Es un dispositivo físico para guardar información.'},
+        {label:'Una tarjeta gráfica',answer:'Hardware',why:'Es un componente físico dedicado al procesamiento gráfico.'}
+      ]},
+    {id:'relaciona',title:'¿Para qué sirve cada pieza?',subtitle:'Relaciona cada componente con su función principal.',type:'match',tag:'Funciones del hardware',
+      options:['Conecta los componentes','Ejecuta instrucciones de programas','Guarda datos temporales en uso','Guarda datos en discos giratorios','Guarda datos sin discos giratorios','Procesa gráficos','Suministra energía eléctrica','Permite conectarse a redes'],
+      items:[
+        {label:'Placa base',answer:'Conecta los componentes',why:'Es el punto central de conexión y comunicación del equipo.'},
+        {label:'Procesador (CPU)',answer:'Ejecuta instrucciones de programas',why:'Interpreta y ejecuta instrucciones.'},
+        {label:'Memoria RAM',answer:'Guarda datos temporales en uso',why:'Es la memoria volátil de trabajo.'},
+        {label:'Disco duro HDD',answer:'Guarda datos en discos giratorios',why:'Emplea platos magnéticos y partes mecánicas.'},
+        {label:'Unidad SSD',answer:'Guarda datos sin discos giratorios',why:'Usa memoria electrónica, no discos giratorios.'},
+        {label:'Tarjeta gráfica (GPU)',answer:'Procesa gráficos',why:'La GPU realiza muchas operaciones en paralelo, especialmente para gráficos.'},
+        {label:'Fuente de alimentación',answer:'Suministra energía eléctrica',why:'Transforma la alimentación eléctrica para los componentes internos.'},
+        {label:'Tarjeta de red',answer:'Permite conectarse a redes',why:'Hace posible la conexión con otros dispositivos mediante Ethernet o tecnología inalámbrica.'}
+      ]},
+    {id:'imagenes',title:'Reconoce los componentes',subtitle:'Observa las ilustraciones y elige el nombre correcto.',type:'visual',tag:'Identificación visual',
+      items:[
+        {label:'Pieza 1',pic:'cpu',answer:'Procesador (CPU)',choices:['Procesador (CPU)','Memoria RAM','Disco HDD','Fuente de alimentación'],why:'Un procesador suele verse como un pequeño chip cuadrado instalado en el socket.'},
+        {label:'Pieza 2',pic:'ram',answer:'Memoria RAM',choices:['Tarjeta de red','Memoria RAM','Placa base','SSD SATA'],why:'Los módulos de RAM suelen ser placas alargadas con chips de memoria.'},
+        {label:'Pieza 3',pic:'board',answer:'Placa base',choices:['Placa base','Procesador (CPU)','Tarjeta gráfica','Disco HDD'],why:'La placa base contiene el socket, ranuras y conectores donde se instalan otras piezas.'},
+        {label:'Pieza 4',pic:'hdd',answer:'Disco duro HDD',choices:['SSD M.2','Tarjeta gráfica','Disco duro HDD','Memoria RAM'],why:'En un HDD se reconocen sus platos giratorios y el brazo de lectura/escritura.'},
+        {label:'Pieza 5',pic:'ssd',answer:'SSD M.2',choices:['SSD M.2','Memoria RAM','Fuente de alimentación','Placa base'],why:'Este SSD tiene forma de pequeña tarjeta M.2; muchas unidades M.2 utilizan NVMe.'},
+        {label:'Pieza 6',pic:'gpu',answer:'Tarjeta gráfica',choices:['Disco duro HDD','Tarjeta gráfica','Procesador (CPU)','Fuente de alimentación'],why:'Una tarjeta gráfica dedicada suele tener refrigeración propia y se conecta a PCI Express.'},
+        {label:'Pieza 7',pic:'psu',answer:'Fuente de alimentación',choices:['Tarjeta de red','Memoria RAM','Fuente de alimentación','SSD SATA'],why:'La fuente es una caja con entrada de electricidad, ventilación y cables de alimentación.'}
+      ]},
+    {id:'mitos',title:'Desmontando mitos',subtitle:'Indica si cada afirmación es verdadera o falsa. Presta atención a las palabras «siempre» y «solo».',type:'bool',tag:'Comprensión y precisión',
+      items:[
+        {label:'La información de la RAM desaparece al apagar el ordenador.',answer:'Verdadero',why:'La RAM es volátil: sus datos no se conservan sin alimentación.'},
+        {label:'Para elegir una placa base y una CPU, el socket debe ser compatible.',answer:'Verdadero',why:'La CPU necesita una placa base con un socket compatible; también hay que comprobar otros requisitos.'},
+        {label:'El procesador que tiene más GHz siempre es el más potente.',answer:'Falso',why:'También importan arquitectura, generación, núcleos y otras características.'},
+        {label:'Se puede instalar una memoria DDR5 en una ranura diseñada para DDR4.',answer:'Falso',why:'Las generaciones DDR4 y DDR5 no son físicamente intercambiables.'},
+        {label:'Un SSD funciona sin discos magnéticos giratorios.',answer:'Verdadero',why:'El SSD guarda datos en memoria electrónica.'},
+        {label:'M.2 y NVMe significan exactamente lo mismo.',answer:'Falso',why:'M.2 se refiere al formato físico; NVMe es un protocolo.'},
+        {label:'Para tareas de ofimática pueden bastar unos gráficos integrados.',answer:'Verdadero',why:'No siempre hace falta una tarjeta gráfica dedicada.'},
+        {label:'Todos los conectores USB-C ofrecen necesariamente la misma velocidad.',answer:'Falso',why:'USB-C describe la forma del conector, no una velocidad garantizada.'},
+        {label:'La placa base puede limitar qué componentes se pueden instalar.',answer:'Verdadero',why:'Su socket, RAM, formato y ranuras determinan compatibilidad y posibilidades de ampliación.'}
+      ]},
+    {id:'almacenamiento',title:'HDD, SSD SATA o SSD NVMe',subtitle:'Clasifica cada característica en el dispositivo de almacenamiento más apropiado.',type:'classify3',tag:'Comparación tecnológica',
+      items:[
+        {label:'Tiene platos magnéticos que giran y piezas mecánicas.',answer:'HDD',why:'Es la característica distintiva de un disco duro mecánico.'},
+        {label:'Puede tener formato de 2,5 pulgadas y utiliza memoria electrónica con interfaz SATA.',answer:'SSD SATA',why:'Un SSD SATA habitual es de 2,5 pulgadas, sin piezas giratorias.'},
+        {label:'Puede ser una pequeña tarjeta M.2 conectada mediante PCI Express.',answer:'SSD NVMe',why:'Es muy frecuente en SSD M.2 con protocolo NVMe y conexión PCIe.'},
+        {label:'Su lectura secuencial suele estar en torno a 100–220 MB/s.',answer:'HDD',why:'Es un rango orientativo para muchos HDD, según el modelo.'},
+        {label:'Puede alcanzar aproximadamente 550 MB/s de lectura secuencial.',answer:'SSD SATA',why:'La interfaz SATA suele limitar estas unidades a varios cientos de MB/s.'},
+        {label:'Un modelo PCIe 3.0 puede alcanzar unos 3.500 MB/s de lectura.',answer:'SSD NVMe',why:'Es un valor máximo orientativo citado para SSD NVMe PCIe 3.0.'}
+      ]},
+    {id:'decisiones',title:'Tú eres el técnico',subtitle:'Lee cada situación y escoge la decisión mejor fundamentada.',type:'quiz',tag:'Aplicación práctica',
+      items:[
+        {label:'Un ordenador con disco HDD tarda mucho en arrancar. ¿Qué cambio suele mejorar más su rapidez de uso?',choices:['Instalar una unidad SSD','Cambiar el teclado','Poner un monitor más grande'],answer:'Instalar una unidad SSD',why:'Un SSD reduce mucho los tiempos de arranque y carga.'},
+        {label:'Hay que guardar muchos archivos grandes al menor coste por GB posible, sin necesitar gran velocidad. ¿Qué opción encaja mejor?',choices:['Un HDD de gran capacidad','Una GPU dedicada','Más frecuencia de CPU'],answer:'Un HDD de gran capacidad',why:'Los HDD siguen siendo interesantes por su capacidad y precio.'},
+        {label:'Un equipo se utilizará para juegos 3D muy exigentes. ¿Qué componente puede resultar especialmente importante?',choices:['Una tarjeta gráfica dedicada','Un puerto jack de audio','Una ranura para CD'],answer:'Una tarjeta gráfica dedicada',why:'La GPU dedicada es muy relevante para gráficos complejos y videojuegos exigentes.'},
+        {label:'Tienes una placa que usa DDR4. ¿Qué RAM deberías buscar para ampliarla?',choices:['Módulos DDR5 porque son más nuevos','Módulos DDR4 compatibles','Cualquier RAM: todas encajan'],answer:'Módulos DDR4 compatibles',why:'DDR4 y DDR5 no se pueden intercambiar físicamente.'},
+        {label:'Quieres cambiar el procesador. ¿Qué debes comprobar antes de comprarlo?',choices:['Solo que tenga más GHz','Que el socket y demás requisitos de compatibilidad sean adecuados','Que sea del mismo color que la placa'],answer:'Que el socket y demás requisitos de compatibilidad sean adecuados',why:'Hay que revisar socket y, cuando proceda, chipset y BIOS/UEFI.'},
+        {label:'Vas a montar un equipo muy compacto. ¿Qué combinación tiene sentido?',choices:['Placa Mini-ITX y caja compatible','Placa de cualquier tamaño en cualquier caja','Elegir el tamaño solo por los GHz'],answer:'Placa Mini-ITX y caja compatible',why:'Mini-ITX es un formato pequeño y la caja debe aceptar ese formato.'},
+        {label:'Comparas dos CPU y una tiene más GHz. ¿Basta ese dato para decidir cuál rendirá mejor?',choices:['Sí, los GHz lo indican todo','No, debo comparar modelos, núcleos, generación y arquitectura','Sí, pero solo si la marca es la misma'],answer:'No, debo comparar modelos, núcleos, generación y arquitectura',why:'La frecuencia, por sí sola, no determina el rendimiento real.'}
+      ]},
+    {id:'encendido',title:'Del botón de encendido a la pantalla',subtitle:'Ordena el proceso simplificado que aparece en los contenidos de la unidad.',type:'order',tag:'Funcionamiento conjunto',
+      items:[
+        {label:'Fuente de alimentación: proporciona energía',why:'La alimentación permite arrancar el equipo.'},
+        {label:'Placa base: conecta los componentes',why:'La placa permite que las piezas se comuniquen.'},
+        {label:'UEFI: inicializa y comprueba el hardware',why:'El firmware prepara el sistema para arrancar.'},
+        {label:'Almacenamiento: contiene el sistema operativo',why:'El sistema operativo está guardado en un HDD o SSD.'},
+        {label:'RAM: recibe los datos y programas en uso',why:'En la memoria de trabajo se cargan datos necesarios.'},
+        {label:'CPU: ejecuta instrucciones',why:'El procesador realiza las tareas solicitadas.'},
+        {label:'GPU: procesa la imagen cuando es necesario',why:'El procesador gráfico genera o ayuda a generar la imagen.'},
+        {label:'Monitor: muestra el resultado',why:'Es el dispositivo de salida de imagen.'}
+      ]},
+    {id:'conexiones',title:'Conéctalo correctamente',subtitle:'Elige la conexión habitual más adecuada para cada necesidad.',type:'quiz',tag:'Uso cotidiano de puertos',
+      items:[
+        {label:'Quieres conectar un pendrive tradicional de conector rectangular.',choices:['USB-A','HDMI','Jack de 3,5 mm'],answer:'USB-A',why:'USB-A es habitual en memorias USB y otros periféricos.'},
+        {label:'Conectas un ordenador a un televisor con audio y vídeo digitales.',choices:['Ethernet (RJ45)','HDMI','Jack de 3,5 mm'],answer:'HDMI',why:'HDMI transmite audio y vídeo digital a pantallas y televisores.'},
+        {label:'Quieres conectarte al router mediante un cable de red.',choices:['DisplayPort','USB-C','Ethernet (RJ45)'],answer:'Ethernet (RJ45)',why:'RJ45 es el conector habitual de Ethernet cableado.'},
+        {label:'Conectas auriculares analógicos con conector redondo estándar.',choices:['Jack de 3,5 mm','HDMI','Ethernet (RJ45)'],answer:'Jack de 3,5 mm',why:'El jack de 3,5 mm se utiliza para audio analógico.'},
+        {label:'Vas a conectar un monitor de sobremesa mediante un puerto frecuente en tarjetas gráficas.',choices:['DisplayPort','RJ45','SATA'],answer:'DisplayPort',why:'DisplayPort se utiliza a menudo para monitores de sobremesa.'},
+        {label:'Tu teléfono usa un conector pequeño, ovalado y reversible para datos y carga.',choices:['VGA','USB-C','USB-A'],answer:'USB-C',why:'USB-C describe la forma reversible del conector; sus prestaciones dependen del equipo.'}
+      ]}
+  ];
+  const byId = Object.fromEntries(activities.map(a => [a.id,a]));
+  let state = {answers:{}, checked:{}, first:{}, order:[]};
+  try{
+    const saved = JSON.parse(localStorage.getItem(STORAGE)||'null');
+    if(saved && typeof saved==='object' && saved.answers && saved.checked){
+      state = {answers:saved.answers,checked:saved.checked,first:saved.first||{},order:Array.isArray(saved.order)?saved.order:[]};
+    }
+  }catch(e){}
+  const initialOrder = [3,0,5,2,7,1,6,4];
+  if(state.order.length!==8 || new Set(state.order).size!==8 || state.order.some(n=>!Number.isInteger(n)||n<0||n>7)) state.order=[...initialOrder];
+  const root=document.getElementById('workspace');
+  const nav=document.getElementById('nav-list');
+  const escapeHTML = x=>String(x).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const valueOf=(id,index)=>state.answers[id+'_'+index] || '';
+  const svgBase=content=>`<svg viewBox="0 0 230 145" role="img" aria-label="Ilustración esquemática de un componente informático" xmlns="http://www.w3.org/2000/svg">${content}</svg>`;
+  const pics = {
+    cpu:svgBase(`<rect x="62" y="23" width="106" height="99" rx="10" fill="#266b77" stroke="#113b49" stroke-width="5"/><rect x="75" y="34" width="81" height="76" rx="5" fill="#a7ddd0" stroke="#d9fff0" stroke-width="3"/><path d="M89 52h54M89 67h54M89 82h42" stroke="#5bada4" stroke-width="4" stroke-linecap="round"/><g stroke="#c6a85b" stroke-width="6" stroke-linecap="round"><path d="M77 18v-12M98 18v-12M119 18v-12M140 18v-12M161 18v-12M77 138v-12M98 138v-12M119 138v-12M140 138v-12M161 138v-12M56 40H44M56 63H44M56 86H44M56 109H44M186 40h-12M186 63h-12M186 86h-12M186 109h-12"/></g>`),
+    ram:svgBase(`<g transform="translate(10 43)"><rect x="8" y="3" width="204" height="61" rx="6" fill="#187b74" stroke="#06554f" stroke-width="4"/><g fill="#163c4d" stroke="#d9e4c5" stroke-width="1.5"><rect x="24" y="13" width="32" height="35" rx="2"/><rect x="64" y="13" width="32" height="35" rx="2"/><rect x="104" y="13" width="32" height="35" rx="2"/><rect x="144" y="13" width="32" height="35" rx="2"/></g><g fill="#d2ae64"><rect x="22" y="64" width="10" height="10"/><rect x="42" y="64" width="10" height="10"/><rect x="62" y="64" width="10" height="10"/><rect x="82" y="64" width="10" height="10"/><rect x="116" y="64" width="10" height="10"/><rect x="136" y="64" width="10" height="10"/><rect x="156" y="64" width="10" height="10"/><rect x="176" y="64" width="10" height="10"/></g></g>`),
+    board:svgBase(`<rect x="54" y="8" width="125" height="129" rx="6" fill="#247b6f" stroke="#0f5250" stroke-width="5"/><rect x="69" y="21" width="53" height="44" rx="4" fill="#204757" stroke="#9bc9c5" stroke-width="5"/><rect x="80" y="30" width="31" height="26" rx="2" fill="#a1cdbd"/><rect x="133" y="24" width="12" height="67" rx="2" fill="#193e4d"/><rect x="153" y="24" width="12" height="67" rx="2" fill="#193e4d"/><rect x="69" y="82" width="54" height="11" fill="#173d46"/><rect x="69" y="104" width="85" height="10" fill="#153f50"/><rect x="73" y="123" width="36" height="6" fill="#d6b66c"/><g stroke="#64bca9" stroke-width="2" fill="none"><path d="M121 53h10M110 70v10h62M114 96v7h54M124 44h8"/></g>`),
+    hdd:svgBase(`<rect x="46" y="10" width="139" height="125" rx="10" fill="#657687" stroke="#354959" stroke-width="6"/><rect x="60" y="23" width="112" height="99" rx="7" fill="#c5d6dd"/><circle cx="111" cy="70" r="41" fill="#7b9da9" stroke="#eef6f6" stroke-width="5"/><circle cx="111" cy="70" r="28" fill="#d9e8eb" stroke="#91b9c4" stroke-width="4"/><circle cx="111" cy="70" r="8" fill="#526d7c"/><path d="M165 109L125 78" stroke="#405669" stroke-width="10" stroke-linecap="round"/><circle cx="163" cy="109" r="10" fill="#8fb4c0" stroke="#4c6e81" stroke-width="4"/>`),
+    ssd:svgBase(`<g transform="translate(4 47) rotate(-6 110 30)"><rect x="17" y="12" width="194" height="51" rx="6" fill="#186d61" stroke="#0b514b" stroke-width="4"/><g fill="#1c3d4a" stroke="#add0a0" stroke-width="1.5"><rect x="38" y="19" width="38" height="36" rx="3"/><rect x="81" y="19" width="38" height="36" rx="3"/><rect x="124" y="19" width="38" height="36" rx="3"/></g><circle cx="193" cy="38" r="6" fill="#d7b673"/><path d="M17 18h8M17 28h8M17 38h8M17 48h8" stroke="#e1b764" stroke-width="5"/></g>`),
+    gpu:svgBase(`<rect x="29" y="26" width="181" height="91" rx="9" fill="#314958" stroke="#1d3445" stroke-width="5"/><rect x="23" y="20" width="12" height="105" rx="3" fill="#a4b3bd"/><circle cx="83" cy="71" r="32" fill="#192f3f" stroke="#89a5af" stroke-width="5"/><circle cx="157" cy="71" r="32" fill="#192f3f" stroke="#89a5af" stroke-width="5"/><g stroke="#698896" stroke-width="7" stroke-linecap="round"><path d="M83 51v40M63 71h40M68 56l30 30M68 86l30-30M157 51v40M137 71h40M142 56l30 30M142 86l30-30"/></g><rect x="81" y="117" width="83" height="9" fill="#d6b36d"/>`),
+    psu:svgBase(`<rect x="42" y="20" width="145" height="109" rx="11" fill="#4a5f6d" stroke="#253a47" stroke-width="5"/><circle cx="112" cy="73" r="45" fill="#263c4a" stroke="#9cb4bd" stroke-width="5"/><circle cx="112" cy="73" r="8" fill="#92b5bd"/><g stroke="#7d9ba8" stroke-width="6" stroke-linecap="round"><path d="M112 35v76M74 73h76M86 47l52 52M86 99l52-52"/></g><rect x="155" y="92" width="23" height="20" rx="2" fill="#172e3c" stroke="#8aa9b5" stroke-width="2"/>`)
+  };
+  function activityIntro(a,i){return `<div class="panel-heading"><div class="panel-number">Reto ${String(i+1).padStart(2,'0')} / ${activities.length}</div><h2>${escapeHTML(a.title)}</h2><p>${escapeHTML(a.subtitle)}</p><div class="meta"><span>${escapeHTML(a.tag)}</span><span>${a.items.length} puntos posibles</span></div></div>`;}
+  function qBlock(id,i,inner){return `<div class="question" id="q-${id}-${i}">${inner}<div class="explain" id="e-${id}-${i}" hidden></div></div>`;}
+  function renderQuestions(a){
+    if(a.type==='classify'||a.type==='bool'||a.type==='classify3'){
+      const opts=a.type==='classify'?['Hardware','Software']:a.type==='bool'?['Verdadero','Falso']:['HDD','SSD SATA','SSD NVMe'];
+      return `<div class="question-stack">${a.items.map((it,i)=>qBlock(a.id,i,`<div class="q-line"><div class="q-label"><span class="q-count">${String(i+1).padStart(2,'0')}.</span> ${escapeHTML(it.label)}</div><div class="segmented" role="group" aria-label="Respuesta a pregunta ${i+1}">${opts.map(opt=>`<button type="button" class="choice" data-a="${a.id}" data-q="${i}" data-value="${escapeHTML(opt)}" aria-pressed="false">${escapeHTML(opt)}</button>`).join('')}</div></div>`)).join('')}</div>`;
+    }
+    if(a.type==='match')return `<div class="question-stack">${a.items.map((it,i)=>qBlock(a.id,i,`<div class="q-line"><label class="q-label" for="${a.id}-${i}"><span class="q-count">${String(i+1).padStart(2,'0')}.</span> ${escapeHTML(it.label)}</label><select class="answer-select" id="${a.id}-${i}" data-a="${a.id}" data-q="${i}"><option value="">— Elige su función —</option>${a.options.map(opt=>`<option value="${escapeHTML(opt)}">${escapeHTML(opt)}</option>`).join('')}</select></div>`)).join('')}</div>`;
+    if(a.type==='visual')return `<div class="visual-grid">${a.items.map((it,i)=>qBlock(a.id,i,`<div class="visual-question"><div class="q-label"><span class="q-count">${String(i+1).padStart(2,'0')}.</span> ¿Qué componente es?</div><div class="visual-box">${pics[it.pic]}</div><div class="choices-row" role="group" aria-label="Nombre de la pieza ${i+1}">${it.choices.map(opt=>`<button type="button" class="radio-button" data-a="${a.id}" data-q="${i}" data-value="${escapeHTML(opt)}" aria-pressed="false">${escapeHTML(opt)}</button>`).join('')}</div></div>`)).join('')}</div>`;
+    if(a.type==='quiz')return `<div class="question-stack">${a.items.map((it,i)=>qBlock(a.id,i,`<div class="scenario">${i+1}</div><p class="scenario-context">${escapeHTML(it.label)}</p><div class="choices-row" role="group" aria-label="Respuesta al caso ${i+1}">${it.choices.map(opt=>`<button type="button" class="radio-button" data-a="${a.id}" data-q="${i}" data-value="${escapeHTML(opt)}" aria-pressed="false">${escapeHTML(opt)}</button>`).join('')}</div>`)).join('')}</div>`;
+    if(a.type==='order')return `<div class="sequence-tip">↕ Utiliza las flechas para colocar los pasos en el orden correcto. Es una <strong>representación simplificada</strong> del encendido, como en el material de la unidad.</div><ol class="sortlist" id="order-list"></ol>`;
+    return '';
+  }
+  function build(){
+    nav.innerHTML=activities.map((a,i)=>`<button class="nav-item" data-go="${a.id}" type="button"><span class="n" data-n="${a.id}">${i+1}</span><span>${escapeHTML(a.title)}</span><span class="check" data-check="${a.id}" hidden aria-label="Actividad corregida">✓</span></button>`).join('')+`<button class="nav-item" type="button" data-go="summary"><span class="n">★</span><span>Mi informe final</span></button>`;
+    root.innerHTML=activities.map((a,i)=>`<section class="panel" id="panel-${a.id}" aria-label="Reto ${i+1}: ${escapeHTML(a.title)}">${activityIntro(a,i)}<div class="panel-body">${renderQuestions(a)}</div><div class="check-feedback" id="feedback-${a.id}" aria-live="polite"></div><div class="panel-controls"><button class="btn btn-primary" data-check-activity="${a.id}" type="button">✓ Corregir actividad</button><button class="btn btn-secondary" data-clear="${a.id}" type="button">↻ Reintentar</button><button class="btn btn-secondary next-btn" type="button" data-go="${i===activities.length-1?'summary':activities[i+1].id}">${i===activities.length-1?'Ver mi informe →':'Siguiente reto →'}</button></div><div class="panel-footer"><span>Aprende de tus errores: puedes corregir tus respuestas.</span><a href="${SOURCE}" target="_blank" rel="noopener noreferrer">Repasar teoría ↗</a></div></section>`).join('') + `<section class="panel" id="summary-panel" aria-label="Informe de resultados"><div class="panel-heading"><div class="panel-number">Resumen personal</div><h2>Mi informe de aprendizaje</h2><p>Revisa tus avances. La primera nota refleja la comprensión inicial; la actual muestra lo que has conseguido después de practicar.</p></div><div class="panel-body"><div id="report-content" aria-live="polite"></div><div class="report-actions"><button type="button" class="btn btn-primary" id="download-results">↓ Guardar informe (.txt)</button><button type="button" class="btn btn-secondary" id="print-results">⎙ Imprimir</button><button type="button" class="btn btn-danger" id="reset-all">↻ Empezar de nuevo</button></div><p class="privacy">El progreso se guarda únicamente en este navegador, si lo permite. No se envían nombres, notas ni respuestas a ningún servidor.</p></div><div class="panel-footer"><span>¡Buen trabajo! Sigue repasando los conceptos que aún te cuestan.</span><a href="${SOURCE}" target="_blank" rel="noopener noreferrer">Volver a los contenidos ↗</a></div></section>`;
+    root.addEventListener('click',handleClick);
+    root.addEventListener('change',handleChange);
+    nav.addEventListener('click',handleClick);
+    document.getElementById('download-results').addEventListener('click',downloadResults);
+    document.getElementById('print-results').addEventListener('click',()=>window.print());
+    document.getElementById('reset-all').addEventListener('click',()=>{
+      if(!window.confirm('¿Seguro que deseas borrar todas las respuestas y notas de este navegador?'))return;
+      state={answers:{},checked:{},first:{},order:[...initialOrder]};save();
+      for(const a of activities){a.items.forEach((_,i)=>{const el=document.getElementById('q-'+a.id+'-'+i);if(el){el.classList.remove('correct','incorrect');const ex=document.getElementById('e-'+a.id+'-'+i);if(ex){ex.hidden=true;ex.textContent='';}}});const f=document.getElementById('feedback-'+a.id);f.className='check-feedback';f.textContent='';}
+      restoreAnswers();updateStats();show('clasifica');
+    });
+    restoreAnswers();
+    for(const a of activities)if(state.checked[a.id])paintCorrection(a);
+    updateStats();
+    const hash=decodeURIComponent(location.hash.slice(1));show(byId[hash]||hash==='summary'?hash:'clasifica',false);
+    window.addEventListener('hashchange',()=>{const h=decodeURIComponent(location.hash.slice(1));if(byId[h]||h==='summary')show(h,false);});
+  }
+  function restoreAnswers(){
+    for(const a of activities){
+      for(let i=0;i<a.items.length;i++){
+        const v=valueOf(a.id,i);
+        if(a.type==='match'){const select=document.getElementById(`${a.id}-${i}`);if(select)select.value=v;}
+        else if(a.type!=='order') updateButtons(a.id,i,v);
+      }
+    }
+    renderOrder();
+  }
+  function updateButtons(id,index,value){
+    const box=document.getElementById(`q-${id}-${index}`);
+    if(!box)return;
+    box.querySelectorAll('[data-value]').forEach(button=>{
+      const isSelected=button.dataset.value===value;
+      button.classList.toggle('selected',isSelected);
+      button.setAttribute('aria-pressed',String(isSelected));
+    });
+  }
+  function handleClick(event){
+    const btn=event.target.closest('button');if(!btn)return;
+    if(btn.dataset.go){show(btn.dataset.go);return;}
+    if(btn.dataset.checkActivity){checkActivity(btn.dataset.checkActivity);return;}
+    if(btn.dataset.clear){clearActivity(btn.dataset.clear);return;}
+    if(btn.dataset.value!==undefined){const {a,q,value}=btn.dataset;setAnswer(a,Number(q),value);return;}
+    if(btn.dataset.move!==undefined){moveRow(Number(btn.dataset.move),Number(btn.dataset.direction));return;}
+  }
+  function handleChange(event){const el=event.target;if(el.matches('select[data-a]'))setAnswer(el.dataset.a,Number(el.dataset.q),el.value);}
+  function setAnswer(id,i,v){state.answers[id+'_'+i]=v;updateButtons(id,i,v);markDirty(id);save();}
+  function markDirty(id){
+    if(state.checked[id]){
+      delete state.checked[id];
+      const f=document.getElementById('feedback-'+id);f.className='check-feedback';f.textContent='';
+      clearHighlights(id);updateStats();
+    }
+  }
+  function clearHighlights(id){byId[id].items.forEach((_,i)=>{const q=document.getElementById('q-'+id+'-'+i);if(q){q.classList.remove('correct','incorrect');const ex=document.getElementById('e-'+id+'-'+i);if(ex){ex.hidden=true;ex.textContent='';}}});}
+  function renderOrder(){
+    const list=document.getElementById('order-list');if(!list)return;
+    const a=byId.encendido;
+    list.innerHTML=state.order.map((original,i)=>`<li class="sortrow" id="order-item-${i}"><span class="sortindex">${i+1}</span><span class="sortlabel">${escapeHTML(a.items[original].label)}</span><div class="sortbtns"><button type="button" class="move-btn" title="Subir paso ${i+1}" aria-label="Subir paso ${i+1}" data-move="${i}" data-direction="-1" ${i===0?'disabled':''}>↑</button><button type="button" class="move-btn" title="Bajar paso ${i+1}" aria-label="Bajar paso ${i+1}" data-move="${i}" data-direction="1" ${i===7?'disabled':''}>↓</button></div></li>`).join('');
+  }
+  function moveRow(i,d){const j=i+d;if(j<0||j>=8)return;[state.order[i],state.order[j]]=[state.order[j],state.order[i]];markDirty('encendido');renderOrder();save();const control=document.querySelector(`[data-move="${j}"][data-direction="${d}"]`);if(control&&!control.disabled)control.focus();}
+  function scoreFor(a){
+    if(a.type==='order')return {score:state.order.reduce((p,original,i)=>p+(original===i?1:0),0),total:a.items.length,blank:0,entries:state.order.map((original,i)=>({correct:original===i,expected:a.items[i].label,why:original===i?a.items[i].why:'En esta posición corresponde: '+a.items[i].label+'.'}))};
+    let score=0,blank=0;
+    const entries=a.items.map((it,i)=>{
+      const v=valueOf(a.id,i);if(!v)blank++;
+      const correct=v===it.answer;if(correct)score++;
+      return {correct,expected:it.answer,why:it.why};
+    });
+    return {score,total:a.items.length,blank,entries};
+  }
+  function checkActivity(id){
+    const a=byId[id],result=scoreFor(a),f=document.getElementById('feedback-'+id);
+    if(result.blank){
+      f.className='check-feedback visible warning';
+      f.innerHTML=`<p class="result-head">Te quedan ${result.blank} ${result.blank===1?'respuesta':'respuestas'} por completar</p><p class="result-desc">Contesta todas las preguntas antes de corregir. Puedes hacerlo a tu ritmo.</p>`;
+      a.items.forEach((_,i)=>{const q=document.getElementById('q-'+id+'-'+i);if(q && !valueOf(id,i))q.style.borderStyle='dashed';else if(q)q.style.borderStyle='solid';});
+      f.scrollIntoView({behavior:'smooth',block:'nearest'});
+      return;
+    }
+    for(const it of a.items){/* las explicaciones se muestran tras corregir */}
+    state.checked[id]={score:result.score,total:result.total};
+    if(!state.first[id])state.first[id]={score:result.score,total:result.total};
+    paintCorrection(a);updateStats();save();
+    f.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  function paintCorrection(a){
+    const result=scoreFor(a);
+    if(a.type==='order'){
+      document.querySelectorAll('#order-list .sortrow').forEach((li,i)=>{
+        li.style.borderColor=result.entries[i].correct?'#b9e1ca':'#edc1c1';
+        li.style.background=result.entries[i].correct?'#f6fcf8':'#fff9f9';
+        const old=li.querySelector('.order-explain');if(old)old.remove();
+        const detail=document.createElement('div');detail.className='order-explain sr-only';detail.textContent=result.entries[i].correct?'Posición correcta':'Posición incorrecta';li.appendChild(detail);
+      });
+    }else{
+      a.items.forEach((_,i)=>{
+        const q=document.getElementById('q-'+a.id+'-'+i),e=result.entries[i],ex=document.getElementById('e-'+a.id+'-'+i);
+        q.style.borderStyle='solid';q.classList.toggle('correct',e.correct);q.classList.toggle('incorrect',!e.correct);
+        ex.hidden=false;ex.innerHTML=`<span class="feedback-flag">${e.correct?'✓ Correcto.':'✗ Revisa esta respuesta.'}</span> ${!e.correct?`<strong>Respuesta: ${escapeHTML(e.expected)}.</strong> `:''}${escapeHTML(e.why)}`;
+      });
+    }
+    const f=document.getElementById('feedback-'+a.id);
+    const first=state.first[a.id];
+    f.className='check-feedback visible';
+    f.innerHTML=`<p class="result-head">${result.score===result.total?'¡Reto superado!':result.score>=Math.ceil(result.total*.7)?'¡Vas por buen camino!':'¡Sigue practicando!'} ${result.score} de ${result.total} aciertos</p><p class="result-desc">${result.score===result.total?'Has respondido correctamente a todo.':`Has acertado ${result.score} y puedes revisar ${result.total-result.score} ${result.total-result.score===1?'respuesta':'respuestas'}.`} Primer intento: <strong>${first?first.score+' / '+first.total:'—'}</strong>. Puedes cambiar tus respuestas y corregir de nuevo.</p>${a.type==='order'&&result.score!==result.total?`<p class="result-desc" style="margin-top:9px">Orden del material: ${a.items.map((x,i)=>`${i+1}. ${escapeHTML(x.label.split(':')[0])}`).join(' → ')}</p>`:''}`;
+  }
+  function clearActivity(id){
+    const a=byId[id];
+    a.items.forEach((_,i)=>{delete state.answers[id+'_'+i];const q=document.getElementById('q-'+id+'-'+i);if(q)q.style.borderStyle='solid';});
+    if(id==='encendido')state.order=[...initialOrder];
+    markDirty(id);clearHighlights(id);
+    const f=document.getElementById('feedback-'+id);f.className='check-feedback';f.textContent='';
+    if(id==='encendido')document.querySelectorAll('#order-list .sortrow').forEach(li=>{li.style.background='';li.style.borderColor='';});
+    restoreAnswers();save();updateStats();
+  }
+  function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state));}catch(e){}}
+  function show(id,setHash=true){
+    const target=byId[id]||id==='summary'?id:'clasifica';
+    document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===(target==='summary'?'summary-panel':'panel-'+target)));
+    document.querySelectorAll('.nav-item').forEach(n=>{const selected=n.dataset.go===target;n.classList.toggle('active',selected);if(selected)n.setAttribute('aria-current','step');else n.removeAttribute('aria-current');});
+    if(target==='summary')renderReport();
+    if(setHash){history.replaceState(null,'','#'+target);const y=document.querySelector('.statbar').getBoundingClientRect().top+window.scrollY-10;window.scrollTo({top:Math.max(0,y),behavior:'smooth'});}
+  }
+  function updateStats(){
+    const done=activities.filter(a=>state.checked[a.id]);
+    const got=done.reduce((s,a)=>s+state.checked[a.id].score,0);
+    const max=done.reduce((s,a)=>s+a.items.length,0);
+    const pct=Math.round(done.length/activities.length*100);
+    document.getElementById('done-stat').textContent=`${done.length}/${activities.length}`;
+    document.getElementById('score-stat').textContent=done.length?`${got}/${max}`:'—';
+    document.getElementById('progress-percent').textContent=pct+' %';
+    document.getElementById('progress-fill').style.width=pct+'%';
+    document.querySelectorAll('[data-check]').forEach(el=>el.hidden=!state.checked[el.dataset.check]);
+    document.querySelectorAll('[data-n]').forEach(el=>el.classList.toggle('done',Boolean(state.checked[el.dataset.n])));
+    if(document.getElementById('summary-panel').classList.contains('active'))renderReport();
+  }
+  function reportData(){
+    const max=activities.reduce((sum,a)=>sum+a.items.length,0);
+    const first=activities.reduce((sum,a)=>sum+(state.first[a.id]?.score||0),0);
+    const current=activities.reduce((sum,a)=>sum+(state.checked[a.id]?.score||0),0);
+    const done=activities.filter(a=>state.checked[a.id]).length;
+    return {max,first,current,done};
+  }
+  function renderReport(){
+    const d=reportData();
+    const content=document.getElementById('report-content');
+    const complete=d.done===activities.length;
+    content.innerHTML=`<div class="overview"><div class="metric"><strong>${d.done}/8</strong><span>Retos corregidos</span></div><div class="metric"><strong>${d.first}/${d.max}</strong><span>Aciertos del primer intento*</span></div><div class="metric"><strong>${d.current}/${d.max}</strong><span>Aciertos actuales*</span></div></div><h3 class="summary-heading">Resultados por actividad</h3><div style="overflow-x:auto"><table class="report-table"><thead><tr><th>Actividad</th><th>Primer intento</th><th>Actual</th></tr></thead><tbody>${activities.map(a=>`<tr><td>${escapeHTML(a.title)}</td><td>${state.first[a.id]?state.first[a.id].score+' / '+a.items.length:'—'}</td><td>${state.checked[a.id]?state.checked[a.id].score+' / '+a.items.length:'Sin corregir'}</td></tr>`).join('')}</tbody></table></div><div class="report-note">${complete?'<strong>Has terminado los 8 retos.</strong> Observa en qué actividades cometiste errores y vuelve a revisar los contenidos si lo necesitas.':'<strong>Tu recorrido aún no está completo.</strong> Puedes visitar cualquier reto pendiente desde el menú y corregirlo antes de cerrar tu informe.'}<br><br>*Los totales incluyen como cero las actividades todavía no corregidas. La nota del primer intento se conserva aunque después mejores las respuestas. Este informe sirve para la <strong>autoevaluación formativa</strong>, no es una calificación oficial.</div>`;
+  }
+  function downloadResults(){
+    const d=reportData(),now=new Date();
+    const lines=['INFORME DE AUTOEVALUACIÓN — COMPONENTES HARDWARE','Medios y Recursos Digitales · 1.º ESO','Fecha: '+now.toLocaleString('es-ES'),'','Actividades corregidas: '+d.done+' de 8','Aciertos primer intento (total 8 actividades): '+d.first+' / '+d.max,'Aciertos actuales (total 8 actividades): '+d.current+' / '+d.max,'',...activities.map((a,i)=>`${i+1}. ${a.title}\n   Primer intento: ${state.first[a.id]?state.first[a.id].score+' / '+a.items.length:'pendiente'}\n   Actual: ${state.checked[a.id]?state.checked[a.id].score+' / '+a.items.length:'pendiente'}`),'','Evaluación formativa; las actividades pendientes cuentan como 0 en el total.','Datos generados localmente; no se transmiten a ningún servidor.'];
+    const blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
+    const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='autoevaluacion_hardware_1ESO.txt';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }
+  build();
+})();
+</script>
+</body>
+</html>
