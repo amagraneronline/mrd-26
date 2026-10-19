@@ -60,11 +60,11 @@
 
         <!-- Selector de Modo de Juego (Entrenamiento vs Ponte a Prueba) -->
         <div class="w-full max-w-xl bg-slate-900/90 border border-slate-800 rounded-2xl p-1.5 flex gap-2 shadow-inner">
-            <button id="btnModeTrain" class="flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 bg-blue-600 text-white shadow-md">
+            <button id="btnModeTrain" class="flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-white">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 Modo Entrenamiento
             </button>
-            <button id="btnModeTest" class="flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-white">
+            <button id="btnModeTest" class="flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 bg-emerald-600 text-white shadow-md">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 Ponte a Prueba
             </button>
@@ -76,12 +76,12 @@
             <!-- Category selector -->
             <div class="flex items-center gap-2">
                 <label for="categorySelect" class="text-xs sm:text-sm font-medium text-slate-300">Categoría:</label>
-                <select id="categorySelect" class="bg-slate-900 border border-slate-600 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-blue-500">
-                    <option value="symbols">Símbolos Especiales (@, #, €, etc.)</option>
-                    <option value="altgr">Solo Combinaciones AltGr</option>
-                    <option value="numbers">Números y Básicos</option>
-                    <option value="letters">Letras y Acentos (Ñ, Ç, á, etc.)</option>
-                    <option value="all">Todas las Categorías</option>
+                <select id="categorySelect" class="bg-slate-900 border border-slate-600 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-blue-500 cursor-pointer">
+                    <option value="all">Todos los símbolos</option>
+                    <option value="symbols">Símbolos clave (!, @, #, $, %, etc.)</option>
+                    <option value="altgr">Símbolos con Alt Gr (@, #, €, ~, {, }, etc.)</option>
+                    <option value="numbers">Números y básico (0-9, º, ª)</option>
+                    <option value="letters">Letras y acentos (Ñ, Ç, á, é, í, ó, ú)</option>
                 </select>
             </div>
 
@@ -94,6 +94,10 @@
                 <div class="flex flex-col items-center">
                     <span class="text-slate-400 text-[10px] sm:text-xs">Errores</span>
                     <span id="errorVal" class="text-rose-400 font-bold text-base sm:text-lg">0</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-slate-400 text-[10px] sm:text-xs">Precisión</span>
+                    <span id="accuracyVal" class="text-blue-400 font-bold text-base sm:text-lg">100%</span>
                 </div>
                 <div class="flex flex-col items-center">
                     <span class="text-slate-400 text-[10px] sm:text-xs">Racha</span>
@@ -321,7 +325,7 @@
                 { char: '#', helper: 'Alt Gr + 3', code: 'Digit3', modifier: 'AltRight' },
                 { char: '€', helper: 'Alt Gr + E', code: 'KeyE', modifier: 'AltRight' },
                 { char: '~', helper: 'Alt Gr + 4', code: 'Digit4', modifier: 'AltRight' },
-                { char: '{', helper: 'Alt Gr + ` (o \')', code: 'Quote', modifier: 'AltRight' },
+                { char: '{', helper: 'Alt Gr + \'', code: 'Quote', modifier: 'AltRight' },
                 { char: '}', helper: 'Alt Gr + ç', code: 'Backslash', modifier: 'AltRight' },
                 { char: '[', helper: 'Alt Gr + `', code: 'BracketLeft', modifier: 'AltRight' },
                 { char: ']', helper: 'Alt Gr + +', code: 'BracketRight', modifier: 'AltRight' },
@@ -332,7 +336,7 @@
                 { char: ')', helper: 'Mayús + 9', code: 'Digit9', modifier: 'ShiftLeft' },
                 { char: '=', helper: 'Mayús + 0', code: 'Digit0', modifier: 'ShiftLeft' },
                 { char: '?', helper: 'Mayús + \'', code: 'Minus', modifier: 'ShiftLeft' },
-                { char: '¿', helper: 'Tecla ¡', code: 'Equal', modifier: 'none' },
+                { char: '¿', helper: 'Mayús + ¡', code: 'Equal', modifier: 'ShiftLeft' },
                 { char: '¡', helper: 'Tecla ¡', code: 'Equal', modifier: 'none' },
                 { char: '!', helper: 'Mayús + 1', code: 'Digit1', modifier: 'ShiftLeft' },
                 { char: '"', helper: 'Mayús + 2', code: 'Digit2', modifier: 'ShiftLeft' },
@@ -377,16 +381,16 @@
                 { char: 'Ñ', helper: 'Mayús + Ñ', code: 'Semicolon', modifier: 'ShiftLeft' },
                 { char: 'ç', helper: 'Tecla Ç', code: 'Backslash', modifier: 'none' },
                 { char: 'Ç', helper: 'Mayús + Ç', code: 'Backslash', modifier: 'ShiftLeft' },
-                { char: 'á', helper: 'Acento (`) + a', code: 'KeyA', modifier: 'accent' },
-                { char: 'é', helper: 'Acento (`) + e', code: 'KeyE', modifier: 'accent' },
-                { char: 'í', helper: 'Acento (`) + i', code: 'KeyI', modifier: 'accent' },
-                { char: 'ó', helper: 'Acento (`) + o', code: 'KeyO', modifier: 'accent' },
-                { char: 'ú', helper: 'Acento (`) + u', code: 'KeyU', modifier: 'accent' }
+                { char: 'á', helper: 'Acento (´) + a', code: 'KeyA', modifier: 'accent' },
+                { char: 'é', helper: 'Acento (´) + e', code: 'KeyE', modifier: 'accent' },
+                { char: 'í', helper: 'Acento (´) + i', code: 'KeyI', modifier: 'accent' },
+                { char: 'ó', helper: 'Acento (´) + o', code: 'KeyO', modifier: 'accent' },
+                { char: 'ú', helper: 'Acento (´) + u', code: 'KeyU', modifier: 'accent' }
             ]
         };
 
         // Estado del juego
-        let currentMode = 'train'; // 'train' o 'test'
+        let currentMode = 'test'; // Default mode
         let score = 0;
         let errors = 0;
         let streak = 0;
@@ -403,6 +407,7 @@
         const scoreVal = document.getElementById('scoreVal');
         const errorVal = document.getElementById('errorVal');
         const streakVal = document.getElementById('streakVal');
+        const accuracyVal = document.getElementById('accuracyVal');
         const timerVal = document.getElementById('timerVal');
         const categorySelect = document.getElementById('categorySelect');
         const restartBtn = document.getElementById('restartBtn');
@@ -426,6 +431,16 @@
             timerVal.textContent = `${mins}:${secs}`;
         }
 
+        function updateAccuracy() {
+            const total = score + errors;
+            if (total === 0) {
+                accuracyVal.textContent = '100%';
+            } else {
+                const acc = Math.round((score / total) * 100);
+                accuracyVal.textContent = `${acc}%`;
+            }
+        }
+
         // Obtener lista actual de ítems según categoría elegida
         function getCurrentPool() {
             const cat = categorySelect.value;
@@ -439,6 +454,8 @@
         // Seleccionar nuevo símbolo aleatorio
         function nextTarget() {
             const pool = getCurrentPool();
+            if (!pool || pool.length === 0) return;
+
             const randomIndex = Math.floor(Math.random() * pool.length);
             currentItem = pool[randomIndex];
 
@@ -506,11 +523,17 @@
             errorVal.textContent = errors;
             streakVal.textContent = streak;
             lastInputChar.textContent = '-';
+            updateAccuracy();
             startTimer();
         }
 
         // Capturar la entrada del teclado
         window.addEventListener('keydown', (e) => {
+            // Si el foco está en la lista desplegable o botones, no capturar eventos para permitir navegación
+            if (document.activeElement === categorySelect) {
+                return;
+            }
+
             hiddenInput.focus();
 
             if (!currentItem) return;
@@ -532,6 +555,7 @@
                 streak++;
                 scoreVal.textContent = score;
                 streakVal.textContent = streak;
+                updateAccuracy();
 
                 // Feedback visual de acierto
                 if (targetKeyEl) {
@@ -548,6 +572,7 @@
                 streak = 0;
                 errorVal.textContent = errors;
                 streakVal.textContent = streak;
+                updateAccuracy();
 
                 // Feedback visual de error
                 if (targetKeyEl) {
@@ -560,13 +585,16 @@
             }
         });
 
-        // Eventos de botones
+        // Eventos de botones y selectores
         btnModeTrain.addEventListener('click', () => setMode('train'));
         btnModeTest.addEventListener('click', () => setMode('test'));
 
-        categorySelect.addEventListener('change', () => {
+        categorySelect.addEventListener('change', (e) => {
+            e.stopPropagation();
             resetStats();
             nextTarget();
+            categorySelect.blur();
+            hiddenInput.focus();
         });
 
         restartBtn.addEventListener('click', () => {
@@ -575,14 +603,16 @@
             hiddenInput.focus();
         });
 
-        document.addEventListener('click', () => {
-            hiddenInput.focus();
+        document.addEventListener('click', (e) => {
+            // Evitar redirigir foco si el usuario está interactuando con el selector de categorías
+            if (e.target !== categorySelect && !categorySelect.contains(e.target)) {
+                hiddenInput.focus();
+            }
         });
 
         // Inicio
         window.onload = () => {
-            resetStats();
-            setMode('train');
+            setMode('test');
         };
     </script>
 </body>
