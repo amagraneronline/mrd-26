@@ -52,21 +52,21 @@
     <!-- Header -->
     <header class="w-full max-w-5xl text-center mb-3">
         <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-blue-400">Práctica de Teclado Español (ES)</h1>
-        <p class="text-xs sm:text-sm text-slate-400 mt-1">Aprende y pon a prueba tu capacidad para escribir símbolos, acentos y combinación de teclas.</p>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">Aprende y pon a prueba tu capacidad para escribir símbolos, acentos y atajos de teclado.</p>
     </header>
 
     <!-- Main Container -->
     <main class="w-full max-w-5xl flex flex-col gap-4 items-center flex-grow justify-center">
 
-        <!-- Selector de Modo de Juego (Entrenamiento vs Ponte a Prueba) -->
+        <!-- Selector de Modo de Juego -->
         <div class="w-full max-w-xl bg-slate-900/90 border border-slate-800 rounded-2xl p-1.5 flex gap-2 shadow-inner">
-            <button id="btnModeTrain" class="flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-white">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                Modo Entrenamiento
-            </button>
             <button id="btnModeTest" class="flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 bg-emerald-600 text-white shadow-md">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 Ponte a Prueba
+            </button>
+            <button id="btnModeTrain" class="flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-white">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                Modo Entrenamiento
             </button>
         </div>
 
@@ -76,12 +76,12 @@
             <!-- Category selector -->
             <div class="flex items-center gap-2">
                 <label for="categorySelect" class="text-xs sm:text-sm font-medium text-slate-300">Categoría:</label>
-                <select id="categorySelect" class="bg-slate-900 border border-slate-600 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-blue-500 cursor-pointer">
-                    <option value="all">Todos los símbolos</option>
-                    <option value="symbols">Símbolos clave (!, @, #, $, %, etc.)</option>
-                    <option value="altgr">Símbolos con Alt Gr (@, #, €, ~, {, }, etc.)</option>
-                    <option value="numbers">Números y básico (0-9, º, ª)</option>
-                    <option value="letters">Letras y acentos (Ñ, Ç, á, é, í, ó, ú)</option>
+                <select id="categorySelect" class="bg-slate-900 border border-slate-600 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-blue-500">
+                    <option value="all" selected>Todas las Categorías</option>
+                    <option value="symbols">Símbolos Especiales (@, #, €, etc.)</option>
+                    <option value="numbers">Números y Símbolos</option>
+                    <option value="letters">Letras y Signos (Ñ, Ç, á, etc.)</option>
+                    <option value="shortcuts">Atajos de Teclado (Copiar, Cortar, Pegar, Deshacer)</option>
                 </select>
             </div>
 
@@ -94,10 +94,6 @@
                 <div class="flex flex-col items-center">
                     <span class="text-slate-400 text-[10px] sm:text-xs">Errores</span>
                     <span id="errorVal" class="text-rose-400 font-bold text-base sm:text-lg">0</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <span class="text-slate-400 text-[10px] sm:text-xs">Precisión</span>
-                    <span id="accuracyVal" class="text-blue-400 font-bold text-base sm:text-lg">100%</span>
                 </div>
                 <div class="flex flex-col items-center">
                     <span class="text-slate-400 text-[10px] sm:text-xs">Racha</span>
@@ -118,10 +114,10 @@
 
         <!-- Target Display Area -->
         <div id="targetCard" class="w-full max-w-xl bg-slate-800/90 border border-slate-700 rounded-2xl p-4 sm:p-6 text-center shadow-2xl relative overflow-hidden target-pulse">
-            <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Teclea el siguiente símbolo:</div>
+            <div id="targetInstructionLabel" class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Teclea lo siguiente:</div>
             
-            <!-- Big symbol -->
-            <div id="targetSymbolDisplay" class="text-6xl sm:text-7xl font-extrabold text-blue-400 my-2 font-mono h-20 flex items-center justify-center">@</div>
+            <!-- Big symbol / Shortcut action name -->
+            <div id="targetSymbolDisplay" class="text-4xl sm:text-6xl font-extrabold text-blue-400 my-2 font-mono min-h-[5rem] flex items-center justify-center">@</div>
             
             <!-- Helper Instruction (Train Mode vs Test Mode) -->
             <div id="helperBox" class="mt-2 min-h-[36px] flex items-center justify-center">
@@ -133,7 +129,7 @@
             <!-- Input Feedback Display -->
             <div class="mt-3 text-xs text-slate-400 flex items-center justify-center gap-2">
                 <span>Tu entrada:</span>
-                <span id="lastInputChar" class="font-mono text-sm px-2 py-0.5 rounded bg-slate-900 text-amber-300 font-bold border border-slate-700 min-w-[30px] inline-block h-6">-</span>
+                <span id="lastInputChar" class="font-mono text-sm px-3 py-0.5 rounded bg-slate-900 text-amber-300 font-bold border border-slate-700 min-w-[40px] inline-block min-h-[24px] flex items-center justify-center">-</span>
             </div>
 
             <!-- Hidden input to capture keystrokes -->
@@ -318,79 +314,73 @@
 
     <!-- JavaScript Game Logic -->
     <script>
-        // Símbolos y caracteres clasificados con sus teclas asignadas
+        // Definición de ítems por categorías
         const itemPool = {
             symbols: [
-                { char: '@', helper: 'Alt Gr + 2', code: 'Digit2', modifier: 'AltRight' },
-                { char: '#', helper: 'Alt Gr + 3', code: 'Digit3', modifier: 'AltRight' },
-                { char: '€', helper: 'Alt Gr + E', code: 'KeyE', modifier: 'AltRight' },
-                { char: '~', helper: 'Alt Gr + 4', code: 'Digit4', modifier: 'AltRight' },
-                { char: '{', helper: 'Alt Gr + \'', code: 'Quote', modifier: 'AltRight' },
-                { char: '}', helper: 'Alt Gr + ç', code: 'Backslash', modifier: 'AltRight' },
-                { char: '[', helper: 'Alt Gr + `', code: 'BracketLeft', modifier: 'AltRight' },
-                { char: ']', helper: 'Alt Gr + +', code: 'BracketRight', modifier: 'AltRight' },
-                { char: '\\', helper: 'Alt Gr + º', code: 'Backquote', modifier: 'AltRight' },
-                { char: '|', helper: 'Alt Gr + 1', code: 'Digit1', modifier: 'AltRight' },
-                { char: '/', helper: 'Mayús + 7', code: 'Digit7', modifier: 'ShiftLeft' },
-                { char: '(', helper: 'Mayús + 8', code: 'Digit8', modifier: 'ShiftLeft' },
-                { char: ')', helper: 'Mayús + 9', code: 'Digit9', modifier: 'ShiftLeft' },
-                { char: '=', helper: 'Mayús + 0', code: 'Digit0', modifier: 'ShiftLeft' },
-                { char: '?', helper: 'Mayús + \'', code: 'Minus', modifier: 'ShiftLeft' },
-                { char: '¿', helper: 'Mayús + ¡', code: 'Equal', modifier: 'ShiftLeft' },
-                { char: '¡', helper: 'Tecla ¡', code: 'Equal', modifier: 'none' },
-                { char: '!', helper: 'Mayús + 1', code: 'Digit1', modifier: 'ShiftLeft' },
-                { char: '"', helper: 'Mayús + 2', code: 'Digit2', modifier: 'ShiftLeft' },
-                { char: '·', helper: 'Mayús + 3', code: 'Digit3', modifier: 'ShiftLeft' },
-                { char: '$', helper: 'Mayús + 4', code: 'Digit4', modifier: 'ShiftLeft' },
-                { char: '%', helper: 'Mayús + 5', code: 'Digit5', modifier: 'ShiftLeft' },
-                { char: '&', helper: 'Mayús + 6', code: 'Digit6', modifier: 'ShiftLeft' },
-                { char: '_', helper: 'Mayús + -', code: 'Slash', modifier: 'ShiftLeft' },
-                { char: ';', helper: 'Mayús + ,', code: 'Comma', modifier: 'ShiftLeft' },
-                { char: ':', helper: 'Mayús + .', code: 'Period', modifier: 'ShiftLeft' },
-                { char: '<', helper: 'Tecla <', code: 'IntlBackslash', modifier: 'none' },
-                { char: '>', helper: 'Mayús + <', code: 'IntlBackslash', modifier: 'ShiftLeft' }
-            ],
-            altgr: [
-                { char: '@', helper: 'Alt Gr + 2', code: 'Digit2', modifier: 'AltRight' },
-                { char: '#', helper: 'Alt Gr + 3', code: 'Digit3', modifier: 'AltRight' },
-                { char: '€', helper: 'Alt Gr + E', code: 'KeyE', modifier: 'AltRight' },
-                { char: '~', helper: 'Alt Gr + 4', code: 'Digit4', modifier: 'AltRight' },
-                { char: '{', helper: 'Alt Gr + \'', code: 'Quote', modifier: 'AltRight' },
-                { char: '}', helper: 'Alt Gr + ç', code: 'Backslash', modifier: 'AltRight' },
-                { char: '[', helper: 'Alt Gr + `', code: 'BracketLeft', modifier: 'AltRight' },
-                { char: ']', helper: 'Alt Gr + +', code: 'BracketRight', modifier: 'AltRight' },
-                { char: '\\', helper: 'Alt Gr + º', code: 'Backquote', modifier: 'AltRight' },
-                { char: '|', helper: 'Alt Gr + 1', code: 'Digit1', modifier: 'AltRight' }
+                { type: 'char', char: '@', helper: 'Alt Gr + 2', code: 'Digit2', modifier: 'AltRight' },
+                { type: 'char', char: '#', helper: 'Alt Gr + 3', code: 'Digit3', modifier: 'AltRight' },
+                { type: 'char', char: '€', helper: 'Alt Gr + E', code: 'KeyE', modifier: 'AltRight' },
+                { type: 'char', char: '~', helper: 'Alt Gr + 4', code: 'Digit4', modifier: 'AltRight' },
+                { type: 'char', char: '{', helper: 'Alt Gr + \'', code: 'Quote', modifier: 'AltRight' },
+                { type: 'char', char: '}', helper: 'Alt Gr + ç', code: 'Backslash', modifier: 'AltRight' },
+                { type: 'char', char: '[', helper: 'Alt Gr + `', code: 'BracketLeft', modifier: 'AltRight' },
+                { type: 'char', char: ']', helper: 'Alt Gr + +', code: 'BracketRight', modifier: 'AltRight' },
+                { type: 'char', char: '\\', helper: 'Alt Gr + º', code: 'Backquote', modifier: 'AltRight' },
+                { type: 'char', char: '|', helper: 'Alt Gr + 1', code: 'Digit1', modifier: 'AltRight' },
+                { type: 'char', char: '/', helper: 'Mayús + 7', code: 'Digit7', modifier: 'ShiftLeft' },
+                { type: 'char', char: '(', helper: 'Mayús + 8', code: 'Digit8', modifier: 'ShiftLeft' },
+                { type: 'char', char: ')', helper: 'Mayús + 9', code: 'Digit9', modifier: 'ShiftLeft' },
+                { type: 'char', char: '=', helper: 'Mayús + 0', code: 'Digit0', modifier: 'ShiftLeft' },
+                { type: 'char', char: '?', helper: 'Mayús + \'', code: 'Minus', modifier: 'ShiftLeft' },
+                { type: 'char', char: '¿', helper: 'Tecla ¡', code: 'Equal', modifier: 'none' },
+                { type: 'char', char: '¡', helper: 'Tecla ¡', code: 'Equal', modifier: 'none' },
+                { type: 'char', char: '!', helper: 'Mayús + 1', code: 'Digit1', modifier: 'ShiftLeft' },
+                { type: 'char', char: '"', helper: 'Mayús + 2', code: 'Digit2', modifier: 'ShiftLeft' },
+                { type: 'char', char: '·', helper: 'Mayús + 3', code: 'Digit3', modifier: 'ShiftLeft' },
+                { type: 'char', char: '$', helper: 'Mayús + 4', code: 'Digit4', modifier: 'ShiftLeft' },
+                { type: 'char', char: '%', helper: 'Mayús + 5', code: 'Digit5', modifier: 'ShiftLeft' },
+                { type: 'char', char: '&', helper: 'Mayús + 6', code: 'Digit6', modifier: 'ShiftLeft' },
+                { type: 'char', char: '_', helper: 'Mayús + -', code: 'Slash', modifier: 'ShiftLeft' },
+                { type: 'char', char: ';', helper: 'Mayús + ,', code: 'Comma', modifier: 'ShiftLeft' },
+                { type: 'char', char: ':', helper: 'Mayús + .', code: 'Period', modifier: 'ShiftLeft' },
+                { type: 'char', char: '<', helper: 'Tecla <', code: 'IntlBackslash', modifier: 'none' },
+                { type: 'char', char: '>', helper: 'Mayús + <', code: 'IntlBackslash', modifier: 'ShiftLeft' }
             ],
             numbers: [
-                { char: '1', helper: 'Tecla 1', code: 'Digit1', modifier: 'none' },
-                { char: '2', helper: 'Tecla 2', code: 'Digit2', modifier: 'none' },
-                { char: '3', helper: 'Tecla 3', code: 'Digit3', modifier: 'none' },
-                { char: '4', helper: 'Tecla 4', code: 'Digit4', modifier: 'none' },
-                { char: '5', helper: 'Tecla 5', code: 'Digit5', modifier: 'none' },
-                { char: '6', helper: 'Tecla 6', code: 'Digit6', modifier: 'none' },
-                { char: '7', helper: 'Tecla 7', code: 'Digit7', modifier: 'none' },
-                { char: '8', helper: 'Tecla 8', code: 'Digit8', modifier: 'none' },
-                { char: '9', helper: 'Tecla 9', code: 'Digit9', modifier: 'none' },
-                { char: '0', helper: 'Tecla 0', code: 'Digit0', modifier: 'none' },
-                { char: 'º', helper: 'Tecla º', code: 'Backquote', modifier: 'none' },
-                { char: 'ª', helper: 'Mayús + º', code: 'Backquote', modifier: 'ShiftLeft' }
+                { type: 'char', char: '1', helper: 'Tecla 1', code: 'Digit1', modifier: 'none' },
+                { type: 'char', char: '2', helper: 'Tecla 2', code: 'Digit2', modifier: 'none' },
+                { type: 'char', char: '3', helper: 'Tecla 3', code: 'Digit3', modifier: 'none' },
+                { type: 'char', char: '4', helper: 'Tecla 4', code: 'Digit4', modifier: 'none' },
+                { type: 'char', char: '5', helper: 'Tecla 5', code: 'Digit5', modifier: 'none' },
+                { type: 'char', char: '6', helper: 'Tecla 6', code: 'Digit6', modifier: 'none' },
+                { type: 'char', char: '7', helper: 'Tecla 7', code: 'Digit7', modifier: 'none' },
+                { type: 'char', char: '8', helper: 'Tecla 8', code: 'Digit8', modifier: 'none' },
+                { type: 'char', char: '9', helper: 'Tecla 9', code: 'Digit9', modifier: 'none' },
+                { type: 'char', char: '0', helper: 'Tecla 0', code: 'Digit0', modifier: 'none' },
+                { type: 'char', char: 'º', helper: 'Tecla º', code: 'Backquote', modifier: 'none' },
+                { type: 'char', char: 'ª', helper: 'Mayús + º', code: 'Backquote', modifier: 'ShiftLeft' }
             ],
             letters: [
-                { char: 'ñ', helper: 'Tecla Ñ', code: 'Semicolon', modifier: 'none' },
-                { char: 'Ñ', helper: 'Mayús + Ñ', code: 'Semicolon', modifier: 'ShiftLeft' },
-                { char: 'ç', helper: 'Tecla Ç', code: 'Backslash', modifier: 'none' },
-                { char: 'Ç', helper: 'Mayús + Ç', code: 'Backslash', modifier: 'ShiftLeft' },
-                { char: 'á', helper: 'Acento (´) + a', code: 'KeyA', modifier: 'accent' },
-                { char: 'é', helper: 'Acento (´) + e', code: 'KeyE', modifier: 'accent' },
-                { char: 'í', helper: 'Acento (´) + i', code: 'KeyI', modifier: 'accent' },
-                { char: 'ó', helper: 'Acento (´) + o', code: 'KeyO', modifier: 'accent' },
-                { char: 'ú', helper: 'Acento (´) + u', code: 'KeyU', modifier: 'accent' }
+                { type: 'char', char: 'ñ', helper: 'Tecla Ñ', code: 'Semicolon', modifier: 'none' },
+                { type: 'char', char: 'Ñ', helper: 'Mayús + Ñ', code: 'Semicolon', modifier: 'ShiftLeft' },
+                { type: 'char', char: 'ç', helper: 'Tecla Ç', code: 'Backslash', modifier: 'none' },
+                { type: 'char', char: 'Ç', helper: 'Mayús + Ç', code: 'Backslash', modifier: 'ShiftLeft' },
+                { type: 'char', char: 'á', helper: 'Acento (`) + a', code: 'KeyA', modifier: 'accent' },
+                { type: 'char', char: 'é', helper: 'Acento (`) + e', code: 'KeyE', modifier: 'accent' },
+                { type: 'char', char: 'í', helper: 'Acento (`) + i', code: 'KeyI', modifier: 'accent' },
+                { type: 'char', char: 'ó', helper: 'Acento (`) + o', code: 'KeyO', modifier: 'accent' },
+                { type: 'char', char: 'ú', helper: 'Acento (`) + u', code: 'KeyU', modifier: 'accent' }
+            ],
+            shortcuts: [
+                { type: 'shortcut', name: 'Copiar (Ctrl+C)', keyChar: 'c', helper: 'Ctrl + C', mainCode: 'KeyC', modifierCode: 'ControlLeft' },
+                { type: 'shortcut', name: 'Cortar (Ctrl+X)', keyChar: 'x', helper: 'Ctrl + X', mainCode: 'KeyX', modifierCode: 'ControlLeft' },
+                { type: 'shortcut', name: 'Pegar (Ctrl+V)', keyChar: 'v', helper: 'Ctrl + V', mainCode: 'KeyV', modifierCode: 'ControlLeft' },
+                { type: 'shortcut', name: 'Deshacer (Ctrl+Z)', keyChar: 'z', helper: 'Ctrl + Z', mainCode: 'KeyZ', modifierCode: 'ControlLeft' }
             ]
         };
 
-        // Estado del juego
-        let currentMode = 'test'; // Default mode
+        // Estado global de la app
+        let currentMode = 'test'; // Default 'test'
         let score = 0;
         let errors = 0;
         let streak = 0;
@@ -398,7 +388,7 @@
         let timerSeconds = 0;
         let timerInterval = null;
 
-        // Elementos DOM
+        // Referencias DOM
         const btnModeTrain = document.getElementById('btnModeTrain');
         const btnModeTest = document.getElementById('btnModeTest');
         const targetSymbolDisplay = document.getElementById('targetSymbolDisplay');
@@ -407,14 +397,13 @@
         const scoreVal = document.getElementById('scoreVal');
         const errorVal = document.getElementById('errorVal');
         const streakVal = document.getElementById('streakVal');
-        const accuracyVal = document.getElementById('accuracyVal');
         const timerVal = document.getElementById('timerVal');
         const categorySelect = document.getElementById('categorySelect');
         const restartBtn = document.getElementById('restartBtn');
         const hiddenInput = document.getElementById('hiddenInput');
         const lastInputChar = document.getElementById('lastInputChar');
 
-        // Cronómetro
+        // Manejo del temporizador
         function startTimer() {
             clearInterval(timerInterval);
             timerSeconds = 0;
@@ -431,71 +420,69 @@
             timerVal.textContent = `${mins}:${secs}`;
         }
 
-        function updateAccuracy() {
-            const total = score + errors;
-            if (total === 0) {
-                accuracyVal.textContent = '100%';
-            } else {
-                const acc = Math.round((score / total) * 100);
-                accuracyVal.textContent = `${acc}%`;
-            }
-        }
-
-        // Obtener lista actual de ítems según categoría elegida
+        // Obtener elementos filtrados según categoría seleccionada
         function getCurrentPool() {
             const cat = categorySelect.value;
             if (cat === 'symbols') return itemPool.symbols;
-            if (cat === 'altgr') return itemPool.altgr;
             if (cat === 'numbers') return itemPool.numbers;
             if (cat === 'letters') return itemPool.letters;
-            return [...itemPool.symbols, ...itemPool.numbers, ...itemPool.letters];
+            if (cat === 'shortcuts') return itemPool.shortcuts;
+            // "all" por defecto
+            return [...itemPool.symbols, ...itemPool.numbers, ...itemPool.letters, ...itemPool.shortcuts];
         }
 
-        // Seleccionar nuevo símbolo aleatorio
+        // Seleccionar nuevo objetivo aleatorio
         function nextTarget() {
             const pool = getCurrentPool();
-            if (!pool || pool.length === 0) return;
-
             const randomIndex = Math.floor(Math.random() * pool.length);
             currentItem = pool[randomIndex];
 
-            targetSymbolDisplay.textContent = currentItem.char;
+            if (currentItem.type === 'shortcut') {
+                targetSymbolDisplay.textContent = currentItem.name;
+                targetSymbolDisplay.className = "text-2xl sm:text-4xl font-extrabold text-blue-400 my-2 font-sans min-h-[5rem] flex items-center justify-center text-center px-2";
+            } else {
+                targetSymbolDisplay.textContent = currentItem.char;
+                targetSymbolDisplay.className = "text-5xl sm:text-7xl font-extrabold text-blue-400 my-2 font-mono min-h-[5rem] flex items-center justify-center";
+            }
 
-            // Actualizar vista según el modo activo
+            // Actualización visual por modo de juego
             if (currentMode === 'train') {
                 helperBox.style.visibility = 'visible';
                 targetHelper.innerHTML = `Pulsa <span class="font-bold text-blue-300">${currentItem.helper}</span>`;
-                highlightTargetKey();
+                highlightTargetKeys();
             } else { // Mode: Test
                 helperBox.style.visibility = 'hidden';
                 clearKeyHighlights();
             }
         }
 
-        // Limpiar todas las iluminaciones del teclado
+        // Limpiar estilos de teclas virtual
         function clearKeyHighlights() {
             document.querySelectorAll('.key').forEach(k => {
                 k.classList.remove('key-active', 'key-modifier-highlight', 'key-correct', 'key-incorrect');
             });
         }
 
-        // Iluminar tecla en el teclado virtual (Solo en Modo Entrenamiento)
-        function highlightTargetKey() {
+        // Iluminar teclas objetivo (Solo en Modo Entrenamiento)
+        function highlightTargetKeys() {
             clearKeyHighlights();
 
             if (!currentItem || currentMode !== 'train') return;
 
-            // Iluminar tecla principal
-            const keyEl = document.querySelector(`.key[data-code="${currentItem.code}"]`);
-            if (keyEl) {
-                keyEl.classList.add('key-active');
-            }
+            if (currentItem.type === 'shortcut') {
+                // Iluminar Ctrl y la letra del atajo
+                const mainEl = document.querySelector(`.key[data-code="${currentItem.mainCode}"]`);
+                const modEl = document.querySelector(`.key[data-code="${currentItem.modifierCode}"]`);
+                if (mainEl) mainEl.classList.add('key-active');
+                if (modEl) modEl.classList.add('key-modifier-highlight');
+            } else {
+                // Iluminar tecla principal y modificador (Shift/AltGr)
+                const keyEl = document.querySelector(`.key[data-code="${currentItem.code}"]`);
+                if (keyEl) keyEl.classList.add('key-active');
 
-            // Iluminar tecla modificadora si existe (AltGr o Shift)
-            if (currentItem.modifier && currentItem.modifier !== 'none' && currentItem.modifier !== 'accent') {
-                const modEl = document.querySelector(`.key[data-code="${currentItem.modifier}"]`);
-                if (modEl) {
-                    modEl.classList.add('key-modifier-highlight');
+                if (currentItem.modifier && currentItem.modifier !== 'none' && currentItem.modifier !== 'accent') {
+                    const modEl = document.querySelector(`.key[data-code="${currentItem.modifier}"]`);
+                    if (modEl) modEl.classList.add('key-modifier-highlight');
                 }
             }
         }
@@ -506,7 +493,7 @@
             if (mode === 'train') {
                 btnModeTrain.className = "flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 bg-blue-600 text-white shadow-md";
                 btnModeTest.className = "flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-white";
-            } else {
+            } else { // test
                 btnModeTest.className = "flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 bg-emerald-600 text-white shadow-md";
                 btnModeTrain.className = "flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-white";
             }
@@ -523,13 +510,12 @@
             errorVal.textContent = errors;
             streakVal.textContent = streak;
             lastInputChar.textContent = '-';
-            updateAccuracy();
             startTimer();
         }
 
-        // Capturar la entrada del teclado
+        // Listener central de captura de teclado
         window.addEventListener('keydown', (e) => {
-            // Si el foco está en la lista desplegable o botones, no capturar eventos para permitir navegación
+            // Permitir navegación fluida si se interactúa directamente con el selector
             if (document.activeElement === categorySelect) {
                 return;
             }
@@ -538,26 +524,50 @@
 
             if (!currentItem) return;
 
-            // Ignorar teclas sueltas de control/modificadores
-            if (['Shift', 'Control', 'Alt', 'AltGraph', 'CapsLock', 'Meta', 'Tab'].includes(e.key)) {
-                return;
+            // Evitar comportamiento por defecto para atajos de teclado (Ctrl+C, Ctrl+V, etc.)
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
             }
 
-            let typedChar = e.key;
-            lastInputChar.textContent = typedChar === ' ' ? 'Espacio' : typedChar;
+            let isCorrect = false;
+            let keyDisplay = '';
 
-            let isCorrect = (typedChar === currentItem.char);
+            if (currentItem.type === 'shortcut') {
+                // Evaluación de atajos (ej. Ctrl+C)
+                if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === currentItem.keyChar) {
+                    isCorrect = true;
+                    keyDisplay = `Ctrl + ${currentItem.keyChar.toUpperCase()}`;
+                } else if (!['Control', 'Meta', 'Alt', 'Shift'].includes(e.key)) {
+                    isCorrect = false;
+                    keyDisplay = (e.ctrlKey ? 'Ctrl + ' : '') + e.key.toUpperCase();
+                } else {
+                    return; // Esperar a presionar la combinación completa
+                }
+            } else {
+                // Evaluación de caracteres/símbolos simples
+                if (['Shift', 'Control', 'Alt', 'AltGraph', 'CapsLock', 'Meta', 'Tab'].includes(e.key)) {
+                    return;
+                }
+                keyDisplay = e.key === ' ' ? 'Espacio' : e.key;
+                isCorrect = (e.key === currentItem.char);
+            }
 
-            const targetKeyEl = document.querySelector(`.key[data-code="${currentItem.code}"]`);
+            lastInputChar.textContent = keyDisplay;
+
+            // Obtención de elementos para animación visual
+            let targetKeyEl = null;
+            if (currentItem.type === 'shortcut') {
+                targetKeyEl = document.querySelector(`.key[data-code="${currentItem.mainCode}"]`);
+            } else {
+                targetKeyEl = document.querySelector(`.key[data-code="${currentItem.code}"]`);
+            }
 
             if (isCorrect) {
                 score++;
                 streak++;
                 scoreVal.textContent = score;
                 streakVal.textContent = streak;
-                updateAccuracy();
 
-                // Feedback visual de acierto
                 if (targetKeyEl) {
                     targetKeyEl.classList.remove('key-active', 'key-modifier-highlight');
                     targetKeyEl.classList.add('key-correct');
@@ -572,28 +582,25 @@
                 streak = 0;
                 errorVal.textContent = errors;
                 streakVal.textContent = streak;
-                updateAccuracy();
 
-                // Feedback visual de error
                 if (targetKeyEl) {
                     targetKeyEl.classList.add('key-incorrect');
                     setTimeout(() => {
                         targetKeyEl.classList.remove('key-incorrect');
-                        if (currentMode === 'train') highlightTargetKey();
+                        if (currentMode === 'train') highlightTargetKeys();
                     }, 300);
                 }
             }
         });
 
-        // Eventos de botones y selectores
+        // Eventos de controles de usuario
         btnModeTrain.addEventListener('click', () => setMode('train'));
         btnModeTest.addEventListener('click', () => setMode('test'));
 
-        categorySelect.addEventListener('change', (e) => {
-            e.stopPropagation();
+        categorySelect.addEventListener('change', () => {
+            categorySelect.blur();
             resetStats();
             nextTarget();
-            categorySelect.blur();
             hiddenInput.focus();
         });
 
@@ -604,15 +611,16 @@
         });
 
         document.addEventListener('click', (e) => {
-            // Evitar redirigir foco si el usuario está interactuando con el selector de categorías
-            if (e.target !== categorySelect && !categorySelect.contains(e.target)) {
+            if (e.target !== categorySelect) {
                 hiddenInput.focus();
             }
         });
 
-        // Inicio
+        // Inicio automático al cargar
         window.onload = () => {
-            setMode('test');
+            categorySelect.value = 'all'; // Forzar la opción "Todos" por defecto
+            resetStats();
+            setMode('test'); // Forzar modo "Ponte a prueba" activo por defecto
         };
     </script>
 </body>
