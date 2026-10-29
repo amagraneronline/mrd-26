@@ -47,16 +47,16 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-between p-3 sm:p-5">
+<body class="min-h-screen flex flex-col items-center justify-between p-3 sm:p-5 relative">
 
     <!-- Header -->
     <header class="w-full max-w-5xl text-center mb-3">
         <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-blue-400">Práctica de Teclado Español (ES)</h1>
-        <p class="text-xs sm:text-sm text-slate-400 mt-1">Aprende y pon a prueba tu capacidad para escribir símbolos, acentos y atajos de teclado.</p>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">Aprende y pon a prueba tu escritura de símbolos, acentos y atajos de teclado.</p>
     </header>
 
     <!-- Main Container -->
-    <main class="w-full max-w-5xl flex flex-col gap-4 items-center flex-grow justify-center">
+    <main class="w-full max-w-5xl flex flex-col gap-4 items-center flex-grow justify-center relative">
 
         <!-- Selector de Modo de Juego -->
         <div class="w-full max-w-xl bg-slate-900/90 border border-slate-800 rounded-2xl p-1.5 flex gap-2 shadow-inner">
@@ -79,7 +79,7 @@
                 <select id="categorySelect" class="bg-slate-900 border border-slate-600 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-blue-500">
                     <option value="all" selected>Todas las Categorías</option>
                     <option value="symbols">Símbolos Especiales (@, #, €, etc.)</option>
-                    <option value="numbers">Números y Símbolos</option>
+                    <option value="numbers">Números y Símbolos Superior</option>
                     <option value="letters">Letras y Signos (Ñ, Ç, á, etc.)</option>
                     <option value="shortcuts">Atajos de Teclado (Copiar, Cortar, Pegar, Deshacer)</option>
                 </select>
@@ -88,16 +88,16 @@
             <!-- Stats -->
             <div class="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm">
                 <div class="flex flex-col items-center">
+                    <span class="text-slate-400 text-[10px] sm:text-xs">Progreso</span>
+                    <span id="progressVal" class="text-blue-400 font-bold text-base sm:text-lg">0 / 0</span>
+                </div>
+                <div class="flex flex-col items-center">
                     <span class="text-slate-400 text-[10px] sm:text-xs">Aciertos</span>
                     <span id="scoreVal" class="text-emerald-400 font-bold text-base sm:text-lg">0</span>
                 </div>
                 <div class="flex flex-col items-center">
                     <span class="text-slate-400 text-[10px] sm:text-xs">Errores</span>
                     <span id="errorVal" class="text-rose-400 font-bold text-base sm:text-lg">0</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <span class="text-slate-400 text-[10px] sm:text-xs">Racha</span>
-                    <span id="streakVal" class="text-amber-400 font-bold text-base sm:text-lg">0</span>
                 </div>
                 <div class="flex flex-col items-center">
                     <span class="text-slate-400 text-[10px] sm:text-xs">Tiempo</span>
@@ -305,6 +305,52 @@
             </div>
         </div>
 
+        <!-- Diagnostic Summary Modal / Overlay -->
+        <div id="reportModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+            <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-2xl flex flex-col gap-6">
+                <div class="text-center">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-blue-400">¡Prueba Finalizada! 🎉</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-1">Aquí tienes tu informe de rendimiento detallado.</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                    <div class="bg-slate-800/80 border border-slate-700 p-3 rounded-2xl">
+                        <div class="text-[10px] text-slate-400 uppercase font-semibold">Precisión</div>
+                        <div id="reportAccuracy" class="text-xl font-bold text-emerald-400 mt-0.5">100%</div>
+                    </div>
+                    <div class="bg-slate-800/80 border border-slate-700 p-3 rounded-2xl">
+                        <div class="text-[10px] text-slate-400 uppercase font-semibold">Total Teclas</div>
+                        <div id="reportTotal" class="text-xl font-bold text-blue-400 mt-0.5">0</div>
+                    </div>
+                    <div class="bg-slate-800/80 border border-slate-700 p-3 rounded-2xl">
+                        <div class="text-[10px] text-slate-400 uppercase font-semibold">Errores</div>
+                        <div id="reportErrors" class="text-xl font-bold text-rose-400 mt-0.5">0</div>
+                    </div>
+                    <div class="bg-slate-800/80 border border-slate-700 p-3 rounded-2xl">
+                        <div class="text-[10px] text-slate-400 uppercase font-semibold">Tiempo Medio</div>
+                        <div id="reportAvgTime" class="text-xl font-bold text-cyan-400 mt-0.5">0s</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-bold text-slate-300 mb-2 flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        Símbolos que necesitas practicar más:
+                    </h3>
+                    <div id="weakItemsList" class="bg-slate-950/60 border border-slate-800 rounded-2xl p-3 max-h-40 overflow-y-auto flex flex-col gap-2">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3 mt-2">
+                    <button id="modalRestartBtn" class="flex-1 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold py-3 px-6 rounded-2xl transition shadow-lg flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                        Volver a intentar
+                    </button>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- Footer Feedback & Instructions -->
@@ -314,79 +360,86 @@
 
     <!-- JavaScript Game Logic -->
     <script>
-        // Definición de ítems por categorías
+        // Pool de datos de teclado
         const itemPool = {
             symbols: [
-                { type: 'char', char: '@', helper: 'Alt Gr + 2', code: 'Digit2', modifier: 'AltRight' },
-                { type: 'char', char: '#', helper: 'Alt Gr + 3', code: 'Digit3', modifier: 'AltRight' },
-                { type: 'char', char: '€', helper: 'Alt Gr + E', code: 'KeyE', modifier: 'AltRight' },
-                { type: 'char', char: '~', helper: 'Alt Gr + 4', code: 'Digit4', modifier: 'AltRight' },
-                { type: 'char', char: '{', helper: 'Alt Gr + \'', code: 'Quote', modifier: 'AltRight' },
-                { type: 'char', char: '}', helper: 'Alt Gr + ç', code: 'Backslash', modifier: 'AltRight' },
-                { type: 'char', char: '[', helper: 'Alt Gr + `', code: 'BracketLeft', modifier: 'AltRight' },
-                { type: 'char', char: ']', helper: 'Alt Gr + +', code: 'BracketRight', modifier: 'AltRight' },
-                { type: 'char', char: '\\', helper: 'Alt Gr + º', code: 'Backquote', modifier: 'AltRight' },
-                { type: 'char', char: '|', helper: 'Alt Gr + 1', code: 'Digit1', modifier: 'AltRight' },
-                { type: 'char', char: '/', helper: 'Mayús + 7', code: 'Digit7', modifier: 'ShiftLeft' },
-                { type: 'char', char: '(', helper: 'Mayús + 8', code: 'Digit8', modifier: 'ShiftLeft' },
-                { type: 'char', char: ')', helper: 'Mayús + 9', code: 'Digit9', modifier: 'ShiftLeft' },
-                { type: 'char', char: '=', helper: 'Mayús + 0', code: 'Digit0', modifier: 'ShiftLeft' },
-                { type: 'char', char: '?', helper: 'Mayús + \'', code: 'Minus', modifier: 'ShiftLeft' },
-                { type: 'char', char: '¿', helper: 'Tecla ¡', code: 'Equal', modifier: 'none' },
-                { type: 'char', char: '¡', helper: 'Tecla ¡', code: 'Equal', modifier: 'none' },
-                { type: 'char', char: '!', helper: 'Mayús + 1', code: 'Digit1', modifier: 'ShiftLeft' },
-                { type: 'char', char: '"', helper: 'Mayús + 2', code: 'Digit2', modifier: 'ShiftLeft' },
-                { type: 'char', char: '·', helper: 'Mayús + 3', code: 'Digit3', modifier: 'ShiftLeft' },
-                { type: 'char', char: '$', helper: 'Mayús + 4', code: 'Digit4', modifier: 'ShiftLeft' },
-                { type: 'char', char: '%', helper: 'Mayús + 5', code: 'Digit5', modifier: 'ShiftLeft' },
-                { type: 'char', char: '&', helper: 'Mayús + 6', code: 'Digit6', modifier: 'ShiftLeft' },
-                { type: 'char', char: '_', helper: 'Mayús + -', code: 'Slash', modifier: 'ShiftLeft' },
-                { type: 'char', char: ';', helper: 'Mayús + ,', code: 'Comma', modifier: 'ShiftLeft' },
-                { type: 'char', char: ':', helper: 'Mayús + .', code: 'Period', modifier: 'ShiftLeft' },
-                { type: 'char', char: '<', helper: 'Tecla <', code: 'IntlBackslash', modifier: 'none' },
-                { type: 'char', char: '>', helper: 'Mayús + <', code: 'IntlBackslash', modifier: 'ShiftLeft' }
+                { id: 'sym_at', type: 'char', char: '@', helper: 'Alt Gr + 2', code: 'Digit2', modifier: 'AltRight' },
+                { id: 'sym_hash', type: 'char', char: '#', helper: 'Alt Gr + 3', code: 'Digit3', modifier: 'AltRight' },
+                { id: 'sym_euro', type: 'char', char: '€', helper: 'Alt Gr + E', code: 'KeyE', modifier: 'AltRight' },
+                { id: 'sym_tilde', type: 'char', char: '~', helper: 'Alt Gr + 4', code: 'Digit4', modifier: 'AltRight' },
+                { id: 'sym_open_curly', type: 'char', char: '{', helper: 'Alt Gr + \'', code: 'Quote', modifier: 'AltRight' },
+                { id: 'sym_close_curly', type: 'char', char: '}', helper: 'Alt Gr + ç', code: 'Backslash', modifier: 'AltRight' },
+                { id: 'sym_open_bracket', type: 'char', char: '[', helper: 'Alt Gr + `', code: 'BracketLeft', modifier: 'AltRight' },
+                { id: 'sym_close_bracket', type: 'char', char: ']', helper: 'Alt Gr + +', code: 'BracketRight', modifier: 'AltRight' },
+                { id: 'sym_backslash', type: 'char', char: '\\', helper: 'Alt Gr + º', code: 'Backquote', modifier: 'AltRight' },
+                { id: 'sym_pipe', type: 'char', char: '|', helper: 'Alt Gr + 1', code: 'Digit1', modifier: 'AltRight' },
+                { id: 'sym_slash', type: 'char', char: '/', helper: 'Mayús + 7', code: 'Digit7', modifier: 'ShiftLeft' },
+                { id: 'sym_open_paren', type: 'char', char: '(', helper: 'Mayús + 8', code: 'Digit8', modifier: 'ShiftLeft' },
+                { id: 'sym_close_paren', type: 'char', char: ')', helper: 'Mayús + 9', code: 'Digit9', modifier: 'ShiftLeft' },
+                { id: 'sym_equal', type: 'char', char: '=', helper: 'Mayús + 0', code: 'Digit0', modifier: 'ShiftLeft' },
+                { id: 'sym_question', type: 'char', char: '?', helper: 'Mayús + \'', code: 'Minus', modifier: 'ShiftLeft' },
+                { id: 'sym_open_question', type: 'char', char: '¿', helper: 'Tecla ¡', code: 'Equal', modifier: 'none' },
+                { type: 'char', id: 'sym_open_exclamation', char: '¡', helper: 'Tecla ¡', code: 'Equal', modifier: 'none' },
+                { type: 'char', id: 'sym_exclamation', char: '!', helper: 'Mayús + 1', code: 'Digit1', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_quote', char: '"', helper: 'Mayús + 2', code: 'Digit2', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_dot', char: '·', helper: 'Mayús + 3', code: 'Digit3', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_dollar', char: '$', helper: 'Mayús + 4', code: 'Digit4', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_percent', char: '%', helper: 'Mayús + 5', code: 'Digit5', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_ampersand', char: '&', helper: 'Mayús + 6', code: 'Digit6', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_underscore', char: '_', helper: 'Mayús + -', code: 'Slash', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_semicolon', char: ';', helper: 'Mayús + ,', code: 'Comma', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_colon', char: ':', helper: 'Mayús + .', code: 'Period', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_less', char: '<', helper: 'Tecla <', code: 'IntlBackslash', modifier: 'none' },
+                { type: 'char', id: 'sym_greater', char: '>', helper: 'Mayús + <', code: 'IntlBackslash', modifier: 'ShiftLeft' }
             ],
             numbers: [
-                { type: 'char', char: '1', helper: 'Tecla 1', code: 'Digit1', modifier: 'none' },
-                { type: 'char', char: '2', helper: 'Tecla 2', code: 'Digit2', modifier: 'none' },
-                { type: 'char', char: '3', helper: 'Tecla 3', code: 'Digit3', modifier: 'none' },
-                { type: 'char', char: '4', helper: 'Tecla 4', code: 'Digit4', modifier: 'none' },
-                { type: 'char', char: '5', helper: 'Tecla 5', code: 'Digit5', modifier: 'none' },
-                { type: 'char', char: '6', helper: 'Tecla 6', code: 'Digit6', modifier: 'none' },
-                { type: 'char', char: '7', helper: 'Tecla 7', code: 'Digit7', modifier: 'none' },
-                { type: 'char', char: '8', helper: 'Tecla 8', code: 'Digit8', modifier: 'none' },
-                { type: 'char', char: '9', helper: 'Tecla 9', code: 'Digit9', modifier: 'none' },
-                { type: 'char', char: '0', helper: 'Tecla 0', code: 'Digit0', modifier: 'none' },
-                { type: 'char', char: 'º', helper: 'Tecla º', code: 'Backquote', modifier: 'none' },
-                { type: 'char', char: 'ª', helper: 'Mayús + º', code: 'Backquote', modifier: 'ShiftLeft' }
+                { type: 'char', id: 'num_1', char: '1', helper: 'Tecla 1', code: 'Digit1', modifier: 'none' },
+                { type: 'char', id: 'num_2', char: '2', helper: 'Tecla 2', code: 'Digit2', modifier: 'none' },
+                { type: 'char', id: 'num_3', char: '3', helper: 'Tecla 3', code: 'Digit3', modifier: 'none' },
+                { type: 'char', id: 'num_4', char: '4', helper: 'Tecla 4', code: 'Digit4', modifier: 'none' },
+                { type: 'char', id: 'num_5', char: '5', helper: 'Tecla 5', code: 'Digit5', modifier: 'none' },
+                { type: 'char', id: 'num_6', char: '6', helper: 'Tecla 6', code: 'Digit6', modifier: 'none' },
+                { type: 'char', id: 'num_7', char: '7', helper: 'Tecla 7', code: 'Digit7', modifier: 'none' },
+                { type: 'char', id: 'num_8', char: '8', helper: 'Tecla 8', code: 'Digit8', modifier: 'none' },
+                { type: 'char', id: 'num_9', char: '9', helper: 'Tecla 9', code: 'Digit9', modifier: 'none' },
+                { type: 'char', id: 'num_0', char: '0', helper: 'Tecla 0', code: 'Digit0', modifier: 'none' },
+                { type: 'char', id: 'num_ord_masc', char: 'º', helper: 'Tecla º', code: 'Backquote', modifier: 'none' },
+                { type: 'char', id: 'num_ord_fem', char: 'ª', helper: 'Mayús + º', code: 'Backquote', modifier: 'ShiftLeft' }
             ],
             letters: [
-                { type: 'char', char: 'ñ', helper: 'Tecla Ñ', code: 'Semicolon', modifier: 'none' },
-                { type: 'char', char: 'Ñ', helper: 'Mayús + Ñ', code: 'Semicolon', modifier: 'ShiftLeft' },
-                { type: 'char', char: 'ç', helper: 'Tecla Ç', code: 'Backslash', modifier: 'none' },
-                { type: 'char', char: 'Ç', helper: 'Mayús + Ç', code: 'Backslash', modifier: 'ShiftLeft' },
-                { type: 'char', char: 'á', helper: 'Acento (`) + a', code: 'KeyA', modifier: 'accent' },
-                { type: 'char', char: 'é', helper: 'Acento (`) + e', code: 'KeyE', modifier: 'accent' },
-                { type: 'char', char: 'í', helper: 'Acento (`) + i', code: 'KeyI', modifier: 'accent' },
-                { type: 'char', char: 'ó', helper: 'Acento (`) + o', code: 'KeyO', modifier: 'accent' },
-                { type: 'char', char: 'ú', helper: 'Acento (`) + u', code: 'KeyU', modifier: 'accent' }
+                { type: 'char', id: 'let_ene_lower', char: 'ñ', helper: 'Tecla Ñ', code: 'Semicolon', modifier: 'none' },
+                { type: 'char', id: 'let_ene_upper', char: 'Ñ', helper: 'Mayús + Ñ', code: 'Semicolon', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'let_cedilla_lower', char: 'ç', helper: 'Tecla Ç', code: 'Backslash', modifier: 'none' },
+                { type: 'char', id: 'let_cedilla_upper', char: 'Ç', helper: 'Mayús + Ç', code: 'Backslash', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'let_a_acute', char: 'á', helper: 'Acento (`) + a', code: 'KeyA', modifier: 'accent' },
+                { type: 'char', id: 'let_e_acute', char: 'é', helper: 'Acento (`) + e', code: 'KeyE', modifier: 'accent' },
+                { type: 'char', id: 'let_i_acute', char: 'í', helper: 'Acento (`) + i', code: 'KeyI', modifier: 'accent' },
+                { type: 'char', id: 'let_o_acute', char: 'ó', helper: 'Acento (`) + o', code: 'KeyO', modifier: 'accent' },
+                { type: 'char', id: 'let_u_acute', char: 'ú', helper: 'Acento (`) + u', code: 'KeyU', modifier: 'accent' }
             ],
             shortcuts: [
-                { type: 'shortcut', name: 'Copiar (Ctrl+C)', keyChar: 'c', helper: 'Ctrl + C', mainCode: 'KeyC', modifierCode: 'ControlLeft' },
-                { type: 'shortcut', name: 'Cortar (Ctrl+X)', keyChar: 'x', helper: 'Ctrl + X', mainCode: 'KeyX', modifierCode: 'ControlLeft' },
-                { type: 'shortcut', name: 'Pegar (Ctrl+V)', keyChar: 'v', helper: 'Ctrl + V', mainCode: 'KeyV', modifierCode: 'ControlLeft' },
-                { type: 'shortcut', name: 'Deshacer (Ctrl+Z)', keyChar: 'z', helper: 'Ctrl + Z', mainCode: 'KeyZ', modifierCode: 'ControlLeft' }
+                { type: 'shortcut', id: 'sc_copy', name: 'Copiar (Ctrl+C)', keyChar: 'c', helper: 'Ctrl + C', mainCode: 'KeyC', modifierCode: 'ControlLeft' },
+                { type: 'shortcut', id: 'sc_cut', name: 'Cortar (Ctrl+X)', keyChar: 'x', helper: 'Ctrl + X', mainCode: 'KeyX', modifierCode: 'ControlLeft' },
+                { type: 'shortcut', id: 'sc_paste', name: 'Pegar (Ctrl+V)', keyChar: 'v', helper: 'Ctrl + V', mainCode: 'KeyV', modifierCode: 'ControlLeft' },
+                { type: 'shortcut', id: 'sc_undo', name: 'Deshacer (Ctrl+Z)', keyChar: 'z', helper: 'Ctrl + Z', mainCode: 'KeyZ', modifierCode: 'ControlLeft' }
             ]
         };
 
-        // Estado global de la app
-        let currentMode = 'test'; // Default 'test'
+        // Variables de estado
+        let currentMode = 'test';
         let score = 0;
         let errors = 0;
-        let streak = 0;
-        let currentItem = null;
         let timerSeconds = 0;
         let timerInterval = null;
+        let isDeadKeyPressed = false;
+
+        // Gestión de cola y estadísticas por símbolo
+        let queue = [];
+        let totalInitialItems = 0;
+        let currentItem = null;
+        let itemStartTime = 0;
+        let statsTracker = {}; // id -> { errors: 0, times: [], label: '' }
+        let hesitationTimer = null;
 
         // Referencias DOM
         const btnModeTrain = document.getElementById('btnModeTrain');
@@ -396,14 +449,31 @@
         const helperBox = document.getElementById('helperBox');
         const scoreVal = document.getElementById('scoreVal');
         const errorVal = document.getElementById('errorVal');
-        const streakVal = document.getElementById('streakVal');
+        const progressVal = document.getElementById('progressVal');
         const timerVal = document.getElementById('timerVal');
         const categorySelect = document.getElementById('categorySelect');
         const restartBtn = document.getElementById('restartBtn');
         const hiddenInput = document.getElementById('hiddenInput');
         const lastInputChar = document.getElementById('lastInputChar');
 
-        // Manejo del temporizador
+        const reportModal = document.getElementById('reportModal');
+        const reportAccuracy = document.getElementById('reportAccuracy');
+        const reportTotal = document.getElementById('reportTotal');
+        const reportErrors = document.getElementById('reportErrors');
+        const reportAvgTime = document.getElementById('reportAvgTime');
+        const weakItemsList = document.getElementById('weakItemsList');
+        const modalRestartBtn = document.getElementById('modalRestartBtn');
+
+        // Algoritmo de barajado Fisher-Yates
+        function shuffle(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
         function startTimer() {
             clearInterval(timerInterval);
             timerSeconds = 0;
@@ -420,22 +490,61 @@
             timerVal.textContent = `${mins}:${secs}`;
         }
 
-        // Obtener elementos filtrados según categoría seleccionada
         function getCurrentPool() {
             const cat = categorySelect.value;
             if (cat === 'symbols') return itemPool.symbols;
             if (cat === 'numbers') return itemPool.numbers;
             if (cat === 'letters') return itemPool.letters;
             if (cat === 'shortcuts') return itemPool.shortcuts;
-            // "all" por defecto
             return [...itemPool.symbols, ...itemPool.numbers, ...itemPool.letters, ...itemPool.shortcuts];
         }
 
-        // Seleccionar nuevo objetivo aleatorio
-        function nextTarget() {
+        // Iniciar una nueva sesión limpia
+        function initSession() {
+            reportModal.classList.add('hidden');
             const pool = getCurrentPool();
-            const randomIndex = Math.floor(Math.random() * pool.length);
-            currentItem = pool[randomIndex];
+            queue = shuffle(pool);
+            totalInitialItems = queue.length;
+            score = 0;
+            errors = 0;
+            statsTracker = {};
+
+            pool.forEach(item => {
+                const label = item.type === 'shortcut' ? item.name : item.char;
+                statsTracker[item.id] = {
+                    label: label,
+                    helper: item.helper,
+                    errors: 0,
+                    times: [],
+                    needsPractice: false
+                };
+            });
+
+            scoreVal.textContent = '0';
+            errorVal.textContent = '0';
+            lastInputChar.textContent = '-';
+            
+            startTimer();
+            nextTarget();
+        }
+
+        function nextTarget() {
+            clearTimeout(hesitationTimer);
+            isDeadKeyPressed = false;
+            hiddenInput.value = '';
+
+            if (queue.length === 0) {
+                finishSession();
+                return;
+            }
+
+            currentItem = queue.shift();
+            itemStartTime = Date.now();
+
+            // Actualizar progreso
+            const remaining = queue.length + 1;
+            const completed = totalInitialItems - remaining + 1;
+            progressVal.textContent = `${Math.min(completed, totalInitialItems)} / ${totalInitialItems}`;
 
             if (currentItem.type === 'shortcut') {
                 targetSymbolDisplay.textContent = currentItem.name;
@@ -445,78 +554,125 @@
                 targetSymbolDisplay.className = "text-5xl sm:text-7xl font-extrabold text-blue-400 my-2 font-mono min-h-[5rem] flex items-center justify-center";
             }
 
-            // Actualización visual por modo de juego
             if (currentMode === 'train') {
                 helperBox.style.visibility = 'visible';
                 targetHelper.innerHTML = `Pulsa <span class="font-bold text-blue-300">${currentItem.helper}</span>`;
                 highlightTargetKeys();
-            } else { // Mode: Test
+            } else {
                 helperBox.style.visibility = 'hidden';
                 clearKeyHighlights();
+
+                // En modo "Ponte a prueba", si tarda más de 5s, mostrar pista y mandar a reintento
+                hesitationTimer = setTimeout(() => {
+                    helperBox.style.visibility = 'visible';
+                    targetHelper.innerHTML = `Pista: <span class="font-bold text-amber-300">${currentItem.helper}</span>`;
+                    statsTracker[currentItem.id].needsPractice = true;
+                    // Agregar a cola para repetir al final si no está ya al final
+                    if (!queue.some(i => i.id === currentItem.id)) {
+                        queue.push(currentItem);
+                    }
+                }, 5000);
             }
         }
 
-        // Limpiar estilos de teclas virtual
         function clearKeyHighlights() {
             document.querySelectorAll('.key').forEach(k => {
                 k.classList.remove('key-active', 'key-modifier-highlight', 'key-correct', 'key-incorrect');
             });
         }
 
-        // Iluminar teclas objetivo (Solo en Modo Entrenamiento)
         function highlightTargetKeys() {
             clearKeyHighlights();
-
             if (!currentItem || currentMode !== 'train') return;
 
             if (currentItem.type === 'shortcut') {
-                // Iluminar Ctrl y la letra del atajo
                 const mainEl = document.querySelector(`.key[data-code="${currentItem.mainCode}"]`);
                 const modEl = document.querySelector(`.key[data-code="${currentItem.modifierCode}"]`);
                 if (mainEl) mainEl.classList.add('key-active');
                 if (modEl) modEl.classList.add('key-modifier-highlight');
             } else {
-                // Iluminar tecla principal y modificador (Shift/AltGr)
                 const keyEl = document.querySelector(`.key[data-code="${currentItem.code}"]`);
                 if (keyEl) keyEl.classList.add('key-active');
 
-                if (currentItem.modifier && currentItem.modifier !== 'none' && currentItem.modifier !== 'accent') {
-                    const modEl = document.querySelector(`.key[data-code="${currentItem.modifier}"]`);
-                    if (modEl) modEl.classList.add('key-modifier-highlight');
+                if (currentItem.modifier && currentItem.modifier !== 'none') {
+                    if (currentItem.modifier === 'accent') {
+                        const accentEl = document.querySelector(`.key[data-code="BracketLeft"]`);
+                        if (accentEl) accentEl.classList.add('key-modifier-highlight');
+                    } else {
+                        const modEl = document.querySelector(`.key[data-code="${currentItem.modifier}"]`);
+                        if (modEl) modEl.classList.add('key-modifier-highlight');
+                    }
                 }
             }
         }
 
-        // Cambiar entre Modo Entrenamiento y Ponte a Prueba
         function setMode(mode) {
             currentMode = mode;
             if (mode === 'train') {
                 btnModeTrain.className = "flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 bg-blue-600 text-white shadow-md";
                 btnModeTest.className = "flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-white";
-            } else { // test
+            } else {
                 btnModeTest.className = "flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 bg-emerald-600 text-white shadow-md";
                 btnModeTrain.className = "flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-white";
             }
-            resetStats();
-            nextTarget();
+            initSession();
             hiddenInput.focus();
         }
 
-        function resetStats() {
-            score = 0;
-            errors = 0;
-            streak = 0;
-            scoreVal.textContent = score;
-            errorVal.textContent = errors;
-            streakVal.textContent = streak;
-            lastInputChar.textContent = '-';
-            startTimer();
+        function finishSession() {
+            clearInterval(timerInterval);
+            
+            // Cálculos del informe
+            let totalTimes = [];
+            let weakItems = [];
+
+            Object.values(statsTracker).forEach(item => {
+                totalTimes = totalTimes.concat(item.times);
+                if (item.errors > 0 || item.needsPractice || (item.times.length > 0 && Math.min(...item.times) > 4000)) {
+                    weakItems.push(item);
+                }
+            });
+
+            const avgTimeSecs = totalTimes.length > 0 
+                ? (totalTimes.reduce((a, b) => a + b, 0) / totalTimes.length / 1000).toFixed(1)
+                : '0.0';
+
+            const accuracy = (score + errors) > 0 
+                ? Math.round((score / (score + errors)) * 100) 
+                : 100;
+
+            reportAccuracy.textContent = `${accuracy}%`;
+            reportTotal.textContent = score;
+            reportErrors.textContent = errors;
+            reportAvgTime.textContent = `${avgTimeSecs}s`;
+
+            // Rellenar lista de sugerencias / práctica
+            weakItemsList.innerHTML = '';
+            if (weakItems.length === 0) {
+                weakItemsList.innerHTML = `
+                    <div class="text-emerald-400 text-xs text-center py-2 font-medium">
+                        ¡Excelente dominio! No tuviste fallos ni dudas destacables.
+                    </div>
+                `;
+            } else {
+                weakItems.forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = "flex items-center justify-between text-xs bg-slate-900 px-3 py-2 rounded-xl border border-slate-800";
+                    row.innerHTML = `
+                        <span class="font-bold text-blue-300 font-mono text-sm">${item.label}</span>
+                        <span class="text-slate-400">${item.helper}</span>
+                        <span class="text-rose-400 font-semibold">${item.errors > 0 ? `${item.errors} fallo(s)` : 'Lento'}</span>
+                    `;
+                    weakItemsList.appendChild(row);
+                });
+            }
+
+            reportModal.classList.remove('hidden');
         }
 
-        // Listener central de captura de teclado
+        // Listener de teclado global
         window.addEventListener('keydown', (e) => {
-            // Permitir navegación fluida si se interactúa directamente con el selector
-            if (document.activeElement === categorySelect) {
+            if (document.activeElement === categorySelect || !reportModal.classList.contains('hidden')) {
                 return;
             }
 
@@ -524,49 +680,70 @@
 
             if (!currentItem) return;
 
-            // Evitar comportamiento por defecto para atajos de teclado (Ctrl+C, Ctrl+V, etc.)
             if (e.ctrlKey || e.metaKey) {
                 e.preventDefault();
+            }
+
+            // Manejo especial de teclas muertas (tildes / diéresis)
+            if (e.key === 'Dead' || (e.code === 'BracketLeft' && currentItem.modifier === 'accent' && !isDeadKeyPressed)) {
+                if (e.key === 'Dead' || e.code === 'BracketLeft') {
+                    isDeadKeyPressed = true;
+                    lastInputChar.textContent = '´';
+                    const accentKey = document.querySelector(`.key[data-code="BracketLeft"]`);
+                    if (accentKey) {
+                        accentKey.classList.add('key-active');
+                        setTimeout(() => accentKey.classList.remove('key-active'), 200);
+                    }
+                    return;
+                }
+            }
+
+            if (['Shift', 'Control', 'Alt', 'AltGraph', 'CapsLock', 'Meta', 'Tab'].includes(e.key)) {
+                return;
             }
 
             let isCorrect = false;
             let keyDisplay = '';
 
             if (currentItem.type === 'shortcut') {
-                // Evaluación de atajos (ej. Ctrl+C)
                 if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === currentItem.keyChar) {
                     isCorrect = true;
                     keyDisplay = `Ctrl + ${currentItem.keyChar.toUpperCase()}`;
-                } else if (!['Control', 'Meta', 'Alt', 'Shift'].includes(e.key)) {
+                } else {
                     isCorrect = false;
                     keyDisplay = (e.ctrlKey ? 'Ctrl + ' : '') + e.key.toUpperCase();
-                } else {
-                    return; // Esperar a presionar la combinación completa
                 }
             } else {
-                // Evaluación de caracteres/símbolos simples
-                if (['Shift', 'Control', 'Alt', 'AltGraph', 'CapsLock', 'Meta', 'Tab'].includes(e.key)) {
-                    return;
-                }
                 keyDisplay = e.key === ' ' ? 'Espacio' : e.key;
-                isCorrect = (e.key === currentItem.char);
+
+                if (e.key === currentItem.char) {
+                    isCorrect = true;
+                } else if (isDeadKeyPressed) {
+                    const inputVal = hiddenInput.value;
+                    if (inputVal.includes(currentItem.char)) {
+                        isCorrect = true;
+                        keyDisplay = currentItem.char;
+                    } else {
+                        isCorrect = false;
+                    }
+                } else {
+                    isCorrect = false;
+                }
             }
 
+            isDeadKeyPressed = false;
             lastInputChar.textContent = keyDisplay;
 
-            // Obtención de elementos para animación visual
-            let targetKeyEl = null;
-            if (currentItem.type === 'shortcut') {
-                targetKeyEl = document.querySelector(`.key[data-code="${currentItem.mainCode}"]`);
-            } else {
-                targetKeyEl = document.querySelector(`.key[data-code="${currentItem.code}"]`);
-            }
+            const timeTaken = Date.now() - itemStartTime;
+            statsTracker[currentItem.id].times.push(timeTaken);
+
+            let targetKeyEl = currentItem.type === 'shortcut' 
+                ? document.querySelector(`.key[data-code="${currentItem.mainCode}"]`)
+                : document.querySelector(`.key[data-code="${currentItem.code}"]`);
 
             if (isCorrect) {
                 score++;
-                streak++;
                 scoreVal.textContent = score;
-                streakVal.textContent = streak;
 
                 if (targetKeyEl) {
                     targetKeyEl.classList.remove('key-active', 'key-modifier-highlight');
@@ -575,13 +752,18 @@
 
                 setTimeout(() => {
                     nextTarget();
-                }, 220);
+                }, 200);
 
             } else {
                 errors++;
-                streak = 0;
                 errorVal.textContent = errors;
-                streakVal.textContent = streak;
+                statsTracker[currentItem.id].errors++;
+                statsTracker[currentItem.id].needsPractice = true;
+
+                // Re-encolar para repetir al final por equivocación
+                if (!queue.some(i => i.id === currentItem.id)) {
+                    queue.push(currentItem);
+                }
 
                 if (targetKeyEl) {
                     targetKeyEl.classList.add('key-incorrect');
@@ -593,34 +775,56 @@
             }
         });
 
-        // Eventos de controles de usuario
+        hiddenInput.addEventListener('input', () => {
+            if (!currentItem || currentItem.type === 'shortcut') return;
+            
+            if (hiddenInput.value.includes(currentItem.char)) {
+                lastInputChar.textContent = currentItem.char;
+                score++;
+                scoreVal.textContent = score;
+
+                let targetKeyEl = document.querySelector(`.key[data-code="${currentItem.code}"]`);
+                if (targetKeyEl) {
+                    targetKeyEl.classList.remove('key-active', 'key-modifier-highlight');
+                    targetKeyEl.classList.add('key-correct');
+                }
+
+                setTimeout(() => {
+                    nextTarget();
+                }, 200);
+            }
+        });
+
+        // Controles e interacciones
         btnModeTrain.addEventListener('click', () => setMode('train'));
         btnModeTest.addEventListener('click', () => setMode('test'));
 
         categorySelect.addEventListener('change', () => {
             categorySelect.blur();
-            resetStats();
-            nextTarget();
+            initSession();
             hiddenInput.focus();
         });
 
         restartBtn.addEventListener('click', () => {
-            resetStats();
-            nextTarget();
+            initSession();
+            hiddenInput.focus();
+        });
+
+        modalRestartBtn.addEventListener('click', () => {
+            initSession();
             hiddenInput.focus();
         });
 
         document.addEventListener('click', (e) => {
-            if (e.target !== categorySelect) {
+            if (e.target !== categorySelect && reportModal.classList.contains('hidden')) {
                 hiddenInput.focus();
             }
         });
 
-        // Inicio automático al cargar
+        // Carga inicial
         window.onload = () => {
-            categorySelect.value = 'all'; // Forzar la opción "Todos" por defecto
-            resetStats();
-            setMode('test'); // Forzar modo "Ponte a prueba" activo por defecto
+            categorySelect.value = 'all';
+            setMode('test');
         };
     </script>
 </body>
