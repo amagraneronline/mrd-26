@@ -1,489 +1,837 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Práctica Interactiva de Símbolos y Atajos de Teclado</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .key {
-      transition: all 0.1s ease;
-      user-select: none;
-    }
-    .key-active {
-      background-color: #3b82f6 !important;
-      color: white !important;
-      transform: translateY(2px);
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.7) !important;
-    }
-    .key-hint {
-      background-color: #f59e0b !important;
-      color: white !important;
-      animation: pulse 0.8s infinite alternate;
-    }
-    @keyframes pulse {
-      from { opacity: 0.6; }
-      to { opacity: 1; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica de Teclado Español (ES)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0b1329;
+            color: #f8fafc;
+        }
+        .key {
+            transition: all 0.12s ease;
+            user-select: none;
+        }
+        .key-active {
+            background-color: #3b82f6 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 18px rgba(59, 130, 246, 0.8);
+            transform: scale(0.96);
+        }
+        .key-modifier-highlight {
+            background-color: #8b5cf6 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 14px rgba(139, 92, 246, 0.7);
+        }
+        .key-correct {
+            background-color: #22c55e !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.9);
+        }
+        .key-incorrect {
+            background-color: #ef4444 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.9);
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(59, 130, 246, 0.7); }
+        }
+        .target-pulse {
+            animation: pulse-glow 2s infinite;
+        }
+    </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col font-sans select-none">
+<body class="min-h-screen flex flex-col items-center justify-between p-3 sm:p-5 relative">
 
-  <!-- Encabezado -->
-  <header class="bg-slate-800 border-b border-slate-700 py-4 px-6 shadow-md">
-    <div class="max-w-5xl mx-auto flex flex-wrap justify-between items-center gap-4">
-      <div>
-        <h1 class="text-xl font-bold text-blue-400">⌨️ Práctica de Símbolos y Atajos</h1>
-        <p class="text-xs text-slate-400">Distribución de Teclado Español (ES)</p>
-      </div>
+    <!-- Header -->
+    <header class="w-full max-w-5xl text-center mb-3">
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-blue-400">Práctica de Teclado Español (ES)</h1>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">Aprende y pon a prueba tu escritura de símbolos, acentos y atajos de teclado.</p>
+    </header>
 
-      <!-- Controles de Modo y Categoría -->
-      <div class="flex flex-wrap items-center gap-3">
-        <div>
-          <label for="category-select" class="block text-xs font-medium text-slate-400 mb-1">Categoría:</label>
-          <select id="category-select" class="bg-slate-700 border border-slate-600 rounded px-3 py-1.5 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option value="all" selected>Todas las Categorías</option>
-            <option value="symbols">Símbolos Especiales (@, #, €, ...)</option>
-            <option value="shortcuts">Atajos de Teclado (Copiar, Pegar, ...)</option>
-            <option value="accents">Vocales con Tilde (á, é, í, ó, ú)</option>
-          </select>
-        </div>
+    <!-- Main Container -->
+    <main class="w-full max-w-5xl flex flex-col gap-4 items-center flex-grow justify-center relative">
 
-        <div>
-          <label class="block text-xs font-medium text-slate-400 mb-1">Modo de Práctica:</label>
-          <div class="inline-flex rounded-md shadow-sm" role="group">
-            <button type="button" id="btn-mode-test" class="px-3 py-1.5 text-sm font-medium bg-emerald-600 text-white rounded-l-lg border border-emerald-500 focus:z-10">
-              Ponte a prueba
+        <!-- Selector de Modo de Juego -->
+        <div class="w-full max-w-xl bg-slate-900/90 border border-slate-800 rounded-2xl p-1.5 flex gap-2 shadow-inner">
+            <button id="btnModeTest" class="flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 bg-emerald-600 text-white shadow-md">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Ponte a Prueba
             </button>
-            <button type="button" id="btn-mode-train" class="px-3 py-1.5 text-sm font-medium bg-slate-700 text-slate-300 rounded-r-lg border border-slate-600 hover:bg-slate-600 focus:z-10">
-              Entrenamiento
+            <button id="btnModeTrain" class="flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-white">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                Modo Entrenamiento
             </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Área Principal de Práctica -->
-  <main class="flex-1 max-w-5xl w-full mx-auto p-4 flex flex-col items-center justify-between gap-6 my-auto">
-
-    <!-- Panel de Estado / Objetivo -->
-    <div class="w-full bg-slate-800 rounded-xl p-6 border border-slate-700 shadow-xl text-center relative overflow-hidden">
-      <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
-        <span id="progress-indicator">Progreso: 0 / 0</span>
-        <span id="target-label" class="uppercase tracking-wider font-semibold">Pulsa la combinación o símbolo:</span>
-        <span id="streak-indicator">Racha: 🔥 0</span>
-      </div>
-
-      <div id="target-display" class="text-4xl md:text-5xl font-extrabold text-yellow-400 my-3 min-h-[70px] flex items-center justify-center gap-2">
-        Cargando...
-      </div>
-
-      <!-- Ayuda flotante / Combinación -->
-      <div id="hint-box" class="hidden mt-2 inline-block bg-slate-700/90 px-4 py-1.5 rounded-full text-sm text-amber-300 font-mono border border-amber-500/40 shadow-inner">
-        <!-- Contenido de pista -->
-      </div>
-
-      <div id="feedback-msg" class="text-sm font-medium mt-2 min-h-[24px]"></div>
-
-      <!-- Input oculto para captura universal de eventos -->
-      <input type="text" id="hidden-input" class="opacity-0 absolute -z-10 w-0 h-0" autocomplete="off" />
-    </div>
-
-    <!-- Representación del Teclado Virtual Español -->
-    <div class="w-full bg-slate-800/80 p-4 rounded-xl border border-slate-700/80 shadow-2xl overflow-x-auto">
-      <div class="min-w-[720px] flex flex-col gap-1.5">
-
-        <!-- Fila 1 -->
-        <div class="flex gap-1.5">
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="º">º<br>ª</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="1">1<br>!</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="2">2<br>@</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="3">3<br>#</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="4">4<br>$</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="5">5<br>%</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="6">6<br>&</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="7">7<br>/</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="8">8<br>(</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="9">9<br>)</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="0">0<br>=</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="'">'<br>?</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="¡">¡<br>¿</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs flex-1">← Borrar</div>
         </div>
 
-        <!-- Fila 2 -->
-        <div class="flex gap-1.5">
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-14">Tab</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="q">Q</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="w">W</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="e">E<br>€</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="r">R</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="t">T</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="y">Y</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="u">U</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="i">I</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="o">O</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="p">P</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="`">`</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="+">+<br>*</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs flex-1">Intro</div>
+        <!-- Controls & Stats Bar -->
+        <div class="w-full bg-slate-800/80 backdrop-blur border border-slate-700/80 rounded-2xl p-3 sm:p-4 flex flex-wrap items-center justify-between gap-3 shadow-lg">
+            
+            <!-- Category selector -->
+            <div class="flex items-center gap-2">
+                <label for="categorySelect" class="text-xs sm:text-sm font-medium text-slate-300">Categoría:</label>
+                <select id="categorySelect" class="bg-slate-900 border border-slate-600 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-blue-500">
+                    <option value="all" selected>Todas las Categorías</option>
+                    <option value="symbols">Símbolos Especiales (@, #, €, etc.)</option>
+                    <option value="numbers">Números y Símbolos Superior</option>
+                    <option value="letters">Letras y Signos (Ñ, Ç, á, etc.)</option>
+                    <option value="shortcuts">Atajos de Teclado (Copiar, Cortar, Pegar, Deshacer)</option>
+                </select>
+            </div>
+
+            <!-- Stats -->
+            <div class="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm">
+                <div class="flex flex-col items-center">
+                    <span class="text-slate-400 text-[10px] sm:text-xs">Progreso</span>
+                    <span id="progressVal" class="text-blue-400 font-bold text-base sm:text-lg">0 / 0</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-slate-400 text-[10px] sm:text-xs">Aciertos</span>
+                    <span id="scoreVal" class="text-emerald-400 font-bold text-base sm:text-lg">0</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-slate-400 text-[10px] sm:text-xs">Errores</span>
+                    <span id="errorVal" class="text-rose-400 font-bold text-base sm:text-lg">0</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-slate-400 text-[10px] sm:text-xs">Tiempo</span>
+                    <span id="timerVal" class="text-cyan-400 font-bold text-base sm:text-lg">00:00</span>
+                </div>
+            </div>
+
+            <div>
+                <button id="restartBtn" class="bg-slate-700 hover:bg-slate-600 active:scale-95 text-white text-xs sm:text-sm font-semibold px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl transition border border-slate-600">
+                    Reiniciar
+                </button>
+            </div>
         </div>
 
-        <!-- Fila 3 -->
-        <div class="flex gap-1.5">
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-16">Bloq Mayús</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="a">A</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="s">S</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="d">D</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="f">F</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="g">G</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="h">H</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="j">J</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="k">K</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="l">L</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="ñ">Ñ</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="accent">´<br>¨</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="ç">Ç</div>
+        <!-- Target Display Area -->
+        <div id="targetCard" class="w-full max-w-xl bg-slate-800/90 border border-slate-700 rounded-2xl p-4 sm:p-6 text-center shadow-2xl relative overflow-hidden target-pulse">
+            <div id="targetInstructionLabel" class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Teclea lo siguiente:</div>
+            
+            <!-- Big symbol / Shortcut action name -->
+            <div id="targetSymbolDisplay" class="text-4xl sm:text-6xl font-extrabold text-blue-400 my-2 font-mono min-h-[5rem] flex items-center justify-center">@</div>
+            
+            <!-- Helper Instruction (Train Mode vs Test Mode) -->
+            <div id="helperBox" class="mt-2 min-h-[36px] flex items-center justify-center">
+                <div id="targetHelper" class="text-xs sm:text-sm text-slate-200 bg-slate-900/80 py-1.5 px-4 rounded-xl inline-block border border-blue-500/30">
+                    Pulsa <span class="font-bold text-blue-300">Alt Gr + 2</span>
+                </div>
+            </div>
+
+            <!-- Input Feedback Display -->
+            <div class="mt-3 text-xs text-slate-400 flex items-center justify-center gap-2">
+                <span>Tu entrada:</span>
+                <span id="lastInputChar" class="font-mono text-sm px-3 py-0.5 rounded bg-slate-900 text-amber-300 font-bold border border-slate-700 min-w-[40px] inline-block min-h-[24px] flex items-center justify-center">-</span>
+            </div>
+
+            <!-- Hidden input to capture keystrokes -->
+            <input type="text" id="hiddenInput" class="opacity-0 absolute inset-0 w-full h-full cursor-pointer" autocomplete="off" autofocus>
         </div>
 
-        <!-- Fila 4 -->
-        <div class="flex gap-1.5">
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-20" data-key="shift">Shift ⇧</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="<">&lt;<br>&gt;</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="z">Z</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="x">X</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="c">C</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="v">V</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="b">B</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="n">N</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="m">M</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key=",">,<br>;</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key=".">.<br>:</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-10" data-key="-">-<br>_</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs flex-1" data-key="shift">Shift ⇧</div>
+        <!-- Virtual Keyboard (Spanish Layout ISO) -->
+        <div id="virtualKeyboard" class="w-full bg-slate-900 border border-slate-800 rounded-3xl p-3 sm:p-5 shadow-2xl flex flex-col gap-1.5 overflow-x-auto">
+            <!-- Row 0: Function Keys -->
+            <div class="flex gap-1 justify-center min-w-[700px]">
+                <div class="key bg-slate-800 text-slate-400 text-[10px] rounded-lg px-2 py-1 flex items-center justify-center font-mono" data-code="Escape">Esc</div>
+                <div class="w-4"></div>
+                <div class="key bg-slate-800 text-slate-400 text-[10px] rounded-lg px-2.5 py-1 flex items-center justify-center font-mono" data-code="F1">F1</div>
+                <div class="key bg-slate-800 text-slate-400 text-[10px] rounded-lg px-2.5 py-1 flex items-center justify-center font-mono" data-code="F2">F2</div>
+                <div class="key bg-slate-800 text-slate-400 text-[10px] rounded-lg px-2.5 py-1 flex items-center justify-center font-mono" data-code="F3">F3</div>
+                <div class="key bg-slate-800 text-slate-400 text-[10px] rounded-lg px-2.5 py-1 flex items-center justify-center font-mono" data-code="F4">F4</div>
+                <div class="w-3"></div>
+                <div class="key bg-slate-800 text-slate-400 text-[10px] rounded-lg px-2.5 py-1 flex items-center justify-center font-mono" data-code="F5">F5</div>
+                <div class="key bg-slate-800 text-slate-400 text-[10px] rounded-lg px-2.5 py-1 flex items-center justify-center font-mono" data-code="F6">F6</div>
+                <div class="key bg-slate-800 text-slate-400 text-[10px] rounded-lg px-2.5 py-1 flex items-center justify-center font-mono" data-code="F7">F7</div>
+                <div class="key bg-slate-800 text-slate-400 text-[10px] rounded-lg px-2.5 py-1 flex items-center justify-center font-mono" data-code="F8">F8</div>
+                <div class="w-3"></div>
+                <div class="key bg-slate-800 text-slate-400 text-[10px] rounded-lg px-2.5 py-1 flex items-center justify-center font-mono" data-code="F9">F9</div>
+                <div class="key bg-slate-800 text-slate-400 text-[10px] rounded-lg px-2.5 py-1 flex items-center justify-center font-mono" data-code="F10">F10</div>
+                <div class="key bg-slate-800 text-slate-400 text-[10px] rounded-lg px-2.5 py-1 flex items-center justify-center font-mono" data-code="F11">F11</div>
+                <div class="key bg-slate-800 text-slate-400 text-[10px] rounded-lg px-2.5 py-1 flex items-center justify-center font-mono" data-code="F12">F12</div>
+            </div>
+
+            <!-- Row 1: Numbers & Symbols -->
+            <div class="flex gap-1 justify-center min-w-[700px]">
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Backquote">
+                    <span class="text-[9px] text-slate-400">ª \</span>
+                    <span>º</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Digit1">
+                    <span class="text-[9px] text-slate-400">! |</span>
+                    <span>1</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Digit2">
+                    <span class="text-[9px] text-slate-400">" @</span>
+                    <span>2</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Digit3">
+                    <span class="text-[9px] text-slate-400">· #</span>
+                    <span>3</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Digit4">
+                    <span class="text-[9px] text-slate-400">$ ~</span>
+                    <span>4</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Digit5">
+                    <span class="text-[9px] text-slate-400">%</span>
+                    <span>5</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Digit6">
+                    <span class="text-[9px] text-slate-400">&</span>
+                    <span>6</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Digit7">
+                    <span class="text-[9px] text-slate-400">/</span>
+                    <span>7</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Digit8">
+                    <span class="text-[9px] text-slate-400">(</span>
+                    <span>8</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Digit9">
+                    <span class="text-[9px] text-slate-400">)</span>
+                    <span>9</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Digit0">
+                    <span class="text-[9px] text-slate-400">=</span>
+                    <span>0</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Minus">
+                    <span class="text-[9px] text-slate-400">?</span>
+                    <span>'</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Equal">
+                    <span class="text-[9px] text-slate-400">¿</span>
+                    <span>¡</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-400 text-xs rounded-lg w-16 h-10 flex items-center justify-center font-medium" data-code="Backspace">Borrar</div>
+            </div>
+
+            <!-- Row 2: QWERTY -->
+            <div class="flex gap-1 justify-center min-w-[700px]">
+                <div class="key bg-slate-800 text-slate-400 text-xs rounded-lg w-12 h-10 flex items-center justify-center font-medium" data-code="Tab">Tab</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyQ">Q</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyW">W</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyE">
+                    <span class="text-[9px] text-slate-400">€</span>
+                    <span>E</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyR">R</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyT">T</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyY">Y</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyU">U</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyI">I</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyO">O</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyP">P</div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="BracketLeft">
+                    <span class="text-[9px] text-slate-400">^ [</span>
+                    <span>`</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="BracketRight">
+                    <span class="text-[9px] text-slate-400">* ]</span>
+                    <span>+</span>
+                </div>
+            </div>
+
+            <!-- Row 3: ASDF -->
+            <div class="flex gap-1 justify-center min-w-[700px]">
+                <div class="key bg-slate-800 text-slate-400 text-[10px] rounded-lg w-14 h-10 flex items-center justify-center font-medium" data-code="CapsLock">Bloq Mayús</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyA">A</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyS">S</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyD">D</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyF">F</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyG">G</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyH">H</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyJ">J</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyK">K</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyL">L</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="Semicolon">Ñ</div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Quote">
+                    <span class="text-[9px] text-slate-400">¨ {</span>
+                    <span>'</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Backslash">
+                    <span class="text-[9px] text-slate-400">Ç }</span>
+                    <span>ç</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-400 text-xs rounded-lg w-12 h-10 flex items-center justify-center font-medium" data-code="Enter">Enter</div>
+            </div>
+
+            <!-- Row 4: ZXCV -->
+            <div class="flex gap-1 justify-center min-w-[700px]">
+                <div class="key bg-slate-800 text-slate-400 text-xs rounded-lg w-14 h-10 flex items-center justify-center font-medium" data-code="ShiftLeft">Mayús</div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="IntlBackslash">
+                    <span class="text-[9px] text-slate-400">></span>
+                    <span><</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyZ">Z</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyX">X</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyC">C</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyV">V</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyB">B</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyN">N</div>
+                <div class="key bg-slate-800 text-slate-200 rounded-lg w-10 h-10 flex flex-col items-center justify-center font-semibold" data-code="KeyM">M</div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Comma">
+                    <span class="text-[9px] text-slate-400">;</span>
+                    <span>,</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Period">
+                    <span class="text-[9px] text-slate-400">:</span>
+                    <span>.</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-300 rounded-lg w-10 h-10 flex flex-col items-center justify-center text-xs" data-code="Slash">
+                    <span class="text-[9px] text-slate-400">_</span>
+                    <span>-</span>
+                </div>
+                <div class="key bg-slate-800 text-slate-400 text-xs rounded-lg w-16 h-10 flex items-center justify-center font-medium" data-code="ShiftRight">Mayús</div>
+            </div>
+
+            <!-- Row 5: Spacebar & Modifiers -->
+            <div class="flex gap-1 justify-center min-w-[700px]">
+                <div class="key bg-slate-800 text-slate-400 text-xs rounded-lg w-12 h-10 flex items-center justify-center font-medium" data-code="ControlLeft">Ctrl</div>
+                <div class="key bg-slate-800 text-slate-400 text-xs rounded-lg w-12 h-10 flex items-center justify-center font-medium" data-code="MetaLeft">Win</div>
+                <div class="key bg-slate-800 text-slate-400 text-xs rounded-lg w-12 h-10 flex items-center justify-center font-medium" data-code="AltLeft">Alt</div>
+                <div class="key bg-slate-800 text-slate-400 text-xs rounded-lg w-72 h-10 flex items-center justify-center font-medium text-slate-500" data-code="Space">Espacio</div>
+                <div class="key bg-slate-800 text-slate-400 text-xs rounded-lg w-14 h-10 flex items-center justify-center font-medium" data-code="AltRight">AltGr</div>
+                <div class="key bg-slate-800 text-slate-400 text-xs rounded-lg w-12 h-10 flex items-center justify-center font-medium" data-code="ControlRight">Ctrl</div>
+            </div>
         </div>
 
-        <!-- Fila 5 -->
-        <div class="flex gap-1.5">
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-14" data-key="ctrl">Ctrl</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-12" data-key="alt">Alt</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs flex-1" data-key=" ">Espacio</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-14" data-key="altgr">Alt Gr</div>
-          <div class="key bg-slate-700 border border-slate-600 rounded p-2 text-center text-xs w-14" data-key="ctrl">Ctrl</div>
+        <!-- Diagnostic Summary Modal / Overlay -->
+        <div id="reportModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+            <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-2xl flex flex-col gap-6">
+                <div class="text-center">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-blue-400">¡Prueba Finalizada! 🎉</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-1">Aquí tienes tu informe de rendimiento detallado.</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                    <div class="bg-slate-800/80 border border-slate-700 p-3 rounded-2xl">
+                        <div class="text-[10px] text-slate-400 uppercase font-semibold">Precisión</div>
+                        <div id="reportAccuracy" class="text-xl font-bold text-emerald-400 mt-0.5">100%</div>
+                    </div>
+                    <div class="bg-slate-800/80 border border-slate-700 p-3 rounded-2xl">
+                        <div class="text-[10px] text-slate-400 uppercase font-semibold">Total Teclas</div>
+                        <div id="reportTotal" class="text-xl font-bold text-blue-400 mt-0.5">0</div>
+                    </div>
+                    <div class="bg-slate-800/80 border border-slate-700 p-3 rounded-2xl">
+                        <div class="text-[10px] text-slate-400 uppercase font-semibold">Errores</div>
+                        <div id="reportErrors" class="text-xl font-bold text-rose-400 mt-0.5">0</div>
+                    </div>
+                    <div class="bg-slate-800/80 border border-slate-700 p-3 rounded-2xl">
+                        <div class="text-[10px] text-slate-400 uppercase font-semibold">Tiempo Medio</div>
+                        <div id="reportAvgTime" class="text-xl font-bold text-cyan-400 mt-0.5">0s</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-bold text-slate-300 mb-2 flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        Símbolos que necesitas practicar más:
+                    </h3>
+                    <div id="weakItemsList" class="bg-slate-950/60 border border-slate-800 rounded-2xl p-3 max-h-40 overflow-y-auto flex flex-col gap-2">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3 mt-2">
+                    <button id="modalRestartBtn" class="flex-1 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold py-3 px-6 rounded-2xl transition shadow-lg flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                        Volver a intentar
+                    </button>
+                </div>
+            </div>
         </div>
 
-      </div>
-    </div>
-  </main>
+    </main>
 
-  <!-- Modal de Diagnóstico / Resultados Finales -->
-  <div id="results-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl text-center flex flex-col gap-4">
-      <h2 class="text-2xl font-bold text-blue-400">📊 ¡Informe de Diagnóstico Final!</h2>
-      <p class="text-slate-300 text-sm">Has completado la ronda de símbolos y atajos de teclado.</p>
-      
-      <div class="grid grid-cols-3 gap-3 my-2">
-        <div class="bg-slate-700/50 p-3 rounded-xl border border-slate-600">
-          <div class="text-xs text-slate-400">Precisión</div>
-          <div id="res-accuracy" class="text-xl font-bold text-emerald-400">100%</div>
+    <!-- Footer cumpliendo con Capítulo 9 de Vibe Coding Responsable -->
+    <footer class="w-full max-w-5xl text-center text-xs text-slate-400 mt-4 pt-3 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-2">
+        <div>
+            Haz clic en cualquier parte para enfocar el teclado. En el modo <b>"Ponte a prueba"</b> no habrá pistas visuales.
         </div>
-        <div class="bg-slate-700/50 p-3 rounded-xl border border-slate-600">
-          <div class="text-xs text-slate-400">Tiempo Medio</div>
-          <div id="res-time" class="text-xl font-bold text-blue-300">0.0s</div>
+        <div class="text-slate-400">
+            Contenidos bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener" class="underline text-blue-400 hover:text-blue-300">CC BY-SA 4.0</a> | 
+            Código bajo <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener" class="underline text-blue-400 hover:text-blue-300">GNU AGPL v3</a>
         </div>
-        <div class="bg-slate-700/50 p-3 rounded-xl border border-slate-600">
-          <div class="text-xs text-slate-400">A repasar</div>
-          <div id="res-fails" class="text-xl font-bold text-amber-400">0</div>
-        </div>
-      </div>
+    </footer>
 
-      <div id="res-suggestions" class="text-left bg-slate-900/60 p-3 rounded-xl border border-slate-700 text-xs text-slate-300 max-h-36 overflow-y-auto">
-        <!-- Contenido dinámico de sugerencias -->
-      </div>
+    <!-- JavaScript Game Logic -->
+    <script>
+        // Pool de datos de teclado
+        const itemPool = {
+            symbols: [
+                { id: 'sym_at', type: 'char', char: '@', helper: 'Alt Gr + 2', code: 'Digit2', modifier: 'AltRight' },
+                { id: 'sym_hash', type: 'char', char: '#', helper: 'Alt Gr + 3', code: 'Digit3', modifier: 'AltRight' },
+                { id: 'sym_euro', type: 'char', char: '€', helper: 'Alt Gr + E', code: 'KeyE', modifier: 'AltRight' },
+                { id: 'sym_tilde', type: 'char', char: '~', helper: 'Alt Gr + 4', code: 'Digit4', modifier: 'AltRight' },
+                { id: 'sym_open_curly', type: 'char', char: '{', helper: 'Alt Gr + \'', code: 'Quote', modifier: 'AltRight' },
+                { id: 'sym_close_curly', type: 'char', char: '}', helper: 'Alt Gr + ç', code: 'Backslash', modifier: 'AltRight' },
+                { id: 'sym_open_bracket', type: 'char', char: '[', helper: 'Alt Gr + `', code: 'BracketLeft', modifier: 'AltRight' },
+                { id: 'sym_close_bracket', type: 'char', char: ']', helper: 'Alt Gr + +', code: 'BracketRight', modifier: 'AltRight' },
+                { id: 'sym_backslash', type: 'char', char: '\\', helper: 'Alt Gr + º', code: 'Backquote', modifier: 'AltRight' },
+                { id: 'sym_pipe', type: 'char', char: '|', helper: 'Alt Gr + 1', code: 'Digit1', modifier: 'AltRight' },
+                { id: 'sym_slash', type: 'char', char: '/', helper: 'Mayús + 7', code: 'Digit7', modifier: 'ShiftLeft' },
+                { id: 'sym_open_paren', type: 'char', char: '(', helper: 'Mayús + 8', code: 'Digit8', modifier: 'ShiftLeft' },
+                { id: 'sym_close_paren', type: 'char', char: ')', helper: 'Mayús + 9', code: 'Digit9', modifier: 'ShiftLeft' },
+                { id: 'sym_equal', type: 'char', char: '=', helper: 'Mayús + 0', code: 'Digit0', modifier: 'ShiftLeft' },
+                { id: 'sym_question', type: 'char', char: '?', helper: 'Mayús + \'', code: 'Minus', modifier: 'ShiftLeft' },
+                { id: 'sym_open_question', type: 'char', char: '¿', helper: 'Tecla ¡', code: 'Equal', modifier: 'none' },
+                { type: 'char', id: 'sym_open_exclamation', char: '¡', helper: 'Tecla ¡', code: 'Equal', modifier: 'none' },
+                { type: 'char', id: 'sym_exclamation', char: '!', helper: 'Mayús + 1', code: 'Digit1', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_quote', char: '"', helper: 'Mayús + 2', code: 'Digit2', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_dot', char: '·', helper: 'Mayús + 3', code: 'Digit3', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_dollar', char: '$', helper: 'Mayús + 4', code: 'Digit4', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_percent', char: '%', helper: 'Mayús + 5', code: 'Digit5', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_ampersand', char: '&', helper: 'Mayús + 6', code: 'Digit6', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_underscore', char: '_', helper: 'Mayús + -', code: 'Slash', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_semicolon', char: ';', helper: 'Mayús + ,', code: 'Comma', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_colon', char: ':', helper: 'Mayús + .', code: 'Period', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'sym_less', char: '<', helper: 'Tecla <', code: 'IntlBackslash', modifier: 'none' },
+                { type: 'char', id: 'sym_greater', char: '>', helper: 'Mayús + <', code: 'IntlBackslash', modifier: 'ShiftLeft' }
+            ],
+            numbers: [
+                { type: 'char', id: 'num_1', char: '1', helper: 'Tecla 1', code: 'Digit1', modifier: 'none' },
+                { type: 'char', id: 'num_2', char: '2', helper: 'Tecla 2', code: 'Digit2', modifier: 'none' },
+                { type: 'char', id: 'num_3', char: '3', helper: 'Tecla 3', code: 'Digit3', modifier: 'none' },
+                { type: 'char', id: 'num_4', char: '4', helper: 'Tecla 4', code: 'Digit4', modifier: 'none' },
+                { type: 'char', id: 'num_5', char: '5', helper: 'Tecla 5', code: 'Digit5', modifier: 'none' },
+                { type: 'char', id: 'num_6', char: '6', helper: 'Tecla 6', code: 'Digit6', modifier: 'none' },
+                { type: 'char', id: 'num_7', char: '7', helper: 'Tecla 7', code: 'Digit7', modifier: 'none' },
+                { type: 'char', id: 'num_8', char: '8', helper: 'Tecla 8', code: 'Digit8', modifier: 'none' },
+                { type: 'char', id: 'num_9', char: '9', helper: 'Tecla 9', code: 'Digit9', modifier: 'none' },
+                { type: 'char', id: 'num_0', char: '0', helper: 'Tecla 0', code: 'Digit0', modifier: 'none' },
+                { type: 'char', id: 'num_ord_masc', char: 'º', helper: 'Tecla º', code: 'Backquote', modifier: 'none' },
+                { type: 'char', id: 'num_ord_fem', char: 'ª', helper: 'Mayús + º', code: 'Backquote', modifier: 'ShiftLeft' }
+            ],
+            letters: [
+                { type: 'char', id: 'let_ene_lower', char: 'ñ', helper: 'Tecla Ñ', code: 'Semicolon', modifier: 'none' },
+                { type: 'char', id: 'let_ene_upper', char: 'Ñ', helper: 'Mayús + Ñ', code: 'Semicolon', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'let_cedilla_lower', char: 'ç', helper: 'Tecla Ç', code: 'Backslash', modifier: 'none' },
+                { type: 'char', id: 'let_cedilla_upper', char: 'Ç', helper: 'Mayús + Ç', code: 'Backslash', modifier: 'ShiftLeft' },
+                { type: 'char', id: 'let_a_acute', char: 'á', helper: 'Acento (`) + a', code: 'KeyA', modifier: 'accent' },
+                { type: 'char', id: 'let_e_acute', char: 'é', helper: 'Acento (`) + e', code: 'KeyE', modifier: 'accent' },
+                { type: 'char', id: 'let_i_acute', char: 'í', helper: 'Acento (`) + i', code: 'KeyI', modifier: 'accent' },
+                { type: 'char', id: 'let_o_acute', char: 'ó', helper: 'Acento (`) + o', code: 'KeyO', modifier: 'accent' },
+                { type: 'char', id: 'let_u_acute', char: 'ú', helper: 'Acento (`) + u', code: 'KeyU', modifier: 'accent' }
+            ],
+            shortcuts: [
+                { type: 'shortcut', id: 'sc_copy', name: 'Copiar (Ctrl+C)', keyChar: 'c', helper: 'Ctrl + C', mainCode: 'KeyC', modifierCode: 'ControlLeft' },
+                { type: 'shortcut', id: 'sc_cut', name: 'Cortar (Ctrl+X)', keyChar: 'x', helper: 'Ctrl + X', mainCode: 'KeyX', modifierCode: 'ControlLeft' },
+                { type: 'shortcut', id: 'sc_paste', name: 'Pegar (Ctrl+V)', keyChar: 'v', helper: 'Ctrl + V', mainCode: 'KeyV', modifierCode: 'ControlLeft' },
+                { type: 'shortcut', id: 'sc_undo', name: 'Deshacer (Ctrl+Z)', keyChar: 'z', helper: 'Ctrl + Z', mainCode: 'KeyZ', modifierCode: 'ControlLeft' }
+            ]
+        };
 
-      <button id="btn-restart" class="w-full py-3 bg-blue-600 hover:bg-blue-500 font-semibold rounded-xl text-white transition-colors shadow-lg">
-        Volver a Intentar
-      </button>
-    </div>
-  </div>
+        // Variables de estado
+        let currentMode = 'test';
+        let score = 0;
+        let errors = 0;
+        let timerSeconds = 0;
+        let timerInterval = null;
+        let isDeadKeyPressed = false;
 
-  <!-- Pie de página (Capítulo 9 - Vibe Responsable) -->
-  <footer class="bg-slate-800 border-t border-slate-700 py-3 px-6 text-center text-xs text-slate-400">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
-      <div>
-        Recurso Educativo Abierto (REA) — Diseñado para prácticas de mecanografía y accesibilidad digital.
-      </div>
-      <div>
-        Contenidos bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" class="underline text-blue-400 hover:text-blue-300">CC BY-SA 4.0</a> | 
-        Código bajo <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="underline text-blue-400 hover:text-blue-300">GNU AGPL v3</a>[cite: 1]
-      </div>
-    </div>
-  </footer>
+        // Gestión de cola y estadísticas por símbolo
+        let queue = [];
+        let totalInitialItems = 0;
+        let currentItem = null;
+        let itemStartTime = 0;
+        let statsTracker = {}; // id -> { errors: 0, times: [], label: '' }
+        let hesitationTimer = null;
 
-  <script>
-    // Base de datos de elementos a practicar
-    const itemsDatabase = [
-      // Símbolos
-      { id: '@', category: 'symbols', label: '@', hint: 'Alt Gr + 2', keys: ['altgr', '2'] },
-      { id: '#', category: 'symbols', label: '#', hint: 'Alt Gr + 3', keys: ['altgr', '3'] },
-      { id: '€', category: 'symbols', label: '€', hint: 'Alt Gr + E', keys: ['altgr', 'e'] },
-      { id: '~', category: 'symbols', label: '~', hint: 'Alt Gr + 4', keys: ['altgr', '4'] },
-      { id: '{', category: 'symbols', label: '{', hint: 'Alt Gr + \'`\' (tecla junto a P)', keys: ['altgr', '`'] },
-      { id: '}', category: 'symbols', label: '}', hint: 'Alt Gr + `+` (tecla junto a Ç)', keys: ['altgr', '+'] },
-      { id: '[', category: 'symbols', label: '[', hint: 'Alt Gr + `\' (tecla numérica º)', keys: ['altgr', 'º'] },
-      { id: '\\', category: 'symbols', label: '\\', hint: 'Alt Gr + 1', keys: ['altgr', '1'] },
-      { id: '_', category: 'symbols', label: '_', hint: 'Shift + -', keys: ['shift', '-'] },
-      
-      // Atajos de Teclado
-      { id: 'ctrl+c', category: 'shortcuts', label: 'Copiar (Ctrl + C)', hint: 'Ctrl + C', keys: ['ctrl', 'c'], evalKey: 'c', ctrlReq: true },
-      { id: 'ctrl+x', category: 'shortcuts', label: 'Cortar (Ctrl + X)', hint: 'Ctrl + X', keys: ['ctrl', 'x'], evalKey: 'x', ctrlReq: true },
-      { id: 'ctrl+v', category: 'shortcuts', label: 'Pegar (Ctrl + V)', hint: 'Ctrl + V', keys: ['ctrl', 'v'], evalKey: 'v', ctrlReq: true },
-      { id: 'ctrl+z', category: 'shortcuts', label: 'Deshacer (Ctrl + Z)', hint: 'Ctrl + Z', keys: ['ctrl', 'z'], evalKey: 'z', ctrlReq: true },
+        // Referencias DOM
+        const btnModeTrain = document.getElementById('btnModeTrain');
+        const btnModeTest = document.getElementById('btnModeTest');
+        const targetSymbolDisplay = document.getElementById('targetSymbolDisplay');
+        const targetHelper = document.getElementById('targetHelper');
+        const helperBox = document.getElementById('helperBox');
+        const scoreVal = document.getElementById('scoreVal');
+        const errorVal = document.getElementById('errorVal');
+        const progressVal = document.getElementById('progressVal');
+        const timerVal = document.getElementById('timerVal');
+        const categorySelect = document.getElementById('categorySelect');
+        const restartBtn = document.getElementById('restartBtn');
+        const hiddenInput = document.getElementById('hiddenInput');
+        const lastInputChar = document.getElementById('lastInputChar');
 
-      // Vocales con Tilde
-      { id: 'á', category: 'accents', label: 'á', hint: 'Tilde (´) y luego a', keys: ['accent', 'a'] },
-      { id: 'é', category: 'accents', label: 'é', hint: 'Tilde (´) y luego e', keys: ['accent', 'e'] },
-      { id: 'í', category: 'accents', label: 'í', hint: 'Tilde (´) y luego i', keys: ['accent', 'i'] },
-      { id: 'ó', category: 'accents', label: 'ó', hint: 'Tilde (´) y luego o', keys: ['accent', 'o'] },
-      { id: 'ú', category: 'accents', label: 'ú', hint: 'Tilde (´) y luego u', keys: ['accent', 'u'] }
-    ];
+        const reportModal = document.getElementById('reportModal');
+        const reportAccuracy = document.getElementById('reportAccuracy');
+        const reportTotal = document.getElementById('reportTotal');
+        const reportErrors = document.getElementById('reportErrors');
+        const reportAvgTime = document.getElementById('reportAvgTime');
+        const weakItemsList = document.getElementById('weakItemsList');
+        const modalRestartBtn = document.getElementById('modalRestartBtn');
 
-    let currentQueue = [];
-    let currentIndex = 0;
-    let currentItem = null;
-    let isTestMode = true; // Por defecto "Ponte a prueba"
-    let currentCategory = 'all';
-    
-    // Métricas
-    let totalAttempts = 0;
-    let errorsCount = 0;
-    let startTime = 0;
-    let itemStartTime = 0;
-    let totalTimeTaken = 0;
-    let failedItems = new Map(); // id -> count
-    let isDeadKeyPressed = false;
-
-    const hiddenInput = document.getElementById('hidden-input');
-    const targetDisplay = document.getElementById('target-display');
-    const hintBox = document.getElementById('hint-box');
-    const categorySelect = document.getElementById('category-select');
-    const btnTest = document.getElementById('btn-mode-test');
-    const btnTrain = document.getElementById('btn-mode-train');
-    const progressIndicator = document.getElementById('progress-indicator');
-    const streakIndicator = document.getElementById('streak-indicator');
-    const feedbackMsg = document.getElementById('feedback-msg');
-    const resultsModal = document.getElementById('results-modal');
-    const btnRestart = document.getElementById('btn-restart');
-    
-    let streak = 0;
-    let timerCheck = null;
-
-    // Inicialización de la sesión
-    function initSession() {
-      let filtered = currentCategory === 'all' 
-        ? [...itemsDatabase] 
-        : itemsDatabase.filter(i => i.category === currentCategory);
-
-      // Barajado Fisher-Yates
-      for (let i = filtered.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
-      }
-
-      currentQueue = filtered;
-      currentIndex = 0;
-      totalAttempts = 0;
-      errorsCount = 0;
-      totalTimeTaken = 0;
-      failedItems.clear();
-      streak = 0;
-
-      resultsModal.classList.add('hidden');
-      loadNextItem();
-    }
-
-    function loadNextItem() {
-      if (currentIndex >= currentQueue.length) {
-        showResultsReport();
-        return;
-      }
-
-      currentItem = currentQueue[currentIndex];
-      targetDisplay.textContent = currentItem.label;
-      hintBox.textContent = currentItem.hint;
-      feedbackMsg.textContent = '';
-      
-      progressIndicator.textContent = `Progreso: ${currentIndex + 1} / ${currentQueue.length}`;
-      streakIndicator.textContent = `Racha: 🔥 ${streak}`;
-
-      clearKeyHighlights();
-      if (!isTestMode) {
-        highlightKeys(currentItem.keys);
-      }
-
-      itemStartTime = Date.now();
-      if (timerCheck) clearTimeout(timerCheck);
-
-      // Si en modo prueba tardan > 5s, mostrar ayuda y reencolar
-      if (isTestMode) {
-        timerCheck = setTimeout(() => {
-          hintBox.classList.remove('hidden');
-          highlightKeys(currentItem.keys);
-          registerFailure(true);
-        }, 5000);
-      }
-    }
-
-    function highlightKeys(keysArr) {
-      keysArr.forEach(k => {
-        const el = document.querySelector(`[data-key="${k}"]`);
-        if (el) el.classList.add(isTestMode ? 'key-hint' : 'key-active');
-      });
-    }
-
-    function clearKeyHighlights() {
-      document.querySelectorAll('.key').forEach(el => {
-        el.classList.remove('key-active', 'key-hint');
-      });
-    }
-
-    function registerFailure(isSlow = false) {
-      errorsCount++;
-      streak = 0;
-      streakIndicator.textContent = `Racha: 🔥 ${streak}`;
-      const count = failedItems.get(currentItem.id) || 0;
-      failedItems.set(currentItem.id, count + 1);
-
-      if (!currentQueue.includes(currentItem, currentIndex + 1)) {
-        currentQueue.push(currentItem); // Reencolar al final
-      }
-
-      feedbackMsg.textContent = isSlow ? '⏱️ Tiempo agotado. Observa la pista.' : '❌ Inténtalo de nuevo.';
-      feedbackMsg.className = 'text-sm font-medium mt-2 min-h-[24px] text-amber-400';
-    }
-
-    function registerSuccess() {
-      if (timerCheck) clearTimeout(timerCheck);
-      const elapsed = (Date.now() - itemStartTime) / 1000;
-      totalTimeTaken += elapsed;
-      totalAttempts++;
-      streak++;
-
-      feedbackMsg.textContent = '✅ ¡Correcto!';
-      feedbackMsg.className = 'text-sm font-medium mt-2 min-h-[24px] text-emerald-400';
-
-      currentIndex++;
-      setTimeout(loadNextItem, 400);
-    }
-
-    // Manejo de eventos de teclado global
-    window.addEventListener('keydown', (e) => {
-      if (!currentItem) return;
-      hiddenInput.focus();
-
-      // Detección de tecla muerta (tildes)
-      if (e.key === 'Dead' || e.code === 'BracketLeft') {
-        isDeadKeyPressed = true;
-        if (currentItem.keys.includes('accent')) {
-          highlightKeys(currentItem.keys);
+        // Algoritmo de barajado Fisher-Yates
+        function shuffle(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
         }
-        return;
-      }
 
-      // Verificación de Atajos (Ctrl + Tecla)
-      if (currentItem.ctrlReq) {
-        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === currentItem.evalKey) {
-          e.preventDefault();
-          registerSuccess();
-        } else if (e.key !== 'Control' && e.key !== 'Meta') {
-          e.preventDefault();
-          registerFailure();
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerSeconds = 0;
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                updateTimerDisplay();
+            }, 1000);
         }
-        return;
-      }
 
-      // Verificación de Vocales con Tilde
-      if (currentItem.category === 'accents') {
-        if (isDeadKeyPressed && e.key.toLowerCase() === currentItem.id[0]) {
-          isDeadKeyPressed = false;
-          registerSuccess();
-          return;
+        function updateTimerDisplay() {
+            const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+            const secs = (timerSeconds % 60).toString().padStart(2, '0');
+            timerVal.textContent = `${mins}:${secs}`;
         }
-      }
 
-      // Verificación general por caracteres directos
-      if (e.key === currentItem.id || e.key.toLowerCase() === currentItem.id.toLowerCase()) {
-        registerSuccess();
-      } else if (!e.ctrlKey && !e.altKey && e.key.length === 1) {
-        registerFailure();
-      }
-    });
+        function getCurrentPool() {
+            const cat = categorySelect.value;
+            if (cat === 'symbols') return itemPool.symbols;
+            if (cat === 'numbers') return itemPool.numbers;
+            if (cat === 'letters') return itemPool.letters;
+            if (cat === 'shortcuts') return itemPool.shortcuts;
+            return [...itemPool.symbols, ...itemPool.numbers, ...itemPool.letters, ...itemPool.shortcuts];
+        }
 
-    hiddenInput.addEventListener('input', (e) => {
-      const val = e.target.value;
-      if (val.length > 0 && currentItem && val.slice(-1).toLowerCase() === currentItem.id.toLowerCase()) {
-        registerSuccess();
-      }
-      hiddenInput.value = '';
-    });
+        // Iniciar una nueva sesión limpia
+        function initSession() {
+            reportModal.classList.add('hidden');
+            const pool = getCurrentPool();
+            queue = shuffle(pool);
+            totalInitialItems = queue.length;
+            score = 0;
+            errors = 0;
+            statsTracker = {};
 
-    // Control de UI
-    document.addEventListener('click', () => hiddenInput.focus());
+            pool.forEach(item => {
+                const label = item.type === 'shortcut' ? item.name : item.char;
+                statsTracker[item.id] = {
+                    label: label,
+                    helper: item.helper,
+                    errors: 0,
+                    times: [],
+                    needsPractice: false
+                };
+            });
 
-    categorySelect.addEventListener('change', (e) => {
-      currentCategory = e.target.value;
-      categorySelect.blur();
-      initSession();
-    });
+            scoreVal.textContent = '0';
+            errorVal.textContent = '0';
+            lastInputChar.textContent = '-';
+            
+            startTimer();
+            nextTarget();
+        }
 
-    btnTest.addEventListener('click', () => {
-      isTestMode = true;
-      btnTest.className = "px-3 py-1.5 text-sm font-medium bg-emerald-600 text-white rounded-l-lg border border-emerald-500 focus:z-10";
-      btnTrain.className = "px-3 py-1.5 text-sm font-medium bg-slate-700 text-slate-300 rounded-r-lg border border-slate-600 hover:bg-slate-600 focus:z-10";
-      hintBox.classList.add('hidden');
-      initSession();
-    });
+        function nextTarget() {
+            clearTimeout(hesitationTimer);
+            isDeadKeyPressed = false;
+            hiddenInput.value = '';
 
-    btnTrain.addEventListener('click', () => {
-      isTestMode = false;
-      btnTrain.className = "px-3 py-1.5 text-sm font-medium bg-blue-600 text-white rounded-r-lg border border-blue-500 focus:z-10";
-      btnTest.className = "px-3 py-1.5 text-sm font-medium bg-slate-700 text-slate-300 rounded-l-lg border border-slate-600 hover:bg-slate-600 focus:z-10";
-      hintBox.classList.remove('hidden');
-      initSession();
-    });
+            if (queue.length === 0) {
+                finishSession();
+                return;
+            }
 
-    function showResultsReport() {
-      resultsModal.classList.remove('hidden');
-      const totalOps = totalAttempts || 1;
-      const accuracy = Math.max(0, Math.round(((totalOps - errorsCount) / totalOps) * 100));
-      const avgTime = (totalTimeTaken / totalOps).toFixed(1);
+            currentItem = queue.shift();
+            itemStartTime = Date.now();
 
-      document.getElementById('res-accuracy').textContent = `${accuracy}%`;
-      document.getElementById('res-time').textContent = `${avgTime}s`;
-      document.getElementById('res-fails').textContent = `${failedItems.size}`;
+            // Actualizar progreso
+            const remaining = queue.length + 1;
+            const completed = totalInitialItems - remaining + 1;
+            progressVal.textContent = `${Math.min(completed, totalInitialItems)} / ${totalInitialItems}`;
 
-      const suggestionsContainer = document.getElementById('res-suggestions');
-      if (failedItems.size === 0) {
-        suggestionsContainer.innerHTML = `<p class="text-emerald-400 font-semibold">✨ ¡Excelente trabajo! Has dominado todos los símbolos de esta ronda sin errores ni bloqueos.</p>`;
-      } else {
-        let html = `<p class="font-semibold text-amber-400 mb-1">Símbolos que requieren más práctica:</p><ul class="list-disc pl-4 space-y-1">`;
-        failedItems.forEach((count, id) => {
-          const item = itemsDatabase.find(i => i.id === id);
-          html += `<li><strong>${item ? item.label : id}</strong> (${count} fallo/s o dudas registradas)</li>`;
+            if (currentItem.type === 'shortcut') {
+                targetSymbolDisplay.textContent = currentItem.name;
+                targetSymbolDisplay.className = "text-2xl sm:text-4xl font-extrabold text-blue-400 my-2 font-sans min-h-[5rem] flex items-center justify-center text-center px-2";
+            } else {
+                targetSymbolDisplay.textContent = currentItem.char;
+                targetSymbolDisplay.className = "text-5xl sm:text-7xl font-extrabold text-blue-400 my-2 font-mono min-h-[5rem] flex items-center justify-center";
+            }
+
+            if (currentMode === 'train') {
+                helperBox.style.visibility = 'visible';
+                targetHelper.innerHTML = `Pulsa <span class="font-bold text-blue-300">${currentItem.helper}</span>`;
+                highlightTargetKeys();
+            } else {
+                helperBox.style.visibility = 'hidden';
+                clearKeyHighlights();
+
+                // En modo "Ponte a prueba", si tarda más de 5s, mostrar pista y mandar a reintento
+                hesitationTimer = setTimeout(() => {
+                    helperBox.style.visibility = 'visible';
+                    targetHelper.innerHTML = `Pista: <span class="font-bold text-amber-300">${currentItem.helper}</span>`;
+                    statsTracker[currentItem.id].needsPractice = true;
+                    // Agregar a cola para repetir al final si no está ya al final
+                    if (!queue.some(i => i.id === currentItem.id)) {
+                        queue.push(currentItem);
+                    }
+                }, 5000);
+            }
+        }
+
+        function clearKeyHighlights() {
+            document.querySelectorAll('.key').forEach(k => {
+                k.classList.remove('key-active', 'key-modifier-highlight', 'key-correct', 'key-incorrect');
+            });
+        }
+
+        function highlightTargetKeys() {
+            clearKeyHighlights();
+            if (!currentItem || currentMode !== 'train') return;
+
+            if (currentItem.type === 'shortcut') {
+                const mainEl = document.querySelector(`.key[data-code="${currentItem.mainCode}"]`);
+                const modEl = document.querySelector(`.key[data-code="${currentItem.modifierCode}"]`);
+                if (mainEl) mainEl.classList.add('key-active');
+                if (modEl) modEl.classList.add('key-modifier-highlight');
+            } else {
+                const keyEl = document.querySelector(`.key[data-code="${currentItem.code}"]`);
+                if (keyEl) keyEl.classList.add('key-active');
+
+                if (currentItem.modifier && currentItem.modifier !== 'none') {
+                    if (currentItem.modifier === 'accent') {
+                        const accentEl = document.querySelector(`.key[data-code="BracketLeft"]`);
+                        if (accentEl) accentEl.classList.add('key-modifier-highlight');
+                    } else {
+                        const modEl = document.querySelector(`.key[data-code="${currentItem.modifier}"]`);
+                        if (modEl) modEl.classList.add('key-modifier-highlight');
+                    }
+                }
+            }
+        }
+
+        function setMode(mode) {
+            currentMode = mode;
+            if (mode === 'train') {
+                btnModeTrain.className = "flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 bg-blue-600 text-white shadow-md";
+                btnModeTest.className = "flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-white";
+            } else {
+                btnModeTest.className = "flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 bg-emerald-600 text-white shadow-md";
+                btnModeTrain.className = "flex-1 py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-white";
+            }
+            initSession();
+            hiddenInput.focus();
+        }
+
+        function finishSession() {
+            clearInterval(timerInterval);
+            
+            // Cálculos del informe
+            let totalTimes = [];
+            let weakItems = [];
+
+            Object.values(statsTracker).forEach(item => {
+                totalTimes = totalTimes.concat(item.times);
+                if (item.errors > 0 || item.needsPractice || (item.times.length > 0 && Math.min(...item.times) > 4000)) {
+                    weakItems.push(item);
+                }
+            });
+
+            const avgTimeSecs = totalTimes.length > 0 
+                ? (totalTimes.reduce((a, b) => a + b, 0) / totalTimes.length / 1000).toFixed(1)
+                : '0.0';
+
+            const accuracy = (score + errors) > 0 
+                ? Math.round((score / (score + errors)) * 100) 
+                : 100;
+
+            reportAccuracy.textContent = `${accuracy}%`;
+            reportTotal.textContent = score;
+            reportErrors.textContent = errors;
+            reportAvgTime.textContent = `${avgTimeSecs}s`;
+
+            // Rellenar lista de sugerencias / práctica
+            weakItemsList.innerHTML = '';
+            if (weakItems.length === 0) {
+                weakItemsList.innerHTML = `
+                    <div class="text-emerald-400 text-xs text-center py-2 font-medium">
+                        ¡Excelente dominio! No tuviste fallos ni dudas destacables.
+                    </div>
+                `;
+            } else {
+                weakItems.forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = "flex items-center justify-between text-xs bg-slate-900 px-3 py-2 rounded-xl border border-slate-800";
+                    row.innerHTML = `
+                        <span class="font-bold text-blue-300 font-mono text-sm">${item.label}</span>
+                        <span class="text-slate-400">${item.helper}</span>
+                        <span class="text-rose-400 font-semibold">${item.errors > 0 ? `${item.errors} fallo(s)` : 'Lento'}</span>
+                    `;
+                    weakItemsList.appendChild(row);
+                });
+            }
+
+            reportModal.classList.remove('hidden');
+        }
+
+        // Listener de teclado global
+        window.addEventListener('keydown', (e) => {
+            if (document.activeElement === categorySelect || !reportModal.classList.contains('hidden')) {
+                return;
+            }
+
+            hiddenInput.focus();
+
+            if (!currentItem) return;
+
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+            }
+
+            // Manejo especial de teclas muertas (tildes / diéresis)
+            if (e.key === 'Dead' || (e.code === 'BracketLeft' && currentItem.modifier === 'accent' && !isDeadKeyPressed)) {
+                if (e.key === 'Dead' || e.code === 'BracketLeft') {
+                    isDeadKeyPressed = true;
+                    lastInputChar.textContent = '´';
+                    const accentKey = document.querySelector(`.key[data-code="BracketLeft"]`);
+                    if (accentKey) {
+                        accentKey.classList.add('key-active');
+                        setTimeout(() => accentKey.classList.remove('key-active'), 200);
+                    }
+                    return;
+                }
+            }
+
+            if (['Shift', 'Control', 'Alt', 'AltGraph', 'CapsLock', 'Meta', 'Tab'].includes(e.key)) {
+                return;
+            }
+
+            let isCorrect = false;
+            let keyDisplay = '';
+
+            if (currentItem.type === 'shortcut') {
+                if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === currentItem.keyChar) {
+                    isCorrect = true;
+                    keyDisplay = `Ctrl + ${currentItem.keyChar.toUpperCase()}`;
+                } else {
+                    isCorrect = false;
+                    keyDisplay = (e.ctrlKey ? 'Ctrl + ' : '') + e.key.toUpperCase();
+                }
+            } else {
+                keyDisplay = e.key === ' ' ? 'Espacio' : e.key;
+
+                if (e.key === currentItem.char) {
+                    isCorrect = true;
+                } else if (isDeadKeyPressed) {
+                    const inputVal = hiddenInput.value;
+                    if (inputVal.includes(currentItem.char)) {
+                        isCorrect = true;
+                        keyDisplay = currentItem.char;
+                    } else {
+                        isCorrect = false;
+                    }
+                } else {
+                    isCorrect = false;
+                }
+            }
+
+            isDeadKeyPressed = false;
+            lastInputChar.textContent = keyDisplay;
+
+            const timeTaken = Date.now() - itemStartTime;
+            statsTracker[currentItem.id].times.push(timeTaken);
+
+            let targetKeyEl = currentItem.type === 'shortcut' 
+                ? document.querySelector(`.key[data-code="${currentItem.mainCode}"]`)
+                : document.querySelector(`.key[data-code="${currentItem.code}"]`);
+
+            if (isCorrect) {
+                score++;
+                scoreVal.textContent = score;
+
+                if (targetKeyEl) {
+                    targetKeyEl.classList.remove('key-active', 'key-modifier-highlight');
+                    targetKeyEl.classList.add('key-correct');
+                }
+
+                setTimeout(() => {
+                    nextTarget();
+                }, 200);
+
+            } else {
+                errors++;
+                errorVal.textContent = errors;
+                statsTracker[currentItem.id].errors++;
+                statsTracker[currentItem.id].needsPractice = true;
+
+                // Re-encolar para repetir al final por equivocación
+                if (!queue.some(i => i.id === currentItem.id)) {
+                    queue.push(currentItem);
+                }
+
+                if (targetKeyEl) {
+                    targetKeyEl.classList.add('key-incorrect');
+                    setTimeout(() => {
+                        targetKeyEl.classList.remove('key-incorrect');
+                        if (currentMode === 'train') highlightTargetKeys();
+                    }, 300);
+                }
+            }
         });
-        html += `</ul>`;
-        suggestionsContainer.innerHTML = html;
-      }
-    }
 
-    btnRestart.addEventListener('click', initSession);
+        hiddenInput.addEventListener('input', () => {
+            if (!currentItem || currentItem.type === 'shortcut') return;
+            
+            if (hiddenInput.value.includes(currentItem.char)) {
+                lastInputChar.textContent = currentItem.char;
+                score++;
+                scoreVal.textContent = score;
 
-    // Arranque inicial automático
-    window.onload = () => {
-      hiddenInput.focus();
-      initSession();
-    };
-  </script>
+                let targetKeyEl = document.querySelector(`.key[data-code="${currentItem.code}"]`);
+                if (targetKeyEl) {
+                    targetKeyEl.classList.remove('key-active', 'key-modifier-highlight');
+                    targetKeyEl.classList.add('key-correct');
+                }
+
+                setTimeout(() => {
+                    nextTarget();
+                }, 200);
+            }
+        });
+
+        // Controles e interacciones
+        btnModeTrain.addEventListener('click', () => setMode('train'));
+        btnModeTest.addEventListener('click', () => setMode('test'));
+
+        categorySelect.addEventListener('change', () => {
+            categorySelect.blur();
+            initSession();
+            hiddenInput.focus();
+        });
+
+        restartBtn.addEventListener('click', () => {
+            initSession();
+            hiddenInput.focus();
+        });
+
+        modalRestartBtn.addEventListener('click', () => {
+            initSession();
+            hiddenInput.focus();
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target !== categorySelect && reportModal.classList.contains('hidden')) {
+                hiddenInput.focus();
+            }
+        });
+
+        // Carga inicial
+        window.onload = () => {
+            categorySelect.value = 'all';
+            setMode('test');
+        };
+    </script>
 </body>
 </html>
