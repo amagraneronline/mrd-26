@@ -50,9 +50,17 @@
 <body class="min-h-screen flex flex-col items-center justify-between p-3 sm:p-5 relative">
 
     <!-- Header -->
-    <header class="w-full max-w-5xl text-center mb-3">
-        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-blue-400">Práctica de Teclado Español (ES)</h1>
-        <p class="text-xs sm:text-sm text-slate-400 mt-1">Aprende y pon a prueba tu escritura de símbolos, acentos y atajos de teclado.</p>
+    <header class="w-full max-w-5xl flex flex-col sm:flex-row items-center justify-between gap-3 mb-3 border-b border-slate-800 pb-3">
+        <div class="text-center sm:text-left">
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-blue-400">Práctica de Teclado Español (ES)</h1>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1">Aprende y pon a prueba tu escritura de símbolos, acentos y atajos de teclado.</p>
+        </div>
+
+        <!-- Botón para ver la infografía -->
+        <button id="btnOpenInfographic" class="bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl transition shadow-lg flex items-center gap-2 border border-indigo-400/30">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Ver Infografía de Ayuda
+        </button>
     </header>
 
     <!-- Main Container -->
@@ -305,6 +313,28 @@
             </div>
         </div>
 
+        <!-- Modal para Infografía de Ayuda -->
+        <div id="infographicModal" class="hidden fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+            <div class="bg-slate-900 border border-slate-700 rounded-3xl p-4 sm:p-6 max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl relative">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-xl font-bold text-blue-400 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Infografía: Símbolos del Teclado en Español
+                    </h2>
+                    <button id="btnCloseInfographic" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+                <div class="flex-grow overflow-y-auto rounded-2xl border border-slate-800 bg-slate-950 p-2 flex justify-center items-start">
+                    <img src="infografia_simbolos_teclado.png" alt="Infografía de guía de Símbolos del Teclado en Español" class="w-full max-w-2xl h-auto rounded-xl object-contain shadow-md">
+                </div>
+                <div class="mt-3 flex justify-between items-center text-xs text-slate-400">
+                    <span>Enlace a imagen directa: <a href="infografia_simbolos_teclado.png" target="_blank" class="text-blue-400 underline hover:text-blue-300">infografia_simbolos_teclado.png</a></span>
+                    <button id="btnCloseInfographicFooter" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-1.5 rounded-xl font-medium transition">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Diagnostic Summary Modal / Overlay -->
         <div id="reportModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
             <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-2xl flex flex-col gap-6">
@@ -356,11 +386,11 @@
     <!-- Footer cumpliendo con Capítulo 9 de Vibe Coding Responsable -->
     <footer class="w-full max-w-5xl text-center text-xs text-slate-400 mt-4 pt-3 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-2">
         <div>
-            Haz clic en cualquier parte para enfocar el teclado. En el modo <b>"Ponte a prueba"</b> no habrá pistas visuales.
+            Haz clic en cualquier parte para enfocar el teclado. Consulta la <a href="infografia_simbolos_teclado.png" target="_blank" rel="noopener" class="underline text-indigo-400 hover:text-indigo-300">infografía de símbolos</a> como ayuda extra.
         </div>
         <div class="text-slate-400">
             Contenidos bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener" class="underline text-blue-400 hover:text-blue-300">CC BY-SA 4.0</a> | 
-            Código bajo <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener" class="underline text-blue-400 hover:text-blue-300">GNU AGPL v3</a>
+            Código bajo <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener" class="underline text-blue-400 hover:text-blue-300">GNU AGPL v3</a>[cite: 1]
         </div>
     </footer>
 
@@ -469,6 +499,23 @@
         const reportAvgTime = document.getElementById('reportAvgTime');
         const weakItemsList = document.getElementById('weakItemsList');
         const modalRestartBtn = document.getElementById('modalRestartBtn');
+
+        // Referencias del Modal de Infografía
+        const infographicModal = document.getElementById('infographicModal');
+        const btnOpenInfographic = document.getElementById('btnOpenInfographic');
+        const btnCloseInfographic = document.getElementById('btnCloseInfographic');
+        const btnCloseInfographicFooter = document.getElementById('btnCloseInfographicFooter');
+
+        // Modal Handlers
+        btnOpenInfographic.addEventListener('click', () => infographicModal.classList.remove('hidden'));
+        btnCloseInfographic.addEventListener('click', () => {
+            infographicModal.classList.add('hidden');
+            hiddenInput.focus();
+        });
+        btnCloseInfographicFooter.addEventListener('click', () => {
+            infographicModal.classList.add('hidden');
+            hiddenInput.focus();
+        });
 
         // Algoritmo de barajado Fisher-Yates
         function shuffle(array) {
@@ -678,7 +725,7 @@
 
         // Listener de teclado global
         window.addEventListener('keydown', (e) => {
-            if (document.activeElement === categorySelect || !reportModal.classList.contains('hidden')) {
+            if (document.activeElement === categorySelect || !reportModal.classList.contains('hidden') || !infographicModal.classList.contains('hidden')) {
                 return;
             }
 
@@ -822,7 +869,7 @@
         });
 
         document.addEventListener('click', (e) => {
-            if (e.target !== categorySelect && reportModal.classList.contains('hidden')) {
+            if (e.target !== categorySelect && reportModal.classList.contains('hidden') && infographicModal.classList.contains('hidden')) {
                 hiddenInput.focus();
             }
         });
