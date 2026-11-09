@@ -1,0 +1,25 @@
+# Fotografías de los componentes del ordenador
+
+Esta carpeta está preparada para almacenar las 10 fotografías reales que aparecen al pasar el cursor por los números del esquema.
+
+**Importante:** en el paquete inicial solo se incluye el manifiesto y los créditos; no hay archivos JPG todavía porque el entorno de creación no pudo descargarlos. La infografía intenta usar primero las fotos locales y, si faltan, las carga desde Wikimedia Commons cuando hay conexión a Internet.
+
+## Completar carpeta local
+
+Desde la carpeta raíz del paquete, con una conexión a Internet:
+
+```bash
+python descargar_fotos.py
+```
+
+En Windows también puedes probar:
+
+```powershell
+py descargar_fotos.py
+```
+
+El programa descargará y verificará `cpu.jpg`, `ram.jpg`, `placa_base.jpg`, `almacenamiento_ssd_hdd.jpg`, `tarjeta_grafica.jpg`, `fuente_alimentacion.jpg`, `refrigeracion.jpg`, `puertos.jpg`, `tarjeta_red.jpg` y `tarjeta_sonido.jpg`.
+
+**No cambies los nombres de los JPG**; la web los busca mediante rutas relativas. Una vez instalados, la infografía puede funcionar sin Internet.
+
+Cada imagen conserva su referencia de autoría, fuente y licencia en `fuentes_imagenes.json` y en la propia web.

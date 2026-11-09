@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="Infografía educativa de los principales componentes de un ordenador, para estudiantes de 13 y 14 años. Ilustraciones SVG originales, sin dependencias externas.">
+  <meta name="description" content="Infografía educativa de los principales componentes de un ordenador, para estudiantes de 1ºESO. Ilustraciones SVG originales, sin dependencias externas.">
   <title>¿Qué hay dentro de un ordenador? | Infografía</title>
   <style>
     :root {
@@ -119,6 +119,34 @@
       .flow-panel{padding:13px;break-inside:avoid}.flow-step{min-height:90px;padding:7px}.flow-step strong{font-size:8pt}.flow-step span{font-size:7pt}.flow-step svg{width:25px;height:25px}.flow-support{margin-top:9px}.support-item{padding:8px;font-size:8pt}.flow-note{font-size:8pt;margin-top:10px}
       .comparison{break-inside:avoid}table{font-size:9pt}td{padding:7px 10px}th{padding:8px 10px}.important{break-inside:avoid;padding:10px;margin-top:9px;font-size:9pt}footer{font-size:7pt;padding:10px 0}
     }
+
+    /* Fotografías de Wikimedia Commons que acompañan a las zonas activas del SVG. */
+    .foto-hint{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:#08717b;font-size:.84rem;font-weight:750;margin:8px 0 2px}
+    .foto-hint::before{content:"●";font-size:9px;color:#13a4a4}
+    .hardware-tooltip[hidden]{display:none!important}
+    .hardware-tooltip{position:fixed;z-index:2000;width:min(365px,calc(100vw - 22px));background:white;border:1px solid #bdd3df;border-radius:17px;box-shadow:0 20px 65px #132f4c47;overflow:hidden;pointer-events:none;animation:photoPop .14s ease-out;}
+    .hardware-tooltip .hw-visual{height:208px;background:#edf3f6;display:grid;place-items:center;position:relative;overflow:hidden}
+    .hardware-tooltip img{height:100%;width:100%;object-fit:contain;display:block;}
+    .hardware-tooltip .hw-load{position:absolute;inset:0;background:#edf3f6;color:#557189;display:grid;place-items:center;text-align:center;font-size:.89rem;padding:22px;}
+    /* Respeta el atributo hidden: de otro modo el cartel de carga tapa la foto. */
+    .hardware-tooltip .hw-load[hidden]{display:none!important}
+    .hardware-tooltip .hw-body{padding:12px 16px 15px}
+    .hardware-tooltip .hw-heading{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+    .hardware-tooltip .hw-num{display:grid;place-items:center;color:#fff;background:#087f8c;font-weight:900;border-radius:9px;width:30px;height:30px;flex:0 0 30px;font-size:.83rem}
+    .hardware-tooltip .hw-heading strong{font-size:1.06rem;color:#18374e;line-height:1.18}
+    .hardware-tooltip .hw-description{color:#3e596f;font-size:.85rem;margin:0 0 5px;line-height:1.42}
+    .hardware-tooltip .hw-author{font-size:.75rem;color:#667a8f;margin:0;line-height:1.35}
+    @keyframes photoPop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+    .photo-credits{border:1px solid #d9e6ef;background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:35px}
+    .photo-credits summary{font-weight:800;cursor:pointer;color:#24435d}
+    .photo-credits p{font-size:.82rem;color:#5a7185}
+    .photo-credits ol{columns:2;column-gap:35px;padding-left:20px;font-size:.83rem;line-height:1.5}
+    .photo-credits li{break-inside:avoid;margin-bottom:9px;padding-right:10px}
+    .photo-credits a{color:#087f8c;text-decoration:underline;text-underline-offset:2px}
+    @media(max-width:650px){.photo-credits{padding:16px}.photo-credits ol{columns:1}.hardware-tooltip .hw-visual{height:165px}.hardware-tooltip .hw-body{padding:10px 13px}}
+    @media(prefers-reduced-motion:reduce){.hardware-tooltip{animation:none}}
+    @media print{.hardware-tooltip,.foto-hint{display:none!important}.photo-credits{break-inside:avoid}.photo-credits ol{font-size:7pt}}
+
   </style>
 </head>
 <body>
@@ -143,19 +171,18 @@
   </svg>
 
   <header class="page masthead">
-    <span class="eyebrow">Infografía · Digitalización · 13–14 años</span>
+    <span class="eyebrow">Infografía · Digitalización · 1.º ESO</span>
     <h1>¿Qué hay <span class="title-accent">dentro</span> de un ordenador?</h1>
     <p class="lead">Descubre las piezas que hacen posible que un ordenador funcione: qué son, para qué sirven y cómo colaboran cuando utilizamos una aplicación o jugamos.</p>
     <div class="hero-bottom">
-      <div class="pill-row"><span class="pill">10 componentes principales</span><span class="pill">BIOS/UEFI: ampliación</span><span class="pill">Ejemplos cotidianos</span></div>
-      <div class="tools"><button class="btn" type="button" onclick="window.print()" aria-label="Imprimir o guardar la infografía como PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v7H6z"/></svg>Imprimir / Guardar PDF</button></div>
-    </div>
+      <div class="pill-row"><span class="pill">10 componentes principales</span><span class="pill">BIOS/UEFI: ampliación</span><span class="pill">Ejemplos cotidianos</span></div>    </div>
   </header>
 
   <main id="contenido" class="page">
     <section class="section" aria-labelledby="explora">
-      <div class="section-heading"><span class="section-index">01</span><div><h2 id="explora">Explora el interior del ordenador</h2><p>Pulsa los números del dibujo para ir a la explicación de cada componente.</p></div></div>
+      <div class="section-heading"><span class="section-index">01</span><div><h2 id="explora">Explora el interior del ordenador</h2><p>Pasa el ratón por los números para ver fotografías reales. Haz clic para ir a la explicación de cada componente. Con teclado, utiliza Tab.</p></div></div>
       <div class="diagram-wrap">
+        <p class="foto-hint">Pasa el cursor por cada número para ver cómo es el componente real.</p>
         <div class="diagram-label"><strong>Vista esquemática de una torre de ordenador</strong><span class="tiny-tag">Los tamaños y posiciones pueden variar</span></div>
         <svg class="computer-svg" viewBox="0 0 880 570" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="diagt diagd">
           <title id="diagt">Interior ilustrado de una torre con diez componentes señalados</title>
@@ -222,16 +249,16 @@
           <g fill="none" stroke="#59aab3" stroke-width="4" stroke-linecap="round" stroke-dasharray="5 8" opacity=".55"><path d="M456 231h28"/><path d="M543 250h59v62"/><path d="M643 360h10"/></g>
           <!-- etiquetas y números clicables -->
           <g font-family="system-ui,-apple-system,'Segoe UI',sans-serif">
-            <a class="hotspot" href="#cpu" aria-label="Ir a procesador CPU"><circle class="marker" cx="399" cy="237" r="19" fill="#1b6cad"/><text x="399" y="238">1</text></a>
-            <a class="hotspot" href="#ram" aria-label="Ir a memoria RAM"><circle class="marker" cx="515" cy="194" r="19" fill="#1b6cad"/><text x="515" y="195">2</text></a>
-            <a class="hotspot" href="#placa" aria-label="Ir a placa base"><circle class="marker" cx="266" cy="250" r="19" fill="#1b6cad"/><text x="266" y="251">3</text></a>
-            <a class="hotspot" href="#almacenamiento" aria-label="Ir a almacenamiento"><circle class="marker" cx="701" cy="386" r="19" fill="#1b6cad"/><text x="701" y="387">4</text></a>
-            <a class="hotspot" href="#grafica" aria-label="Ir a gráfica"><circle class="marker" cx="443" cy="367" r="19" fill="#1b6cad"/><text x="443" y="368">5</text></a>
-            <a class="hotspot" href="#fuente" aria-label="Ir a fuente de alimentación"><circle class="marker" cx="209" cy="448" r="19" fill="#1b6cad"/><text x="209" y="449">6</text></a>
-            <a class="hotspot" href="#refrigeracion" aria-label="Ir a refrigeración"><circle class="marker" cx="698" cy="164" r="19" fill="#1b6cad"/><text x="698" y="165">7</text></a>
-            <a class="hotspot" href="#puertos" aria-label="Ir a puertos"><circle class="marker" cx="179" cy="155" r="16" fill="#1b6cad"/><text x="179" y="156">8</text></a>
-            <a class="hotspot" href="#red" aria-label="Ir a tarjeta de red"><circle class="marker" cx="179" cy="230" r="16" fill="#1b6cad"/><text x="179" y="231">9</text></a>
-            <a class="hotspot" href="#sonido" aria-label="Ir a tarjeta de sonido"><circle class="marker" cx="179" cy="290" r="17" fill="#1b6cad"/><text x="179" y="291" style="font-size:14px">10</text></a>
+            <a class="hotspot" aria-describedby="foto-componente" href="#cpu" aria-label="Ir a procesador CPU"><circle class="marker" cx="399" cy="237" r="19" fill="#1b6cad"/><text x="399" y="238">1</text></a>
+            <a class="hotspot" aria-describedby="foto-componente" href="#ram" aria-label="Ir a memoria RAM"><circle class="marker" cx="515" cy="194" r="19" fill="#1b6cad"/><text x="515" y="195">2</text></a>
+            <a class="hotspot" aria-describedby="foto-componente" href="#placa" aria-label="Ir a placa base"><circle class="marker" cx="266" cy="250" r="19" fill="#1b6cad"/><text x="266" y="251">3</text></a>
+            <a class="hotspot" aria-describedby="foto-componente" href="#almacenamiento" aria-label="Ir a almacenamiento"><circle class="marker" cx="701" cy="386" r="19" fill="#1b6cad"/><text x="701" y="387">4</text></a>
+            <a class="hotspot" aria-describedby="foto-componente" href="#grafica" aria-label="Ir a gráfica"><circle class="marker" cx="443" cy="367" r="19" fill="#1b6cad"/><text x="443" y="368">5</text></a>
+            <a class="hotspot" aria-describedby="foto-componente" href="#fuente" aria-label="Ir a fuente de alimentación"><circle class="marker" cx="209" cy="448" r="19" fill="#1b6cad"/><text x="209" y="449">6</text></a>
+            <a class="hotspot" aria-describedby="foto-componente" href="#refrigeracion" aria-label="Ir a refrigeración"><circle class="marker" cx="698" cy="164" r="19" fill="#1b6cad"/><text x="698" y="165">7</text></a>
+            <a class="hotspot" aria-describedby="foto-componente" href="#puertos" aria-label="Ir a puertos"><circle class="marker" cx="179" cy="155" r="16" fill="#1b6cad"/><text x="179" y="156">8</text></a>
+            <a class="hotspot" aria-describedby="foto-componente" href="#red" aria-label="Ir a tarjeta de red"><circle class="marker" cx="179" cy="230" r="16" fill="#1b6cad"/><text x="179" y="231">9</text></a>
+            <a class="hotspot" aria-describedby="foto-componente" href="#sonido" aria-label="Ir a tarjeta de sonido"><circle class="marker" cx="179" cy="290" r="17" fill="#1b6cad"/><text x="179" y="291" style="font-size:14px">10</text></a>
           </g>
           <text x="429" y="564" font-size="12" fill="#61788c" text-anchor="middle">Ilustración orientativa, no a escala · Algunos componentes pueden estar integrados en la placa base</text>
         </svg>
@@ -305,7 +332,137 @@
       </div>
       <div class="important"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 18H2L12 3Z"/><path d="M12 9v5m0 3v.5"/></svg><p><strong>Recuerda:</strong> tener más RAM no significa tener más espacio para guardar archivos. La RAM es memoria temporal; el SSD o el HDD son almacenamiento que conserva los datos.</p></div>
     </section>
+
+    <details class="photo-credits" id="fuentes-fotografias">
+      <summary>Fuentes y licencias de las 10 fotografías reales</summary>
+      <p>Las fotos pertenecen a sus autores y proceden de Wikimedia Commons. Se muestran desde la carpeta local <code>imagenes_infografia</code>, como miniaturas sin recorte. Las licencias se aplican a cada fotografía, no al texto ni a los SVG originales de esta infografía.</p>
+      <ol>
+        <li><strong>01 · Procesador (CPU)</strong>: Eric Gaba (Sting) · <a href="https://commons.wikimedia.org/wiki/File:Intel_CPU_Core_i7_12700K_Alder_Lake_top.jpg" target="_blank" rel="noopener noreferrer">fotografía original</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</li>
+        <li><strong>02 · Memoria RAM</strong>: ElooKoN · <a href="https://commons.wikimedia.org/wiki/File:RAM_Module_(SDRAM-DDR4).jpg" target="_blank" rel="noopener noreferrer">fotografía original</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</li>
+        <li><strong>03 · Placa base</strong>: Kurt Kaiser · <a href="https://commons.wikimedia.org/wiki/File:Computer_motherboard_11.jpg" target="_blank" rel="noopener noreferrer">fotografía original</a> · <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0 1.0</a>.</li>
+        <li><strong>04 · Almacenamiento: SSD y HDD</strong>: Daniel Aleksandersen · <a href="https://commons.wikimedia.org/wiki/File:Last_and_next-generation_storage_media.jpg" target="_blank" rel="noopener noreferrer">fotografía original</a> · <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener noreferrer">CC BY 2.0</a>.</li>
+        <li><strong>05 · Tarjeta gráfica (GPU)</strong>: Benlisquare · <a href="https://commons.wikimedia.org/wiki/File:Asus_Strix_RTX_4090.jpg" target="_blank" rel="noopener noreferrer">fotografía original</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</li>
+        <li><strong>06 · Fuente de alimentación</strong>: Dmitry Makeev · <a href="https://commons.wikimedia.org/wiki/File:ATX_Computer_power_supply_unit.jpg" target="_blank" rel="noopener noreferrer">fotografía original</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</li>
+        <li><strong>07 · Sistema de refrigeración</strong>: Douglas Paul Perkins · <a href="https://commons.wikimedia.org/wiki/File:Computer_heatsink_and_fan.jpg" target="_blank" rel="noopener noreferrer">fotografía original</a> · <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>.</li>
+        <li><strong>08 · Puertos de comunicación</strong>: The High Fin Sperm Whale · <a href="https://commons.wikimedia.org/wiki/File:Computer_ports.JPG" target="_blank" rel="noopener noreferrer">fotografía original</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>.</li>
+        <li><strong>09 · Tarjeta de red</strong>: अरविंद धरेप्पा बगले · <a href="https://commons.wikimedia.org/wiki/File:Nicdlink.jpg" target="_blank" rel="noopener noreferrer">fotografía original</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</li>
+        <li><strong>10 · Tarjeta de sonido</strong>: Usamasaad · <a href="https://commons.wikimedia.org/wiki/File:Sound_card_2.jpg" target="_blank" rel="noopener noreferrer">fotografía original</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</li>
+      </ol>
+    </details>
   </main>
-  <footer class="page"><span><strong>Infografía educativa · Componentes de un ordenador</strong> · Edad recomendada: 13–14 años.</span><span>Ilustraciones e iconos SVG originales. Archivo autónomo: funciona sin conexión a Internet.</span></footer>
+  <footer class="page"><span><strong>Infografía educativa · Componentes de un ordenador</strong> · </span><span>Ilustraciones e iconos SVG originales. Archivo autónomo: funciona sin conexión a Internet.</span></footer>
+
+  <!-- Esta tarjeta no tapa los enlaces del SVG, conserva la navegación original. -->
+  <div class="hardware-tooltip" id="foto-componente" role="tooltip" aria-hidden="true" hidden>
+    <div class="hw-visual"><img id="hw-img" alt="" decoding="async"><div class="hw-load" id="hw-load" aria-live="polite">Cargando fotografía…</div></div>
+    <div class="hw-body">
+      <div class="hw-heading"><span id="hw-num" class="hw-num"></span><strong id="hw-title"></strong></div>
+      <p id="hw-desc" class="hw-description"></p>
+      <p id="hw-author" class="hw-author"></p>
+    </div>
+  </div>
+
+  <script>
+  (() => {
+    'use strict';
+    // Información contrastada con las fichas de las fotografías en Wikimedia Commons.
+    const fotos = [{"id": "cpu", "n": "01", "title": "Procesador (CPU)", "description": "Intel Core i7-12700K, fotografía superior del procesador", "file": "cpu.jpg", "commons_filename": "Intel CPU Core i7 12700K Alder Lake top.jpg", "author": "Eric Gaba (Sting)", "license": "CC BY-SA 4.0", "license_url": "https://creativecommons.org/licenses/by-sa/4.0/", "source_url": "https://commons.wikimedia.org/wiki/File:Intel_CPU_Core_i7_12700K_Alder_Lake_top.jpg", "remote_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Intel_CPU_Core_i7_12700K_Alder_Lake_top.jpg/960px-Intel_CPU_Core_i7_12700K_Alder_Lake_top.jpg"}, {"id": "ram", "n": "02", "title": "Memoria RAM", "description": "Módulo de memoria DDR4 para ordenador de sobremesa", "file": "ram.jpg", "commons_filename": "RAM Module (SDRAM-DDR4).jpg", "author": "ElooKoN", "license": "CC BY-SA 4.0", "license_url": "https://creativecommons.org/licenses/by-sa/4.0/", "source_url": "https://commons.wikimedia.org/wiki/File:RAM_Module_(SDRAM-DDR4).jpg", "remote_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/RAM_Module_%28SDRAM-DDR4%29.jpg/960px-RAM_Module_%28SDRAM-DDR4%29.jpg"}, {"id": "placa", "n": "03", "title": "Placa base", "description": "Placa base completa con sus conectores y zócalos", "file": "placa_base.jpg", "commons_filename": "Computer motherboard 11.jpg", "author": "Kurt Kaiser", "license": "CC0 1.0", "license_url": "https://creativecommons.org/publicdomain/zero/1.0/", "source_url": "https://commons.wikimedia.org/wiki/File:Computer_motherboard_11.jpg", "remote_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Computer_motherboard_11.jpg/960px-Computer_motherboard_11.jpg"}, {"id": "almacenamiento", "n": "04", "title": "Almacenamiento: SSD y HDD", "description": "Unidad SSD NVMe situada sobre un disco duro HDD", "file": "almacenamiento_ssd_hdd.jpg", "commons_filename": "Last and next-generation storage media.jpg", "author": "Daniel Aleksandersen", "license": "CC BY 2.0", "license_url": "https://creativecommons.org/licenses/by/2.0/", "source_url": "https://commons.wikimedia.org/wiki/File:Last_and_next-generation_storage_media.jpg", "remote_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Last_and_next-generation_storage_media.jpg/960px-Last_and_next-generation_storage_media.jpg"}, {"id": "grafica", "n": "05", "title": "Tarjeta gráfica (GPU)", "description": "Tarjeta gráfica dedicada NVIDIA RTX 4090", "file": "tarjeta_grafica.jpg", "commons_filename": "Asus Strix RTX 4090.jpg", "author": "Benlisquare", "license": "CC BY-SA 4.0", "license_url": "https://creativecommons.org/licenses/by-sa/4.0/", "source_url": "https://commons.wikimedia.org/wiki/File:Asus_Strix_RTX_4090.jpg", "remote_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Asus_Strix_RTX_4090.jpg/960px-Asus_Strix_RTX_4090.jpg"}, {"id": "fuente", "n": "06", "title": "Fuente de alimentación", "description": "Fuente de alimentación ATX para PC", "file": "fuente_alimentacion.jpg", "commons_filename": "ATX Computer power supply unit.jpg", "author": "Dmitry Makeev", "license": "CC BY-SA 4.0", "license_url": "https://creativecommons.org/licenses/by-sa/4.0/", "source_url": "https://commons.wikimedia.org/wiki/File:ATX_Computer_power_supply_unit.jpg", "remote_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/ATX_Computer_power_supply_unit.jpg/960px-ATX_Computer_power_supply_unit.jpg"}, {"id": "refrigeracion", "n": "07", "title": "Sistema de refrigeración", "description": "Ventilador y disipador de calor montados en un ordenador", "file": "refrigeracion.jpg", "commons_filename": "Computer heatsink and fan.jpg", "author": "Douglas Paul Perkins", "license": "CC BY 3.0", "license_url": "https://creativecommons.org/licenses/by/3.0/", "source_url": "https://commons.wikimedia.org/wiki/File:Computer_heatsink_and_fan.jpg", "remote_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Computer_heatsink_and_fan.jpg/960px-Computer_heatsink_and_fan.jpg"}, {"id": "puertos", "n": "08", "title": "Puertos de comunicación", "description": "Conectores externos en la parte posterior de un ordenador", "file": "puertos.jpg", "commons_filename": "Computer ports.JPG", "author": "The High Fin Sperm Whale", "license": "CC BY-SA 3.0", "license_url": "https://creativecommons.org/licenses/by-sa/3.0/", "source_url": "https://commons.wikimedia.org/wiki/File:Computer_ports.JPG", "remote_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Computer_ports.JPG/960px-Computer_ports.JPG"}, {"id": "red", "n": "09", "title": "Tarjeta de red", "description": "Adaptador de red Ethernet (NIC) para ordenador", "file": "tarjeta_red.jpg", "commons_filename": "Nicdlink.jpg", "author": "अरविंद धरेप्पा बगले", "license": "CC BY-SA 4.0", "license_url": "https://creativecommons.org/licenses/by-sa/4.0/", "source_url": "https://commons.wikimedia.org/wiki/File:Nicdlink.jpg", "remote_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Nicdlink.jpg/960px-Nicdlink.jpg"}, {"id": "sonido", "n": "10", "title": "Tarjeta de sonido", "description": "Tarjeta de sonido PCI con conectores de audio", "file": "tarjeta_sonido.jpg", "commons_filename": "Sound card 2.jpg", "author": "Usamasaad", "license": "CC BY-SA 4.0", "license_url": "https://creativecommons.org/licenses/by-sa/4.0/", "source_url": "https://commons.wikimedia.org/wiki/File:Sound_card_2.jpg", "remote_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Sound_card_2.jpg/960px-Sound_card_2.jpg"}];
+    const porId = Object.fromEntries(fotos.map(f => [f.id,f]));
+    const tarjeta = document.getElementById('foto-componente');
+    const foto = document.getElementById('hw-img');
+    const estado = document.getElementById('hw-load');
+    const eNumero = document.getElementById('hw-num');
+    const eTitulo = document.getElementById('hw-title');
+    const eDescripcion = document.getElementById('hw-desc');
+    const eAutor = document.getElementById('hw-author');
+    let activo = null, peticion = 0, ultimoToque = null, temporizadorCarga = null;
+
+    function mostrarZona(e) {
+      const rect = e.getBoundingClientRect();
+      const width = tarjeta.offsetWidth || Math.min(365,window.innerWidth - 22);
+      const height = tarjeta.offsetHeight || 340;
+      const margen = 11;
+      let left = rect.right + 14;
+      if (left + width > innerWidth - margen) left = rect.left - width - 14;
+      if (left < margen) left = Math.max(margen, (innerWidth-width)/2);
+      const top = Math.max(margen, Math.min(rect.top - 25, innerHeight - height - margen));
+      tarjeta.style.left = Math.round(left)+'px';
+      tarjeta.style.top = Math.round(top)+'px';
+    }
+    function ocultar() {
+      activo=null;
+      tarjeta.hidden = true;
+      tarjeta.setAttribute('aria-hidden','true');
+      peticion++;
+      clearTimeout(temporizadorCarga);
+    }
+    function abrir(a) {
+      const id = a.getAttribute('href').slice(1);
+      const f = porId[id];
+      if (!f) return;
+      const cambio = activo !== id;
+      activo = id;
+      eNumero.textContent=f.n;
+      eTitulo.textContent=f.title;
+      eDescripcion.textContent=f.description;
+      eAutor.textContent='Fotografía: '+f.author+' · '+f.license;
+      tarjeta.hidden=false;
+      tarjeta.setAttribute('aria-hidden','false');
+      if (cambio) {
+        const token=++peticion;
+        foto.removeAttribute('src');
+        foto.style.visibility='hidden';
+        estado.textContent='Cargando fotografía…';
+        estado.hidden=false;
+        // Carga directamente el JPG local, sin esperar a servidores externos.
+        const local='imagenes_infografia/'+encodeURIComponent(f.file);
+        clearTimeout(temporizadorCarga);
+        foto.onload=()=>{
+          if(token!==peticion)return;
+          clearTimeout(temporizadorCarga);
+          foto.alt=f.description;
+          foto.style.visibility='visible';
+          estado.hidden=true;
+          mostrarZona(a);
+        };
+        foto.onerror=()=>{
+          if(token!==peticion)return;
+          clearTimeout(temporizadorCarga);
+          foto.style.visibility='hidden';
+          estado.hidden=false;
+          estado.textContent='No se encuentra «'+f.file+'». Revisa que la carpeta imagenes_infografia esté junto al HTML y que el nombre coincida exactamente.';
+          mostrarZona(a);
+        };
+        temporizadorCarga=setTimeout(()=>{
+          if(token!==peticion || foto.complete)return;
+          estado.hidden=false;
+          estado.textContent='La fotografía está tardando demasiado. Comprueba el archivo «'+f.file+'» en la carpeta imagenes_infografia.';
+          mostrarZona(a);
+        }, 4500);
+        foto.src=local;
+      }
+      // Ajustamos una primera vez y después de conocer el tamaño real.
+      mostrarZona(a);
+    }
+    document.querySelectorAll('.computer-svg a.hotspot').forEach(a=>{
+      a.addEventListener('mouseenter',()=>abrir(a));
+      a.addEventListener('mouseleave',()=>{if(!a.matches(':focus'))ocultar();});
+      a.addEventListener('focus',()=>abrir(a));
+      a.addEventListener('blur',()=>ocultar());
+      a.addEventListener('click',e=>{
+        if(e.detail===0) return; // teclado: se mantiene el enlace original
+        if(window.matchMedia('(hover: none)').matches){
+          const id=a.getAttribute('href');
+          if(ultimoToque!==id){e.preventDefault();ultimoToque=id;abrir(a);}
+          else {ultimoToque=null;ocultar();}
+        }
+      });
+    });
+    window.addEventListener('scroll',()=>{if(activo)ocultar();},{passive:true});
+    window.addEventListener('resize',()=>{if(activo)ocultar();},{passive:true});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')ocultar();});
+    document.addEventListener('pointerdown',e=>{if(!e.target.closest('.computer-svg .hotspot'))ultimoToque=null;});
+  })();
+  </script>
 </body>
 </html>

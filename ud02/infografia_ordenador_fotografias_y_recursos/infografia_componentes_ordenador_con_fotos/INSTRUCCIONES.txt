@@ -1,0 +1,13 @@
+INFOGRAFÍA CON FOTOGRAFÍAS REALES
+
+Abrir: infografia_componentes_ordenador.html
+Pasar el ratón sobre los 10 números. Pulsarlos mantiene los enlaces originales.
+
+Las fotos se muestran en línea desde Wikimedia Commons si no están descargadas.
+Para disponer de las 10 fotografías EN LOCAL ejecuta:
+    python descargar_fotos.py
+
+Carpeta de imágenes: imagenes_infografia/
+Autorías y licencias: imagenes_infografia/fuentes_imagenes.json
+
+No se distribuyen en este paquete fotografías descargadas: la conexión exterior a los servidores de imágenes no está disponible en el entorno de generación.
