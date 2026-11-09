@@ -1,148 +1,311 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Componentes hardware esenciales de un ordenador</title>
-<style>
-:root{--bg:#f5f7f8;--paper:#fff;--ink:#182126;--muted:#637079;--line:#d9e0e4;--accent:#2366d1;--accent-soft:#eaf2ff;--good:#eaf6ef;--shadow:0 12px 32px rgba(22,35,45,.08)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.62 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}.shell{max-width:1180px;margin:auto;padding:24px}.hero{background:linear-gradient(135deg,#fff,#f1f6ff);border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:var(--shadow)}.eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}h1{font-size:clamp(2rem,5vw,3.6rem);line-height:1.05;margin:.35rem 0 1rem;letter-spacing:-.04em}.hero p{max-width:760px;color:var(--muted);margin:0}.topnav{position:sticky;top:0;z-index:20;margin:18px 0;background:rgba(245,247,248,.94);backdrop-filter:blur(12px);padding:10px 0}.navscroll{display:flex;gap:8px;overflow:auto;padding:2px}.navscroll button{flex:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 14px;font-weight:750;color:var(--ink);cursor:pointer}.navscroll button.active{background:var(--ink);color:#fff;border-color:var(--ink)}main{min-height:480px}.panel{display:none;background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:clamp(20px,4vw,38px);box-shadow:var(--shadow)}.panel.active{display:block}.kicker{font-weight:850;color:var(--accent);font-size:.82rem;letter-spacing:.11em}h2{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.12;margin:.2rem 0 1.2rem;letter-spacing:-.025em}h3{font-size:1.15rem;margin:1.4rem 0 .6rem}.leadgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}.photo-wrap{position:relative}.photo{display:block;width:100%;height:310px;object-fit:scale-down;border-radius:18px;border:1px solid var(--line);background:#eef1f2}.caption{font-size:.76rem;color:var(--muted);margin-top:7px}.card{border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0;background:#fff}.callout{padding:16px 18px;border-radius:14px;background:var(--accent-soft);border-left:4px solid var(--accent);margin:14px 0}.note{padding:14px 16px;border-radius:14px;background:#f6f7f7;color:#45525a;font-size:.92rem}.comparison{overflow:auto;border:1px solid var(--line);border-radius:15px;margin:14px 0}table{border-collapse:collapse;width:100%;min-width:620px}th,td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#f4f6f7;font-size:.88rem}tr:last-child td{border-bottom:0}details{border:1px solid var(--line);border-radius:16px;padding:0 17px;margin:12px 0;background:#fff}summary{cursor:pointer;font-weight:800;padding:15px 0}details>div{padding:0 0 15px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:13px 0}.stat{padding:15px;border-radius:14px;border:1px solid var(--line);background:#f8fafb}.stat b{display:block;font-size:1.25rem}.flow{max-width:690px;margin:22px auto}.step{text-align:center;border:1px solid var(--line);border-radius:14px;padding:13px;background:#fff;font-weight:780}.arrow{text-align:center;color:#81909a;font-size:1.35rem}.pager{display:flex;justify-content:space-between;gap:12px;margin:18px 0 38px}.pager button{border:1px solid var(--line);border-radius:13px;background:#fff;padding:12px 18px;font-weight:800;cursor:pointer}.pager button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.pager button:disabled{opacity:.4;cursor:not-allowed}.sources{font-size:.83rem;color:var(--muted);border-top:1px solid var(--line);padding-top:20px;margin-top:30px}.tag{display:inline-block;padding:3px 8px;border-radius:999px;background:var(--good);font-size:.78rem;font-weight:800}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:760px){.shell{padding:12px}.hero,.panel{border-radius:18px}.leadgrid,.two{grid-template-columns:1fr}.photo{height:230px}.stats{grid-template-columns:1fr}.topnav{top:0}h1{font-size:2.25rem}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Infografía educativa de los principales componentes de un ordenador, para estudiantes de 13 y 14 años. Ilustraciones SVG originales, sin dependencias externas.">
+  <title>¿Qué hay dentro de un ordenador? | Infografía</title>
+  <style>
+    :root {
+      --ink:#162d49;--sub:#52677c;--soft:#748399;--paper:#f4f8fc;--white:#fff;
+      --line:#dce6ee;--teal:#087f8c;--cyan:#0aa8aa;--blue:#275bb5;--purple:#7655ba;
+      --gold:#df923a;--shadow:0 14px 45px rgba(18,46,77,.07);
+      --radius:20px;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;color:var(--ink);background:radial-gradient(circle at 10% 3%,#d8f3f2 0,transparent 23rem),radial-gradient(circle at 96% 18%,#e5e8ff 0,transparent 23rem),var(--paper);font:16px/1.57 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+    button{font:inherit}
+    a{color:inherit}
+    .page{width:min(1160px,calc(100% - 38px));margin:0 auto}
+    .skip{position:absolute;top:-100px;left:15px;z-index:20;background:#fff;padding:10px;border:2px solid var(--teal)}
+    .skip:focus{top:10px}
+    .masthead{padding:48px 0 33px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 13px;border:1px solid #b7dcd9;border-radius:999px;color:#086e76;background:#e9f8f6;font-size:.77rem;letter-spacing:.095em;text-transform:uppercase;font-weight:800}
+    .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:#10a8a4}
+    h1{font-size:clamp(2.25rem,5.4vw,4.1rem);line-height:1.09;letter-spacing:-.05em;margin:21px 0 17px;max-width:800px}
+    .title-accent{color:var(--teal)}
+    .lead{font-size:clamp(1rem,1.6vw,1.19rem);max-width:795px;margin:0;color:var(--sub);line-height:1.65}
+    .hero-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:27px}
+    .pill-row{display:flex;gap:9px;flex-wrap:wrap}
+    .pill{border:1px solid #c8dce9;background:#fff;border-radius:100px;padding:6px 12px;font-size:.82rem;font-weight:700;color:#37526d}
+    .tools{display:flex;gap:9px;flex-wrap:wrap}
+    .btn{appearance:none;border:1px solid #b9d0df;border-radius:10px;color:var(--ink);background:#fff;font-weight:700;font-size:.87rem;padding:10px 15px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:transform .15s,box-shadow .15s}
+    .btn:hover{box-shadow:0 4px 15px #1b4a6c20;transform:translateY(-1px)}
+    .btn:focus-visible,a:focus-visible{outline:3px solid #f5ab44;outline-offset:3px}
+    .btn svg{width:17px;height:17px}
+    .section{margin:22px 0 48px}
+    .section-heading{display:flex;gap:18px;align-items:flex-start;margin-bottom:20px}
+    .section-index{font-size:.8rem;font-weight:900;letter-spacing:.06em;color:var(--teal);background:#daf2ef;display:grid;place-items:center;border-radius:11px;flex:0 0 45px;height:45px}
+    .section-heading h2{font-size:clamp(1.48rem,2.8vw,2.15rem);letter-spacing:-.035em;line-height:1.2;margin:1px 0 7px}
+    .section-heading p{color:var(--sub);margin:0;font-size:.94rem}
+    .diagram-wrap{border:1px solid var(--line);background:linear-gradient(155deg,#fff,#eef8fb 89%);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 25px 22px;overflow:hidden}
+    .diagram-label{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+    .diagram-label strong{font-size:.88rem;letter-spacing:.02em}
+    .tiny-tag{font-size:.73rem;color:#577188;border-radius:8px;background:#e8eff5;padding:5px 9px}
+    .computer-svg{width:100%;height:auto;display:block;max-height:655px}
+    .computer-svg .hotspot{cursor:pointer;outline:0}
+    .computer-svg .hotspot .marker{stroke:white;stroke-width:3;filter:drop-shadow(0 3px 4px rgba(21,46,71,.22));transition:transform .16s,fill .16s;transform-box:fill-box;transform-origin:center}
+    .computer-svg .hotspot:hover .marker,.computer-svg .hotspot:focus .marker{transform:scale(1.18);fill:#e88e2c}
+    .computer-svg .hotspot:focus-visible .marker{stroke:#fdbe5e;stroke-width:5}
+    .computer-svg .hotspot text{pointer-events:none;fill:#fff;font-weight:850;font-size:17px;text-anchor:middle;dominant-baseline:middle}
+    .diagram-footnote{margin:0;color:var(--sub);font-size:.8rem}
+    .key{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:14px}
+    .key a{display:flex;align-items:center;gap:9px;text-decoration:none;background:white;border:1px solid #d8e6ec;border-radius:10px;padding:9px 10px;font-size:.84rem;font-weight:750;line-height:1.15;transition:border-color .15s,background .15s}
+    .key a:hover{border-color:#3aa8aa;background:#f0fffb}
+    .number{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:8px;background:#e2f2f2;color:#087984;font-weight:900;font-size:.8rem;font-variant-numeric:tabular-nums}
+    .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .component-card{--c:var(--teal);position:relative;overflow:hidden;display:flex;gap:17px;align-items:flex-start;padding:24px;border:1px solid var(--line);border-left:4px solid var(--c);background:white;border-radius:17px;box-shadow:0 5px 21px #17344b09;scroll-margin-top:25px}
+    .component-card:target{outline:3px solid #f0ac4e;outline-offset:3px;background:#fffffb}
+    .component-card[data-kind="processing"]{--c:#215eb6}
+    .component-card[data-kind="memory"]{--c:#168b95}
+    .component-card[data-kind="support"]{--c:#805dbb}
+    .component-card[data-kind="energy"]{--c:#c78231}
+    .component-card[data-kind="connection"]{--c:#227a69}
+    .component-icon{flex:0 0 77px;width:77px;height:77px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 9%,white);border:1px solid color-mix(in srgb,var(--c) 18%,white);border-radius:15px;color:var(--c)}
+    .component-icon svg{width:62px;height:62px;stroke:currentColor;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    .component-meta{display:flex;align-items:center;gap:9px;margin-bottom:3px}
+    .card-count{font-size:.74rem;font-weight:900;color:var(--c);letter-spacing:.08em}
+    .card-category{font-size:.69rem;letter-spacing:.04em;text-transform:uppercase;font-weight:800;color:var(--soft)}
+    h3{font-size:1.2rem;letter-spacing:-.03em;line-height:1.27;margin:0 0 10px}
+    .component-card p{margin:0 0 10px;color:#384e65;font-size:.935rem}
+    .component-card p:last-child{margin:0}
+    .example{padding:10px 12px;background:#f3f7fa;border-radius:9px;border:1px solid #e5edf2}
+    .example strong{color:#1e415e}
+    .in-card-list{margin:0 0 11px;padding:0;list-style:none;display:grid;gap:5px;color:#384e65;font-size:.935rem}
+    .in-card-list li::before{content:"•";color:var(--c);font-weight:900;margin-right:6px}
+    .side-note{font-size:.83rem;color:#5b7185;margin-top:7px}
+    .firmware-box{display:grid;grid-template-columns:82px 1fr;gap:20px;align-items:center;background:#eaf2ff;border:1px solid #c8daef;border-radius:17px;padding:23px 25px;margin-top:17px}
+    .firmware-box .component-icon{background:#fff;--c:#466da5}
+    .firmware-box h3{margin:0 0 7px}
+    .firmware-box p{font-size:.95rem;color:#3f536b;margin:0 0 8px}
+    .firmware-box p:last-child{margin-bottom:0}
+    .firmware-kicker{font-size:.74rem;font-weight:900;color:#315b96;letter-spacing:.07em;text-transform:uppercase;margin-bottom:3px}
+    .flow-panel{border:1px solid var(--line);border-radius:var(--radius);background:#fff;padding:29px 24px 23px;box-shadow:var(--shadow)}
+    .flow-sequence{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;align-items:stretch}
+    .flow-step{position:relative;border-radius:13px;border:1px solid #dce6eb;background:#f6f9fc;padding:14px 8px;min-height:148px;display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:flex-start;gap:7px}
+    .flow-step:not(:last-child)::after{content:"→";font-size:20px;position:absolute;right:-13px;top:52%;transform:translateY(-50%);z-index:2;color:#188e98;font-weight:900;background:#fff;border-radius:50%;width:23px;height:23px;display:grid;place-items:center}
+    .flow-step svg{width:34px;height:34px;color:var(--teal);fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+    .flow-step strong{font-size:.82rem;line-height:1.2}
+    .flow-step span{font-size:.72rem;color:#5b6f84;line-height:1.34}
+    .flow-support{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin-top:20px}
+    .support-item{padding:13px 15px;border-radius:11px;background:#eaf6f5;color:#2b5461;font-size:.87rem;line-height:1.45}
+    .support-item strong{color:#0e6c76}
+    .flow-note{margin:17px 1px 0;font-size:.85rem;color:#62758a}
+    .comparison{border:1px solid var(--line);border-radius:17px;overflow:hidden;background:white;box-shadow:var(--shadow)}
+    table{width:100%;border-collapse:collapse;font-size:.95rem}
+    th{text-align:left;background:#e9f2f5;color:#24485d;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;padding:14px 19px}
+    td{padding:12px 19px;border-top:1px solid #e6eef2}
+    td:first-child{width:35%;font-weight:800;color:#265477}
+    tr:nth-child(even) td{background:#f9fbfd}
+    .important{display:flex;align-items:flex-start;gap:13px;background:#fff8ec;border:1px solid #f0d8a9;border-radius:13px;padding:16px 19px;margin-top:17px;font-size:.94rem}
+    .important svg{flex:0 0 23px;width:23px;height:23px;stroke:#b76c17;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .important p{margin:0;color:#674e28}
+    footer{border-top:1px solid #d4e2e9;padding:21px 0 38px;color:#718195;font-size:.8rem;display:flex;gap:18px;justify-content:space-between;flex-wrap:wrap}
+    footer strong{color:#50667a}
+    @media(max-width:900px){.key{grid-template-columns:repeat(3,minmax(0,1fr))}.flow-sequence{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 9px}.flow-step:nth-child(3)::after{content:none}.flow-step{min-height:130px}.flow-step:nth-child(4){grid-column:auto}}
+    @media(max-width:650px){.page{width:min(100% - 24px,1160px)}.masthead{padding:32px 0 15px}.section{margin:23px 0 36px}.section-heading{gap:12px}.section-index{flex-basis:39px;height:39px}.diagram-wrap{padding:12px}.diagram-label{padding:3px 3px 0}.key{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.key a{font-size:.77rem;padding:7px}.key a .number{min-width:24px;height:24px}.cards{grid-template-columns:1fr;gap:12px}.component-card{padding:18px 16px;gap:13px}.component-icon{flex-basis:60px;width:60px;height:60px;border-radius:11px}.component-icon svg{width:51px;height:51px}h3{font-size:1.12rem}.firmware-box{grid-template-columns:60px 1fr;gap:13px;padding:17px}.flow-panel{padding:16px 12px}.flow-sequence{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 9px}.flow-step{min-height:134px}.flow-step:nth-child(3)::after{content:"→"}.flow-step:nth-child(2)::after,.flow-step:nth-child(4)::after{content:none}.flow-support{grid-template-columns:1fr;gap:8px}.support-item{padding:11px}.comparison{overflow-x:auto}table{min-width:460px}td,th{padding:11px 13px}footer{padding-bottom:24px}.diagram-footnote{font-size:.72rem}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+    @media print{
+      @page{size:A4;margin:13mm}
+      :root{--paper:#fff;--shadow:none}
+      body{background:#fff;font-size:11pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .page{width:100%;max-width:none}
+      .masthead{padding:0 0 14px}.eyebrow{padding:5px 9px;font-size:8pt}h1{font-size:30pt;margin:13px 0 9px}.lead{font-size:10pt}.hero-bottom{margin-top:13px}.tools{display:none}.pill{font-size:8pt;padding:4px 8px}
+      .section{margin:12px 0 20px}.section-heading{margin-bottom:10px}.section-heading h2{font-size:17pt}.section-heading p{font-size:9pt}.section-index{height:32px;flex-basis:32px;font-size:9pt}
+      .diagram-wrap{padding:11px 13px}.computer-svg{max-height:92mm}.key{gap:5px;margin-top:8px}.key a{font-size:8pt;padding:5px}.number{min-width:21px;height:21px;font-size:8pt}.diagram-footnote{font-size:7pt}
+      .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.component-card{padding:10px;gap:9px;border-radius:10px;break-inside:avoid}.component-icon{flex:0 0 48px;width:48px;height:48px}.component-icon svg{width:42px;height:42px}.component-card p,.in-card-list{font-size:8.5pt;line-height:1.43;margin-bottom:5px}.card-count,.card-category{font-size:7pt}h3{font-size:11pt;margin-bottom:6px}.example{padding:6px}.firmware-box{break-inside:avoid;padding:11px;margin-top:8px}.firmware-box p{font-size:9pt}
+      .flow-panel{padding:13px;break-inside:avoid}.flow-step{min-height:90px;padding:7px}.flow-step strong{font-size:8pt}.flow-step span{font-size:7pt}.flow-step svg{width:25px;height:25px}.flow-support{margin-top:9px}.support-item{padding:8px;font-size:8pt}.flow-note{font-size:8pt;margin-top:10px}
+      .comparison{break-inside:avoid}table{font-size:9pt}td{padding:7px 10px}th{padding:8px 10px}.important{break-inside:avoid;padding:10px;margin-top:9px;font-size:9pt}footer{font-size:7pt;padding:10px 0}
+    }
+  </style>
 </head>
 <body>
-<div class="shell">
-<header class="hero"><div class="eyebrow">Digitalización · Hardware</div><h1>Componentes hardware esenciales de un ordenador</h1><p>Material interactivo de consulta. Recorre los componentes, sus funciones y sus características clave mediante las pestañas o los botones de navegación.</p></header>
-<nav class="topnav" aria-label="Secciones"><div id="nav" class="navscroll"></div></nav>
-<main id="pages">
-<section class="panel active" data-title="1 · Hardware"><div class="kicker">01</div><h2>¿Qué entendemos por hardware?</h2><div class="leadgrid"><div><p>El <strong>hardware</strong> es el conjunto de componentes físicos que forman un sistema informático: las piezas que podemos tocar, como la placa base, el procesador, la memoria RAM, el disco SSD, la tarjeta gráfica o la fuente de alimentación.</p><p>El hardware trabaja conjuntamente con el <strong>software</strong>, que está formado por los programas y datos que utiliza el ordenador. Un ordenador necesita ambos para funcionar.</p><p>Un equipo puede tener componentes muy potentes de manera individual y, sin embargo, ofrecer un rendimiento mediocre si están mal elegidos, son incompatibles entre sí o uno de ellos limita considerablemente al resto. Por eso, cuando se analiza un ordenador no basta con estudiar cada componente de forma aislada: también debemos comprender <strong>cómo se relacionan entre ellos</strong>.</p></div><figure class="photo-wrap"><img class="photo" src="https://upload.wikimedia.org/wikipedia/commons/6/68/Computer_motherboard.jpg" data-fallback="img/placa_base.svg" alt="Fotografía de hardware interno de un ordenador"><figcaption class="caption">Imagen real de apoyo. Si no hay conexión, se mostrará una ilustración local.</figcaption></figure></div></section>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <!-- Iconos SVG originales, creados para esta infografía; no se emplean librerías externas. -->
+  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;overflow:hidden">
+    <defs>
+      <symbol id="i-cpu" viewBox="0 0 80 80"><rect x="18" y="18" width="44" height="44" rx="6"/><rect x="29" y="29" width="22" height="22" rx="3"/><path d="M25 9v9m13-9v9m13-9v9m4-9v9M25 62v9m13-9v9m13-9v9m4-9v9M9 25h9m-9 13h9m-9 13h9m-9 4h9m44-30h9m-9 13h9m-9 13h9m-9 4h9"/></symbol>
+      <symbol id="i-ram" viewBox="0 0 80 80"><rect x="8" y="25" width="64" height="28" rx="4"/><rect x="15" y="31" width="12" height="15" rx="2"/><rect x="33" y="31" width="12" height="15" rx="2"/><rect x="51" y="31" width="12" height="15" rx="2"/><path d="M17 53v7m12-7v7m12-7v7m12-7v7m12-7v7M9 17h62"/></symbol>
+      <symbol id="i-motherboard" viewBox="0 0 80 80"><rect x="9" y="9" width="62" height="62" rx="5"/><rect x="24" y="19" width="29" height="29" rx="3"/><path d="M33 27h12v12H33zM14 22h6M14 33h6M14 44h6M59 18v30M59 55h7M24 56h26M24 61h17M20 50v11M54 55v8"/></symbol>
+      <symbol id="i-storage" viewBox="0 0 80 80"><rect x="8" y="12" width="43" height="54" rx="5"/><circle cx="29" cy="38" r="14"/><circle cx="29" cy="38" r="4"/><path d="m29 38 10 9M14 58h29M56 20h15v41H56zM61 28h5m-5 7h5m-5 7h5m-5 7h5"/></symbol>
+      <symbol id="i-gpu" viewBox="0 0 80 80"><rect x="7" y="17" width="66" height="42" rx="5"/><circle cx="28" cy="38" r="13"/><circle cx="54" cy="38" r="11"/><path d="m28 25 2 10 9 3-9 3-2 10-3-10-9-3 9-3zM53 27l2 8 8 3-8 2-2 9-2-9-8-2 8-3zM15 59v7m8-7v7m8-7v7M73 25h4m-4 13h4m-4 13h4"/></symbol>
+      <symbol id="i-power" viewBox="0 0 80 80"><rect x="10" y="16" width="60" height="48" rx="5"/><circle cx="37" cy="40" r="18"/><circle cx="37" cy="40" r="4"/><path d="M37 22q15 9 3 17M54 40q-9 15-17 3M37 58q-15-9-3-17M20 40q9-15 17-3M62 27h3m-3 8h3m-3 8h3M17 65v5m8-5v5"/></symbol>
+      <symbol id="i-cooling" viewBox="0 0 80 80"><rect x="10" y="12" width="60" height="56" rx="5"/><circle cx="40" cy="40" r="22"/><circle cx="40" cy="40" r="4"/><path d="M40 36c-2-12 8-20 16-14 4 6-2 13-12 17M44 40c12-2 20 8 14 16-6 4-13-2-17-12M40 44c2 12-8 20-16 14-4-6 2-13 12-17M36 40c-12 2-20-8-14-16 6-4 13 2 17 12"/></symbol>
+      <symbol id="i-ports" viewBox="0 0 80 80"><rect x="8" y="12" width="64" height="56" rx="6"/><rect x="16" y="21" width="26" height="14" rx="3"/><path d="M21 26v4m8-4v4m8-4v4M50 21h14v13H50zM53 26h8M16 44h26v13H16zM20 50h18M50 44h14v13H50zM55 50h4"/></symbol>
+      <symbol id="i-network" viewBox="0 0 80 80"><rect x="9" y="12" width="62" height="56" rx="5"/><path d="M22 23h36v20H22zM30 23v-7m10 7v-7m10 7v-7M40 44v9M23 57h34M31 57v-4m18 4v-4M26 33h28M16 62h48"/><circle cx="56" cy="60" r="2"/></symbol>
+      <symbol id="i-sound" viewBox="0 0 80 80"><rect x="10" y="11" width="60" height="58" rx="5"/><rect x="18" y="20" width="25" height="22" rx="4"/><path d="M25 48v10M31 48v10M37 48v10M48 23h12M48 31h12M48 39h12M50 52l3-4 4 8 4-5M17 62h47"/></symbol>
+      <symbol id="i-firmware" viewBox="0 0 80 80"><rect x="18" y="18" width="44" height="44" rx="4"/><path d="M29 29h22v22H29zM26 8v10m14-10v10m14-10v10M26 62v10m14-10v10m14-10v10M8 26h10M8 40h10M8 54h10M62 26h10M62 40h10M62 54h10M33 40l5 5 10-12"/></symbol>
+      <symbol id="i-game" viewBox="0 0 48 48"><path d="M13 18h22c5 0 7 5 9 16 1 6-3 9-7 6l-8-7H19l-8 7c-4 3-8 0-7-6 2-11 4-16 9-16zM12 26h10m-5-5v10"/><circle cx="32" cy="25" r="2"/><circle cx="37" cy="30" r="2"/></symbol>
+      <symbol id="i-monitor" viewBox="0 0 48 48"><rect x="5" y="6" width="38" height="28" rx="3"/><path d="M24 34v7m-12 1h24M15 23l6-7 5 5 6-8"/></symbol>
+    </defs>
+  </svg>
 
-<section class="panel" data-title="2 · Placa base"><div class="kicker">02</div><h2>Placa base</h2><div class="leadgrid"><div><h3>¿Qué es?</h3><p>La <strong>placa base</strong>, también denominada <em>motherboard</em>, es la placa electrónica principal del ordenador.</p><p>Sobre ella se conectan o instalan prácticamente todos los componentes:</p><div class="callout"><strong>procesador → memoria RAM → tarjeta gráfica → almacenamiento → fuente de alimentación → dispositivos USB → tarjetas de expansión</strong></div><p>Podemos considerarla el <strong>punto de conexión y comunicación de todo el ordenador</strong>.</p></div><figure><img class="photo" src="https://upload.wikimedia.org/wikipedia/commons/6/68/Computer_motherboard.jpg" data-fallback="img/placa_base.svg" alt="Placa base"><figcaption class="caption">Placa base.</figcaption></figure></div><details open><summary>Función principal</summary><div><p>Su función es permitir que los diferentes componentes del ordenador puedan:</p><ul><li>conectarse físicamente;</li><li>recibir alimentación;</li><li>intercambiar información;</li><li>comunicarse con el procesador.</li></ul><p>La placa base no suele determinar directamente que un ordenador sea más rápido, pero <strong>sí determina qué componentes podemos instalar y qué posibilidades de ampliación tendrá el equipo</strong>.</p></div></details><details open><summary>Características clave</summary><div class="comparison"><table><thead><tr><th>Característica</th><th>Qué indica</th></tr></thead><tbody><tr><td>Socket</td><td>Tipo de procesadores que pueden instalarse</td></tr><tr><td>Chipset</td><td>Funciones y tecnologías soportadas por la placa</td></tr><tr><td>Formato</td><td>Tamaño físico de la placa</td></tr><tr><td>Tipo de RAM</td><td>Generación de memoria compatible</td></tr><tr><td>Ranuras RAM</td><td>Cantidad de módulos que pueden instalarse</td></tr><tr><td>PCI Express</td><td>Conexión para tarjetas gráficas y otras tarjetas</td></tr><tr><td>M.2</td><td>Conexión habitual para SSD NVMe</td></tr><tr><td>SATA</td><td>Conexión para discos SATA</td></tr><tr><td>Puertos externos</td><td>USB, audio, Ethernet, vídeo, etc.</td></tr><tr><td>Conectividad</td><td>Ethernet, Wi‑Fi o Bluetooth según modelo</td></tr></tbody></table></div></details><details open><summary>Socket del procesador</summary><div><p>El socket es el lugar de la placa base donde se instala el procesador.</p><p>No todos los procesadores pueden instalarse en cualquier placa. Un procesador diseñado para un determinado socket necesita una placa base que disponga exactamente de ese socket.</p><div class="callout"><strong>Procesador y placa base deben tener un socket compatible.</strong></div><p>Incluso teniendo el mismo socket, también debe comprobarse que el <strong>chipset y la BIOS/UEFI</strong> de la placa sean compatibles con la generación concreta del procesador.</p></div></details><details open><summary>Chipset</summary><div><p>El chipset es uno de los elementos que determina las capacidades de una placa base.</p><p>Puede determinar aspectos como: cantidad de conexiones disponibles, número de puertos USB, posibilidades de expansión, compatibilidad con determinadas tecnologías, características de almacenamiento o posibilidades de configuración del procesador y de la memoria.</p><p>Por tanto, dos placas con el mismo socket pueden ofrecer prestaciones diferentes.</p></div></details><details open><summary>Formato de la placa base</summary><div class="comparison"><table><thead><tr><th>Formato</th><th>Características</th></tr></thead><tbody><tr><td>ATX</td><td>Grande, muchas posibilidades de expansión</td></tr><tr><td>Micro‑ATX</td><td>Más compacto, muy habitual</td></tr><tr><td>Mini‑ITX</td><td>Muy pequeño, utilizado en equipos compactos</td></tr></tbody></table></div><p>El formato es importante porque la <strong>caja del ordenador debe ser compatible con el tamaño de la placa base</strong>.</p></details></section>
-
-<section class="panel" data-title="3 · CPU"><div class="kicker">03</div><h2>Procesador o CPU</h2><div class="leadgrid"><div><h3>¿Qué es?</h3><p>La <strong>CPU, Central Processing Unit</strong>, es el procesador principal del ordenador.</p><p>Es el componente encargado de <strong>interpretar y ejecutar las instrucciones de los programas</strong>.</p><p>Cuando abrimos una aplicación, realizamos un cálculo, ejecutamos un videojuego o navegamos por Internet, el procesador interviene continuamente.</p><p>Podemos considerarlo uno de los principales responsables de la capacidad de cálculo general del equipo.</p></div><figure><img class="photo" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Cpu.jpg" data-fallback="img/cpu.svg" alt="Procesador"><figcaption class="caption">Procesador.</figcaption></figure></div><details open><summary>Fabricantes principales</summary><div class="comparison"><table><thead><tr><th>Fabricante</th><th>Familia conocida</th></tr></thead><tbody><tr><td>Intel</td><td>Intel Core</td></tr><tr><td>AMD</td><td>AMD Ryzen</td></tr></tbody></table></div><p>Dentro de cada familia existen numerosas generaciones y gamas.</p><p>No debemos determinar cuál es mejor simplemente porque sea Intel o AMD. Hay que comparar <strong>modelos concretos de una generación determinada y para una determinada utilización</strong>.</p></details><h3>Características importantes de un procesador</h3><details open><summary>Núcleos</summary><div><p>Un núcleo puede considerarse una unidad capaz de ejecutar instrucciones.</p><p>Los procesadores modernos contienen varios núcleos. Por ejemplo: <strong>4 núcleos, 6 núcleos, 8 núcleos, 12 núcleos, etc.</strong></p><p>Disponer de más núcleos permite realizar mejor aquellas tareas que pueden dividirse en varios procesos simultáneos.</p><p>Es especialmente importante en trabajos como: edición de vídeo, renderizado 3D, máquinas virtuales, compilación de programas o multitarea intensiva.</p></div></details><details open><summary>Frecuencia</summary><div><p>La frecuencia suele expresarse en <strong>GHz — gigahercios</strong>.</p><p>Podemos encontrar valores como: <strong>3,5 GHz · 4,2 GHz · 5 GHz</strong>.</p><p>La frecuencia indica aproximadamente el ritmo al que trabaja el procesador.</p><div class="callout"><h3 style="margin-top:0">¿Qué significa que un procesador tenga 3,5 GHz?</h3><p><strong>1 hercio (Hz) = 1 ciclo de reloj por segundo.</strong><br><strong>1 GHz = mil millones de ciclos de reloj por segundo.</strong></p><p>Un procesador funcionando a <strong>3,5 GHz</strong> realiza aproximadamente <strong>3.500 millones de ciclos de reloj cada segundo por núcleo</strong>.</p><p class="note"><strong>Importante:</strong> un ciclo de reloj no equivale necesariamente a una operación. El número real de instrucciones u operaciones depende también de la arquitectura del procesador.</p></div><div class="callout"><strong>No podemos determinar qué procesador es más potente comparando solamente sus GHz.</strong></div><p>La arquitectura, la generación, el número de núcleos, la memoria caché y otras características también influyen enormemente.</p><p>Un procesador moderno a menor frecuencia puede superar a otro procesador más antiguo que tenga más GHz.</p></div></details><details open><summary>Consumo y temperatura</summary><div><p>Los procesadores consumen electricidad y generan calor.</p><p>Un procesador de mayor consumo normalmente necesita un sistema de refrigeración más potente y una fuente de alimentación adecuada.</p><p>Las especificaciones pueden mostrar valores como TDP o diferentes límites de potencia, dependiendo del fabricante.</p></div></details><details open><summary>Gráficos integrados</summary><div><p>Algunos procesadores incluyen una pequeña unidad gráfica denominada <strong>GPU integrada o iGPU</strong>.</p><p>Permite utilizar el ordenador sin necesidad de instalar una tarjeta gráfica independiente.</p><p>Puede ser suficiente para: ofimática, navegación, reproducción multimedia, tareas educativas y determinados juegos poco exigentes.</p><p>Otros procesadores carecen de gráficos integrados. En estos casos será necesaria una tarjeta gráfica dedicada para disponer de salida de imagen.</p></div></details></section>
-
-<section class="panel" data-title="4 · RAM"><div class="kicker">04</div><h2>Memoria RAM</h2><div class="leadgrid"><figure><img class="photo" src="https://upload.wikimedia.org/wikipedia/commons/0/05/RAM_module.jpg" data-fallback="img/ram.svg" alt="Módulo de memoria RAM"><figcaption class="caption">Módulo de memoria RAM.</figcaption></figure><div><h3>¿Qué es?</h3><p>La <strong>RAM — Random Access Memory —</strong> es la memoria de trabajo del ordenador.</p><p>En ella se almacenan temporalmente los programas y datos que el procesador está utilizando en ese momento.</p><p>Por ejemplo, cuando abrimos el navegador, un documento, un videojuego y una aplicación de edición, parte de la información necesaria se coloca en RAM.</p></div></div><details open><summary>Característica fundamental: es memoria volátil</summary><div><p>La información almacenada en RAM <strong>desaparece cuando apagamos el ordenador</strong>.</p><p>Por esta razón, RAM y almacenamiento no deben confundirse.</p><div class="two"><div class="callout"><strong>RAM = memoria temporal de trabajo.</strong></div><div class="callout"><strong>SSD/HDD = almacenamiento permanente.</strong></div></div></div></details><h3>Características principales de la RAM</h3><details open><summary>Capacidad</summary><div><p>Se mide normalmente en <strong>GB — gigabytes</strong>.</p><p>Podemos encontrar ordenadores con: <strong>8 GB, 16 GB, 32 GB, 64 GB...</strong></p><p>La cantidad necesaria depende de las tareas realizadas.</p><p>Tener poca RAM provoca que el sistema tenga que recurrir con mayor frecuencia al almacenamiento como memoria auxiliar, que es mucho más lento.</p></div></details><details open><summary>Generación DDR</summary><div><p>La RAM utilizada actualmente pertenece a diferentes generaciones de memoria DDR.</p><p>Por ejemplo: <strong>DDR4 y DDR5</strong>.</p><p>Las generaciones <strong>no son intercambiables físicamente</strong>.</p><p>Una placa preparada para DDR4 no permite instalar módulos DDR5 y viceversa.</p></div></details><details open><summary>Velocidad</summary><div><p>La velocidad de las memorias modernas suele especificarse utilizando <strong>MT/s — millones de transferencias por segundo</strong>.</p><p>Por ejemplo: <strong>DDR4-3200 · DDR5-5600</strong>.</p><p>Es habitual que tiendas y fabricantes utilicen incorrectamente MHz para presentar este dato.</p><p>Una mayor velocidad puede aumentar el ancho de banda disponible para el procesador, aunque la mejora real depende del resto del sistema.</p></div></details><details open><summary>Formato</summary><div><p>En ordenadores de sobremesa se utilizan principalmente módulos <strong>DIMM</strong>.</p><p>En muchos portátiles se emplean módulos más pequeños denominados <strong>SO-DIMM</strong>.</p></div></details></section>
-
-<section class="panel" data-title="5 · Almacenamiento"><div class="kicker">05</div><h2>Almacenamiento</h2><div class="card"><p>El almacenamiento es el componente donde se guardan permanentemente:</p><p><strong>el sistema operativo, programas, documentos, fotografías, vídeos, videojuegos y demás archivos.</strong></p><p>A diferencia de la RAM, la información permanece almacenada incluso cuando apagamos el ordenador.</p><p>Existen <strong>dos tecnologías principales</strong>.</p></div><div class="two"><div class="card"><h3>HDD</h3><p>Almacenamiento magnético con partes mecánicas.</p></div><div class="card"><h3>SSD</h3><p>Almacenamiento mediante memoria electrónica, sin discos giratorios.</p></div></div></section>
-
-<section class="panel" data-title="6 · HDD"><div class="kicker">06</div><h2>Disco duro HDD</h2><div class="leadgrid"><div><h3>¿Qué es?</h3><p>Un <strong>HDD — Hard Disk Drive —</strong> almacena información magnéticamente utilizando discos que giran en su interior.</p><p>Incluye <strong>partes mecánicas</strong>.</p></div><figure><img class="photo" src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Open_hard-drive.jpg" data-fallback="img/hdd.svg" alt="Interior de un disco duro HDD"><figcaption class="caption">Interior de un HDD: se observan el plato y el mecanismo de lectura/escritura.</figcaption></figure></div><details open><summary>Ventajas</summary><div><p>Su principal ventaja es proporcionar <strong>gran capacidad a un precio relativamente reducido</strong>.</p><p>Por este motivo continúa siendo útil para almacenar grandes cantidades de información.</p></div></details><details open><summary>Inconvenientes</summary><div><p>Es considerablemente más lento que un SSD.</p><p>Además: produce ruido, genera vibraciones, consume más energía y es más sensible a golpes porque contiene piezas móviles.</p></div></details><details open><summary>Características principales</summary><div class="comparison"><table><thead><tr><th>Característica</th><th>Qué observar / ejemplo</th></tr></thead><tbody><tr><td>Capacidad</td><td>1 TB, 2 TB, 4 TB</td></tr><tr><td>Velocidad de giro</td><td>5400 o 7200 RPM</td></tr><tr><td>Interfaz</td><td>SATA</td></tr><tr><td>Formato</td><td>Habitualmente 3,5&quot; en sobremesa</td></tr><tr><td><strong>Velocidad de lectura</strong></td><td>Rapidez con la que recupera datos. Se expresa normalmente en <strong>MB/s</strong>.</td></tr><tr><td><strong>Velocidad de escritura</strong></td><td>Rapidez con la que guarda datos. Se expresa normalmente en <strong>MB/s</strong>.</td></tr></tbody></table></div><p class="note">Como referencia orientativa, un HDD puede situarse aproximadamente en el entorno de <strong>100–220 MB/s</strong> en transferencias secuenciales, dependiendo del modelo.</p></details></section>
-
-<section class="panel" data-title="7 · SSD"><div class="kicker">07</div><h2>Unidad SSD</h2><div class="leadgrid"><figure><img class="photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/20260522_%EC%8A%A4%EC%BA%94%EB%94%94%EC%8A%A4%ED%81%AC_NVMe_M.2%ED%98%95_SSD.jpg/960px-20260522_%EC%8A%A4%EC%BA%94%EB%94%94%EC%8A%A4%ED%81%AC_NVMe_M.2%ED%98%95_SSD.jpg" data-fallback="img/ssd.svg" alt="Unidad SSD M.2 NVMe"><figcaption class="caption">Unidades SSD M.2 NVMe.</figcaption></figure><div><h3>¿Qué es?</h3><p>Un <strong>SSD — Solid State Drive —</strong> almacena la información utilizando memoria electrónica.</p><p>No contiene discos giratorios ni piezas mecánicas.</p></div></div><details open><summary>Ventajas</summary><div><p>Un SSD proporciona: arranque del ordenador mucho más rápido, apertura más rápida de programas, menor tiempo de carga y mayor velocidad de transferencia de archivos.</p><p>Por eso, disponer de SSD supone una de las diferencias más perceptibles en el uso diario de un ordenador.</p></div></details><details open><summary>SSD SATA</summary><div><p>Utiliza normalmente la interfaz <strong>SATA</strong>.</p><p>Puede presentarse en formato de <strong>2,5 pulgadas</strong>.</p><p>Su velocidad está limitada por la propia interfaz SATA y suele situarse aproximadamente en el entorno de varios cientos de MB/s.</p></div></details><details open><summary>SSD M.2 NVMe</summary><div><p>Muchos ordenadores actuales utilizan unidades que físicamente tienen forma de pequeña tarjeta.</p><p>El formato habitual es <strong>M.2</strong>.</p><p>Muchas de estas unidades utilizan el protocolo <strong>NVMe</strong> y se comunican mediante líneas PCI Express.</p><p>Pueden alcanzar velocidades de varios GB/s, muy superiores a las de un SSD SATA.</p><div class="two"><div class="callout"><strong>M.2</strong> describe principalmente el formato físico.</div><div class="callout"><strong>NVMe</strong> describe un protocolo utilizado por muchas unidades SSD.</div></div><p><strong>No todos los dispositivos M.2 son necesariamente NVMe.</strong></p></div></details><details open><summary>Características clave de un SSD</summary><div class="comparison"><table><thead><tr><th>Característica</th><th>Qué debemos observar</th></tr></thead><tbody><tr><td>Capacidad</td><td>GB o TB disponibles</td></tr><tr><td>Formato</td><td>2,5&quot;, M.2, etc.</td></tr><tr><td>Interfaz</td><td>SATA o PCIe</td></tr><tr><td>Protocolo</td><td>Por ejemplo NVMe</td></tr><tr><td><strong>Velocidad de lectura</strong></td><td>Rapidez al recuperar información. Se expresa en <strong>MB/s</strong> o, en unidades muy rápidas, en <strong>GB/s</strong>.</td></tr><tr><td><strong>Velocidad de escritura</strong></td><td>Rapidez al guardar información. Se expresa en <strong>MB/s</strong> o <strong>GB/s</strong>.</td></tr><tr><td>Generación PCIe</td><td>Determina el ancho de banda disponible</td></tr></tbody></table></div></details><details open><summary>Comparativa de velocidades de lectura y escritura</summary><div class="comparison"><table><thead><tr><th>Tipo</th><th>Lectura secuencial orientativa</th><th>Escritura secuencial orientativa</th></tr></thead><tbody><tr><td><strong>HDD</strong></td><td>≈ 100–220 MB/s</td><td>≈ 100–220 MB/s</td></tr><tr><td><strong>SSD SATA</strong></td><td>Hasta ≈ 550–560 MB/s</td><td>Hasta ≈ 510–520 MB/s</td></tr><tr><td><strong>SSD NVMe PCIe 3.0</strong></td><td>Hasta ≈ 3.500 MB/s</td><td>Hasta ≈ 3.000 MB/s</td></tr></tbody></table></div><p class="note">Los valores son orientativos. La velocidad real depende del modelo, interfaz, generación y condiciones de funcionamiento.</p></details></section>
-
-<section class="panel" data-title="8 · GPU"><div class="kicker">08</div><h2>Tarjeta gráfica o GPU</h2><div class="leadgrid"><div><h3>¿Qué es?</h3><p>La <strong>GPU — Graphics Processing Unit —</strong> es un procesador especializado en realizar gran cantidad de operaciones en paralelo.</p><p>Su utilización más conocida es la generación de gráficos.</p><p>Es especialmente importante en: videojuegos, diseño 3D, edición audiovisual, renderizado, determinadas aplicaciones científicas y numerosos procesos relacionados con inteligencia artificial.</p></div><figure><img class="photo" src="https://upload.wikimedia.org/wikipedia/commons/9/97/Graphics_board_gv-n560oc-1gi_IMGP0968_wp.jpg" data-fallback="img/gpu.svg" alt="Tarjeta gráfica dedicada"><figcaption class="caption">Tarjeta gráfica dedicada.</figcaption></figure></div><details open><summary>GPU integrada y GPU dedicada</summary><div><p>Una <strong>GPU integrada</strong> forma parte del procesador o del propio sistema y normalmente utiliza parte de la memoria RAM.</p><p>Una <strong>tarjeta gráfica dedicada</strong> dispone de su propio procesador gráfico y normalmente de su propia memoria de vídeo.</p><p>Para tareas básicas no siempre es necesaria una tarjeta gráfica dedicada.</p><p>Para videojuegos exigentes, modelado 3D o determinados trabajos profesionales sí puede convertirse en uno de los componentes más importantes del equipo.</p></div></details><details open><summary>Fabricantes</summary><div><p>En el mercado podemos encontrar principalmente soluciones gráficas relacionadas con:</p><div class="stats"><div class="stat"><b>NVIDIA</b></div><div class="stat"><b>AMD</b></div><div class="stat"><b>Intel</b></div></div><p>Como ocurre con los procesadores, no debe juzgarse el rendimiento únicamente por la marca.</p></div></details></section>
-
-<section class="panel" data-title="9 · Fuente"><div class="kicker">09</div><h2>Fuente de alimentación</h2><div class="leadgrid"><figure><img class="photo" src="https://upload.wikimedia.org/wikipedia/commons/d/d6/HP-Compaq-PC-Power-Supply_IMG_8112.JPG" data-fallback="img/psu.svg" alt="Fuente de alimentación"><figcaption class="caption">Fuente de alimentación de un ordenador.</figcaption></figure><div><h3>¿Qué es?</h3><p>La <strong>fuente de alimentación o PSU — Power Supply Unit —</strong> proporciona energía eléctrica a todos los componentes del ordenador.</p><p>Convierte la corriente eléctrica procedente de la red en las tensiones que necesitan los componentes internos.</p></div></div></section>
-
-<section class="panel" data-title="13 · Red"><div class="kicker">13</div><h2>Tarjeta de red</h2><div class="leadgrid"><div><p>Permite que el ordenador se comunique con otros dispositivos y acceda a una red.</p><p>Actualmente suele estar integrada directamente en la placa base.</p></div><figure><img class="photo" src="https://upload.wikimedia.org/wikipedia/commons/0/09/RJ-45_Ethernet_socket_on_Lenovo_T410_Laptop.jpg" data-fallback="img/red.svg" alt="Puerto Ethernet RJ45 y otros conectores"><figcaption class="caption">Puerto Ethernet RJ45 junto a otros conectores.</figcaption></figure></div><div class="two"><details open><summary>Ethernet</summary><div><p>Permite realizar una conexión de red mediante cable.</p><p>Se utiliza normalmente un conector <strong>RJ45</strong>.</p><p>La conexión por cable suele proporcionar: <strong>gran estabilidad, baja latencia y velocidades elevadas</strong>.</p></div></details><details open><summary>Wi‑Fi</summary><div><p>Permite conectarse a redes inalámbricas.</p><p>Algunas placas base incorporan Wi‑Fi y otras necesitan un adaptador adicional.</p><p>Las diferentes generaciones del estándar Wi‑Fi ofrecen diferentes prestaciones.</p></div></details></div><details open><summary>Bluetooth</summary><div><p>Muchas placas que incorporan Wi‑Fi también proporcionan Bluetooth.</p><p>Se utiliza para conectar periféricos como: auriculares, ratones, teclados, mandos y teléfonos.</p></div></details></section>
-
-<section class="panel" data-title="19 · Conectores">
-<div class="kicker">19</div>
-<h2>Principales conectores externos</h2>
-
-<div class="leadgrid">
-  <div>
-    <p>Los conectores externos permiten comunicar el ordenador con otros dispositivos. En 1.º ESO no es necesario memorizar todos los conectores existentes: lo importante es <strong>reconocer los más habituales y saber para qué sirven</strong>.</p>
-    <div class="callout"><strong>Objetivo:</strong> ser capaz de decidir dónde conectar una pantalla, un pendrive, un teclado, unos auriculares o un cable de red.</div>
-  </div>
-  <figure>
-    <img class="photo" style="height:auto;max-height:340px" src="img/puertos.svg" data-fallback="img/puertos.svg" alt="Conectores externos de una placa base">
-    <figcaption class="caption">Ejemplo real de conexiones externas de una placa base.</figcaption>
-  </figure>
-</div>
-
-<h3>Los conectores que debes reconocer</h3>
-<div class="comparison">
-<table>
-  <thead>
-    <tr><th>Conector</th><th>¿Para qué sirve?</th><th>Importancia</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><strong>USB-A</strong></td><td>Teclado, ratón, pendrive, impresora y otros periféricos.</td><td><span class="tag">Imprescindible</span></td></tr>
-    <tr><td><strong>USB-C</strong></td><td>Datos, carga y, en algunos equipos, también vídeo.</td><td><span class="tag">Imprescindible</span></td></tr>
-    <tr><td><strong>HDMI</strong></td><td>Conectar el ordenador a monitores, televisores y proyectores. Transporta vídeo y audio digital.</td><td><span class="tag">Imprescindible</span></td></tr>
-    <tr><td><strong>DisplayPort</strong></td><td>Conectar monitores. Transporta vídeo y audio digital y es habitual en ordenadores de sobremesa.</td><td><span class="tag">Importante</span></td></tr>
-    <tr><td><strong>Ethernet (RJ45)</strong></td><td>Conectar el ordenador a una red mediante cable.</td><td><span class="tag">Imprescindible</span></td></tr>
-    <tr><td><strong>Jack de audio 3,5 mm</strong></td><td>Conectar auriculares, altavoces o micrófonos.</td><td><span class="tag">Imprescindible</span></td></tr>
-  </tbody>
-</table>
-</div>
-
-<div class="two">
-  <details open>
-    <summary>USB-A y USB-C</summary>
-    <div>
-      <p><strong>USB</strong> es uno de los sistemas de conexión más utilizados.</p>
-      <p>Puede usarse para conectar teclados, ratones, memorias USB, discos externos, impresoras, teléfonos y muchos otros dispositivos.</p>
-      <p><strong>USB-A</strong> y <strong>USB-C</strong> indican principalmente la <strong>forma física del conector</strong>.</p>
-      <div class="callout"><strong>Importante:</strong> no debemos confundir la forma del conector con la versión o la velocidad de USB.</div>
+  <header class="page masthead">
+    <span class="eyebrow">Infografía · Digitalización · 13–14 años</span>
+    <h1>¿Qué hay <span class="title-accent">dentro</span> de un ordenador?</h1>
+    <p class="lead">Descubre las piezas que hacen posible que un ordenador funcione: qué son, para qué sirven y cómo colaboran cuando utilizamos una aplicación o jugamos.</p>
+    <div class="hero-bottom">
+      <div class="pill-row"><span class="pill">10 componentes principales</span><span class="pill">BIOS/UEFI: ampliación</span><span class="pill">Ejemplos cotidianos</span></div>
+      <div class="tools"><button class="btn" type="button" onclick="window.print()" aria-label="Imprimir o guardar la infografía como PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v7H6z"/></svg>Imprimir / Guardar PDF</button></div>
     </div>
-  </details>
+  </header>
 
-  <details open>
-    <summary>HDMI y DisplayPort</summary>
-    <div>
-      <p>Ambos permiten transmitir <strong>vídeo y audio digital</strong>.</p>
-      <p><strong>HDMI</strong> es muy habitual en televisores, proyectores, monitores y ordenadores.</p>
-      <p><strong>DisplayPort</strong> aparece con frecuencia en ordenadores de sobremesa, monitores y tarjetas gráficas.</p>
-    </div>
-  </details>
+  <main id="contenido" class="page">
+    <section class="section" aria-labelledby="explora">
+      <div class="section-heading"><span class="section-index">01</span><div><h2 id="explora">Explora el interior del ordenador</h2><p>Pulsa los números del dibujo para ir a la explicación de cada componente.</p></div></div>
+      <div class="diagram-wrap">
+        <div class="diagram-label"><strong>Vista esquemática de una torre de ordenador</strong><span class="tiny-tag">Los tamaños y posiciones pueden variar</span></div>
+        <svg class="computer-svg" viewBox="0 0 880 570" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="diagt diagd">
+          <title id="diagt">Interior ilustrado de una torre con diez componentes señalados</title>
+          <desc id="diagd">Se reconocen la placa base, el procesador, los módulos RAM, la tarjeta gráfica, una unidad SSD, la fuente de alimentación, un ventilador y los puertos de conexión. Los círculos numerados enlazan con su explicación posterior.</desc>
+          <defs>
+            <pattern id="grid1" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M22 0H0V22" fill="none" stroke="#dbe9ef" stroke-width=".65"/></pattern>
+            <linearGradient id="casebg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f5fbfc"/><stop offset="1" stop-color="#e8f3f8"/></linearGradient>
+            <linearGradient id="boardbg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#36778b"/><stop offset="1" stop-color="#1b5268"/></linearGradient>
+            <linearGradient id="graphbg" x1="0" x2="1"><stop stop-color="#283d58"/><stop offset="1" stop-color="#55718b"/></linearGradient>
+          </defs>
+          <!-- Chasis y esquema general -->
+          <rect x="74" y="23" width="722" height="520" rx="28" fill="#233c53" opacity=".11"/>
+          <rect x="67" y="16" width="722" height="520" rx="28" fill="url(#casebg)" stroke="#7497ab" stroke-width="4"/>
+          <rect x="92" y="43" width="667" height="461" rx="13" fill="url(#grid1)" stroke="#cadce5" stroke-width="2"/>
+          <rect x="95" y="45" width="44" height="457" rx="8" fill="#b8d1de" opacity=".9"/>
+          <circle cx="116" cy="71" r="7" fill="#159b9c"/><rect x="105" y="101" width="22" height="11" rx="2" fill="#6f8ca0"/><path d="M104 126h24M104 134h24M104 142h24" stroke="#728ba0" stroke-width="4"/>
+          <rect x="751" y="52" width="25" height="439" rx="9" fill="#b4cbd7"/>
+          <g fill="#7e9bad"><circle cx="110" cy="482" r="3"/><circle cx="746" cy="482" r="3"/><circle cx="746" cy="58" r="3"/></g>
+          <!-- Placa base -->
+          <rect x="220" y="80" width="422" height="358" rx="12" fill="url(#boardbg)" stroke="#2e5364" stroke-width="4"/>
+          <g stroke="#76d0c8" stroke-width="2" opacity=".46" fill="none">
+            <path d="M248 94v30h58v28h43m-101 19h68m-68 30h40v40h53M239 281h53v-29h24m-68 80h45m254-220h66v40h17m-93 16h54v64h45M580 292h46m-320 125v-23h52m-120 16h29m350-26v25h-53M386 111h72m102 123h57"/>
+            <path d="M300 117v42m22-45v35m32-35v22m240 114h36m-34 10h34M278 358v36m19-36v36"/>
+          </g>
+          <g fill="#b5efe3"><circle cx="302" cy="125" r="3"/><circle cx="295" cy="242" r="4"/><circle cx="584" cy="230" r="3"/><circle cx="555" cy="414" r="3"/><circle cx="260" cy="197" r="3"/></g>
+          <rect x="242" y="101" width="50" height="52" rx="4" fill="#d6e4e7" stroke="#7e9dab" stroke-width="3"/>
+          <rect x="253" y="112" width="29" height="30" rx="3" fill="#9bb9c4"/>
+          <rect x="259" y="379" width="111" height="39" rx="3" fill="#9cbbc2"/>
+          <path d="M273 390h84M273 397h84M273 404h84" stroke="#567a85" stroke-width="3"/>
+          <!-- CPU -->
+          <rect x="344" y="177" width="114" height="109" rx="11" fill="#b4d2d5" stroke="#a4c2c8" stroke-width="8"/>
+          <g stroke="#bacdd0" stroke-width="5"><path d="M363 164v12m17-12v12m17-12v12m17-12v12m17-12v12M363 287v12m17-12v12m17-12v12m17-12v12m17-12v12M332 193h11m-11 17h11m-11 17h11m-11 17h11m-11 17h11M460 193h11m-11 17h11m-11 17h11m-11 17h11m-11 17h11"/></g>
+          <rect x="355" y="188" width="92" height="87" rx="7" fill="#edf6f3" stroke="#7fa1ad" stroke-width="3"/>
+          <path d="M374 221h54M374 233h54M374 245h54" stroke="#9dbbbd" stroke-width="4"/>
+          <text x="401" y="209" text-anchor="middle" fill="#39677b" font-size="12" font-weight="900" letter-spacing="2">CPU</text>
+          <!-- RAM -->
+          <g><rect x="486" y="132" width="24" height="160" rx="4" fill="#173e4f" stroke="#a0d6cd" stroke-width="2"/><rect x="519" y="132" width="24" height="160" rx="4" fill="#173e4f" stroke="#a0d6cd" stroke-width="2"/><rect x="493" y="145" width="10" height="125" rx="2" fill="#79aeb7" opacity=".6"/><rect x="526" y="145" width="10" height="125" rx="2" fill="#79aeb7" opacity=".6"/><g stroke="#e2cb75" stroke-width="2"><path d="M490 292v8m7-8v8m7-8v8m18-8v8m7-8v8m7-8v8"/></g></g>
+          <!-- tarjeta gráfica -->
+          <g><rect x="275" y="325" width="332" height="80" rx="10" fill="url(#graphbg)" stroke="#1c415b" stroke-width="3"/><circle cx="362" cy="365" r="29" fill="#1a354c" stroke="#a8c7d5" stroke-width="3"/><circle cx="362" cy="365" r="7" fill="#7298b0"/><circle cx="520" cy="365" r="29" fill="#1a354c" stroke="#a8c7d5" stroke-width="3"/><circle cx="520" cy="365" r="7" fill="#7298b0"/><g fill="#7ea9bd"><path d="m360 357-7-14q14-7 18 10zM370 367l14-7q6 14-10 18zM354 371l-13 8q-8-14 10-20zM518 357l-7-14q14-7 18 10zM528 367l14-7q6 14-10 18zM512 371l-13 8q-8-14 10-20z"/></g><rect x="314" y="405" width="191" height="10" rx="1" fill="#d2ab51"/><path d="M326 406v8m18-8v8m18-8v8m18-8v8m18-8v8m18-8v8m18-8v8m18-8v8m18-8v8" stroke="#fff1bd" stroke-width="2"/></g>
+          <!-- fuente alimentación -->
+          <rect x="151" y="397" width="117" height="105" rx="9" fill="#d6e2e9" stroke="#7894a5" stroke-width="3"/>
+          <circle cx="208" cy="447" r="39" fill="#b2cad5" stroke="#607e94" stroke-width="3"/><circle cx="208" cy="447" r="10" fill="#7899a9"/>
+          <g fill="#67869b"><path d="M208 434c-6-18 7-28 18-19 6 9-4 18-13 24zM221 447c18-6 28 7 19 18-9 6-18-4-24-13zM208 460c6 18-7 28-18 19-6-9 4-18 13-24zM195 447c-18 6-28-7-19-18 9-6 18 4 24 13z"/></g><path d="M271 455q23 0 24-26t27-26" fill="none" stroke="#50697a" stroke-width="6" stroke-linecap="round"/>
+          <!-- SSD y HDD -->
+          <rect x="656" y="293" width="85" height="118" rx="9" fill="#d7e8e8" stroke="#6b92a3" stroke-width="3"/>
+          <rect x="666" y="305" width="64" height="93" rx="5" fill="#1f4d61"/>
+          <text x="698" y="344" text-anchor="middle" font-size="21" font-weight="900" fill="#eaf7f4">SSD</text><path d="M678 357h41m-41 9h26" stroke="#6ccdc6" stroke-width="3"/>
+          <rect x="649" y="427" width="98" height="64" rx="7" fill="#d7e0ea" stroke="#7998a8" stroke-width="3"/>
+          <circle cx="678" cy="459" r="19" fill="#afc8d3" stroke="#668798" stroke-width="2"/><circle cx="678" cy="459" r="5" fill="#edf6f3"/><text x="716" y="465" text-anchor="middle" font-size="14" font-weight="800" fill="#4c6977">HDD</text>
+          <!-- ventilador refrigeración -->
+          <circle cx="697" cy="164" r="61" fill="#d1e4e8" stroke="#7393a4" stroke-width="5"/>
+          <circle cx="697" cy="164" r="51" fill="#b8d2dd" stroke="#7e9ba9" stroke-width="2"/>
+          <g fill="#75a7b6" stroke="#5c8998" stroke-width="2"><path d="M697 153q-9-35 12-34 22 5 5 33z"/><path d="M709 164q35-9 34 12-5 22-33 5z"/><path d="M697 176q9 35-12 34-22-5-5-33z"/><path d="M685 164q-35 9-34-12 5-22 33-5z"/></g><circle cx="697" cy="164" r="11" fill="#5e879b"/>
+          <!-- panel de puertos (zona posterior) -->
+          <rect x="151" y="102" width="54" height="256" rx="7" fill="#d2e1e5" stroke="#829daa" stroke-width="3"/>
+          <rect x="161" y="117" width="34" height="19" rx="3" fill="#31536b"/><path d="M169 124h18M169 130h18" stroke="#8ab5c8" stroke-width="2"/>
+          <rect x="161" y="146" width="34" height="19" rx="3" fill="#31536b"/><path d="M169 153h18M169 159h18" stroke="#8ab5c8" stroke-width="2"/>
+          <rect x="161" y="176" width="34" height="21" rx="2" fill="#345d74"/><path d="M167 186h22" stroke="#8bbaca" stroke-width="3"/>
+          <rect x="161" y="216" width="34" height="28" rx="2" fill="#375e74"/><path d="M166 222h24v8h-24zM170 233v5m5-5v5m5-5v5m5-5v5" stroke="#b6cfda" stroke-width="2" fill="none"/>
+          <circle cx="178" cy="274" r="11" fill="#2e566d" stroke="#90bfbe" stroke-width="3"/><circle cx="178" cy="274" r="4" fill="#8cbdba"/>
+          <circle cx="178" cy="308" r="11" fill="#2e566d" stroke="#ddadb0" stroke-width="3"/><circle cx="178" cy="308" r="4" fill="#d9a7af"/>
+          <path d="M179 328v17" stroke="#7898aa" stroke-width="3"/>
+          <!-- conexiones esquemáticas de datos -->
+          <g fill="none" stroke="#59aab3" stroke-width="4" stroke-linecap="round" stroke-dasharray="5 8" opacity=".55"><path d="M456 231h28"/><path d="M543 250h59v62"/><path d="M643 360h10"/></g>
+          <!-- etiquetas y números clicables -->
+          <g font-family="system-ui,-apple-system,'Segoe UI',sans-serif">
+            <a class="hotspot" href="#cpu" aria-label="Ir a procesador CPU"><circle class="marker" cx="399" cy="237" r="19" fill="#1b6cad"/><text x="399" y="238">1</text></a>
+            <a class="hotspot" href="#ram" aria-label="Ir a memoria RAM"><circle class="marker" cx="515" cy="194" r="19" fill="#1b6cad"/><text x="515" y="195">2</text></a>
+            <a class="hotspot" href="#placa" aria-label="Ir a placa base"><circle class="marker" cx="266" cy="250" r="19" fill="#1b6cad"/><text x="266" y="251">3</text></a>
+            <a class="hotspot" href="#almacenamiento" aria-label="Ir a almacenamiento"><circle class="marker" cx="701" cy="386" r="19" fill="#1b6cad"/><text x="701" y="387">4</text></a>
+            <a class="hotspot" href="#grafica" aria-label="Ir a gráfica"><circle class="marker" cx="443" cy="367" r="19" fill="#1b6cad"/><text x="443" y="368">5</text></a>
+            <a class="hotspot" href="#fuente" aria-label="Ir a fuente de alimentación"><circle class="marker" cx="209" cy="448" r="19" fill="#1b6cad"/><text x="209" y="449">6</text></a>
+            <a class="hotspot" href="#refrigeracion" aria-label="Ir a refrigeración"><circle class="marker" cx="698" cy="164" r="19" fill="#1b6cad"/><text x="698" y="165">7</text></a>
+            <a class="hotspot" href="#puertos" aria-label="Ir a puertos"><circle class="marker" cx="179" cy="155" r="16" fill="#1b6cad"/><text x="179" y="156">8</text></a>
+            <a class="hotspot" href="#red" aria-label="Ir a tarjeta de red"><circle class="marker" cx="179" cy="230" r="16" fill="#1b6cad"/><text x="179" y="231">9</text></a>
+            <a class="hotspot" href="#sonido" aria-label="Ir a tarjeta de sonido"><circle class="marker" cx="179" cy="290" r="17" fill="#1b6cad"/><text x="179" y="291" style="font-size:14px">10</text></a>
+          </g>
+          <text x="429" y="564" font-size="12" fill="#61788c" text-anchor="middle">Ilustración orientativa, no a escala · Algunos componentes pueden estar integrados en la placa base</text>
+        </svg>
+        <p class="diagram-footnote">El dibujo representa un ordenador de sobremesa. En los portátiles muchas piezas son más pequeñas o están integradas.</p>
+        <nav class="key" aria-label="Componentes numerados del ordenador">
+          <a href="#cpu"><span class="number">01</span> CPU</a>
+          <a href="#ram"><span class="number">02</span> RAM</a>
+          <a href="#placa"><span class="number">03</span> Placa base</a>
+          <a href="#almacenamiento"><span class="number">04</span> SSD / HDD</a>
+          <a href="#grafica"><span class="number">05</span> Gráfica</a>
+          <a href="#fuente"><span class="number">06</span> Fuente</a>
+          <a href="#refrigeracion"><span class="number">07</span> Refrigeración</a>
+          <a href="#puertos"><span class="number">08</span> Puertos</a>
+          <a href="#red"><span class="number">09</span> Red</a>
+          <a href="#sonido"><span class="number">10</span> Sonido</a>
+        </nav>
+      </div>
+    </section>
 
-  <details open>
-    <summary>Ethernet (RJ45)</summary>
-    <div>
-      <p>Permite conectar el ordenador a una red mediante cable.</p>
-      <p>El conector se conoce habitualmente como <strong>RJ45</strong> y suele proporcionar una conexión estable y rápida.</p>
-    </div>
-  </details>
+    <section class="section" aria-labelledby="componentes">
+      <div class="section-heading"><span class="section-index">02</span><div><h2 id="componentes">Las piezas y su función</h2><p>Conoce cada componente y descubre en qué situaciones cotidianas participa.</p></div></div>
+      <div class="cards">
+        <article class="component-card" data-kind="processing" id="cpu"><div class="component-icon"><svg aria-hidden="true"><use href="#i-cpu"/></svg></div><div><div class="component-meta"><span class="card-count">01</span><span class="card-category">Procesamiento</span></div><h3>Procesador (CPU)</h3><p>Ejecuta las instrucciones de los programas y realiza cálculos para que el ordenador pueda trabajar.</p><p class="example"><strong>Ejemplo:</strong> cuando abres un videojuego, la CPU procesa las instrucciones necesarias para que funcione.</p></div></article>
+        <article class="component-card" data-kind="memory" id="ram"><div class="component-icon"><svg aria-hidden="true"><use href="#i-ram"/></svg></div><div><div class="component-meta"><span class="card-count">02</span><span class="card-category">Memoria temporal</span></div><h3>Memoria RAM</h3><p>Guarda temporalmente datos e instrucciones que usan los programas abiertos. Su contenido se pierde al apagar el ordenador.</p><p class="example"><strong>Ejemplo:</strong> si utilizas un navegador y un documento al mismo tiempo, ambos necesitan memoria RAM.</p></div></article>
+        <article class="component-card" data-kind="support" id="placa"><div class="component-icon"><svg aria-hidden="true"><use href="#i-motherboard"/></svg></div><div><div class="component-meta"><span class="card-count">03</span><span class="card-category">Conexión interna</span></div><h3>Placa base</h3><p>Es la placa principal del ordenador. Conecta los componentes y permite que intercambien información entre ellos.</p><p class="example"><strong>Ejemplo:</strong> conecta la CPU con la RAM y permite comunicarse con el almacenamiento y otros dispositivos.</p></div></article>
+        <article class="component-card" data-kind="memory" id="almacenamiento"><div class="component-icon"><svg aria-hidden="true"><use href="#i-storage"/></svg></div><div><div class="component-meta"><span class="card-count">04</span><span class="card-category">Almacenamiento permanente</span></div><h3>Disco duro (HDD) y SSD</h3><p>Guardan archivos, programas y el sistema operativo incluso cuando el ordenador está apagado.</p><ul class="in-card-list"><li><strong>HDD:</strong> utiliza discos magnéticos que giran.</li><li><strong>SSD:</strong> utiliza memoria electrónica y suele ser más rápido.</li></ul><p class="example"><strong>Ejemplo:</strong> aquí se conservan tus trabajos guardados, fotos y juegos instalados.</p></div></article>
+        <article class="component-card" data-kind="processing" id="grafica"><div class="component-icon"><svg aria-hidden="true"><use href="#i-gpu"/></svg></div><div><div class="component-meta"><span class="card-count">05</span><span class="card-category">Imagen y vídeo</span></div><h3>Procesador gráfico (GPU)</h3><p>Realiza cálculos para generar imágenes y gráficos. Puede estar integrado o formar parte de una tarjeta gráfica independiente.</p><p class="example"><strong>Ejemplo:</strong> en un videojuego 3D procesa los gráficos que aparecen en la pantalla.</p></div></article>
+        <article class="component-card" data-kind="energy" id="fuente"><div class="component-icon"><svg aria-hidden="true"><use href="#i-power"/></svg></div><div><div class="component-meta"><span class="card-count">06</span><span class="card-category">Energía</span></div><h3>Fuente de alimentación</h3><p>Transforma la electricidad que llega del enchufe y suministra la energía adecuada a las distintas piezas.</p><p class="example"><strong>Ejemplo:</strong> proporciona energía a la placa base, al procesador y a los dispositivos de almacenamiento.</p></div></article>
+        <article class="component-card" data-kind="energy" id="refrigeracion"><div class="component-icon"><svg aria-hidden="true"><use href="#i-cooling"/></svg></div><div><div class="component-meta"><span class="card-count">07</span><span class="card-category">Temperatura</span></div><h3>Sistema de refrigeración</h3><p>Ayuda a evitar que las piezas se calienten demasiado.</p><ul class="in-card-list"><li><strong>Disipador:</strong> recibe y dispersa el calor.</li><li><strong>Ventilador:</strong> mueve el aire para ayudar a eliminarlo.</li></ul><p class="example"><strong>Ejemplo:</strong> al jugar, los ventiladores pueden girar más rápido para enfriar el equipo.</p></div></article>
+        <article class="component-card" data-kind="connection" id="puertos"><div class="component-icon"><svg aria-hidden="true"><use href="#i-ports"/></svg></div><div><div class="component-meta"><span class="card-count">08</span><span class="card-category">Conexiones externas</span></div><h3>Puertos de comunicación</h3><p>Permiten conectar otros dispositivos y transmitir datos, imagen o sonido.</p><ul class="in-card-list"><li><strong>USB:</strong> teclado, ratón o memoria externa.</li><li><strong>HDMI:</strong> monitor o televisor.</li><li><strong>Ethernet (RJ45):</strong> red por cable.</li><li><strong>Audio:</strong> auriculares o micrófono.</li></ul></div></article>
+        <article class="component-card" data-kind="connection" id="red"><div class="component-icon"><svg aria-hidden="true"><use href="#i-network"/></svg></div><div><div class="component-meta"><span class="card-count">09</span><span class="card-category">Conectividad</span></div><h3>Adaptador de red</h3><p>Permite conectarse a otras máquinas y redes mediante cable Ethernet o Wi-Fi. Puede estar integrado en la placa base.</p><p class="example"><strong>Ejemplo:</strong> cuando visitas una web, ayuda a enviar y recibir datos por la red.</p></div></article>
+        <article class="component-card" data-kind="connection" id="sonido"><div class="component-icon"><svg aria-hidden="true"><use href="#i-sound"/></svg></div><div><div class="component-meta"><span class="card-count">10</span><span class="card-category">Sonido</span></div><h3>Tarjeta de sonido</h3><p>Procesa señales de audio para reproducir y grabar sonido. Hoy suele estar integrada en la placa base.</p><p class="example"><strong>Ejemplo:</strong> permite escuchar música con auriculares o grabar tu voz con un micrófono.</p></div></article>
+      </div>
+      <aside class="firmware-box" aria-labelledby="bios"><div class="component-icon"><svg aria-hidden="true"><use href="#i-firmware"/></svg></div><div><div class="firmware-kicker">Para saber un poco más</div><h3 id="bios">BIOS / UEFI: ¿qué sucede al encender?</h3><p>BIOS/UEFI es un <strong>firmware</strong>: un programa básico guardado en un chip de la placa base que comienza a funcionar al encender el ordenador.</p><p><strong>Ejemplo:</strong> prepara y comprueba el hardware necesario y pone en marcha el proceso de carga del sistema operativo.</p></div></aside>
+    </section>
 
-  <details open>
-    <summary>Audio</summary>
-    <div>
-      <p>El <strong>jack de 3,5 mm</strong> se utiliza para conectar dispositivos de audio analógico.</p>
-      <p>Puede emplearse para auriculares, altavoces o micrófonos, aunque algunos equipos modernos también utilizan USB o Bluetooth para el sonido.</p>
-    </div>
-  </details>
-</div>
+    <section class="section" aria-labelledby="colaboran">
+      <div class="section-heading"><span class="section-index">03</span><div><h2 id="colaboran">¿Cómo trabajan juntos?</h2><p>Imagina que abres un videojuego en el ordenador.</p></div></div>
+      <div class="flow-panel">
+        <div class="flow-sequence" aria-label="Secuencia simplificada de apertura y uso de un videojuego">
+          <div class="flow-step"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-game"/></svg><strong>1. Abres el juego</strong><span>Das la orden de iniciarlo.</span></div>
+          <div class="flow-step"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-storage"/></svg><strong>2. SSD / HDD</strong><span>Contiene los archivos del juego.</span></div>
+          <div class="flow-step"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-ram"/></svg><strong>3. RAM</strong><span>Mantiene datos en uso.</span></div>
+          <div class="flow-step"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-cpu"/></svg><strong>4. CPU</strong><span>Ejecuta instrucciones.</span></div>
+          <div class="flow-step"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-gpu"/></svg><strong>5. GPU</strong><span>Procesa los gráficos.</span></div>
+          <div class="flow-step"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-monitor"/></svg><strong>6. Pantalla</strong><span>Muestra las imágenes.</span></div>
+        </div>
+        <div class="flow-support">
+          <div class="support-item"><strong>Placa base:</strong> comunica las piezas.</div>
+          <div class="support-item"><strong>Fuente:</strong> proporciona la energía.</div>
+          <div class="support-item"><strong>Refrigeración:</strong> controla el calor.</div>
+        </div>
+        <p class="flow-note"><strong>Importante:</strong> es un esquema simplificado para entender sus funciones; en realidad, las piezas intercambian información continuamente y el sistema operativo coordina muchos de estos procesos.</p>
+      </div>
+    </section>
 
-<h3>Otros conectores que puedes encontrar</h3>
-<div class="two">
-  <div class="card">
-    <h3>VGA</h3>
-    <p>Es un conector antiguo de vídeo analógico. Todavía puede aparecer en algunos ordenadores, monitores o proyectores antiguos.</p>
-  </div>
-  <div class="card">
-    <h3>Puerto serie</h3>
-    <p>Fue habitual en ordenadores antiguos y en determinados equipos técnicos. Hoy no es un conector básico de uso cotidiano.</p>
-  </div>
-</div>
-
-<details open>
-  <summary>USB-C y Thunderbolt: no son lo mismo</summary>
-  <div>
-    <p>Este punto puede resultar confuso porque muchos dispositivos con <strong>Thunderbolt</strong> utilizan físicamente un conector <strong>USB-C</strong>.</p>
-    <div class="two">
-      <div class="callout"><strong>USB-C</strong><br>Describe la forma física del conector.</div>
-      <div class="callout"><strong>Thunderbolt</strong><br>Es una tecnología de comunicación que puede utilizar ese conector.</div>
-    </div>
-    <p>Por tanto, <strong>dos puertos con la misma forma USB-C no tienen por qué ofrecer exactamente las mismas funciones o velocidades</strong>.</p>
-    <p class="note">Para este nivel basta con saber reconocer USB-C. Thunderbolt puede considerarse un contenido de ampliación.</p>
-  </div>
-</details>
-
-<div class="callout">
-  <strong>Qué debes saber al terminar esta sección</strong>
-  <p>Reconocer visualmente USB-A, USB-C, HDMI, DisplayPort, Ethernet y audio, y elegir el conector adecuado ante una situación cotidiana.</p>
-</div>
-</section>
-
-<section class="panel" data-title="20 · Funcionamiento"><div class="kicker">20</div><h2>¿Cómo trabajan todos los componentes conjuntamente?</h2><p>Cuando encendemos el ordenador se produce, simplificando mucho, el siguiente proceso:</p><div class="flow"><div class="step">Fuente de alimentación → proporciona energía</div><div class="arrow">↓</div><div class="step">Placa base → conecta los componentes</div><div class="arrow">↓</div><div class="step">UEFI → inicializa y comprueba el hardware</div><div class="arrow">↓</div><div class="step">Almacenamiento → contiene el sistema operativo</div><div class="arrow">↓</div><div class="step">RAM → recibe los datos y programas que están utilizándose</div><div class="arrow">↓</div><div class="step">CPU → ejecuta las instrucciones</div><div class="arrow">↓</div><div class="step">GPU → procesa la imagen cuando es necesario</div><div class="arrow">↓</div><div class="step">Monitor → muestra el resultado</div></div><div class="callout" style="text-align:center"><strong>Todo ocurre continuamente y a gran velocidad.</strong></div></section>
-</main>
-<div class="pager"><button id="prev">← Anterior</button><button id="next" class="primary">Siguiente →</button></div>
-<footer class="sources"><p><span class="tag">Imágenes</span> La web intenta cargar fotografías reales desde Wikimedia Commons. Si no hay conexión a Internet, utiliza las ilustraciones SVG incluidas en la carpeta <code>img</code>. Consulta <code>FUENTES_IMAGENES.txt</code> para las fuentes y licencias.</p></footer>
-</div>
-<script>
-const panels=[...document.querySelectorAll('.panel')],nav=document.getElementById('nav'),prev=document.getElementById('prev'),next=document.getElementById('next');let current=0;
-panels.forEach((p,i)=>{const b=document.createElement('button');b.textContent=p.dataset.title;b.addEventListener('click',()=>show(i));nav.appendChild(b)});const btns=[...nav.children];
-function show(i){current=Math.max(0,Math.min(panels.length-1,i));panels.forEach((p,j)=>p.classList.toggle('active',j===current));btns.forEach((b,j)=>b.classList.toggle('active',j===current));prev.disabled=current===0;next.disabled=current===panels.length-1;next.textContent=current===panels.length-1?'Fin del recorrido':'Siguiente →';btns[current].scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});window.scrollTo({top:document.querySelector('.topnav').offsetTop,behavior:'smooth'})}
-prev.addEventListener('click',()=>show(current-1));next.addEventListener('click',()=>show(current+1));
-document.querySelectorAll('img[data-fallback]').forEach(img=>{img.addEventListener('error',()=>{if(img.src.endsWith(img.dataset.fallback))return;img.src=img.dataset.fallback})});show(0);
-</script>
-</body></html>
+    <section class="section" aria-labelledby="recuerda">
+      <div class="section-heading"><span class="section-index">04</span><div><h2 id="recuerda">No confundas estas piezas</h2><p>Una frase para recordar qué aporta cada componente.</p></div></div>
+      <div class="comparison">
+        <table>
+          <thead><tr><th scope="col">Componente</th><th scope="col">Su función esencial</th></tr></thead>
+          <tbody>
+            <tr><td>CPU</td><td>Ejecuta instrucciones y realiza cálculos.</td></tr>
+            <tr><td>RAM</td><td>Guarda temporalmente datos que se están utilizando.</td></tr>
+            <tr><td>SSD / HDD</td><td>Conserva archivos y programas al apagar el equipo.</td></tr>
+            <tr><td>Placa base</td><td>Conecta los componentes y permite su comunicación.</td></tr>
+            <tr><td>GPU</td><td>Procesa los gráficos y las imágenes.</td></tr>
+            <tr><td>Fuente de alimentación</td><td>Suministra energía eléctrica a las piezas.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="important"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 18H2L12 3Z"/><path d="M12 9v5m0 3v.5"/></svg><p><strong>Recuerda:</strong> tener más RAM no significa tener más espacio para guardar archivos. La RAM es memoria temporal; el SSD o el HDD son almacenamiento que conserva los datos.</p></div>
+    </section>
+  </main>
+  <footer class="page"><span><strong>Infografía educativa · Componentes de un ordenador</strong> · Edad recomendada: 13–14 años.</span><span>Ilustraciones e iconos SVG originales. Archivo autónomo: funciona sin conexión a Internet.</span></footer>
+</body>
+</html>
