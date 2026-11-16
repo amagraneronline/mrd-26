@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10233b">
-<meta name="description" content="Ocho actividades interactivas y autoevaluables para repasar los componentes hardware esenciales del ordenador. Medios y Recursos Digitales, 1.º ESO.">
+<meta name="description" content="Siete actividades interactivas y autoevaluables para repasar los componentes hardware esenciales del ordenador. Medios y Recursos Digitales, 1.º ESO.">
 <title>Reto hardware · 1.º ESO · Medios y Recursos Digitales</title>
 <style>
   :root{--ink:#192b40;--soft:#5a6c81;--line:#dfe8f0;--paper:#fff;--base:#f3f7fb;--navy:#10233b;--teal:#0d938b;--teal-dark:#06756f;--cyan:#dff8f4;--amber:#d68121;--amber-soft:#fff0d7;--red:#ae3d40;--red-soft:#fff0f1;--good:#16734d;--good-soft:#e5f6ec;--round:19px;--shadow:0 14px 45px rgba(17,43,75,.065)}
@@ -162,8 +162,8 @@
       <div class="hero-body">
         <div class="eyebrow">Laboratorio de autoevaluación</div>
         <h1>¿Conoces tu ordenador<br>por dentro?</h1>
-        <p>Demuestra lo que sabes sobre los componentes de un ordenador. Ocho retos diferentes, situaciones reales y explicaciones para aprender de los errores.</p>
-        <div class="hero-tags"><span class="hero-tag">8 retos interactivos</span><span class="hero-tag">Corrección automática</span><span class="hero-tag">Sin registro</span><span class="hero-tag">Ritmo libre</span></div>
+        <p>Demuestra lo que sabes sobre los componentes de un ordenador. Siete retos diferentes, situaciones reales y explicaciones para aprender de los errores.</p>
+        <div class="hero-tags"><span class="hero-tag">7 retos interactivos</span><span class="hero-tag">Corrección automática</span><span class="hero-tag">Sin registro</span><span class="hero-tag">Ritmo libre</span></div>
       </div>
       <div class="hero-art" aria-hidden="true">
         <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="heroG" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#35d0bb"/><stop offset="1" stop-color="#4d90c1"/></linearGradient></defs><rect x="22" y="20" width="196" height="196" rx="25" fill="#123e53" stroke="#379eaa" stroke-width="2"/><path d="M46 55h148v130H46z" fill="#142b48" stroke="#5ca8b1" stroke-width="2"/><rect x="73" y="65" width="96" height="92" rx="8" fill="url(#heroG)" opacity=".18" stroke="#4db5af" stroke-width="2"/><rect x="89" y="81" width="64" height="62" rx="6" fill="#143b53" stroke="#61dccd" stroke-width="3"/><path d="M97 103h48M97 115h48M97 127h48" stroke="#53b2b4" stroke-width="3"/><g stroke="#66c6bd" stroke-width="4" stroke-linecap="round"><path d="M101 74v-11m16 11v-11m16 11v-11m16 11v-11M101 160v-11m16 11v-11m16 11v-11m16 11v-11M82 93H65m17 17H65m17 17H65m105-34h-17m17 17h-17m17 17h-17"/></g><path d="M57 196h126" stroke="#70d6c8" stroke-width="3" stroke-linecap="round"/><circle cx="186" cy="48" r="8" fill="#f8c477"/><circle cx="57" cy="176" r="6" fill="#67c9b9"/></svg>
@@ -173,7 +173,7 @@
 </header>
 <div class="container">
   <div class="statbar" aria-label="Progreso de las actividades">
-    <div class="stat-left"><div class="stat-col"><strong id="done-stat">0/8</strong><span>Retos corregidos</span></div><div class="stat-col"><strong id="score-stat">—</strong><span>Aciertos actuales</span></div></div>
+    <div class="stat-left"><div class="stat-col"><strong id="done-stat">0/7</strong><span>Retos corregidos</span></div><div class="stat-col"><strong id="score-stat">—</strong><span>Aciertos actuales</span></div></div>
     <div class="stat-progress"><div class="progress-label"><span>Mi recorrido</span><span id="progress-percent">0 %</span></div><div class="progress"><div id="progress-fill" class="fill"></div></div></div>
   </div>
   <div class="layout">
@@ -260,17 +260,6 @@
         {label:'Vas a montar un equipo muy compacto. ¿Qué combinación tiene sentido?',choices:['Placa Mini-ITX y caja compatible','Placa de cualquier tamaño en cualquier caja','Elegir el tamaño solo por los GHz'],answer:'Placa Mini-ITX y caja compatible',why:'Mini-ITX es un formato pequeño y la caja debe aceptar ese formato.'},
         {label:'Comparas dos CPU y una tiene más GHz. ¿Basta ese dato para decidir cuál rendirá mejor?',choices:['Sí, los GHz lo indican todo','No, debo comparar modelos, núcleos, generación y arquitectura','Sí, pero solo si la marca es la misma'],answer:'No, debo comparar modelos, núcleos, generación y arquitectura',why:'La frecuencia, por sí sola, no determina el rendimiento real.'}
       ]},
-    {id:'encendido',title:'Del botón de encendido a la pantalla',subtitle:'Ordena el proceso simplificado que aparece en los contenidos de la unidad.',type:'order',tag:'Funcionamiento conjunto',
-      items:[
-        {label:'Fuente de alimentación: proporciona energía',why:'La alimentación permite arrancar el equipo.'},
-        {label:'Placa base: conecta los componentes',why:'La placa permite que las piezas se comuniquen.'},
-        {label:'UEFI: inicializa y comprueba el hardware',why:'El firmware prepara el sistema para arrancar.'},
-        {label:'Almacenamiento: contiene el sistema operativo',why:'El sistema operativo está guardado en un HDD o SSD.'},
-        {label:'RAM: recibe los datos y programas en uso',why:'En la memoria de trabajo se cargan datos necesarios.'},
-        {label:'CPU: ejecuta instrucciones',why:'El procesador realiza las tareas solicitadas.'},
-        {label:'GPU: procesa la imagen cuando es necesario',why:'El procesador gráfico genera o ayuda a generar la imagen.'},
-        {label:'Monitor: muestra el resultado',why:'Es el dispositivo de salida de imagen.'}
-      ]},
     {id:'conexiones',title:'Conéctalo correctamente',subtitle:'Elige la conexión habitual más adecuada para cada necesidad.',type:'quiz',tag:'Uso cotidiano de puertos',
       items:[
         {label:'Quieres conectar un pendrive tradicional de conector rectangular.',choices:['USB-A','HDMI','Jack de 3,5 mm'],answer:'USB-A',why:'USB-A es habitual en memorias USB y otros periféricos.'},
@@ -282,15 +271,13 @@
       ]}
   ];
   const byId = Object.fromEntries(activities.map(a => [a.id,a]));
-  let state = {answers:{}, checked:{}, first:{}, order:[],history:{}};
+  let state = {answers:{}, checked:{}, first:{}, history:{}};
   try{
     const saved = JSON.parse(localStorage.getItem(STORAGE)||'null');
     if(saved && typeof saved==='object' && saved.answers && saved.checked){
-      state = {answers:saved.answers,checked:saved.checked,first:saved.first||{},order:Array.isArray(saved.order)?saved.order:[],history:saved.history&&typeof saved.history==='object'?saved.history:{}};
+      state = {answers:saved.answers,checked:saved.checked,first:saved.first||{},history:saved.history&&typeof saved.history==='object'?saved.history:{}};
     }
   }catch(e){}
-  const initialOrder = [3,0,5,2,7,1,6,4];
-  if(state.order.length!==8 || new Set(state.order).size!==8 || state.order.some(n=>!Number.isInteger(n)||n<0||n>7)) state.order=[...initialOrder];
   const root=document.getElementById('workspace');
   const nav=document.getElementById('nav-list');
   const escapeHTML = x=>String(x).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -315,7 +302,6 @@
     if(a.type==='match')return `<div class="question-stack">${a.items.map((it,i)=>qBlock(a.id,i,`<div class="q-line"><label class="q-label" for="${a.id}-${i}"><span class="q-count">${String(i+1).padStart(2,'0')}.</span> ${escapeHTML(it.label)}</label><select class="answer-select" id="${a.id}-${i}" data-a="${a.id}" data-q="${i}"><option value="">— Elige su función —</option>${a.options.map(opt=>`<option value="${escapeHTML(opt)}">${escapeHTML(opt)}</option>`).join('')}</select></div>`)).join('')}</div>`;
     if(a.type==='visual')return `<div class="visual-grid">${a.items.map((it,i)=>qBlock(a.id,i,`<div class="visual-question"><div class="q-label"><span class="q-count">${String(i+1).padStart(2,'0')}.</span> ¿Qué componente es?</div><div class="visual-box">${pics[it.pic]}</div><div class="choices-row" role="group" aria-label="Nombre de la pieza ${i+1}">${it.choices.map(opt=>`<button type="button" class="radio-button" data-a="${a.id}" data-q="${i}" data-value="${escapeHTML(opt)}" aria-pressed="false">${escapeHTML(opt)}</button>`).join('')}</div></div>`)).join('')}</div>`;
     if(a.type==='quiz')return `<div class="question-stack">${a.items.map((it,i)=>qBlock(a.id,i,`<div class="scenario">${i+1}</div><p class="scenario-context">${escapeHTML(it.label)}</p><div class="choices-row" role="group" aria-label="Respuesta al caso ${i+1}">${it.choices.map(opt=>`<button type="button" class="radio-button" data-a="${a.id}" data-q="${i}" data-value="${escapeHTML(opt)}" aria-pressed="false">${escapeHTML(opt)}</button>`).join('')}</div>`)).join('')}</div>`;
-    if(a.type==='order')return `<div class="sequence-tip">↕ Utiliza las flechas para colocar los pasos en el orden correcto. Es una <strong>representación simplificada</strong> del encendido, como en el material de la unidad.</div><ol class="sortlist" id="order-list"></ol>`;
     return '';
   }
   function build(){
@@ -329,7 +315,7 @@
     document.getElementById('print-results').addEventListener('click',()=>window.print());
     document.getElementById('reset-all').addEventListener('click',()=>{
       if(!window.confirm('¿Seguro que deseas borrar todas las respuestas y notas de este navegador?'))return;
-      state={answers:{},checked:{},first:{},order:[...initialOrder],history:{}};save();
+      state={answers:{},checked:{},first:{},history:{}};save();
        for(const id of ['student-name','student-surname','student-group'])document.getElementById(id).value='';
        document.getElementById('pdf-status').textContent='';
       for(const a of activities){a.items.forEach((_,i)=>{const el=document.getElementById('q-'+a.id+'-'+i);if(el){el.classList.remove('correct','incorrect');const ex=document.getElementById('e-'+a.id+'-'+i);if(ex){ex.hidden=true;ex.textContent='';}}});const f=document.getElementById('feedback-'+a.id);f.className='check-feedback';f.textContent='';}
@@ -346,10 +332,9 @@
       for(let i=0;i<a.items.length;i++){
         const v=valueOf(a.id,i);
         if(a.type==='match'){const select=document.getElementById(`${a.id}-${i}`);if(select)select.value=v;}
-        else if(a.type!=='order') updateButtons(a.id,i,v);
+        else updateButtons(a.id,i,v);
       }
     }
-    renderOrder();
   }
   function updateButtons(id,index,value){
     const box=document.getElementById(`q-${id}-${index}`);
@@ -366,7 +351,6 @@
     if(btn.dataset.checkActivity){checkActivity(btn.dataset.checkActivity);return;}
     if(btn.dataset.clear){clearActivity(btn.dataset.clear);return;}
     if(btn.dataset.value!==undefined){const {a,q,value}=btn.dataset;setAnswer(a,Number(q),value);return;}
-    if(btn.dataset.move!==undefined){moveRow(Number(btn.dataset.move),Number(btn.dataset.direction));return;}
   }
   function handleChange(event){const el=event.target;if(el.matches('select[data-a]'))setAnswer(el.dataset.a,Number(el.dataset.q),el.value);}
   function setAnswer(id,i,v){state.answers[id+'_'+i]=v;updateButtons(id,i,v);markDirty(id);save();}
@@ -378,14 +362,7 @@
     }
   }
   function clearHighlights(id){byId[id].items.forEach((_,i)=>{const q=document.getElementById('q-'+id+'-'+i);if(q){q.classList.remove('correct','incorrect');const ex=document.getElementById('e-'+id+'-'+i);if(ex){ex.hidden=true;ex.textContent='';}}});}
-  function renderOrder(){
-    const list=document.getElementById('order-list');if(!list)return;
-    const a=byId.encendido;
-    list.innerHTML=state.order.map((original,i)=>`<li class="sortrow" id="order-item-${i}"><span class="sortindex">${i+1}</span><span class="sortlabel">${escapeHTML(a.items[original].label)}</span><div class="sortbtns"><button type="button" class="move-btn" title="Subir paso ${i+1}" aria-label="Subir paso ${i+1}" data-move="${i}" data-direction="-1" ${i===0?'disabled':''}>↑</button><button type="button" class="move-btn" title="Bajar paso ${i+1}" aria-label="Bajar paso ${i+1}" data-move="${i}" data-direction="1" ${i===7?'disabled':''}>↓</button></div></li>`).join('');
-  }
-  function moveRow(i,d){const j=i+d;if(j<0||j>=8)return;[state.order[i],state.order[j]]=[state.order[j],state.order[i]];markDirty('encendido');renderOrder();save();const control=document.querySelector(`[data-move="${j}"][data-direction="${d}"]`);if(control&&!control.disabled)control.focus();}
   function scoreFor(a){
-    if(a.type==='order')return {score:state.order.reduce((p,original,i)=>p+(original===i?1:0),0),total:a.items.length,blank:0,entries:state.order.map((original,i)=>({correct:original===i,expected:a.items[i].label,why:original===i?a.items[i].why:'En esta posición corresponde: '+a.items[i].label+'.'}))};
     let score=0,blank=0;
     const entries=a.items.map((it,i)=>{
       const v=valueOf(a.id,i);if(!v)blank++;
@@ -408,39 +385,27 @@
     if(!state.first[id])state.first[id]={score:result.score,total:result.total};
      if(!Array.isArray(state.history[id]))state.history[id]=[];
      state.history[id].push({at:new Date().toISOString(),score:result.score,total:result.total,
-       answers:a.items.map((_,i)=>a.type==='order'?'':valueOf(id,i)),
-       order:a.type==='order'?[...state.order]:null});
+       answers:a.items.map((_,i)=>valueOf(id,i))});
     paintCorrection(a);updateStats();save();
     f.scrollIntoView({behavior:'smooth',block:'nearest'});
   }
   function paintCorrection(a){
     const result=scoreFor(a);
-    if(a.type==='order'){
-      document.querySelectorAll('#order-list .sortrow').forEach((li,i)=>{
-        li.style.borderColor=result.entries[i].correct?'#b9e1ca':'#edc1c1';
-        li.style.background=result.entries[i].correct?'#f6fcf8':'#fff9f9';
-        const old=li.querySelector('.order-explain');if(old)old.remove();
-        const detail=document.createElement('div');detail.className='order-explain sr-only';detail.textContent=result.entries[i].correct?'Posición correcta':'Posición incorrecta';li.appendChild(detail);
-      });
-    }else{
       a.items.forEach((_,i)=>{
         const q=document.getElementById('q-'+a.id+'-'+i),e=result.entries[i],ex=document.getElementById('e-'+a.id+'-'+i);
         q.style.borderStyle='solid';q.classList.toggle('correct',e.correct);q.classList.toggle('incorrect',!e.correct);
         ex.hidden=false;ex.innerHTML=`<span class="feedback-flag">${e.correct?'✓ Correcto.':'✗ Revisa esta respuesta.'}</span> ${!e.correct?`<strong>Respuesta: ${escapeHTML(e.expected)}.</strong> `:''}${escapeHTML(e.why)}`;
       });
-    }
     const f=document.getElementById('feedback-'+a.id);
     const first=state.first[a.id];
     f.className='check-feedback visible';
-    f.innerHTML=`<p class="result-head">${result.score===result.total?'¡Reto superado!':result.score>=Math.ceil(result.total*.7)?'¡Vas por buen camino!':'¡Sigue practicando!'} ${result.score} de ${result.total} aciertos</p><p class="result-desc">${result.score===result.total?'Has respondido correctamente a todo.':`Has acertado ${result.score} y puedes revisar ${result.total-result.score} ${result.total-result.score===1?'respuesta':'respuestas'}.`} Primer intento: <strong>${first?first.score+' / '+first.total:'—'}</strong>. Puedes cambiar tus respuestas y corregir de nuevo.</p>${a.type==='order'&&result.score!==result.total?`<p class="result-desc" style="margin-top:9px">Orden del material: ${a.items.map((x,i)=>`${i+1}. ${escapeHTML(x.label.split(':')[0])}`).join(' → ')}</p>`:''}`;
+    f.innerHTML=`<p class="result-head">${result.score===result.total?'¡Reto superado!':result.score>=Math.ceil(result.total*.7)?'¡Vas por buen camino!':'¡Sigue practicando!'} ${result.score} de ${result.total} aciertos</p><p class="result-desc">${result.score===result.total?'Has respondido correctamente a todo.':`Has acertado ${result.score} y puedes revisar ${result.total-result.score} ${result.total-result.score===1?'respuesta':'respuestas'}.`} Primer intento: <strong>${first?first.score+' / '+first.total:'—'}</strong>. Puedes cambiar tus respuestas y corregir de nuevo.</p>`;
   }
   function clearActivity(id){
     const a=byId[id];
     a.items.forEach((_,i)=>{delete state.answers[id+'_'+i];const q=document.getElementById('q-'+id+'-'+i);if(q)q.style.borderStyle='solid';});
-    if(id==='encendido')state.order=[...initialOrder];
     markDirty(id);clearHighlights(id);
     const f=document.getElementById('feedback-'+id);f.className='check-feedback';f.textContent='';
-    if(id==='encendido')document.querySelectorAll('#order-list .sortrow').forEach(li=>{li.style.background='';li.style.borderColor='';});
     restoreAnswers();save();updateStats();
   }
   function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state));}catch(e){}}
@@ -477,11 +442,11 @@
     const d=reportData();
     const content=document.getElementById('report-content');
     const complete=d.done===activities.length;
-    content.innerHTML=`<div class="overview"><div class="metric"><strong>${d.done}/8</strong><span>Retos corregidos</span></div><div class="metric"><strong>${d.first}/${d.max}</strong><span>Aciertos del primer intento*</span></div><div class="metric"><strong>${d.current}/${d.max}</strong><span>Aciertos actuales*</span></div><div class="metric"><strong>${d.attempts}</strong><span>Intentos corregidos registrados</span></div></div><h3 class="summary-heading">Resultados por actividad</h3><div style="overflow-x:auto"><table class="report-table"><thead><tr><th>Actividad</th><th>Intentos</th><th>Primer intento</th><th>Actual</th></tr></thead><tbody>${activities.map(a=>`<tr><td>${escapeHTML(a.title)}</td><td>${(state.history[a.id]||[]).length}${state.first[a.id]&&!(state.history[a.id]||[]).length?'**':''}</td><td>${state.first[a.id]?state.first[a.id].score+' / '+a.items.length:'—'}</td><td>${state.checked[a.id]?state.checked[a.id].score+' / '+a.items.length:'Sin corregir'}</td></tr>`).join('')}</tbody></table></div><div class="report-note">${complete?'<strong>Has terminado los 8 retos.</strong> Observa en qué actividades cometiste errores y vuelve a revisar los contenidos si lo necesitas.':'<strong>Tu recorrido aún no está completo.</strong> Puedes visitar cualquier reto pendiente desde el menú y corregirlo antes de cerrar tu informe.'}<br><br>*Los totales incluyen como cero las actividades todavía no corregidas. La nota del primer intento se conserva aunque después mejores las respuestas. Los intentos se contabilizan desde esta versión de la actividad. ${d.legacy?'** Indica un reto corregido antes de esta actualización; no es posible reconstruir su historial. ':''}Este informe sirve para la <strong>autoevaluación formativa</strong>, no es una calificación oficial.</div>`;
+    content.innerHTML=`<div class="overview"><div class="metric"><strong>${d.done}/${activities.length}</strong><span>Retos corregidos</span></div><div class="metric"><strong>${d.first}/${d.max}</strong><span>Aciertos del primer intento*</span></div><div class="metric"><strong>${d.current}/${d.max}</strong><span>Aciertos actuales*</span></div><div class="metric"><strong>${d.attempts}</strong><span>Intentos corregidos registrados</span></div></div><h3 class="summary-heading">Resultados por actividad</h3><div style="overflow-x:auto"><table class="report-table"><thead><tr><th>Actividad</th><th>Intentos</th><th>Primer intento</th><th>Actual</th></tr></thead><tbody>${activities.map(a=>`<tr><td>${escapeHTML(a.title)}</td><td>${(state.history[a.id]||[]).length}${state.first[a.id]&&!(state.history[a.id]||[]).length?'**':''}</td><td>${state.first[a.id]?state.first[a.id].score+' / '+a.items.length:'—'}</td><td>${state.checked[a.id]?state.checked[a.id].score+' / '+a.items.length:'Sin corregir'}</td></tr>`).join('')}</tbody></table></div><div class="report-note">${complete?'<strong>Has terminado los 7 retos.</strong> Observa en qué actividades cometiste errores y vuelve a revisar los contenidos si lo necesitas.':'<strong>Tu recorrido aún no está completo.</strong> Puedes visitar cualquier reto pendiente desde el menú y corregirlo antes de cerrar tu informe.'}<br><br>*Los totales incluyen como cero las actividades todavía no corregidas. La nota del primer intento se conserva aunque después mejores las respuestas. Los intentos se contabilizan desde esta versión de la actividad. ${d.legacy?'** Indica un reto corregido antes de esta actualización; no es posible reconstruir su historial. ':''}Este informe sirve para la <strong>autoevaluación formativa</strong>, no es una calificación oficial.</div>`;
   }
   function downloadResults(){
     const d=reportData(),now=new Date();
-    const lines=['INFORME DE AUTOEVALUACIÓN — COMPONENTES HARDWARE','Medios y Recursos Digitales · 1.º ESO','Fecha: '+now.toLocaleString('es-ES'),'','Actividades corregidas: '+d.done+' de 8','Aciertos primer intento (total 8 actividades): '+d.first+' / '+d.max,'Aciertos actuales (total 8 actividades): '+d.current+' / '+d.max,'',...activities.map((a,i)=>`${i+1}. ${a.title}\n   Primer intento: ${state.first[a.id]?state.first[a.id].score+' / '+a.items.length:'pendiente'}\n   Actual: ${state.checked[a.id]?state.checked[a.id].score+' / '+a.items.length:'pendiente'}`),'','Evaluación formativa; las actividades pendientes cuentan como 0 en el total.','Datos generados localmente; no se transmiten a ningún servidor.'];
+    const lines=['INFORME DE AUTOEVALUACIÓN — COMPONENTES HARDWARE','Medios y Recursos Digitales · 1.º ESO','Fecha: '+now.toLocaleString('es-ES'),'','Actividades corregidas: '+d.done+' de '+activities.length,'Aciertos primer intento (total '+activities.length+' actividades): '+d.first+' / '+d.max,'Aciertos actuales (total '+activities.length+' actividades): '+d.current+' / '+d.max,'',...activities.map((a,i)=>`${i+1}. ${a.title}\n   Primer intento: ${state.first[a.id]?state.first[a.id].score+' / '+a.items.length:'pendiente'}\n   Actual: ${state.checked[a.id]?state.checked[a.id].score+' / '+a.items.length:'pendiente'}`),'','Evaluación formativa; las actividades pendientes cuentan como 0 en el total.','Datos generados localmente; no se transmiten a ningún servidor.'];
     const blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
     const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='autoevaluacion_hardware_1ESO.txt';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
@@ -590,7 +555,7 @@
     activities.forEach((a,index)=>{
       const hist=state.history[a.id]||[];
       const legacy=!hist.length&&Boolean(state.first[a.id]);
-      const answered=a.type==='order'?hist.length>0||Boolean(state.checked[a.id])||state.order.some((v,i)=>v!==initialOrder[i]):a.items.some((_,i)=>Boolean(valueOf(a.id,i)));
+      const answered=a.items.some((_,i)=>Boolean(valueOf(a.id,i)));
       subheading(`${index+1}. ${a.title}`);
       if(!hist.length&&!answered&&!legacy){paragraph('No se ha respondido ni corregido esta actividad.',{size:9,color:'#66798a'});return;}
       if(legacy){
@@ -599,9 +564,9 @@
         if(c){
           paragraph('Últimas respuestas conservadas (fecha e intentos anteriores desconocidos):',{size:9.4,bold:true,spaceAfter:3});
           a.items.forEach((it,i)=>{
-            const ans=a.type==='order'?a.items[state.order[i]].label:valueOf(a.id,i);
-            const expected=a.type==='order'?a.items[i].label:it.answer;
-            question(`${i+1}. ${a.type==='order'?'Posición '+(i+1):it.label}`,ans,expected,ans===expected,it.why);
+            const ans=valueOf(a.id,i);
+            const expected=it.answer;
+            question(`${i+1}. ${it.label}`,ans,expected,ans===expected,it.why);
           });
         }
       }
@@ -609,18 +574,18 @@
         space(4);
         paragraph(`Corrección ${j+1}  ·  ${new Date(attempt.at).toLocaleString('es-ES')}  ·  ${attempt.score}/${attempt.total} aciertos  ·  ${attempt.total-attempt.score} errores`,{size:10,bold:true,color:'#0c7972',spaceAfter:5});
         a.items.forEach((it,i)=>{
-          const answer=a.type==='order'?a.items[attempt.order[i]]?.label||'(sin registrar)':attempt.answers[i]||'(Sin contestar)';
-          const expected=a.type==='order'?a.items[i].label:it.answer;
-          const correct=a.type==='order'?attempt.order[i]===i:answer===expected;
-          question(`${i+1}. ${a.type==='order'?'Posición '+(i+1):it.label}`,answer,expected,correct,it.why);
+          const answer=attempt.answers[i]||'(Sin contestar)';
+          const expected=it.answer;
+          const correct=answer===expected;
+          question(`${i+1}. ${it.label}`,answer,expected,correct,it.why);
         });
       });
       // Cambios no corregidos posteriores al último intento: también son trabajo del alumno.
       if(!state.checked[a.id]&&answered){
         paragraph('Respuestas editadas y todavía sin corregir:',{size:9.5,bold:true,color:'#af3e41',spaceAfter:4});
         a.items.forEach((it,i)=>{
-          const ans=a.type==='order'?a.items[state.order[i]].label:valueOf(a.id,i);
-          if(a.type==='order'||ans)question(`${i+1}. ${a.type==='order'?'Posición '+(i+1):it.label}`,ans,a.type==='order'?a.items[i].label:it.answer,null,'');
+          const ans=valueOf(a.id,i);
+          if(ans)question(`${i+1}. ${it.label}`,ans,it.answer,null,'');
         });
       }
       if(!hist.length&&state.checked[a.id]&&!legacy){
